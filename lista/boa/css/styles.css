@@ -1,0 +1,234 @@
+#tekst {
+	font-family: Verdana;
+}
+#main_body {
+  width: 1000px;
+  margin-left: auto ;
+  margin-right: auto ;
+
+}
+.add_form input {
+  float: left;
+}
+.add_form select {
+  float: left;
+}
+.add_form textarea {
+  float: left;
+}
+table, th, td {
+	font-family: Verdana;
+	font-size: x-small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: 1px solid black;
+}
+.dodaj, .dodaj table, .dodaj th, .dodaj td{
+	font-family: Verdana;
+	font-size: small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: none;
+}
+
+.edit {
+  width: 40px;
+  text-decoration: none;
+	font-weight: bold;
+	color: black;
+	display: block;
+	background: #9c9580;
+	border: 1px solid black;
+}
+.edit:hover {
+	color: white;
+}
+.nieblok {
+	font-family: arial;
+	font-size: 14px;
+	text-decoration: underline;
+	font-weight: bold;
+	color: black;
+	display: inline;
+}
+.nieblok:hover {
+	background: #9c9580;
+}
+.header {
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	background: none;
+	border: none;
+}
+.client_ip {
+        float: left;
+	text-align: left;
+	text-decoration: none;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-top: 5px;
+	color: black;
+	background: none;
+	border: none;
+}
+#title {
+	font-family: monospace;
+	font-weight: bolder;
+	font-size: 20px;
+}
+.invisible{
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	display: inline;
+	background: none;
+	border: 1px solid white;
+}
+.row:hover {
+	background: yellow;
+}
+#field{
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	width: 50px;
+	height:50px;
+	color: black;
+	border: 1px solid black;
+	text-align: center;
+}
+#dodaj {
+	height: 30px;
+	float: left;
+	margin-bottom:10px;
+}
+#menu {
+	height: 25px;
+	float: right;
+	text-align: left;
+	margin: 5px;
+}
+#header {
+        height: 140px;
+        background: rgba(0,0,0,0.2);
+}
+#row_count_form {
+	height: 30px;
+	float: left;
+	text-align: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-bottom:10px;
+	font-family: arial;
+	font-size: 12px;
+        color: black;
+}	
+.paging_active{
+        text-decoration: none;
+        color: black;
+        font-weight: bolder;
+        font-family: courier, arial;
+        font-size: 20px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.paging_menu {
+        text-decoration: none;
+        font-family: courier, arial;
+        color: black;
+	margin-left: 2px;
+	margin-right: 2px;
+        font-size: 16px;
+}
+.paging_dots {
+        text-decoration: none;
+        font-family: courier, arial;
+        color: white;
+        font-size: 16px;
+}
+#login_bar {
+	text-align: right;
+	margin-right:5px;
+	margin-top:5px;
+}	
+#find {
+	height: 30px;
+	float: right;
+	text-align: left;
+	margin-bottom:10px;
+}	
+.ara_id {
+        font-weight: bold;
+        display:block;
+}
+.ara_id:hover {
+        cursor: pointer;
+} 
+.date_field {
+	width:55px;
+	float: left;
+}
+.mac_field {
+	width:110px;
+	float: left;
+}
+.phone_field {
+	width:80px;
+	float: left;
+}
+.time_field {
+	width:35px;
+}
+.address_field {
+	width:150px;
+	float: left;
+}
+.installer_field {
+	width:150px;
+	float: left;
+}
+.speed_field {
+	width:40px;
+	float: left;
+}
+.switch_field {
+	width:150px;
+	font-family: arial;
+	font-size: 12px;
+	float: left;
+}
+.info_field {
+	font-family: arial;
+	font-size: 10px;
+	width:260px;
+	height:100px;
+	float: left;
+}
+.submit_field {
+	width:45px;
+	font-family: arial;
+	font-size: 10px;
+	background: #ffffaa;
+	border: 1px solid #005599;
+}
+.tables {
+        padding: 0;
+        margin: 1px;
+        width: 400px;
+ 	background: none;
+	border: none;
+}
+.tables td {
+	border: none;
+}
+.td_name {
+  width:160px;
+}
+.td_value {
+  width:185px;
+}
+.td_submit {
+  width:50px;
+}

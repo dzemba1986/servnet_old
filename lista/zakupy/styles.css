@@ -1,0 +1,57 @@
+table, th, td {
+	font-family: Verdana;
+	font-size: x-small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: 1px solid black;
+}
+.dodaj, .dodaj table, .dodaj th, .dodaj td{
+	font-family: Verdana;
+	font-size: small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: none;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	display: block;
+	background: #9c9580;
+	border: 1px solid black;
+}
+a:hover {
+	color: white;
+}
+.header {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	display: inline;
+	background: none;
+	border: none;
+}
+#title {
+	font-family: monospace;
+	font-weight: bolder;
+	font-size: 20px;
+}
+.nieblok {
+	display: inline;
+}
+.invisible{
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	display: inline;
+	background: none;
+	border: 1px solid white;
+}
+.row:hover {
+	background: yellow;
+}
+#legenda{
+	border: 1px solid black;
+	text-align: center;
+}

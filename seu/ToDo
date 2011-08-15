@@ -1,0 +1,11 @@
+Poprawić edycję hosta.
+3. Przy dodawaniu hosta sprawdzanie czy mac jest wolny i ewentualne ostrzeżenie. Dodawanie urządzeń bez podawania mac.
+4. Funkcja wyszukująca duplikatów mac w sieci.
+6. Zarządzanie userami.
+7. Po eksporcie mazy ustawiłem w typach urządzeń ondelete cascade, trzeba to poprawić po imporcie oraz w Historia_zapytan ustawic data_zdarzenia na DATETIME.
+8. Funkcja przeniesienia do magazynu dla urządzeń.
+9. Dodać usuwanie urządzeń z systemu (urządzenia przenosimy do magazynu a obiekt device dostanie znacznik uszkodzone; Jeżeli chodzi o userów to maciej musiałby robić zrzuty adresacji)
+10. Dodać typ VirtualDevice do rezerwacji (opis, ip, lokalizacja). Rezerwację będzie można po prosu usunąć.
+11. Skrypt w pythonie musi pobierać również nr telefonu i daty.
+12. Co z rezerwacją adresów ip?
+13. Połączenie bazy z lista podłączeń, długi ciężki temat...

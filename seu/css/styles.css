@@ -1,0 +1,134 @@
+html, body {
+	background-color: #fff;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#cialo{
+	width:1200px;
+	background-color: #fff;
+	text-align: left;
+	margin: 0 auto 0 auto;
+
+}
+
+#naglowek{
+	background-color: #888;
+	height: 50px;
+	width: 100%;
+}
+#menu{
+  float: left;
+  display: inline;
+}
+
+#drzewo {
+	width: 660px;
+	float: left;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+#opis {
+	position: relative;
+	width: 540px;
+	float: left;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+#stopka {
+	clear: both;
+	height: 50px;
+	width: 100%;
+	background-color: #888;
+}
+#historia {
+	margin-bottom:20px;
+	float: left;
+	overflow: hidden;
+	width: 540px;
+	background-color: #fff;
+}
+ul, ul li {
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	padding: 2px 2px 1px 50px;
+	background-color: white;
+	border: 0px;
+	margin-left: 0px;
+}
+
+ul li {
+	padding-left: 20px;
+	background: url("../images/punkt.gif") no-repeat left top;
+	border-width: 0px;
+	cursor: pointer;
+}
+.punkt_koniec {
+	padding-left: 20px;
+	background: url("../images/punkt-koniec.gif") no-repeat left top;
+	border-width: 0px;
+}
+
+ul li div, .cent {
+	display: block;
+	text-decoration: none;
+	padding: 7px 7px 7px 7px;
+	color: #000;
+	font-weight: normal;
+	font-family: Verdana;
+	font-size: small;
+	border-style: none;
+	border-width: 1px;
+	border-color: black;
+	border-left: 0px;
+}
+ul li div:hover, .cent:hover 
+{
+	color: #000;
+	font-weight: bold;
+	border-left: 0px;
+}
+.opis{
+	border: 2px solid black;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 2px;
+	margin-right: 2px;
+	width: 98%;
+	
+}
+.opis tr td{
+	border: 1px solid black;
+}
+.opis td{
+	font-family: monospace;
+	font-size: 14px;
+	text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+}
+.ip {
+	font-style: italic;
+}
+div {
+	font-family: monospace;
+	font-size: 14px;
+}
+.mac {
+	font-family: monospace;
+	font-size: 14px;
+        font-weight: bolder;
+        color: black;
+	text-align: left;
+        text-decoration: none;
+        padding-left: 5px;
+        padding-right: 5px;
+}

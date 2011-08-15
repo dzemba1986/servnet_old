@@ -1,0 +1,246 @@
+.my_body
+{
+  background-image:url('tile11.jpg');
+  background-repeat:repeat;
+}
+#tekst {
+	font-family: Verdana;
+}
+table, th, td {
+	font-family: Verdana;
+	font-size: x-small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: 1px solid black;
+}
+.dodaj, .dodaj table, .dodaj th, .dodaj td{
+	font-family: Verdana;
+	font-size: small;
+	border-collapse:collapse;
+	padding: 1px;
+	border: none;
+}
+
+.nieblok {
+	font-family: arial;
+	font-size: 14px;
+	text-decoration: underline;
+	font-weight: bold;
+	color: white;
+	display: inline;
+}
+.nieblok:hover {
+	background: #9c9580;
+}
+.header {
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	display: inline;
+	background: none;
+	border: none;
+}
+#title {
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: 20px;
+  text-align:center;
+  clear:both;
+  color:white;
+}
+.invisible{
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	display: inline;
+	background: none;
+	border: 1px solid white;
+}
+.row:hover {
+	background: yellow;
+}
+#field{
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	width: 50px;
+	height:50px;
+	color: black;
+	border: 1px solid black;
+	text-align: center;
+}
+#header1 {
+        height: 140px;
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+        background: #000000;
+        zIndex: 999;
+}
+#header {
+        height: 140px;
+        background: rgba(0,0,0,0.5);
+}
+#dodaj {
+	height: 30px;
+	float: left;
+	margin-bottom:10px;
+}
+.logged_user {
+  font-family: Arial;
+  font-size:14px;
+  color:white;
+}
+#menu {
+	height: 25px;
+	float: right;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom:10px;
+}
+.paging_active{
+        text-decoration: none;
+        color: white;
+        font-weight: bolder;
+        font-family: courier, arial;
+        font-size: 20px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.paging_menu {
+        text-decoration: none;
+        font-family: courier, arial;
+        color: white;
+	margin-left: 2px;
+	margin-right: 2px;
+        font-size: 16px;
+}
+.paging_dots {
+        text-decoration: none;
+        font-family: courier, arial;
+        color: white;
+        font-size: 16px;
+}
+#row_count_form {
+	height: 30px;
+	float: left;
+	text-align: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-bottom:10px;
+	font-family: arial;
+	font-size: 12px;
+        color: white;
+}	
+#login_bar {
+	text-align: right;
+	margin-right:5px;
+	margin-top:5px;
+}	
+#find {
+	height: 30px;
+	float: right;
+	text-align: left;
+	margin-right:5px;
+	margin-bottom:10px;
+}	
+#edit {
+	width: 1000px;
+	}
+#net {
+	width: 500px;
+	float: left;
+}
+#phone {
+	width: 500px;
+	float: left;
+}
+.edit_little_header {
+  font-family:Arial;
+  font-size:15px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+.title_row {
+  background-color: grey;
+}
+.edit {
+  width: 40px;
+  text-decoration: none;
+	font-weight: bold;
+	color: black;
+	display: block;
+	background: #9c9580;
+	border: 1px solid black;
+}
+.edit:hover {
+	color: white;
+}
+.date_field {
+	width:55px;
+	float: left;
+}
+.mac_field {
+	width:110px;
+	float: left;
+}
+.phone_field {
+	width:80px;
+	float: left;
+}
+.time_field {
+	width:35px;
+}
+.address_field {
+	width:150px;
+	float: left;
+}
+.installer_field {
+	width:150px;
+	float: left;
+}
+.speed_field {
+	width:40px;
+	float: left;
+}
+.switch_field {
+	width:150px;
+	font-family: arial;
+	font-size: 12px;
+	float: left;
+}
+.port_field {
+	font-family: arial;
+	font-size: 12px;
+	float: left;
+}
+.info_field {
+	font-family: arial;
+	font-size: 10px;
+	width:260px;
+	height:100px;
+	float: left;
+}
+.submit_field {
+	width:45px;
+	font-family: arial;
+	font-size: 10px;
+	background: #ffffaa;
+	border: 1px solid #005599;
+}
+.tables {
+        padding: 0;
+        margin: 1px;
+        width: 400px;
+ 	background-color: grey;
+}
+.td_name {
+  width:160px;
+}
+.td_value {
+  width:185px;
+}
+.td_submit {
+  width:50px;
+}

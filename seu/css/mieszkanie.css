@@ -1,0 +1,31 @@
+.os {
+width: 110px;
+}
+.ulic {
+width: 140px;
+}
+.blok {
+width: 30px;
+}
+.oddo {
+width: 30px;
+}
+.przelacznik {
+width: 120px;
+}
+.id_lok {
+width: 140px;
+}
+.zmien {
+width: 50px;
+}
+.mieszkania {
+margin: none;
+border-collapse:collapse;
+}
+.mieszkania td {
+border-top: 1px solid black;
+border-right: 1px solid black;
+border-left: 1px solid black;
+padding: 1px;
+}

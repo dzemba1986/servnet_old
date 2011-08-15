@@ -1,0 +1,84 @@
+
+html, body {
+	background-color: #fff;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+.switch {
+        width: 1005px;
+        margin-left: auto;
+        margin-right: auto; 
+	font-weight: normal;
+	font-family: Verdana;
+	font-size: 12px;
+	border: 2px dotted black;
+}
+.switch table {
+	border-collapse: collapse;
+        margin: 5px;
+}
+.switch td{
+	border: 1px solid black;
+        padding: 1px 3px 1px 3px;
+}
+.switch_rej {
+        width: 1205px;
+        margin-left: auto;
+        margin-right: auto; 
+	font-weight: normal;
+	font-family: Verdana;
+	font-size: 12px;
+}
+.switch_rej table {
+	border-collapse: collapse;
+        margin: 5px;
+        width: 1194px;
+}
+.switch_rej td{
+	border: 1px solid black;
+        padding: 1px 3px 1px 3px;
+}
+.sw_desc {
+	width: 400px;
+	float: left;
+	overflow: hidden;
+	background-color: #fff;
+}
+.sw_desc table {
+  width: 300px;
+}
+.sw_ip {
+	position: relative;
+	width: 400px;
+	float: left;
+	overflow: hidden;
+	background-color: #fff;
+}
+.sw_ip table {
+  width: 300px;
+}
+.ports {
+        clear: both;
+	position: relative;
+	width: 1000px;
+	float: center;
+	overflow: hidden;
+	background-color: #fff;
+}
+.ports table {
+width: 995px;
+}
+.title {
+  background: #D6D4D5;
+}
+.location {
+  background: #FFFFFF;
+  font-size: 14px;
+  font-weight: bolder;
+}
+hr {
+width: 1000px;
+       margin-left: auto;
+       margin-right: auto;
+}

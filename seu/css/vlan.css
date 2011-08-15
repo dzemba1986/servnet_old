@@ -1,0 +1,166 @@
+html, body {
+	background-color: #fff;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#cialo{
+	width:1200px;
+	background-color: #fff;
+	text-align: left;
+	margin: 0 auto 0 auto;
+
+}
+
+#naglowek{
+	background-color: #888;
+	height: 50px;
+	width: 100%;
+}
+
+#lewa {
+	width: 200px;
+	padding-top: 10px;
+	float: left;
+	min-height: 400px;
+	border-right: 1px solid #000;
+	overflow: hidden;
+	background-color: #fff;
+	text-align: center;
+}
+
+#prawa {
+	position: relative;
+	width: 789px;
+	padding-top: 10px;
+	min-height: 400px;
+	margin-left: 10px;
+	float: left;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+#stopka {
+	clear: both;
+	height: 50px;
+	width: 100%;
+	background-color: #888;
+}
+#dodaj_vlan {
+	margin-bottom: 20px;
+	text-align: center;
+}
+#dodaj_podsiec {
+	margin-bottom: 20px;
+}
+#vlan_form {
+	width: 40px;
+	height: 15px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+#opis_vlanu_form {
+	width: 120px;
+	height: 15px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+#podsiec_form {
+	width: 100px;
+	height: 15px;
+	margin: 0px;
+}
+#maska_form {
+	width: 20px;
+	height: 15px;
+	margin-right: 10px;
+}
+#podsieci{
+	text-align: center;
+}
+.submit {
+   	font-size: 11px;
+      	font-family: Verdana,sans-serif;
+        font-weight: bold;
+	color: #888888;
+	width: 50px;
+	height: 22px;
+	background-color: #EEEEEE;
+	border-style: solid;
+	border-color: #BBBBBB;
+	border-width: 1px;
+}
+.submit:hover {
+	color: #FFF;
+	background-color: #000;
+}
+ul, ul li {
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	padding: 2px 20px 2px 20px;
+	background-color: white;
+	border: 0px;
+	margin-left: 0px;
+}
+
+ul li {
+	background: #DDD;
+	margin: 2px 0px 2px 0px;
+	border-width: 0px;
+	cursor: pointer;
+	text-align: center;
+}
+
+ul li div, .cent {
+	display: block;
+	text-decoration: none;
+	padding: 7px 7px 7px 7px;
+	color: #000;
+	font-weight: normal;
+	font-family: Verdana;
+	font-size: small;
+	border-style: none;
+	border-width: 1px;
+	border-color: black;
+	border-left: 0px;
+}
+ul li:hover
+ {
+	color: #000;
+	font-weight: bold;
+	border: 1px solid;
+}
+.opis{
+	border: 2px solid black;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 5px;
+}
+.opis_naglowek{
+	background: gray;
+}
+.opis tr td{
+	border: 1px solid black;
+}
+.opis_adres{
+	width: 120px;
+}
+.opis_maska{
+	width: 60px;
+}
+.opis_przycisk{
+	width: 80px;
+}
+div {
+	font-family: monospace;
+	font-size: 14px;
+}
+.ip {
+	font-style: italic;
+}
