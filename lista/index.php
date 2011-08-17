@@ -32,9 +32,11 @@ foreach($wynik as $wiersz)
   $net_rowcolor;
   $phone_rowcolor;
   $wina_abonenta ="#CBD665";
+  $long_activation_time = 3600*24*17;
+  $total_activation_time = 3600*24*21;
   if($tryb=='in_progress' || $tryb='for_configuration')
   {
-    if($wiersz['net_awaiting_time'] > 3600*24*30 && $wiersz['net_awaiting_time'] <= 3600*24*40)
+    if($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time)
       if($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
       else
@@ -54,7 +56,7 @@ foreach($wynik as $wiersz)
       $net_rowcolor = "#f2f5a9";
     if($wiersz['phone_id'])
     {
-      if($wiersz['phone_awaiting_time'] > 3600*24*30 && $wiersz['phone_awaiting_time'] <= 3600*24*40)
+      if($wiersz['phone_awaiting_time'] > $long_activation_time && $wiersz['phone_awaiting_time'] <= $total_activation_time)
         if($wiersz['phone_connect'] && $wiersz['phone_wire'])
           $phone_rowcolor = $wina_abonenta;
         else

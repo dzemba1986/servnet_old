@@ -27,14 +27,15 @@ Class Connections
         die("Nie masz uprawnień!");
     $service = $sql->getConnectionAddressAndService($id); 
     $service = $service['service'];
+   
+   // Zmiana ideologii, na jednego użytkownika może być wiele umów
+    /*
     if(!$this->freeAraId($value, $service, $id))
         die('Do tego ARA ID jest juz przypisana taka aktywna usługa!');
     }
-    else
-    {
-      if(($permissions & 64)!=64)
-        die("Nie masz uprawnień!");
-    }
+    */
+    if(($permissions & 64)!=64)
+      die("Nie masz uprawnień!");
     $value2;
     if(!$id || !$field_name)
       die("Błędne dane!");
