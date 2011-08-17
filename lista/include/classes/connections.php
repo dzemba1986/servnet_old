@@ -32,9 +32,10 @@ Class Connections
     /*
     if(!$this->freeAraId($value, $service, $id))
         die('Do tego ARA ID jest juz przypisana taka aktywna usługa!');
-    }
+    
     */
-    if(($permissions & 64)!=64)
+    }
+    elseif(($permissions & 64)!=64)
       die("Nie masz uprawnień!");
     $value2;
     if(!$id || !$field_name)

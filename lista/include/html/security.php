@@ -13,7 +13,7 @@ ini_set('session.gc_maxlifetime', $session_life_time);
 $ip = $_SERVER['REMOTE_ADDR'];
 if(!defined('SESSION'))
 {
-  session_save_path(ROOT.'/sessions/lista/');
+  session_save_path(ROOT.'/sessions/lista');
   session_start();
   define('SESSION', true);
 }
