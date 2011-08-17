@@ -440,7 +440,7 @@ print_r($ips_array);
 echo ($data);
 
 }
-				$filename = "../.dhcp_files/regions/".$subnet['opis'].".conf";
+				$filename = "../../.dhcp_files/regions/".$subnet['opis'].".conf";
 				echo"<br>$filename<br>";
 				$file = fopen($filename, "w");
 				fwrite($file, $data);
