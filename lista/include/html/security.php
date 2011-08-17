@@ -1,19 +1,25 @@
 <?php
 //Przemysław Koltermann
 //All rights reserved
+
+if(!defined('NESTED'))
+    define('NESTED', true);
+
+require('path.php');
+
 $session_life_time = 14400; //4 godziny
 //$session_life_time = 60; //6 godzin
 ini_set('session.gc_maxlifetime', $session_life_time);
 $ip = $_SERVER['REMOTE_ADDR'];
 if(!defined('SESSION'))
 {
-  session_save_path('/home/ftp/www/sessions/podlaczenia_dev');
+  session_save_path(ROOT.'/sessions/lista/');
   session_start();
   define('SESSION', true);
 }
 if(!defined('MYSQL'))
 {
-  require('/home/ftp/www/podlaczenia_dev/include/classes/mysql.php');
+  require(ROOT.'/lista/include/classes/mysql.php');
   define('MYSQL', true);
 }
 if(!defined('GET_USER'))
@@ -63,7 +69,7 @@ if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && 
   if($_GET['wyloguj'])
   {
     session_destroy();
-    require('/home/ftp/www/podlaczenia_dev/include/forms/formularz_zaloguj.php');
+    require(ROOT.'/lista/include/forms/formularz_zaloguj.php');
     die();
   }
   elseif(!headers_sent())
@@ -96,6 +102,6 @@ elseif($_POST['login'] && $_POST['password'])
 }
 else
 {
-  require('/home/ftp/www/podlaczenia_dev/include/forms/formularz_zaloguj.php');
+  require(ROOT.'/lista/include/forms/formularz_zaloguj.php');
   die();
 }

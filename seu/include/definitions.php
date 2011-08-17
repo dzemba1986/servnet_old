@@ -30,8 +30,8 @@
 //	do czasu zaprojektowania logowania zdefiujemy na stałe użytkownka
 
 //define('DEBUG', true);
-define('MYMYSQL_FILE', '/home/ftp/www/podlaczenia_dev/include/classes/mysql.php');
-define('CONNECTIONS_FILE', '/home/ftp/www/podlaczenia_dev/include/classes/connections.php');
+define('MYMYSQL_FILE', ROOT.'/lista/include/classes/mysql.php');
+define('CONNECTIONS_FILE', ROOT.'/lista/include/classes/connections.php');
 
 if(!defined('DADDY'))
 {

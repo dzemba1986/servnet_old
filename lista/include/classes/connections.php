@@ -1,5 +1,5 @@
 <?php
-define('HOST_PATH', '/home/ftp/www/home-test/include/host.php');
+define('HOST_PATH', ROOT.'/seu/include/host.php');
 Class Connections
 {
   public function update($id, $field_name, $value, $value2)

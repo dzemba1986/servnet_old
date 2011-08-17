@@ -99,7 +99,7 @@ else
   $con_id = $_GET['con_id'];
   if(!$con_id)
    die('Błąd przesyłania identyfikatora z Listy podłączeń!!');
-  require('../podlaczenia_dev/include/classes/mysql.php');
+  require(ROOT.'/lista/include/classes/mysql.php');
   $con_id = intval($con_id);
   $con_sql = new myMysql();
   $query = "SELECT c.mac, c.switch as parent_device, c.switch_loc, c.port as parent_port, l.ulic as osiedle, l.blok as nr_bloku, l.nazwa_inna as other_name, CONCAT(l.mieszkanie, l.klatka) as nr_mieszkania, c.speed as pakiet FROM Connections c LEFT JOIN Lokalizacja l ON c.localization=l.id WHERE c.id='$con_id'";
