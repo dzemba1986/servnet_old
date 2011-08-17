@@ -99,8 +99,9 @@ Class Connections
     {
       if($field_name=='mac')
       {
-      if($value && !$this->validMac($value))
-        die('Niewlasciwy format danych!');
+        $value = strtolower($value);
+        if($value && !$this->validMac($value))
+          die('Niewlasciwy format danych!');
       }
       elseif($field_name=='ara_id')
       { 
