@@ -1,11 +1,17 @@
 <?php
 //Przemysław Koltermann
 //All rights reserved
+
+if(!defined('NESTED'))
+    define('NESTED', true);
+
+require('path.php');
+
 $session_life_time = 14400; //4 godziny
 if(!defined('SESSION'))
 {
   ini_set('session.gc_maxlifetime', $session_life_time);
-  session_save_path(ROOT.'/sessions/seu/');
+  session_save_path(ROOT.'/sessions/seu');
   session_start();
   define('SESSION', true);
 }
