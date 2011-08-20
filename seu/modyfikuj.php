@@ -234,10 +234,9 @@ if(isset($_POST['dodaj']))
 		}
 	break;
 	}
-        if($device['device_type']=='Virtual' && $device['lokalizacja']=='11111')
-	  echo"<center><a href=\"index.php?device=".$device['dev_id']."\">Powrót</a></center>";
-        else
-	  echo"<center><a href=\"modyfikuj.php?device=".$device['dev_id']."\">Powrót</a></center>";
+        if($device['lokalizacja']!='11111')
+	  echo"<center><a href=\"index.php?device=".$device['dev_id']."\">Drzewo urządzeń</a></center>";
+	echo"<center><a href=\"modyfikuj.php?device=".$device['dev_id']."\">Edycja</a></center>";
 }
 elseif (isset($_GET['device']))
 {
