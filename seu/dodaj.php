@@ -242,7 +242,7 @@ if(isset($_POST['dodaj']))
 		}
 	break;
 	}
-	echo"<center><a href=\"tree.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
+	echo"<center><a href=\"index.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
 }
 else
 {

@@ -1106,7 +1106,7 @@ class Device extends Daddy
 		$this->loguj($_dev_id_1, $dev2['lokalizacja'], $user, 'Zamontowano '.$dev_id_2, 'wymien');
 		$this->loguj($_dev_id_2, $dev1['lokalizacja'], $user, 'Zamontowano '.$dev_id_1, 'wymien');
 		$this->query("COMMIT");
-	        echo"<center><a href=\"tree.php?device=$_dev_id_2\">Powrót</a></center>";
+	        echo"<center><a href=\"index.php?device=$_dev_id_2\">Powrót</a></center>";
 			
 	}
 	function swap($current_dev, $new_dev)
@@ -1278,7 +1278,7 @@ class Device extends Daddy
 			$this->query("ROLLBACK");
 			echo "Nie udało się przenieść do magazynu";
 		}
-	echo"<center><a href=\"tree.php\">Powrót</a></center>";
+	echo"<center><a href=\"index.php\">Powrót</a></center>";
 }
 
 public function usunVirtual($dev_id)
@@ -1292,7 +1292,7 @@ public function usunVirtual($dev_id)
 		return 0;
 	}
 	else
-		echo "<center>To nie jest urządzenie virtualne!!!</center><center><a href=\"tree.php\">Powrót</a></center>";
+		echo "<center>To nie jest urządzenie virtualne!!!</center><center><a href=\"index.php\">Powrót</a></center>";
 	return 1;
 }
 private function getOldMac()

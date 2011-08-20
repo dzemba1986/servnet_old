@@ -10,7 +10,7 @@ $alert = nl2br($alert);
 ?>
 <div style="padding: 15px;">
 <div style="display: inline; float: left; padding-top: 4px;"><center>
-<a href="tree.php" style="font-weight:bold; color:#000;">DRZEWO URZĄDZEŃ</a>  
+<a href="index.php" style="font-weight:bold; color:#000;">DRZEWO URZĄDZEŃ</a>  
 <a style="font-weight:bold; color:#000;" href="lista_ip.php">ADRESY IP</a>
 <a style="font-weight:bold; color:#000;" href="vlan_zarzadzaj.php">VLANY</a>
 <a style="font-weight:bold; color:#000;" href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
@@ -46,7 +46,7 @@ $alert = nl2br($alert);
 </div>
 <div style="display: inline; float:right; padding-top:4px;">
 <a style="font-weight:bold; color:#000;" href="editUser.php">edytuj konto</a>
-<a style="font-weight:bold; color:#000;" href="tree.php?wyloguj=true">wyloguj [<?php echo $_SESSION['user_login']; ?>]</a>
+<a style="font-weight:bold; color:#000;" href="index.php?wyloguj=true">wyloguj [<?php echo $_SESSION['user_login']; ?>]</a>
 </center>
 </div>
 </div>

@@ -89,7 +89,7 @@ if(isset($_POST['dodaj']))
                 mysql_query("ROLLBACK", $sql) or die(mysql_error());
                 Daddy::error("Nie dodano hosta!");
         }
-	echo"<center><a href=\"tree.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
+	echo"<center><a href=\"index.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
 }
 else
 {

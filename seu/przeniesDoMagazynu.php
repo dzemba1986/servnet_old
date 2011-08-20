@@ -25,7 +25,7 @@ if($_GET['dev_id'])
 	{
 		$device = new Device();
 		$device->usunDoMagazynu($_GET['dev_id']);
-		echo"<center><a href=\"tree.php\">Powrót</a></center>";
+		echo"<center><a href=\"index.php\">Powrót</a></center>";
 	}
 	else
 	{

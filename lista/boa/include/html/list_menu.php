@@ -55,7 +55,7 @@ Rekordów na stronie
         <div id="m2" 
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
-        <a href="index.php?tryb=search&amp;tryb2=address">Adres</a>
+        <a href="index.php?no_res=1&amp;tryb=search&amp;tryb2=address">Adres</a>
         <a href="index.php?month=szukaj&amp;tryb=search&amp;tryb2=activation">Uruchomienie</a>
         <a href="index.php?tryb=search&amp;tryb2=contract">Dodanie</a>
         </div>

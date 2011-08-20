@@ -33,7 +33,7 @@ if($_GET['dev_id'])
 		}
 		else
 			echo "<center>To nie jest urządzenie virtualne!!!</center>";
-		echo"<center><a href=\"tree.php\">Powrót</a></center>";
+		echo"<center><a href=\"index.php\">Powrót</a></center>";
 	}
 	else
 	{

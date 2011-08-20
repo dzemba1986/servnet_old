@@ -28,7 +28,7 @@ if($_POST['zamien']=="zamień")
 	$device->wymien($porty_nowe, $dev_id_1, $dev_id_2);
 	exit();
 }
-	echo"<center><a href=\"tree.php?device=$dev_id_1\">Powrót</a></center>";
+	echo"<center><a href=\"index.php?device=$dev_id_1\">Powrót</a></center>";
 
 ?>
 

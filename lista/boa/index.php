@@ -86,6 +86,8 @@ $variables = "tryb=$tryb&amp;tryb2=$tryb2&amp;od=$od&amp;do=$do&amp;payment=$pay
 <td><a href="index.php?order=service_activation&amp;<?php echo($variables) ?>" class="header">Int. uruchom.</a></td>
 <td>Info o płatności</td>
 <td>Rezygnacja</td>
+<td>Data przew.</td>
+<td>Data gniazd.</td>
 <td>Sync. user</td>
 <td>Ara</td>
 </tr>
@@ -172,6 +174,8 @@ foreach($wynik as $wiersz)
       $ara="";
     }
   }
+  if($wiersz['installation_date'] && !$wiersz['socket_installation_date'])
+    $wiersz['_socket_date'] = 'U'.$wiersz['_installation_date'];;
   echo"<tr bgcolor=\"$rowcolor\" class=\"row\">
     <td>".($row)."</td>	 
     <td>".$wiersz['_start_date']."</td>
@@ -184,6 +188,8 @@ foreach($wynik as $wiersz)
     <td>".$wiersz['_net_date']."</td>
     <td>".$wiersz['_payment_activation']."</td>
     <td>".$wiersz['_resignation_date']."</td>
+    <td>".$wiersz['_wire_date']."</td>
+    <td>".$wiersz['_socket_date']."</td>
     <td>".$wiersz['sync_user']."</td>
     <td$ara_style>".$ara."</td>
 

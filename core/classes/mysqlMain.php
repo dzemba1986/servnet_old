@@ -1,5 +1,5 @@
 <?php
-class myMysql
+class MysqlMain
 {
   public $sql;
   public $result;
@@ -150,5 +150,56 @@ class myMysql
     else
       $wynik = mysql_fetch_array($wskaznik);
     return $wynik;
+  }
+  protected function query_log($zapytanie)
+  {
+    $zapytanie2 = strtolower($zapytanie);
+    if(strpos($zapytanie2, 'insert')!==false ||strpos($zapytanie2, 'update')!==false || strpos($zapytanie2, 'delete')!==false)
+    {
+      $this->connect();
+      $user = intval($_SESSION['user_id']);
+      $ip = mysql_real_escape_string($_SERVER['REMOTE_ADDR']);
+      $safe_zapytanie = mysql_real_escape_string($zapytanie);
+      $query = "INSERT INTO History (query_time, user_name, user_ip, query_text) VALUES(NOW(), '$user', '$ip', '$safe_zapytanie')";
+      mysql_query($query) or die(mysql_error());
+    }
+  }
+  protected function query_log2($zapytanie, $id=null, $table=null)
+  {
+    $id_collumn;
+    $this->connect();
+    $user = intval($_SESSION['user_id']);
+    $ip = mysql_real_escape_string($_SERVER['REMOTE_ADDR']);
+    $safe_zapytanie = mysql_real_escape_string($zapytanie);
+    $zapytanie2 = strtolower($zapytanie);
+    $query;
+    if($id && $table)
+    {
+      switch($table)
+      {
+      case 'Boa':
+        $id_collumn = 'connection_id';
+        break;
+      case 'Installations':
+        $id_collumn = 'installation_id';
+        break;
+      case 'Teryt':
+        $id_collumn = 'ULIC';
+      default:
+        $id_collumn = 'id';
+        break;
+      }
+      $query = "SELECT * FROM $table WHERE $id_collumn='$id'";
+      $result = $this->query_assoc_array($query);
+      $old = print_r($result[0], true);
+      $old = mysql_real_escape_string($old);
+      $query = "INSERT INTO History (query_time, user_name, user_ip, query_text, old_value, object_id, table_name) VALUES(NOW(), '$user', '$ip', '$safe_zapytanie', '$old', '$id', '$table')";
+//      echo $query;
+    }
+    else
+    {
+      $query = "INSERT INTO History (query_time, user_name, user_ip, query_text) VALUES(NOW(), '$user', '$ip', '$safe_zapytanie')";
+    }
+    mysql_query($query) or die(mysql_error());
   }
 }

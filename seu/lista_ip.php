@@ -77,13 +77,13 @@ if($_POST['_vlan0'] && $_POST['_podsiec0'])
 		{
 			$rekord = $wynik[$baza_id];
 			if($rekord['device_type']=="Host")	
-				echo"<tr><td>".$wiersz."</td><td><a href=\"tree.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."/".$rekord['nr_mieszkania']."(".$rekord['device_type'].")</a></td></tr>";
+				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."/".$rekord['nr_mieszkania']."(".$rekord['device_type'].")</a></td></tr>";
                         elseif($rekord['device_type']=="Virtual" && $rekord['osiedle']=='Virtual')	
 				echo"<tr><td>".$wiersz."</td><td><a href=\"modyfikuj.php?device=".$rekord['device']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 			elseif($rekord['other_name'])	
-				echo"<tr><td>".$wiersz."</td><td><a href=\"tree.php?device=".$rekord['device']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
+				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 			else
-				echo"<tr><td>".$wiersz."</td><td><a href=\"tree.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."(".$rekord['device_type'].")</a></td></tr>";
+				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."(".$rekord['device_type'].")</a></td></tr>";
 		}
 		elseif($wolne_wyswietlaj)
 			echo"<tr><td>".$wiersz."</td><td> -- </td></tr>";

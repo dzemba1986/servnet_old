@@ -1,24 +1,24 @@
 <?php 
-require('../include/html/security.php');
+require('../security.php');
 //*******************************
 //Test uprawnień do odczytu listy
 if($_POST['wyloguj']=="Wyloguj")
 {
    session_destroy();
-   require('../include/forms/formularz_zaloguj.php');
+   require(LISTA_ABSOLUTE.'/include/forms/formularz_zaloguj.php');
    exit();
 }
 if(($_SESSION['permissions'] & 8)!=8)
 {
    echo("<center><h1 style=\"color:white\">Nie masz uprawnien!</h1></center>");
    session_destroy();
-   require('../include/forms/formularz_zaloguj.php');
+   require(LISTA_ABSOLUTE.'/include/forms/formularz_zaloguj.php');
    exit();
 }
 //*******************************
 $title;
 $ip = $_SERVER['REMOTE_ADDR'];
-$sql = new myMysql();
+$sql = new MysqlBoa();
 $sql->connect();
 if($_GET['ara_id'])
 { 
@@ -36,7 +36,7 @@ elseif($_POST['dodaj'])
 {
   if($_SESSION['permissions'] & 4 != 4)
     die("Nie masz uprawnień do dodawania!");
-  require('../include/classes/connections.php');
+  require(LISTA_ABSOLUTE.'/include/classes/connections.php');
   $connection = new Connections();
   $start_date = $_POST['start_date'];
   $ara_id = $_POST['ara_id'];
@@ -65,10 +65,10 @@ if(!$tryb)
   $tryb = 'search';
   $tryb2 = 'activation';
 }
-require('../include/classes/paging.php');
+require(LISTA_ABSOLUTE.'/include/classes/paging.php');
 $paging = new Paging();
 $paging->initialize($_GET['page_number'], $_GET['rows_per_page']);
-if($tryb!='add')
+if($tryb!='add' || $no_res==1)
   $wynik = $sql->getBoaList($tryb, $tryb2, $paging, $od, $do, $order, $payment, $activation);
 if($tryb=='add')
   $title = 'Dodaj umowę';
