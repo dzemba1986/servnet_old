@@ -1,0 +1,491 @@
+<?php
+class MysqlBoa extends MysqlMain
+{
+  public $sql;
+  public $result;
+  public function connect()
+  {
+    $sql = mysql_connect('localhost', 'internet', 'szczurek20P4')or die(mysql_error());			
+
+    return $this->connect_pl('localhost', 'internet', 'szczurek20P4', 'internet');
+  }
+  //funkcja query zwraca:
+  //false jeżeli wynik zapytania był pusty lub zapytanie nie zostało wykonane
+  //true jeżeli zapytanie zostało wykonanee poprawnie i nie miało zwracać wartości
+  //wartość, jeżeli wynik powinien być tylko jeden
+  //tablicę wartości...
+  public function num_rows($zapytanie)
+  {
+    $sql = $this->connect();
+    //		echo ("<br>$zapytanie<br>");
+    $wskaznik = mysql_query($zapytanie, $sql);
+    $this->result = $wskaznik;
+    //echo (mysql_info($sql));
+    if ($wskaznik === false)
+    {
+      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
+      echo "<br>".mysql_error($sql)."<br>";
+      return false;
+    }
+    if ($wskaznik === true)
+      return null;		//jezeli to bylo insert update delete drop
+    return mysql_num_rows($wskaznik);
+  }
+  public function query($zapytanie)
+  {
+    $sql = $this->connect();
+    //		echo ("<br>$zapytanie<br>");
+    $this->query_log($zapytanie);
+    $wskaznik = mysql_query($zapytanie, $sql);
+    $this->result = $wskaznik;
+    //echo (mysql_info($sql));
+    if ($wskaznik === false)
+    {
+      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
+      echo "<br>".mysql_error($sql)."<br>";
+      return false;
+    }
+    if ($wskaznik === true)
+      return $wskaznik;		//jezeli to bylo insert update delete drop
+    $wynik;
+    if(mysql_affected_rows($sql) > 1)
+      for($i=0; $i < mysql_affected_rows($sql); $i++)
+      {
+        $wynik[] = mysql_fetch_array($wskaznik);
+      }
+    else
+      $wynik = mysql_fetch_array($wskaznik);
+    return $wynik;
+  }
+  public function query_assoc($zapytanie)
+  {
+    $sql = $this->connect();
+    //		echo ("<br>$zapytanie<br>");
+    $this->query_log($zapytanie);
+    $wskaznik = mysql_query($zapytanie, $sql);
+    //echo (mysql_info($sql));
+    $this->result = $wskaznik;
+    if ($wskaznik === false)
+    {
+      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
+      echo "<br>".mysql_error($sql)."<br>";
+      return false;
+    }
+    if ($wskaznik === true)
+      return $wskaznik;		//jezeli to bylo insert update delete drop
+    $wynik;
+    if(mysql_affected_rows($sql) > 1)
+      for($i=0; $i < mysql_affected_rows($sql); $i++)
+      {
+        $wynik[] = mysql_fetch_assoc($wskaznik);
+      }
+    else
+      $wynik = mysql_fetch_assoc($wskaznik);
+    return $wynik;
+  }
+  public function query_assoc_array($zapytanie)
+  {
+    $sql = $this->connect();
+    //		echo ("<br>$zapytanie<br>");
+    $this->query_log($zapytanie);
+    $wskaznik = mysql_query($zapytanie, $sql);
+    //echo (mysql_info($sql));
+    $this->result = $wskaznik;
+    if ($wskaznik === false)
+    {
+      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
+      echo "<br>".mysql_error($sql)."<br>";
+      return false;
+    }
+    if ($wskaznik === true)
+      return $wskaznik;		//jezeli to bylo insert update delete drop
+    $wynik;
+    for($i=0; $i < mysql_affected_rows($sql); $i++)
+    {
+      $wynik[] = mysql_fetch_assoc($wskaznik);
+    }
+    return $wynik;
+  }
+  public function query_update($zapytanie, $id, $table)
+  {
+    $sql = $this->connect();
+    //		echo ("<br>$zapytanie<br>");
+    $this->query_log2($zapytanie, $id, $table);
+    $wskaznik = mysql_query($zapytanie, $sql);
+    $this->result = $wskaznik;
+    //echo (mysql_info($sql));
+    if ($wskaznik === false)
+    {
+      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
+      echo "<br>".mysql_error($sql)."<br>";
+      return false;
+    }
+    if ($wskaznik === true)
+      return $wskaznik;		//jezeli to bylo insert update delete drop
+    $wynik;
+    if(mysql_affected_rows($sql) > 1)
+      for($i=0; $i < mysql_affected_rows($sql); $i++)
+      {
+        $wynik[] = mysql_fetch_array($wskaznik);
+      }
+    else
+      $wynik = mysql_fetch_array($wskaznik);
+    return $wynik;
+  }
+  public function getInstallationsList($mode, $order, &$paging, $find_phrase=null, $search_field=null)
+  {
+    if ($order)
+    {
+      if($order =="adres")
+      {
+        $isnull = "";
+        $order = " ORDER BY address ASC";
+      }
+      else
+      {
+        $isnull = ", $order is null AS isnull ";
+        $order = " ORDER BY isnull ASC, $order ASC";
+      }
+    }
+    else 
+    {
+      $isnull = ", UNIX_TIMESTAMP(wire_installation_date)=0 AS isnull ";
+      $order = " ORDER BY isnull ASC, wire_installation_date ASC";
+    }
+    $query;
+    $search;
+    if($find_phrase && $search_field)
+    {
+      if($search_field=='installation_id')
+        $search="AND ( $search_field LIKE '$find_phrase') ";
+      else
+        $search="AND ( $search_field LIKE '%$find_phrase%') ";
+    }
+    switch($mode)
+    {
+      case 'pending_installations':
+        $inner_query="
+          SELECT	a.id as connection_id,
+                        c.address,
+                        c.wire_length,
+                        c.wire_installation_date,
+                        DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                        c.socket_installation_date,
+                        DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                        c.wire_installer,
+                        c.socket_installer,
+                        c.type, 
+                        a.last_modyfication as net_modyf,
+                        DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
+                          FROM Installations c
+                          LEFT JOIN Connections a 
+                          ON c.localization=a.localization AND a.service=c.type
+                          WHERE (c.wire_installation_date is null AND c.socket_installation_date is not null) 
+                            OR (c.socket_installation_date is null AND c.wire_installation_date is not null)";
+        break;
+      case 'done_installations':
+        $inner_query="
+          SELECT	a.id as connection_id,
+                        c.address,
+                        c.wire_length,
+                        c.wire_installation_date,
+                        DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                        c.socket_installation_date,
+                        DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                        c.wire_installer,
+                        c.socket_installer,
+                        c.type, 
+                        a.last_modyfication as net_modyf,
+                        DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
+                          FROM Installations c
+                          LEFT JOIN Connections a 
+                          ON c.localization=a.localization AND a.service=c.type
+                          WHERE c.wire_installation_date is not null AND c.socket_installation_date is not null";
+        break;
+      case 'all_installations':
+        $inner_query="
+          SELECT	a.id as connection_id,
+                        c.address,
+                        c.wire_length,
+                        c.wire_installation_date,
+                        DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                        c.socket_installation_date,
+                        DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                        c.wire_installer,
+                        c.socket_installer,
+                        c.type, 
+                        a.last_modyfication as net_modyf,
+                        DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
+                          FROM Installations c
+                          LEFT JOIN Connections a 
+                          ON c.localization=a.localization AND a.service=c.type
+                          WHERE (c.wire_installation_date is not null OR c.socket_installation_date is not null) $search";
+        break;
+    }
+    //echo $query;
+    $num_rows = $this->num_rows($inner_query);
+    $paging->setTotalRows($num_rows);
+    $offset = $paging->getOffset();
+    $pages = $paging->getPages();
+    $rows_per_page = $paging->getRowsPerPage();
+    if($rows_per_page)
+    {
+      $query="SELECT * $isnull FROM ( $inner_query) z $order LIMIT $offset, $rows_per_page";
+      $rows = $this->query_assoc_array($query);
+    }
+    else
+      $query="SELECT * $isnull FROM ( $inner_query) z $order";
+      $rows = $this->query_assoc_array($query);
+    return $rows;
+  }
+  public function getConnection($id)
+  {
+    $this->connect();
+    $id = mysql_real_escape_string($id);
+    $query = "SELECT *, Connections.id as id,
+      DATE_FORMAT(start_date, '%d.%m.%y') as _start_date, 
+      DATE_FORMAT(payment_activation, '%d.%m.%y') as _payment_activation, 
+      DATE_FORMAT(service_activation, '%d.%m.%y') as _service_activation, 
+      DATE_FORMAT(service_configuration, '%d.%m.%y') as _service_configuration, 
+      DATE_FORMAT(installation_date, '%d.%m.%y') as _installation_date_date,		
+      DATE_FORMAT(installation_date, '%H:%i') as _installation_date_time,		
+      DATE_FORMAT(resignation_date, '%d.%m.%y') as _resignation_date,		
+      DATE_FORMAT(informed, '%d.%m.%y') as _informed,
+      DATE_FORMAT(DATE_ADD(start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _end_date,
+      a.login as a_user,
+      c.login as c_user,
+      i.login as i_user
+        FROM Connections
+        LEFT JOIN User a ON Connections.add_user=a.id
+        LEFT JOIN User i ON Connections.installation_user=i.id
+        LEFT JOIN User c ON Connections.configuration_user=c.id
+        WHERE Connections.id='$id'";
+    return $this->query($query);
+  }
+  public function getInstallationAddress($id)
+  {
+    $this->connect();
+    $id = mysql_real_escape_string($id);
+    $query = "SELECT address FROM Installations WHERE installation_id='$id'";
+    return $this->query($query);
+  }
+  public function getConnectionAddressAndService($id)
+  {
+    $this->connect();
+    $id = mysql_real_escape_string($id);
+    $query = "SELECT address, service, localization
+      FROM Connections WHERE id='$id'";
+    return $this->query($query);
+  }
+  public function getInstallation($address, $type)
+  {
+    $this->connect();
+    $id = mysql_real_escape_string($id);
+    $address = mysql_real_escape_string($address);
+    $query = "SELECT *,
+      DATE_FORMAT(wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+      DATE_FORMAT(socket_installation_date, '%d.%m.%y') as _socket_installation_date
+        FROM Installations WHERE address='$address' AND type='$type'";
+    $result = $this->query_assoc_array($query);
+    if (count($result)>1)
+      die ("Za dużo instalacji na jednym adresie!");
+    return $result[0];
+
+  }
+  public function getBoaList($tryb, $tryb2, &$paging, $od, $do, $order, $payment=null, $activation=null)
+  {
+    $od = mysql_real_escape_string($od);
+    $do = mysql_real_escape_string($do);
+    $order = mysql_real_escape_string($order);
+    $payment = intval($payment);
+    $activation = intval($activation);
+    if($tryb=='search' && ($tryb2=='activation' || $tryb2=='contract'))
+    {
+      $today = date("Y-m-d");
+      if(!$od)
+        $od=$today;
+      if(!$do)
+        $do=$today;
+    }
+    if ($order)
+    {
+      if($order =="adres")
+      {
+        $isnull = "";
+        $sql_order = " ORDER BY address ASC";
+      }
+      else
+      {
+        $isnull = ", UNIX_TIMESTAMP($order)=0 AS isnull ";
+        $sql_order = " ORDER BY isnull ASC, $order ASC";
+      }
+    }
+    else
+    {
+      $isnull = ", UNIX_TIMESTAMP(start_date)=0 AS isnull ";
+      $sql_order = " ORDER BY isnull ASC, start_date ASC";
+    }
+    $query_part = " SELECT * FROM (SELECT c.id, c.start_date, c.service_activation, c.payment_activation,
+      DATE_FORMAT(c.start_date, '%d.%m.%y') AS _start_date,
+      c.address, 
+      c.ara_id,
+      b.ara_sync,
+      c.speed, 
+      c.switch, 
+        c.service,
+          c.mac,
+          DATE_FORMAT(c.payment_activation, '%d.%m.%y') AS _payment_activation,
+          DATE_FORMAT(b.ara_sync, '%d.%m.%y') AS ara,
+          DATE_FORMAT(c.service_activation, '%d.%m.%y') AS _net_date,
+          DATE_FORMAT(c.resignation_date, '%d.%m.%y') AS _resignation_date,
+          DATE_FORMAT(i.wire_installation_date, '%d.%m.%y') AS _wire_date,
+          DATE_FORMAT(i.socket_installation_date, '%d.%m.%y') AS _socket_date,
+          DATE_FORMAT(c.installation_date, '%d.%m.%y %H:%m') AS _installation_date,
+          i.socket_installation_date,
+          c.installation_date,
+          c.phone,
+          c.phone2,
+          c.phone3,
+          User_sync.login as sync_user,
+          User_add.login as add_user";
+    if($tryb=='search' && $tryb2=='activation' && $od && $do)
+    {
+      if(!$activation && $payment)
+        $zapytanie = $query_part."
+          $isnull
+          FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
+          LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN User User_sync ON User_sync.id = b.user_id
+          LEFT JOIN User User_add ON User_add.id = c.add_user
+          ) a
+          WHERE (payment_activation >= '$od' AND payment_activation <= '$do' )
+          $sql_order";
+      elseif($activation && $payment)
+        $zapytanie = $query_part."
+        $isnull
+        FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        ) a
+        WHERE ( (service_activation >= '$od' AND service_activation <= '$do' ) || (payment_activation >= '$od' AND payment_activation <= '$do' ))
+        $sql_order";
+      else
+        $zapytanie = $query_part."
+          $isnull
+          FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
+          LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN User User_sync ON User_sync.id = b.user_id
+          LEFT JOIN User User_add ON User_add.id = c.add_user
+          ) a
+          WHERE (service_activation >= '$od' AND service_activation <= '$do' )
+          $sql_order";
+    }
+    elseif($tryb=='search' && $tryb2=='contract' && $od && $do)
+    {
+      $zapytanie = $query_part."
+        $isnull
+        FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        ) a
+        WHERE (start_date >= '$od' AND start_date <= '$do' )
+        $sql_order";
+    }
+    elseif($tryb=='search' && $tryb2=='address')
+    {
+      if(!$od)
+        $od='NieMaTakiegoAdresu';
+      $zapytanie = $query_part."
+        $isnull
+        FROM Connections c
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        ) a
+        WHERE address LIKE '%$od%'
+        $sql_order";
+    }
+    elseif($tryb=='contract' && $tryb2=='sync')
+    {
+      $zapytanie = $query_part."
+        $isnull
+        FROM Connections c
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        ) a
+        WHERE ara_sync is not null 
+        $sql_order";
+    }
+    elseif($tryb=='contract' && $tryb2=='')
+    {
+      if(!$od)
+        $od='NieMaTakiegoAdresu';
+      $zapytanie = $query_part."
+        $isnull
+        FROM Connections c
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        ) a
+        WHERE ara_sync is null 
+        $sql_order";
+    }
+    elseif($tryb=='contract' && $tryb2=='all')
+      $zapytanie = $query_part."
+        $isnull 
+        FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
+        LEFT JOIN Installations i ON c.localization = i.localization
+        LEFT JOIN User User_sync ON User_sync.id = b.user_id
+        LEFT JOIN User User_add ON User_add.id = c.add_user
+        )a $sql_order";
+ //   echo $zapytanie;
+  //  echo "<br>$tryb<br>$tryb2<br>$od<br>$do";
+    $num_rows = $this->num_rows($zapytanie);
+    $paging->setTotalRows($num_rows);
+    $offset = $paging->getOffset();
+    $pages = $paging->getPages();
+    $rows_per_page = $paging->getRowsPerPage();
+    if($rows_per_page)
+    {
+      $query="$zapytanie LIMIT $offset, $rows_per_page";
+      $rows = $this->query_assoc_array($query);
+    }
+    else
+      $rows = $this->query_assoc_array($zapytanie);
+    return $rows;
+  }
+  public function araDeSync($id)
+  {
+    $permissions = $_SESSION['permissions'];
+    if(($permissions & 128)!=128)
+       die("Nie masz uprawnień!");
+    $id=intval($id);
+    $user = intval($_SESSION['user_id']);
+    $query = "DELETE FROM Boa WHERE connection_id='$id'";
+    $this->query_update($query, $id, 'Boa');
+  }
+  public function araSync($id)
+  {
+    $query = "SELECT * FROM Boa WHERE connection_id='$id'";
+    if($this->query($query))
+      return false;
+    $permissions = $_SESSION['permissions'];
+    if(($permissions & 128)!=128)
+       die("Nie masz uprawnień!");
+    $id=intval($id);
+    $user = intval($_SESSION['user_id']);
+    $query = "INSERT INTO Boa (connection_id, ara_sync, user_id) VALUES('$id', NOW(), $user)";
+    $this->query($query);
+  }
+  public function getUlic()
+  {
+    $query = "SELECT * FROM Teryt";
+    return $this->query_assoc_array($query);
+  }
+}
