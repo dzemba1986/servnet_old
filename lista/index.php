@@ -41,7 +41,7 @@ foreach($wynik as $wiersz)
         $net_rowcolor = $wina_abonenta;
       else
         $net_rowcolor = "#E9993E";
-    elseif($wiersz['net_awaiting_time'] > 2592000)
+    elseif($wiersz['net_awaiting_time'] > $total_activation_time)
     {
       if($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
@@ -61,7 +61,7 @@ foreach($wynik as $wiersz)
           $phone_rowcolor = $wina_abonenta;
         else
           $phone_rowcolor = "#E9993E";
-      elseif($wiersz['awaiting_time'] > 2592000)
+      elseif($wiersz['awaiting_time'] > $total_activation_time)
       {
         if($wiersz['phone_connect'] && $wiersz['phone_wire'])
           $phone_rowcolor = $wina_abonenta;
