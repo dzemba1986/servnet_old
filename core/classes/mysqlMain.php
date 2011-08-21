@@ -47,6 +47,7 @@ class MysqlMain
   }
   public function query($zapytanie)
   {
+    echo $zapytanie;
     $this->num_rows = 0;
     $sql = $this->connect();
     $wskaznik = mysql_query($zapytanie, $sql);

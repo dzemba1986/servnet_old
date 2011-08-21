@@ -1,12 +1,8 @@
 <?php
 class MysqlBoa extends MysqlMain
 {
-  public $sql;
-  public $result;
   public function connect()
   {
-    $sql = mysql_connect('localhost', 'internet', 'szczurek20P4')or die(mysql_error());			
-
     return $this->connect_pl('localhost', 'internet', 'szczurek20P4', 'internet');
   }
   //funkcja query zwraca:
@@ -14,124 +10,6 @@ class MysqlBoa extends MysqlMain
   //true jeżeli zapytanie zostało wykonanee poprawnie i nie miało zwracać wartości
   //wartość, jeżeli wynik powinien być tylko jeden
   //tablicę wartości...
-  public function num_rows($zapytanie)
-  {
-    $sql = $this->connect();
-    //		echo ("<br>$zapytanie<br>");
-    $wskaznik = mysql_query($zapytanie, $sql);
-    $this->result = $wskaznik;
-    //echo (mysql_info($sql));
-    if ($wskaznik === false)
-    {
-      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
-      echo "<br>".mysql_error($sql)."<br>";
-      return false;
-    }
-    if ($wskaznik === true)
-      return null;		//jezeli to bylo insert update delete drop
-    return mysql_num_rows($wskaznik);
-  }
-  public function query($zapytanie)
-  {
-    $sql = $this->connect();
-    //		echo ("<br>$zapytanie<br>");
-    $this->query_log($zapytanie);
-    $wskaznik = mysql_query($zapytanie, $sql);
-    $this->result = $wskaznik;
-    //echo (mysql_info($sql));
-    if ($wskaznik === false)
-    {
-      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
-      echo "<br>".mysql_error($sql)."<br>";
-      return false;
-    }
-    if ($wskaznik === true)
-      return $wskaznik;		//jezeli to bylo insert update delete drop
-    $wynik;
-    if(mysql_affected_rows($sql) > 1)
-      for($i=0; $i < mysql_affected_rows($sql); $i++)
-      {
-        $wynik[] = mysql_fetch_array($wskaznik);
-      }
-    else
-      $wynik = mysql_fetch_array($wskaznik);
-    return $wynik;
-  }
-  public function query_assoc($zapytanie)
-  {
-    $sql = $this->connect();
-    //		echo ("<br>$zapytanie<br>");
-    $this->query_log($zapytanie);
-    $wskaznik = mysql_query($zapytanie, $sql);
-    //echo (mysql_info($sql));
-    $this->result = $wskaznik;
-    if ($wskaznik === false)
-    {
-      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
-      echo "<br>".mysql_error($sql)."<br>";
-      return false;
-    }
-    if ($wskaznik === true)
-      return $wskaznik;		//jezeli to bylo insert update delete drop
-    $wynik;
-    if(mysql_affected_rows($sql) > 1)
-      for($i=0; $i < mysql_affected_rows($sql); $i++)
-      {
-        $wynik[] = mysql_fetch_assoc($wskaznik);
-      }
-    else
-      $wynik = mysql_fetch_assoc($wskaznik);
-    return $wynik;
-  }
-  public function query_assoc_array($zapytanie)
-  {
-    $sql = $this->connect();
-    //		echo ("<br>$zapytanie<br>");
-    $this->query_log($zapytanie);
-    $wskaznik = mysql_query($zapytanie, $sql);
-    //echo (mysql_info($sql));
-    $this->result = $wskaznik;
-    if ($wskaznik === false)
-    {
-      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
-      echo "<br>".mysql_error($sql)."<br>";
-      return false;
-    }
-    if ($wskaznik === true)
-      return $wskaznik;		//jezeli to bylo insert update delete drop
-    $wynik;
-    for($i=0; $i < mysql_affected_rows($sql); $i++)
-    {
-      $wynik[] = mysql_fetch_assoc($wskaznik);
-    }
-    return $wynik;
-  }
-  public function query_update($zapytanie, $id, $table)
-  {
-    $sql = $this->connect();
-    //		echo ("<br>$zapytanie<br>");
-    $this->query_log2($zapytanie, $id, $table);
-    $wskaznik = mysql_query($zapytanie, $sql);
-    $this->result = $wskaznik;
-    //echo (mysql_info($sql));
-    if ($wskaznik === false)
-    {
-      echo "<br>zapytanie $zapytanie nie wykonało się poprawnie!<br>";
-      echo "<br>".mysql_error($sql)."<br>";
-      return false;
-    }
-    if ($wskaznik === true)
-      return $wskaznik;		//jezeli to bylo insert update delete drop
-    $wynik;
-    if(mysql_affected_rows($sql) > 1)
-      for($i=0; $i < mysql_affected_rows($sql); $i++)
-      {
-        $wynik[] = mysql_fetch_array($wskaznik);
-      }
-    else
-      $wynik = mysql_fetch_array($wskaznik);
-    return $wynik;
-  }
   public function getInstallationsList($mode, $order, &$paging, $find_phrase=null, $search_field=null)
   {
     if ($order)

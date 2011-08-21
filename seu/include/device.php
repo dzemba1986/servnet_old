@@ -152,11 +152,19 @@ class Device extends Daddy
 		$this->lokalizacja = mysql_real_escape_string($this->lokalizacja);
 		$_uplink_parent_ports = $_device['uplink_parent_ports'];
 		$_uplink_local_ports = $_device['uplink_local_ports'];
+                $subnet_occur;
 		foreach($_device['ip'] as &$adres)
 		{
 			$adres['ip'] = mysql_real_escape_string($adres['ip']);
 			$adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
 			$adres['main'] = mysql_real_escape_string($adres['main']);
+                        if($adres['podsiec'])
+                        {
+                          if(!$subnet_occur[$adres['podsiec']])
+                            $subnet_occur[$adres['podsiec']] = true;
+                          else
+                            die('Podano 2 adresy w jednej podsieci!!!');
+                        }
 			if(!$this->sprawdz_ip_czywolne($adres['ip'], $adres['podsiec']))
 				if($_device_type!='Switch_bud' || ($_device_type=='Switch_bud' && $adres['ip']))
 					die('Adres ip '.$adres['ip']." w podsieci ".$adres['podsiec']." jest zajęty!!!");
@@ -286,12 +294,20 @@ class Device extends Daddy
 		$this->lokalizacja = mysql_real_escape_string($this->lokalizacja);
 		$_uplink_parent_ports = $_device['uplink_parent_ports'];
 		$_uplink_local_ports = $_device['uplink_local_ports'];
+                $subnet_occur;
 		if($device['ip'][1]['ip'])
 			foreach($_device['ip'] as &$adres)
 			{
 				$adres['ip'] = mysql_real_escape_string($adres['ip']);
 				$adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
 				$adres['main'] = mysql_real_escape_string($adres['main']);
+                                if($adres['podsiec'])
+                                {
+                                  if(! $subnet_occur[$adres['podsiec']])
+                                    $subnet_occur[$adres['podsiec']] = true;
+                                  else
+                                    die('Podano 2 adresy w jednej podsieci!!!');
+                                }
 				if(!$this->sprawdz_ip_czywolne($adres['ip'], $adres['podsiec']))
 					if($_device_type!='Switch_bud' || ($_device_type=='Switch_bud' && $adres['ip']))
 						die('Adres ip '.$adres['ip']." w podsieci ".$adres['podsiec']." jest zajęty!!!");
@@ -422,11 +438,19 @@ class Device extends Daddy
 		$this->lokalizacja = mysql_real_escape_string($this->lokalizacja);
 		$_uplink_parent_ports = $_device['uplink_parent_ports'];
 		$_uplink_local_ports = $_device['uplink_local_ports'];
+                $subnet_occur;
 		foreach($_device['ip'] as &$adres)
 		{
 			$adres['ip'] = mysql_real_escape_string($adres['ip']);
 			$adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
 			$adres['main'] = mysql_real_escape_string($adres['main']);
+                        if($adres['podsiec'])
+                        {
+                          if(! $subnet_occur[$adres['podsiec']])
+                            $subnet_occur[$adres['podsiec']] = true;
+                          else
+                            die('Podano 2 adresy w jednej podsieci!!!');
+                        }
 		}
 		unset($adres);
                 if(defined('DEBUG'))
@@ -703,12 +727,21 @@ class Device extends Daddy
 		$this->lokalizacja = mysql_real_escape_string($this->lokalizacja);
 		$_uplink_parent_ports = $_device['uplink_parent_ports'];
 		$_uplink_local_ports = $_device['uplink_local_ports'];
+                $subnet_occur;
 		foreach($_device['ip'] as &$adres)
 		{
 			$adres['ip'] = mysql_real_escape_string($adres['ip']);
 			$adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
 			$adres['main'] = mysql_real_escape_string($adres['main']);
+                        if($adres['podsiec'])
+                        {
+                          if(! $subnet_occur[$adres['podsiec']])
+                            $subnet_occur[$adres['podsiec']] = true;
+                          else
+                            die('Podano 2 adresy w jednej podsieci!!!');
+                        }
 		}
+                print_r($subnet_occur);
 		unset($adres);
 		echo ("count". count($_uplink_parent_ports));
 		for($k=0; $k<count($_uplink_parent_ports);$k++)
