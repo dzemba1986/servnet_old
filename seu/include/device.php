@@ -262,7 +262,7 @@ class Device extends Daddy
 	{
 //		echo "do momentu zaktualizowania wyłaczam dodawanie elementów";
 //		exit();
-	        if($_device['osiedle'] != '11111')
+	        if($_device['osiedle'])
                   //jeżeli jest podany adres virtualny
                 {
                   $this->lokalizacja =  $this->znajdz_lokalizacje($_device['osiedle'], $_device['blok'], $_device['klatka']);
@@ -295,23 +295,32 @@ class Device extends Daddy
 		$_uplink_parent_ports = $_device['uplink_parent_ports'];
 		$_uplink_local_ports = $_device['uplink_local_ports'];
                 $subnet_occur;
-		if($device['ip'][1]['ip'])
-			foreach($_device['ip'] as &$adres)
-			{
-				$adres['ip'] = mysql_real_escape_string($adres['ip']);
-				$adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
-				$adres['main'] = mysql_real_escape_string($adres['main']);
-                                if($adres['podsiec'])
-                                {
-                                  if(! $subnet_occur[$adres['podsiec']])
-                                    $subnet_occur[$adres['podsiec']] = true;
-                                  else
-                                    die('Podano 2 adresy w jednej podsieci!!!');
-                                }
-				if(!$this->sprawdz_ip_czywolne($adres['ip'], $adres['podsiec']))
-					if($_device_type!='Switch_bud' || ($_device_type=='Switch_bud' && $adres['ip']))
-						die('Adres ip '.$adres['ip']." w podsieci ".$adres['podsiec']." jest zajęty!!!");
-			}
+                if($_device['ip'][1]['ip'])
+                {
+                  if($this->lokalizacja==2 && !$_other_name)
+                    die("Przy braku lokalizacji wymagane jest podanie nazwy urządzenia!");
+                  foreach($_device['ip'] as &$adres)
+                  {
+                    $adres['ip'] = mysql_real_escape_string($adres['ip']);
+                    $adres['podsiec'] = mysql_real_escape_string($adres['podsiec']);
+                    $adres['main'] = mysql_real_escape_string($adres['main']);
+                    if($adres['podsiec'])
+                    {
+                      if(! $subnet_occur[$adres['podsiec']])
+                        $subnet_occur[$adres['podsiec']] = true;
+                      else
+                        die('Podano 2 adresy w jednej podsieci!!!');
+                    }
+                    if(!$this->sprawdz_ip_czywolne($adres['ip'], $adres['podsiec']))
+                      if($_device_type!='Switch_bud' || ($_device_type=='Switch_bud' && $adres['ip']))
+                        die('Adres ip '.$adres['ip']." w podsieci ".$adres['podsiec']." jest zajęty!!!");
+                  }
+                }
+                else
+                {
+                  if($this->lokalizacja==2)
+                    die("Przy braku lokalizacji Adres IP jest wymagany!");
+                }
 		unset($adres);
                 if(defined('DEBUG'))
 		  echo ("count". count($_uplink_parent_ports));
@@ -694,7 +703,7 @@ class Device extends Daddy
 	public function modyfikuj_virtual($_device)
 	{
 		
-          if($_device['osiedle']!='11111')
+          if($_device['osiedle'])
           {
 		$this->lokalizacja =  $this->znajdz_lokalizacje($_device['osiedle'], $_device['blok'], $_device['klatka']);
 		if(!$this->lokalizacja)

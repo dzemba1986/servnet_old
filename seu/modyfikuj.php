@@ -7,8 +7,6 @@ $device_type = $_POST['device_type'];
 
 if(isset($_POST['dodaj']))
 {
-        if(!$_POST['osiedle'])
-          die('Nie podano osiedla!');
 	$device = array(
 		'dev_id' => $_POST['dev_id'],
 		'exists' => $_POST['exists'],
@@ -40,6 +38,8 @@ if(isset($_POST['dodaj']))
 		else if(substr($key, 0, 5)=="_vlan")
 			$ip[substr($key, 5)]['vlan'] = $dana;
 	}
+        if(!$_POST['osiedle'] && ($_POST['device_type']!='Virtual' || ($_POST['device_type']=='Virtual' && (!$_POST['other_name'] || !$ip[1]['ip']))))
+          die('Nie podano osiedla!');
 	$obj = new Device();
 //	if(! $obj->sprawdzIp($ip) ||! $obj->sprawdzDevice($device))
 //		exit();
