@@ -366,7 +366,7 @@ class Host extends Daddy
   }
 	private function generateDhcpFiles()
 	{
-                $files_path = '/home/ftp/www/.dhcp_files';
+                $files_path = '/home/ftp/www/servnet/.dhcp_files';
                 
 //deleting old files
                 $sysout = system("rm $files_path/regions/*");
