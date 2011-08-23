@@ -91,10 +91,6 @@ ul li div:hover, .cent:hover
 .ip {
 	font-style: italic;
 }
-div {
-	font-family: monospace;
-	font-size: 14px;
-}
 .mac {
 	font-family: monospace;
 	font-size: 14px;

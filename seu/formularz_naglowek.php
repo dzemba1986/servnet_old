@@ -11,10 +11,10 @@
 else
 	echo"Edycja urządzenia";
 ?> </title>
-<link rel="stylesheet" href="css/naglowek.css" type="text/css" />
+<link rel="stylesheet" href="css/black/naglowek.css" type="text/css" />
 <link rel="stylesheet" href="css/dodaj.css" type="text/css" />
 <link rel="stylesheet" href="css/styles.css" type="text/css" />
-<link rel="stylesheet" href="css/menu.css" type="text/css" >
+<link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
 <script language="JavaScript" SRC="js/xml.js"></script>
 <script language="JavaScript" SRC="js/producentForm.js"></script>
@@ -29,8 +29,8 @@ else
 	
 </head>
 <body>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
 <div id="formularz">
 <? if(!isset($_GET['device']))
 {	?>

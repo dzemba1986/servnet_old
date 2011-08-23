@@ -9,12 +9,13 @@ if(file_exists($alert_file))
 $alert = nl2br($alert);
 ?>
 <div style="padding: 15px;">
+<div id="wslogo"><img src="css/black/images/wachowiakisyn.png"></div>
   <div style="display: inline; float: left; padding-top: 4px;"><center>
-  <a href="index.php" style="font-weight:bold; color:#000;">DRZEWO URZĄDZEŃ</a>  
-  <a style="font-weight:bold; color:#000;" href="lista_ip.php">ADRESY IP</a>
-  <a style="font-weight:bold; color:#000;" href="vlan_zarzadzaj.php">VLANY</a>
-  <a style="font-weight:bold; color:#000;" href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
-  <a style="font-weight:bold; color:#000;" href="historia_ip.php">HISTORIA IP</a>&nbsp&nbsp
+  <a href="index.php">DRZEWO URZĄDZEŃ</a>  
+  <a href="lista_ip.php">ADRESY IP</a>
+  <a href="vlan_zarzadzaj.php">VLANY</a>
+  <a href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
+  <a href="historia_ip.php">HISTORIA IP</a>&nbsp&nbsp
   </div>
   <div id="menu">
   <ul id="sddm">
@@ -24,9 +25,9 @@ $alert = nl2br($alert);
           <div id="m2" 
               onmouseover="mcancelclosetime()" 
               onmouseout="mclosetime()">
-          <a style="font-weight:bold; color:#000;" href="find.php">Szukaj</a>
-          <a style="font-weight:bold; color:#000;" href="dodaj.php">Dodaj</a>
-          <a style="font-weight:bold; color:#000;" href="magazyn.php">Magazyn</a>
+          <a href="find.php">Szukaj</a>
+          <a href="dodaj.php">Dodaj</a>
+          <a href="magazyn.php">Magazyn</a>
           </div>
       </li>
       <li><a href="#" 
@@ -45,8 +46,8 @@ $alert = nl2br($alert);
   </ul>
   </div>
   <div style="display: inline; float:right; padding-top:4px;">
-  <a style="font-weight:bold; color:#000;" href="editUser.php">edytuj konto</a>
-  <a style="font-weight:bold; color:#000;" href="index.php?wyloguj=true">wyloguj [<?php echo $_SESSION['user_login']; ?>]</a>
+  <a href="editUser.php">edytuj konto</a>
+  <a href="index.php?wyloguj=true">wyloguj [<?php echo $_SESSION['user_login']; ?>]</a>
   </center>
   </div>
 </div>
