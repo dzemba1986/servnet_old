@@ -232,7 +232,7 @@ class MysqlBoa extends MysqlMain
         $zapytanie = $query_part."
           $isnull
           FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
-          LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
           LEFT JOIN User User_sync ON User_sync.id = b.user_id
           LEFT JOIN User User_add ON User_add.id = c.add_user
           ) a
@@ -242,7 +242,7 @@ class MysqlBoa extends MysqlMain
         $zapytanie = $query_part."
         $isnull
         FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
         ) a
@@ -252,7 +252,7 @@ class MysqlBoa extends MysqlMain
         $zapytanie = $query_part."
           $isnull
           FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
-          LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
           LEFT JOIN User User_sync ON User_sync.id = b.user_id
           LEFT JOIN User User_add ON User_add.id = c.add_user
           ) a
@@ -264,7 +264,7 @@ class MysqlBoa extends MysqlMain
       $zapytanie = $query_part."
         $isnull
         FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
         ) a
@@ -278,7 +278,7 @@ class MysqlBoa extends MysqlMain
       $zapytanie = $query_part."
         $isnull
         FROM Connections c
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN Boa b ON b.connection_id=c.id
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
@@ -291,7 +291,7 @@ class MysqlBoa extends MysqlMain
       $zapytanie = $query_part."
         $isnull
         FROM Connections c
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN Boa b ON b.connection_id=c.id
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
@@ -306,7 +306,7 @@ class MysqlBoa extends MysqlMain
       $zapytanie = $query_part."
         $isnull
         FROM Connections c
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN Boa b ON b.connection_id=c.id
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
@@ -318,7 +318,7 @@ class MysqlBoa extends MysqlMain
       $zapytanie = $query_part."
         $isnull 
         FROM Connections c LEFT JOIN Boa b ON b.connection_id=c.id
-        LEFT JOIN Installations i ON c.localization = i.localization
+          LEFT JOIN Installations i ON (c.localization = i.localization AND c.service = i.type)
         LEFT JOIN User User_sync ON User_sync.id = b.user_id
         LEFT JOIN User User_add ON User_add.id = c.add_user
         )a $sql_order";

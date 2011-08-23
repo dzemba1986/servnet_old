@@ -41,13 +41,12 @@ class MysqlMain
       echo "<br>".mysql_error($sql)."<br>";
       return false;
     }
-    if ($wskaznik === true)
+    if ($result === true)
       return null;		//jezeli to bylo insert update delete drop
-    return mysql_num_rows($wskaznik);
+    return mysql_num_rows($result);
   }
   public function query($zapytanie)
   {
-    echo $zapytanie;
     $this->num_rows = 0;
     $sql = $this->connect();
     $wskaznik = mysql_query($zapytanie, $sql);
