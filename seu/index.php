@@ -17,6 +17,7 @@ if($_GET['con_id'])
   <link REL="icon" HREF="images/url.png" TYPE="image/png">
   <title>Struktura sieci</title>
 
+  <link rel="stylesheet" href="css/naglowek.css" type="text/css" >
   <link rel="stylesheet" href="css/styles.css" type="text/css" >
   <link rel="stylesheet" href="css/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>

@@ -229,7 +229,6 @@ if(isset($_POST['dodaj']))
 		$sql = $virtual->connect();
 		mysql_query("SET AUTOCOMMIT=0", $sql);
 		mysql_query("BEGIN", $sql);
-                print_r($device);
 		$virtual->dodaj_virtual($device); 
 		if($virtual->mac == TRUE)
 		{

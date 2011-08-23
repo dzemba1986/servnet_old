@@ -28,7 +28,7 @@ function activateParentDevice(value)
 	<td style="width:330px">Device exists *</td>
 	<td><input class="" type="checkbox" name="exists" <?php if($device['exists'] || !$device['dev_id']) echo "checked";  ?>>
 </tr>
-<tr bgcolor="#D8D8D8">
+<tr>
 	<td>Adres MAC *</td>
 	<td><input class="" type="text" name="mac" value="<?php echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
 	</td>
@@ -52,7 +52,7 @@ function activateParentDevice(value)
 
 </td>
 </tr>
-<tr bgcolor="#D8D8D8">
+<tr>
 	<td>Nazwa inna</td>
 	<td><input class="" type="text" name="other_name" value="<? echo($device['other_name']); ?>"></td>
 </tr>
@@ -87,7 +87,7 @@ function activateParentDevice(value)
 
 		</select></td>
 </tr>
-<tr bgcolor="#D8D8D8">
+<tr>
 	<td>Uplink *</td>
 	<td><div id="uplinks"></div>
 	<?php if (!$centralny)
@@ -108,7 +108,7 @@ function activateParentDevice(value)
 	<?php } ?></td>
 
 </tr>
-<tr bgcolor="#D8D8D8">
+<tr>
 	<td>Osiedle/Lokalizacja *</td>
 	<td><select <?php echo "name=\"osiedle\""; ?>>
 		<option></option>
@@ -126,7 +126,7 @@ function activateParentDevice(value)
 	<td><input class="" type="text" name="blok" value="<? echo($device['nr_bloku']); ?>" ></td>
 </tr>
 <?php if($device_type!='Host'){ ?>
-<tr bgcolor="#D8D8D8">
+<tr>
 	<td>Klatka schodowa</td>
 	<td><input class="" type="text" name="klatka" value="<? echo($device['klatka']); ?>"></td>
 </tr>

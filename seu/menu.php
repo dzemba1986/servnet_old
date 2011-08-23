@@ -51,7 +51,6 @@ $alert = nl2br($alert);
   </div>
 </div>
 <div style="clear: both"></div>
-<div>
 <?php
 if($alert) : ?>
 <div style="background: red; font-size: 20px; font-weight:bold; text-align:center;">Plik DHCP zawiera błędy, serwer dhcp nieaktualny !!!</div>

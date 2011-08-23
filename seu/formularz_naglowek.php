@@ -11,6 +11,7 @@
 else
 	echo"Edycja urządzenia";
 ?> </title>
+<link rel="stylesheet" href="css/naglowek.css" type="text/css" />
 <link rel="stylesheet" href="css/dodaj.css" type="text/css" />
 <link rel="stylesheet" href="css/styles.css" type="text/css" />
 <link rel="stylesheet" href="css/menu.css" type="text/css" >

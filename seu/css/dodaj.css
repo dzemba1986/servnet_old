@@ -1,43 +1,30 @@
-html, body {
-	background-color: #fff;
-	color: #000;
-	margin: 0;
-	padding: 0;
-}
-
-#cialo{
-	width:1200px;
-	background-color: #fff;
-	text-align: left;
-	margin: 0 auto 0 auto;
-
-}
-
-#naglowek{
-	background-color: #888;
-	height: 50px;
-	width: 100%;
-}
-
-#stopka {
-	clear: both;
-	height: 50px;
-	width: 100%;
-	background-color: #888;
-}
 #tabela_danych_wejsciowych{
-	font-weight: normal;
-	font-family: Verdana;
-	font-size: small;
-	width: 900px
+  font-weight: normal;
+  font-family: Verdana;
+  font-size: small;
+  width: 1050px;
+}
+#tabela_danych_wejsciowych tr {
+  background: #D8D8D8;
+}
+#device_menu {
+  width: 130px;
+  background: black;
+  float: left;
+  display: inline;
+  margin: 20px 10px 10px 10px;
+}
+#formularz {
+  float: left;
+  display: inline;
 }
 .ip_form {
-	margin: 0px;
+  margin: 0px;
 }
 .maska_form {
-	width: 20px;
-	margin-right: 10px;
+  width: 20px;
+  margin-right: 10px;
 }
 .ip_form select {
-	width: 130px;
+  width: 130px;
 }

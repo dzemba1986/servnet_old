@@ -7,6 +7,7 @@
 </table>
 </form>
 </div>
+<div id="device_menu">Device_menu</div>
 <div id="stopka"></div>
 </div>
 </body>
