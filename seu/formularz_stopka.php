@@ -8,7 +8,8 @@
 </form>
 </div>
 <div id="device_menu">Device_menu</div>
-<div id="stopka"></div>
+</div>
+<div id="dol"></div>
 </div>
 </body>
 </html>

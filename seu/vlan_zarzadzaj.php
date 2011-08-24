@@ -13,13 +13,16 @@ require("include/formDuplicat.php");
   <title>Zarządzanie vlanami i podsieciami</title>
 
   <link rel="stylesheet" href="css/vlan.css" type="text/css">
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
   <script language="JavaScript" SRC="js/menu.js"></script>
   <script language="JavaScript" SRC="js/ajax_base.js"></script>
 </head>
 <body>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 	<div id="lewa">
 	<div id="dodaj_vlan"><form>Vlan: <input maxlength="4" id="vlan_form" type="text" name="nowy_vlan"><br><input maxlength="15" id="opis_vlanu_form" type="text" name="nowy_opis_vlanu"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajVlan();"></form></div>
 		<b>Vlany:</b>
@@ -30,7 +33,8 @@ require("include/formDuplicat.php");
 		<div id="podsieci"></div>
 		<div id="usun_vlan"></div>
 	</div>
-<div id="stopka"></div>
+</div>
+<div id="dol"></div>
 </  div>
 <!-- tutaj wstaw tresc strony -->
 <script language="JavaScript" SRC="js/vlan.js"></script>

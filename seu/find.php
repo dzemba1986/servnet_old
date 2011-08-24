@@ -21,13 +21,16 @@ if($_POST['find_phrase'])
 <title>Wyszukiwanie urządzeń</title>
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
 <link rel="stylesheet" href="css/dodaj.css" type="text/css" />
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
 	
 </head>
 <body>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 <b>Szukaj urządzenia</b>
 <div id="formiu">
 	<form method="post">
@@ -107,7 +110,8 @@ if($fraza && $tryb_wyszukiwania)
 }
 ?>
 </div>
-<div id="stopka"></div>
+</div>
+<div id="dol"></div>
 </div>
 </body>
 </html>

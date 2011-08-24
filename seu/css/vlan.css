@@ -5,19 +5,6 @@ html, body {
 	padding: 0;
 }
 
-#cialo{
-	width:1200px;
-	background-color: #fff;
-	text-align: left;
-	margin: 0 auto 0 auto;
-
-}
-
-#naglowek{
-	background-color: #888;
-	height: 50px;
-	width: 100%;
-}
 
 #lewa {
 	width: 200px;
@@ -156,10 +143,6 @@ ul li:hover
 }
 .opis_przycisk{
 	width: 80px;
-}
-div {
-	font-family: monospace;
-	font-size: 14px;
 }
 .ip {
 	font-style: italic;

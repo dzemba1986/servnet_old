@@ -14,7 +14,8 @@ require("security.php");
 
   <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="stylesheet" href="css/mieszkanie.css" type="text/css">
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
 </head>
 <body>
@@ -52,17 +53,17 @@ $query = "SELECT t.short_name, l.id as id_lok, l.nr_bloku, l.klatka, d.other_nam
       ORDER BY t.short_name, l.nr_bloku, l.klatka";
 $switches = $daddy->query_assoc_array($query);
 ?>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 <div id="formularz" style="margin:10px;">
 <table class="mieszkania" style="border-bottom: 1px solid black;">
 <tr><td width="40">id</td>
-    <td width="120">Os.</td>
     <td width="150">Ulic</td>
     <td width="40">Blok</td>
     <td width="40">od</td>
     <td width="40">do</td>
-    <td width="130">przełącznik</td>
     <td width="150">id_lok</td>
     <td width="60">&nbsp;</td>
     </tr>
@@ -71,7 +72,6 @@ $switches = $daddy->query_assoc_array($query);
   echo "<form method=\"post\"><table class=\"mieszkania\" style=\"border-bottom: 1px solid black; margin-top: 10px; margin-bottom: 10px;\">";
   echo "<tr>
       <td width=\"40\">&nbsp;</td>
-      <td width=\"120\"><input type=\"text\" name=\"\" class=\"os\" value=\"\"></td>
       <td width=\"150\"><select name=\"ulic\" class=\"ulic\">
           <option></option>";
   foreach($teryt as $ulica)
@@ -80,7 +80,6 @@ $switches = $daddy->query_assoc_array($query);
       <td width=\"40\"><input type=\"text\" name=\"blok\" class=\"blok\" value=\"\"></td>
       <td width=\"40\"><input type=\"text\" name=\"od\" class=\"oddo\" value=\"\"></td>
       <td width=\"40\"><input type=\"text\" name=\"do\" class=\"oddo\" value=\"\"></td>
-      <td width=\"130\"><input type=\"text\" name=\"przelacznik\" class=\"przelacznik\" value=\"\"></td>
       <td width=\"150\"><select name=\"id_lok\" class=\"id_lok\">
           <option></option>";
   foreach($switches as $switch)
@@ -95,7 +94,6 @@ foreach($mieszkania as $one)
   echo "<form method=\"post\"><table class=\"mieszkania\">";
   echo "<tr>
       <td width=\"40\">".$one['id']."<input type=\"hidden\" name=\"id\" value=\"".$one['id']."\"></td>
-      <td width=\"120\"><input type=\"text\" name=\"\" class=\"os\" value=\"".$one['osiedle']."\"></td>
       <td width=\"150\"><select name=\"ulic\" class=\"ulic\">
           <option></option>";
   foreach($teryt as $ulica)
@@ -109,7 +107,6 @@ foreach($mieszkania as $one)
       <td width=\"40\"><input type=\"text\" name=\"blok\" class=\"blok\" value=\"".$one['blok']."\"></td>
       <td width=\"40\"><input type=\"text\" name=\"od\" class=\"oddo\" value=\"".$one['od']."\"></td>
       <td width=\"40\"><input type=\"text\" name=\"do\" class=\"oddo\" value=\"".$one['do']."\"></td>
-      <td width=\"130\"><input type=\"text\" name=\"przelacznik\" class=\"przelacznik\" value=\"".$one['przelacznik']."\"></td>
       <td width=\"150\"><select name=\"id_lok\" class=\"id_lok\">
           <option></option>";
   foreach($switches as $switch)
@@ -128,5 +125,6 @@ foreach($mieszkania as $one)
 </table>
 </div>
 </div>
+<div id="dol"></div>
 </body>
 </html>

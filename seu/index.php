@@ -17,15 +17,17 @@ if($_GET['con_id'])
   <link REL="icon" HREF="images/url.png" TYPE="image/png">
   <title>Struktura sieci</title>
 
-  <link rel="stylesheet" href="css/naglowek.css" type="text/css" >
   <link rel="stylesheet" href="css/styles.css" type="text/css" >
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
 </head>
 <body>
 <script language="JavaScript" SRC="js/tree.js"></script>
-<div id="cialo">
-	<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+	<div id="header"><?php include('menu.php') ?></div>
+        <div id="gora"></div>
+        <div id="tresc">
 	<div id="drzewo">
 		<div class="cent" onclick="pobierzOpcje('3');">Centralny [172.21.4.1]</div>
 		<ul style="padding-left:0px;" id="3"></ul>
@@ -33,9 +35,9 @@ if($_GET['con_id'])
 	<div id="opis">
 		Opis
 	</div>
-	<hr>
 	<div id="historia"></div>
-	<div id="stopka"></div>
+        </div>
+	<div id="dol"></div>
 </div>
 <!-- tutaj wstaw tresc strony -->
 <script type="text/javascript">

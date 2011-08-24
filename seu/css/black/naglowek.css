@@ -62,3 +62,21 @@ padding: 10px 0;
 	width: 100%;
 	background-color: #888;
 }
+#gora {
+background: #fff url(images/top.jpg) no-repeat;
+padding: 10px 0;
+}
+
+#tresc {
+float: left;
+width: 1160px;
+background: #fff url(images/middle.jpg) repeat-y;
+padding: 0 20px;
+}
+
+#dol {
+clear:both;
+background: #fff url(images/bottom.jpg) no-repeat;
+padding: 10px 0;
+}
+

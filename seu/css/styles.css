@@ -4,7 +4,7 @@
 }
 
 #drzewo {
-	width: 660px;
+	width: 600px;
 	float: left;
 	overflow: hidden;
 	background-color: #fff;
@@ -12,7 +12,7 @@
 
 #opis {
 	position: relative;
-	width: 540px;
+	width: 500px;
 	float: left;
 	overflow: hidden;
 	background-color: #fff;
@@ -21,7 +21,7 @@
 	margin-bottom:20px;
 	float: left;
 	overflow: hidden;
-	width: 540px;
+	width: 500px;
 	background-color: #fff;
 }
 ul, ul li {

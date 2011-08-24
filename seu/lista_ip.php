@@ -21,16 +21,19 @@ if($_POST['_vlan0'] && $_POST['_podsiec0'])
 
 <title>Adresy IP</title>
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
-<link rel="stylesheet" href="css/dodaj.css" type="text/css" />
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+  <link rel="stylesheet" href="css/dodaj.css" type="text/css" />
+<link rel="stylesheet" href="css/black/naglowek.css" type="text/css" />
+  <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
 <script language="JavaScript" SRC="js/vlan.js"></script>
 <script language="JavaScript" SRC="js/dodaj.js"></script>
 	
 </head>
 <body>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 <b>Adresy IP</b>
 <div id="formiu">
 	<form method="post">
@@ -92,7 +95,8 @@ if($_POST['_vlan0'] && $_POST['_podsiec0'])
 }
 ?>
 </div>
-<div id="stopka"></div>
+</div>
+<div id="dol"></div>
 </div>
 </body>
 </html>
