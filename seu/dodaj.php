@@ -268,31 +268,34 @@ else
 	}
 //	print_r($wynik);
 	require('formularz_naglowek.php');
-	require('formularz_device.php');
-	switch ($device_type)
-	{
-	case 'Switch_rejon':
-		require('formularz_switch_rejon.php');
-		break;
-	case 'Switch_bud':
-		require('formularz_switch_bud.php');
-		break;
-	case 'Kamera':
-		require('formularz_kamera.php');
-		break;
-	case 'Serwer':
-		require('formularz_serwer.php');
-		break;
-	case 'Bramka_voip':
-		require('formularz_bramka_voip.php');
-		break;
-	case 'Host':
-		require('formularz_host.php');
-		break;
-	case 'Router':
-		require('formularz_router.php');
-		break;
-}
+        if($device_type)
+        {
+          require('formularz_device.php');
+          switch ($device_type)
+          {
+            case 'Switch_rejon':
+                    require('formularz_switch_rejon.php');
+                    break;
+            case 'Switch_bud':
+                    require('formularz_switch_bud.php');
+                    break;
+            case 'Kamera':
+                    require('formularz_kamera.php');
+                    break;
+            case 'Serwer':
+                    require('formularz_serwer.php');
+                    break;
+            case 'Bramka_voip':
+                    require('formularz_bramka_voip.php');
+                    break;
+            case 'Host':
+                    require('formularz_host.php');
+                    break;
+            case 'Router':
+                    require('formularz_router.php');
+                    break;
+          }
+        }   
 	require('formularz_stopka.php');
 }
 ?>

@@ -20,7 +20,7 @@ if($_POST['find_phrase'])
 
 <title>Wyszukiwanie urządzeń</title>
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
-<link rel="stylesheet" href="css/dodaj.css" type="text/css" />
+  <link rel="stylesheet" href="css/dodaj.css" type="text/css" />
   <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
   <link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
@@ -92,7 +92,7 @@ if($fraza && $tryb_wyszukiwania)
 		break;
 	}
 	$wynik = $daddy->query_assoc_array($zapytanie);
-	echo"<table border=\"1\"><tr><td>pasujące frazy</td><td>urządzenie</td></tr>";
+	echo"<table class=\"opis\" style=\"width: 500px;\"><tr bgcolor=\"#888\"><td>Pasujące frazy</td><td>Urządzenie</td></tr>";
 	if($wynik)
 	foreach($wynik as $wiersz)
 	{	

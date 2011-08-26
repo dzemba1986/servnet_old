@@ -83,7 +83,30 @@ ul li div:hover, .cent:hover
 }
 .opis td{
 	font-family: monospace;
-	font-size: 14px;
+	font-size: 12px;
+	text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+}
+#historia table {
+	border: 2px solid black;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 2px;
+	margin-right: 2px;
+	width: 98%;
+	
+}
+#historia tr td{
+	border: 1px solid black;
+        padding-top: 0px;
+        padding-bottom: 0px;
+}
+#historia tr {
+}
+#historia td{
+	font-family: monospace;
+	font-size: 10px;
 	text-align: left;
         padding-left: 5px;
         padding-right: 5px;

@@ -49,13 +49,12 @@ else
 <input type="submit" name="zmien_typ" value="zmień typ">
 </form>
 <? 
-if(!$device_type)
-	die();
-} 
-else
-	echo("<b>$device_type</b>"); ?>
+} else
+	echo("<b>$device_type</b>"); 
+if($device_type):?>
 
 <form method="post" action="<?php echo $form_action; ?>">
 <input type="hidden" name="device_type" value="<?php  echo($device_type);?>">
 <table id="tabela_danych_wejsciowych">
+<?php endif; ?>
 

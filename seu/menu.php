@@ -36,11 +36,11 @@ $alert = nl2br($alert);
           <div id="m1" 
               onmouseover="mcancelclosetime()" 
               onmouseout="mclosetime()">
-          <a target="_blank" href="reaports/l3Switches.php" style="font-weight:bold; color:#000;" >Przełączniki Rejonowe</a>
-          <a target="_blank" href="reaports/l2Switches.php" style="font-weight:bold; color:#000;" >Przełączniki Budynkowe</a>
-          <a target="_blank" href="reaports/voipGateways.php" style="font-weight:bold; color:#000;" >Bramki voip</a>
-          <a target="_blank" href="reaports/switches.php" style="font-weight:bold; color:#000;" >Szczegółowe</a>
-          <a target="_blank" href="reaports/vlanIpUtilization.php" style="font-weight:bold; color:#000;" >Wykorzystanie adresów IP</a>
+          <a target="_blank" href="reaports/l3Switches.php">Przełączniki Rejonowe</a>
+          <a target="_blank" href="reaports/l2Switches.php">Przełączniki Budynkowe</a>
+          <a target="_blank" href="reaports/voipGateways.php">Bramki voip</a>
+          <a target="_blank" href="reaports/switches.php">Szczegółowe</a>
+          <a target="_blank" href="reaports/vlanIpUtilization.php">Wykorzystanie adresów IP</a>
           </div>
       </li>
   </ul>

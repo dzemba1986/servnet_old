@@ -2,10 +2,6 @@
 //Przemysław Koltermann
 //All rights reserved
 
-if(!defined('NESTED'))
-    define('NESTED', true);
-
-require('path.php');
 
 $session_life_time = 14400; //4 godziny
 //$session_life_time = 60; //6 godzin
@@ -17,6 +13,10 @@ if(!defined('SESSION'))
   session_start();
   define('SESSION', true);
 }
+if(!defined('NESTED'))
+    define('NESTED', true);
+
+require('path.php');
 if(!defined('MYSQL'))
 {
   require(ROOT.'/lista/include/classes/mysql.php');
