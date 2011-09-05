@@ -64,12 +64,7 @@ if($_REQUEST['main_id'])
   <td>Adres</td>
   <td><?php echo($connection1['address'])?></td>
   </tr>
-<?php if($connection1['service']=="phone"): ?>
-  <tr>
-  <td>Data aktywacji usługi</td>
-  <td><input class="date_field" type="text" style="float:left;" value="<?php echo($connection1['_service_activation'])?>" name="service_activation" id="service_activation_1" onkeyup="testAddSocketForm('<?php echo $connection1['service']?>');"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
-  </tr>
-<?php else: ?>
+<?php if($connection1['service']=="net"): ?>
   <tr>
   <td>MAC</td>
   <td><input class="mac_field" type="text" value="<?php echo($connection1['mac'])?>" name="mac" id="mac_1" onkeyup="testAddSocketForm('<?php echo $connection1['service']?>');"></td>

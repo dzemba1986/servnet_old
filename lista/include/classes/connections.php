@@ -1,5 +1,5 @@
 <?php
-define('HOST_PATH', ROOT.'/seu/include/host.php');
+define('HOST_PATH', ROOT.'/seu/include/classes/host.php');
 Class Connections
 {
   public function update($id, $field_name, $value, $value2)
@@ -14,6 +14,8 @@ Class Connections
         $field_name=='veryfication_method' || $field_name=='installation_date' || $field_name=='info')
     {
       if(($permissions & 2)!=2)
+        die("Nie masz uprawnień!");
+      if($field_name=='service_activation' && (($permissions & 64)!=64))
         die("Nie masz uprawnień!");
     }
     elseif($field_name=='phone' || $field_name=='phone2' || $field_name=='phone3')
