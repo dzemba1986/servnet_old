@@ -11,7 +11,9 @@ if($device_type):
 <?php endif?>
 </div>
 <?php if($device_type): ?>
-<div id="device_menu">Device_menu</div>
+<div class="right">
+<?php require('device_menu.php');?>
+</div>
 <?php endif?>
 </div>
 <div id="dol"></div>
