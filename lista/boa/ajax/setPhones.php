@@ -1,5 +1,5 @@
 <?php
-require('../../include/html/security.php');
+require('../../security.php');
 require('../../include/classes/connections.php');
     $con = new Connections();
     if(!$con->update($_GET['id'], 'phone', $_GET['phone'], ''))

@@ -1,8 +1,9 @@
 <?php
 //Przemysław Koltermann
 //All rights reserved
-
-
+if(!defined('NESTED'))
+    define('NESTED', true);
+require('path.php');
 $session_life_time = 14400; //4 godziny
 //$session_life_time = 60; //6 godzin
 ini_set('session.gc_maxlifetime', $session_life_time);
@@ -13,10 +14,6 @@ if(!defined('SESSION'))
   session_start();
   define('SESSION', true);
 }
-if(!defined('NESTED'))
-    define('NESTED', true);
-
-require('path.php');
 if(!defined('MYSQL'))
 {
   require(ROOT.'/lista/include/classes/mysql.php');
@@ -75,7 +72,7 @@ if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && 
   elseif(!headers_sent())
   {
     //session_set_cookie_params($session_life_time);
-    session_regenerate_id(true); 
+//    session_regenerate_id(true); 
   }
 }
 elseif($_POST['login'] && $_POST['password'])

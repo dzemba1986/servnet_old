@@ -29,7 +29,6 @@ class MysqlMain
   //true jeżeli zapytanie zostało wykonanee poprawnie i nie miało zwracać wartości
   //wartość, jeżeli wynik powinien być tylko jeden
   //tablicę wartości...
-
   public function num_rows($zapytanie)
   {
     $sql = $this->connect();
