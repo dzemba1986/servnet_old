@@ -1,7 +1,7 @@
 <?php
 require('../security.php');
 require('../include/definitions.php');
-require('../include/reaport.php');
+require('../include/classes/reaport.php');
 $repo = new Reaport();
 $switchL2 = $repo->getL2Switches();
 $switchL3 = $repo->getL3Switches();

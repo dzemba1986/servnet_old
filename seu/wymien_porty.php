@@ -7,7 +7,8 @@ require("security.php");
   <meta name="Description" content=" [wstaw tu opis strony] ">
   <meta name="Keywords" content=" [wstaw tu slowa kluczowe] ">
   <meta name="Author" content="Przemysław Koltermann">
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+<link rel="stylesheet" href="css/black/naglowek.css" type="text/css" />
+<link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
   <link REL="icon" HREF="images/url.png" TYPE="image/png">
   <title>Wymiana urządzenia - przepisanie portów</title>
@@ -32,17 +33,10 @@ if($_POST['zamien']=="zamień")
 
 ?>
 
-
-
-
-
-
-
-
-
-
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 <?php
 if(!$_POST['po'])
 	die('Nieprawidłowe wywołanie formularza!');
@@ -125,5 +119,9 @@ function generateName($port, $dev)
 	$nazwa = $wynik['model']." <b>".$wynik['osiedle'].$wynik['nr_bloku'].$wynik['klatka']."</b> ".$wynik['ip'];
 	return $nazwa;
 }
-
-	 	
+?>
+</div>
+<div id="dol"></div>
+</div>
+</body>
+</html>

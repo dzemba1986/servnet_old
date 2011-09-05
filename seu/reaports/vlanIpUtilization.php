@@ -1,7 +1,7 @@
 <?php
 require('../security.php');
 require('../include/definitions.php');
-require('../include/reaport.php');
+require('../include/classes/reaport.php');
 $vid = intval($_GET['vid']);
 if(!$vid)
   $vid=2;

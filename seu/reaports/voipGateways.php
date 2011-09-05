@@ -1,7 +1,7 @@
 <?php
 require('../security.php');
 require('../include/definitions.php');
-require('../include/reaport.php');
+require('../include/classes/reaport.php');
 $repo = new Reaport();
 $voipGateways = $repo->getVoipGatewayReaport();
 //$gatewayL2 = $repo->getL2SwitchReaport();

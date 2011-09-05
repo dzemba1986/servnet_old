@@ -7,7 +7,8 @@ require("security.php");
   <meta name="Description" content=" [wstaw tu opis strony] ">
   <meta name="Keywords" content=" [wstaw tu slowa kluczowe] ">
   <meta name="Author" content="Przemysław Koltermann">
-  <link rel="stylesheet" href="css/menu.css" type="text/css" >
+<link rel="stylesheet" href="css/black/naglowek.css" type="text/css" />
+<link rel="stylesheet" href="css/black/menu.css" type="text/css" >
 <script language="JavaScript" SRC="js/menu.js"></script>
   <link REL="icon" HREF="images/url.png" TYPE="image/png">
   <title>Wymiana urządzenia</title>
@@ -15,8 +16,10 @@ require("security.php");
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 <body>
-<div id="cialo">
-<div id="naglowek"><?php include('menu.php') ?></div>
+<div id="wrap">
+<div id="header"><?php include('menu.php') ?></div>
+<div id="gora"></div>
+<div id="tresc">
 <?php
 if(!$_GET['dev_id'])
 	die('Nieprawidłowe wywołanie formularza!');
@@ -48,3 +51,9 @@ switch($device)
 		echo"</select><input type=\"hidden\" name=\"przed\" value=\"$dev_id\"><input type=\"submit\" value=\"wybierz\"></form>";
  		break;
 }
+?>
+</div>
+<div id="dol"></div>
+</div>
+</body>
+</html>
