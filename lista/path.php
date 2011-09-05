@@ -1,12 +1,14 @@
 <?php
 if(! defined('NESTED'))
   die('Nieprawidłowe wywołanie skryptu!');
-if(! defined('PATH_MAIN_CONF'))
+if(! defined('PATH_LISTA_CONF'))
 { 
 // Defining Path constants
-define('PATH_MAIN_CONF', true);
+define('PATH_LISTA_CONF', true);
 if( !defined('ROOT'))
   define('ROOT', '/home/ftp/www/servnet');
+require(ROOT.'/path.php');
+
 if( !defined('SEU_ABSOLUTE'))
   define('SEU_ABSOLUTE', ROOT."/seu");
 if( !defined('SEU_RELATIVE'))

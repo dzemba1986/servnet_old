@@ -48,14 +48,14 @@ if($fraza && $tryb_wyszukiwania)
 	switch($tryb_wyszukiwania)
 	{
 		case 'ip':
-		$zapytanie = "SELECT *, CONCAT(osiedle, blok, '/', mieszkanie) as lokalizacja 
+		$zapytanie = "SELECT *, CONCAT(osiedle, ' ', blok, '/', mieszkanie) as lokalizacja 
 			FROM Historia_ip
 			WHERE ip LIKE '%$fraza%' 
 			ORDER BY ip ASC";
 		break;
 		case 'lok':
 		$zapytanie = "SELECT * FROM (
-			SELECT *, CONCAT(osiedle, blok, '/', mieszkanie) as lokalizacja
+			SELECT *, CONCAT(osiedle, ' ', blok, '/', mieszkanie) as lokalizacja
 			FROM Historia_ip) a
 			WHERE lokalizacja LIKE '%$fraza%' ORDER BY lokalizacja ASC";
 		break;

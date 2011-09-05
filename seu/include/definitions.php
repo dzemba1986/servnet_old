@@ -35,72 +35,72 @@ define('CONNECTIONS_FILE', ROOT.'/lista/include/classes/connections.php');
 
 if(!defined('DADDY'))
 {
-	require('daddy.php');
+	require(SEU_ABSOLUTE.'/include/classes/daddy.php');
 	define('DADDY', true);
 }
 if(!defined('DEVICE'))
 {
-	require('device.php');
+	require(SEU_ABSOLUTE.'/include/classes/device.php');
 	define('DEVICE', true);
 }
 if(! defined('LOKALIZACJA'))
 {
-	require('lokalizacja.php');
+	require(SEU_ABSOLUTE.'/include/classes/lokalizacja.php');
 	define('LOKALIZACJA', true);
 }
 if(! defined('SWITCH_REJON'))
 {
-	require('switch_rejon.php');
+	require(SEU_ABSOLUTE.'/include/classes/switch_rejon.php');
 	define('SWITCH_REJON', true);
 }
 if(! defined('SWITCH_BUD'))
 {
-	require('switch_bud.php');
+	require(SEU_ABSOLUTE.'/include/classes/switch_bud.php');
 	define('SWITCH_BUD', true);
 }
 if(! defined('ROUTER'))
 {
-	require('router.php');
+	require(SEU_ABSOLUTE.'/include/classes/router.php');
 	define('ROUTER', true);
 }
 if(! defined('SERWER'))
 {
-	require('serwer.php');
+	require(SEU_ABSOLUTE.'/include/classes/serwer.php');
 	define('SERWER', true);
 }
 if(! defined('KAMERA'))
 {
-	require('kamera.php');
+	require(SEU_ABSOLUTE.'/include/classes/kamera.php');
 	define('KAMERA', true);
 }
 if(! defined('HOST'))
 {
-	require('host.php');
+	require(SEU_ABSOLUTE.'/include/classes/host.php');
 	define('HOST', true);
 }
 if(! defined('BRAMKA_VOIP'))
 {
-	require('bramka_voip.php');
+	require(SEU_ABSOLUTE.'/include/classes/bramka_voip.php');
 	define('BRAMKA_VOIP', true);
 }
 if(! defined('VLAN'))
 {
-	require('vlan.php');
+	require(SEU_ABSOLUTE.'/include/classes/vlan.php');
 	define('VLAN', true);
 }
 if(! defined('PODSIEC'))
 {
-	require('podsiec.php');
+	require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
 	define('PODSIEC', true);
 }
 if(! defined('IP'))
 {
-	require('ip.php');
+	require(SEU_ABSOLUTE.'/include/classes/ip.php');
 	define('IP', true);
 }
 if(! defined('MIESZKANIA'))
 {
-	require('mieszkania.php');
+	require(SEU_ABSOLUTE.'/include/classes/mieszkania.php');
 	define('MIESZKANIA', true);
 }
 if(! defined('HISTORIA'))

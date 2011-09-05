@@ -63,7 +63,7 @@ if($_POST['_vlan0'] && $_POST['_podsiec0'])
 	$wynik = $daddy->query_assoc_array($zapytanie);
 	$podsiec_obj = new IpAddress ($wynik2['address'], $wynik2['netmask']);
 	$adresy = $podsiec_obj->generujPodsiec();
-	echo"<table border=\"1\"><tr><td>adres</td><td>urzadzenie</td></tr>";
+	echo"<table class=\"opis\" style=\"width:500px; margin-bottom:20px;\"><tr style=\"background:#888;\"><td>adres</td><td>urzadzenie</td></tr>";
 	foreach($adresy as $wiersz)
 	{	
 		$baza_id = false;
@@ -80,13 +80,13 @@ if($_POST['_vlan0'] && $_POST['_podsiec0'])
 		{
 			$rekord = $wynik[$baza_id];
 			if($rekord['device_type']=="Host")	
-				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."/".$rekord['nr_mieszkania']."(".$rekord['device_type'].")</a></td></tr>";
+				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].' '.$rekord['nr_bloku'].$rekord['klatka']."/".$rekord['nr_mieszkania']."(".$rekord['device_type'].")</a></td></tr>";
                         elseif($rekord['device_type']=="Virtual" && $rekord['osiedle']=='Virtual')	
 				echo"<tr><td>".$wiersz."</td><td><a href=\"modyfikuj.php?device=".$rekord['device']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 			elseif($rekord['other_name'])	
 				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 			else
-				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."(".$rekord['device_type'].")</a></td></tr>";
+				echo"<tr><td>".$wiersz."</td><td><a href=\"index.php?device=".$rekord['device']."\">".$rekord['osiedle'].' '.$rekord['nr_bloku'].$rekord['klatka']."(".$rekord['device_type'].")</a></td></tr>";
 		}
 		elseif($wolne_wyswietlaj)
 			echo"<tr><td>".$wiersz."</td><td> -- </td></tr>";

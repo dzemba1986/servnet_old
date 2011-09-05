@@ -4,7 +4,6 @@
 
 if(!defined('NESTED'))
     define('NESTED', true);
-
 require('path.php');
 
 $session_life_time = 14400; //4 godziny

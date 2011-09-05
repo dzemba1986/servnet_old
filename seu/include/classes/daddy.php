@@ -290,7 +290,7 @@ class Daddy extends MysqlMain
 		switch($device['device_type'])
 		{
 		case 'Switch_rejon':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Przełącznik rejonowy";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -318,7 +318,7 @@ class Daddy extends MysqlMain
 	//		print_r($opis);
 			break;
 		case 'Switch_bud':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Przełącznik budynkowy";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -347,7 +347,7 @@ class Daddy extends MysqlMain
 			$opis['Liczba_portów'] = $switch['port_count'];
 			break;
 		case 'Serwer':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Serwer";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -373,7 +373,7 @@ class Daddy extends MysqlMain
 			$opis['sn'] = $server['sn'];
 			break;
 		case 'Router':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Router";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -399,7 +399,7 @@ class Daddy extends MysqlMain
 			$opis['sn'] = $router['sn'];
 			break;
 		case 'Kamera':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Kamera monitoringu";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -425,7 +425,7 @@ class Daddy extends MysqlMain
 			$opis['sn'] = $kamera['sn'];
 			break;
 		case 'Switch_centralny':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Przełącznik rejonowy";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -437,7 +437,7 @@ class Daddy extends MysqlMain
 			}
 			break;
 		case 'Host':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Host";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -465,7 +465,7 @@ class Daddy extends MysqlMain
 				$opis['Data_zakonczenia'] = $host['stop'];
 			break;
 		case 'Bramka_voip':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Bramka VoIP";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Adres_MAC'] = $device['mac'];
@@ -493,7 +493,7 @@ class Daddy extends MysqlMain
 			$opis['Liczba_portów'] = $switch['port_count'];
 			break;
 		case 'Virtual':
-			$opis['Lokalizacja'] = $device['osiedle'].$device['nr_bloku'].$device['klatka'];
+			$opis['Lokalizacja'] = $device['osiedle'].' '.$device['nr_bloku'].$device['klatka'];
 			$opis['Typ_urządzenia'] = "Virtual";
 			$opis['Dev_ID'] = $device['dev_id'];
 			$opis['Nazwa'] = $device['other_name'];
