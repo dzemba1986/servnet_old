@@ -12,10 +12,10 @@ class Daddy
 			mysql_select_db('siec',$sql);
 			//mysql_select_db('siec-test',$sql);
 //zamiast następujących 4 linijek dodałem odpowiadającą konfigurację do /etc/mysql/my.cnf
-//			$char = "set character_set_connection='utf8', character_set_client='utf8', character_set_results='utf8'";
-//			$enc = "set lc_time_names = 'pl_pl'";
-//			mysql_query($enc) or die(mysql_error());
-//			mysql_query($char) or die(mysql_error());
+			$char = "set character_set_connection='utf8', character_set_client='utf8', character_set_results='utf8'";
+			$enc = "set lc_time_names = 'pl_pl'";
+			mysql_query($enc) or die(mysql_error());
+			mysql_query($char) or die(mysql_error());
 		}
 		$this->sql = $sql;
 		if(!$sql)
