@@ -1,7 +1,7 @@
 #tabela_danych_wejsciowych{
   font-weight: normal;
   font-family: Verdana;
-  font-size: small;
+  font-size: 12px;
   width: 1010px;
 }
 #tabela_danych_wejsciowych tr {
@@ -18,7 +18,7 @@
   margin-right: 10px;
 }
 .ip_form select {
-  width: 130px;
+  width: 180px;
 }
 .right
 {

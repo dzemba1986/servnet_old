@@ -110,13 +110,21 @@ function generateName($port, $dev)
 		$device_type="Switch_rejon";
 	$zapytanie;
 	if($device_type=="Host")
-		$zapytanie = "SELECT DISTINCT Lokalizacja.osiedle, null AS model, Lokalizacja.nr_bloku, Adres_ip.ip, CONCAT('/',Host.nr_mieszkania) AS klatka 
+		$zapytanie = "SELECT DISTINCT Lokalizacja.osiedle, null AS model, Lokalizacja.nr_bloku, Adres_ip.ip, CONCAT('/',Host.nr_mieszkania) AS klatka , Device.other_name
 			FROM Model, Host, Lokalizacja, Adres_ip, Device 
 			WHERE Device.dev_id='$connected_dev' AND Host.device=Device.dev_id AND Lokalizacja.id=Device.lokalizacja AND Adres_ip.device=Device.dev_id AND Adres_ip.main='1'";
+        elseif($device_type=="Virtual")
+		$zapytanie = "SELECT DISTINCT Lokalizacja.osiedle, null AS model, Lokalizacja.nr_bloku, Adres_ip.ip, Lokalizacja.klatka, Device.other_name
+			FROM Model, Lokalizacja, Device
+                        LEFT JOIN Adres_ip ON (Adres_ip.device=Device.dev_id AND Adres_ip.main='1')
+			WHERE Device.dev_id='$connected_dev' AND Lokalizacja.id=Device.lokalizacja";
 	else
-		$zapytanie = "SELECT DISTINCT Model.name as model, Lokalizacja.osiedle, Lokalizacja.nr_bloku, Lokalizacja.klatka, Adres_ip.ip FROM Model, $device_type, Lokalizacja, Device LEFT JOIN Adres_ip ON Adres_ip.device=Device.dev_id AND Adres_ip.main='1' WHERE Device.dev_id='$connected_dev' AND $device_type.device=Device.dev_id AND Model.id=$device_type.model AND Lokalizacja.id=Device.lokalizacja";
+		$zapytanie = "SELECT DISTINCT Model.name as model, Lokalizacja.osiedle, Lokalizacja.nr_bloku, Lokalizacja.klatka, Adres_ip.ip, Device.other_name FROM Model, $device_type, Lokalizacja, Device LEFT JOIN Adres_ip ON Adres_ip.device=Device.dev_id AND Adres_ip.main='1' WHERE Device.dev_id='$connected_dev' AND $device_type.device=Device.dev_id AND Model.id=$device_type.model AND Lokalizacja.id=Device.lokalizacja";
 	$wynik = $daddy->query_assoc($zapytanie);
-	$nazwa = $wynik['model']." <b>".$wynik['osiedle'].$wynik['nr_bloku'].$wynik['klatka']."</b> ".$wynik['ip'];
+        if($wynik['other_name'])
+	  $nazwa = "<b>".$wynik['other_name']."</b> (".$wynik['osiedle'].$wynik['nr_bloku'].$wynik['klatka'].") <b>".$wynik['ip']."</b> ".$wynik['model'];
+        else
+	  $nazwa = $wynik['model']." <b>".$wynik['osiedle'].$wynik['nr_bloku'].$wynik['klatka']."</b> ".$wynik['ip'];
 	return $nazwa;
 }
 ?>

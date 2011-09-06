@@ -1011,24 +1011,27 @@ class Device extends Daddy
 		$tmp = array();
 		foreach($port_list_1 as $port)
 			$tmp[$port]="";
+                unset($port);
 		$port_list_1 = $tmp;
 		$port_list_2 = $this->getModelPortList($model_2['id']);
 		$tmp = array();
 		foreach($port_list_2 as $port)
 			$tmp[$port]="";
+                unset($port);
 		$port_list_2 = $tmp;
-		foreach($port_list_1 as $port)
-			if($porty_stare_1)
+		if($porty_stare_1)
+		  foreach($port_list_1 as $port)
 				foreach($porty_stare_1 as $key=>$element)
 					$port_list_1[$element['parent_port']]=$element['device'];
 		
-		foreach($port_list_2 as $port)
-			if($porty_stare_2)
+		if($porty_stare_2)
+		  foreach($port_list_2 as $port)
 				foreach($porty_stare_2 as $key=>$element)
 					$port_list_2[$element['parent_port']]=$element['device'];
 
 
 //		echo"<br>$_dev_id_1<br>$_dev_id_2<br>";
+                define('DEBUG', true);
                 if(defined('DEBUG'))
                 {
                   print_r($porty_stare_1);
