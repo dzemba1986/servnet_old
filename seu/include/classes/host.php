@@ -379,7 +379,11 @@ class Host extends Daddy
 		$subnets = $daddy->query_assoc($query);
 		$dns1 = '213.5.208.35';
 		$dns2 = '213.5.208.3';
+                $dns_array = array();
+                $dns_array[0] = "option domain-name-servers $dns1, $dns2;";
+                $dns_array[1] = "option domain-name-servers $dns2, $dns1;";
 		$lease_time = '86400';
+                $counter = 1;
 		foreach($subnets as $subnet)
 		{
 			//var_dump ($subnet);
@@ -389,7 +393,6 @@ class Host extends Daddy
 			$sub_hr_mask = $sub_ip->getNetmask();
 			$sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
 			$sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
-
 			$data = "# PODSIEC ".$subnet['opis']."
 #######################################
 #         INTERNET - ADRESACJA
@@ -397,7 +400,7 @@ class Host extends Daddy
 
 subnet $sub_hr_ip netmask $sub_hr_mask {
 option routers $sub_gateway;
-option domain-name-servers $dns1, $dns2;
+".$dns_array[$counter%2]."
 option subnet-mask $sub_hr_mask;
 #option domain-name \"wtvk.pl\";
 option broadcast-address $sub_broadcast;
@@ -449,6 +452,7 @@ echo ($data);
 				$file = fopen($filename, "w");
 				fwrite($file, $data);
 				fclose($file);
+                                $counter++;
 				}
 			$file = fopen($update_file_name, "w");
                         $czas = time();
