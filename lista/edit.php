@@ -3,7 +3,8 @@ require('include/classes/installations.php');
 require('include/classes/connections.php');
 require('include/classes/phpToJs.php');
 require('include/classes/localization.php');
-include('include/classes/daddy.php');
+define('DADDY_PATH', SEU_ABSOLUTE.'/include/classes/daddy.php');
+require(DADDY_PATH);
 $connection = new Connections();
 $installation = new Installations();
 if($_REQUEST['field_name'])
@@ -100,7 +101,8 @@ if($_REQUEST['main_id'])
   }
 
 }
-
+$daddy = new Daddy();
+$dev_id = $daddy->getDevId($connection1['id']);
 
 ?>
 <script type="text/javascript" src="js/edit.js"></script>
@@ -121,7 +123,7 @@ if($_REQUEST['main_id'])
 </table>
 </form>
 <table class="tables">
-  <tr>
+  <tr height="25">
     <td width="160">Deadline</td>
     <td width="185"> <?php echo($connection1['_end_date'])?></td>
     <td>&nbsp; </td>
@@ -166,20 +168,26 @@ if($_REQUEST['main_id'])
 <!--</form>-->
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
-  <tr>
+  <tr height="25">
     <td width="160">Przełącznik</td>
+    <?php if(!$dev_id): ?>
     <td width="185"><?php echo($connection1['switch'])?><input class="switch_field" type="text" value="<?php echo($switch_loc)?>" name="switch" id="switch_1" onkeyup="testSwitch(this);"><select name="switch_loc"><option></option><?php echo $switches_loc_opt ?></select></td>
     <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="switch_loc"><input type="submit" class="submit_field"  value="zmień">
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>
+    <?php else: ?>
+    <td width="185"><?php echo($daddy->getParentDeviceString($dev_id)) ?></td>
+    <td></td>
+    <?php endif; ?>
   </tr>
 </table>
 </form>
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
-  <tr>
+  <tr height="25">
     <td width="160">Port</td>
+    <?php if(!$dev_id): ?>
     <td width="185"><select class="port_field" name="port" id="port_1" onchange="changedField(this);">
       <option></option>
       <?php for($i=1; $i<=46; $i++)
@@ -195,14 +203,19 @@ if($_REQUEST['main_id'])
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>
+    <?php else: ?>
+    <td width="185"><?php echo($daddy->getParentPortsString($dev_id)) ?></td>
+    <td></td>
+    <?php endif; ?>
   </tr>
 </table>
 </form>
 <?php if($connection1['service']=="net"):?>
 <form action="edit.php?tryb=edit" onsubmit="return checkMacEditForm('<?php echo($connection1['id'])?>');" method="post">
 <table class="tables">
-  <tr>
+  <tr height="25">
     <td width="160">mac</td>
+    <?php if(!$dev_id): ?>
     <td width="185">
       <script type="text/javascript" src="js/checkMac.js"></script>
       <input class="mac_field" type="text" value="<?php echo($connection1['mac'])?>" name="mac" id="mac_1" onkeyup="testMac(this);"><?php echo ($mac_link); ?></td>
@@ -210,18 +223,30 @@ if($_REQUEST['main_id'])
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>
+    <?php else: ?>
+    <td width="185"><?php echo($daddy->getDeviceMac($dev_id)) ?></td>
+    <td></td>
+    <?php endif; ?>
   </tr>
 </table>
 </form>
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
-  <tr>
+  <tr height="25">
     <td width="160">prędkość</td>
+    <?php if(!$dev_id): ?>
     <td width="185"><input class="speed_field" type="text" value="<?php echo($connection1['speed'])?>" name="speed" id="speed_1" onkeyup="testSpeed(this);"></td>
     <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="speed"><input type="submit" class="submit_field"  value="zmień">
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>
+    <?php else: 
+    include(SEU_ABSOLUTE.'/include/classes/host.php');
+    $host = new Host();
+    $speed = $host->getSpeed($dev_id); ?> 
+    <td width="185"><?php echo($speed) ?></td>
+    <td></td>
+    <?php endif; ?>
   </tr>
 </table>
 </form>
@@ -654,7 +679,7 @@ Brak instalacji
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
-    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/add_internet.php?mac=<?php echo($connection2['mac']."&amp;address=".$connection2['address']."&amp;speed=".$connection2['speed']);?>">Konfiguruj</a></center></td>
+    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/8000GS/add_internet.php?mac=<?php echo($connection2['mac']."&amp;address=".$connection2['address']."&amp;speed=".$connection2['speed']);?>">Konfiguruj</a></center></td>
   </tr>
 </table>
 </form>

@@ -441,14 +441,14 @@ max-lease-time $lease_time;
   				$data .= "}";
 if($subnet['id']==87)
 {
-print_r($query);
-print_r($ips);
-print_r($ips_array);
+//print_r($query);
+//print_r($ips);
+//print_r($ips_array);
 echo ($data);
 
 }
 				$filename = $files_path."/regions/".$subnet['opis'].".conf";
-				echo"<br>$filename<br>";
+//				echo"<br>$filename<br>";
 				$file = fopen($filename, "w");
 				fwrite($file, $data);
 				fclose($file);
@@ -465,6 +465,11 @@ public function removePL($in_string)
 	$arrAsciiChars = array('a','c','e','l','n','o','s','z','z','A','C','E','L','N','O','S','Z','Z','_','_','_','_');
 	return str_replace($arrPlSpecialChars, $arrAsciiChars, $in_string);
 }
-
-
-	}
+public function getSpeed($dev_id)
+{
+  $id=intval($dev_id);
+  $query = "SELECT pakiet FROM Host WHERE device='$id'";
+  $result = $this->query($query);
+  return $result['pakiet'];
+}
+}

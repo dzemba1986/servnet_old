@@ -126,10 +126,10 @@ class MysqlMain
     }
     return $wynik;
   }
-  public function query_update($zapytanie, $id, $tabela)
+  public function query_update($zapytanie, $id, $tabela, $id_field)
   {
     $sql = $this->connect();
-    $this->query_log2($zapytanie, $id, $tabela);
+    $this->query_log2($zapytanie, $id, $tabela, $id_field);
     $wskaznik = mysql_query($zapytanie, $sql);
     $this->result = $wskaznik;
     if ($wskaznik === false)
@@ -163,7 +163,7 @@ class MysqlMain
       mysql_query($query) or die(mysql_error());
     }
   }
-  protected function query_log2($zapytanie, $id=null, $table=null)
+  protected function query_log2($zapytanie, $id=null, $table=null, $id_field=null)
   {
     $id_collumn;
     $this->connect();
@@ -188,6 +188,8 @@ class MysqlMain
         $id_collumn = 'id';
         break;
       }
+      if($id_field)
+        $id_collumn = $id_field;
       $query = "SELECT * FROM $table WHERE $id_collumn='$id'";
       $result = $this->query_assoc_array($query);
       $old = print_r($result[0], true);

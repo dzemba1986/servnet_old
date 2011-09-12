@@ -1340,6 +1340,56 @@ public function usunVirtual($dev_id)
 		echo "<center>To nie jest urządzenie virtualne!!!</center><center><a href=\"index.php\">Powrót</a></center>";
 	return 1;
 }
+	public function sprawdz_mac($mac)
+	{
+		if ($this->sprawdz_mac_skladnia($mac))
+		{
+			$sql = $this->connect();
+			$mac = mysql_real_escape_string($mac, $sql);
+			$zapytanie = "SELECT mac FROM Device WHERE mac='$mac'";
+                        if(defined('DEBUG'))
+			  echo "<br>".$zapytanie."<br>";
+			$wynik = $this->query($zapytanie);
+			if(!$wynik)
+				return true;
+		}
+		return false;
+	}
+	public function sprawdz_mac_skladnia($mac)
+	{
+		$pattern = '/^\b(([0-9a-zA-Z]{2}):){5}([0-9a-zA-Z]{2})\b$/';
+		if(preg_match($pattern, $mac))
+			return true;
+		else
+			return false;
+	}
+public function changeMac($con_id, $mac)
+{
+  $mac = strtolower(mysql_real_escape_string($mac));
+  $con_id = intval($con_id);
+  $dev_id = $this->getDevId($con_id);
+  $old_mac = $this->getDeviceMac($con_id);
+  if(!$this->sprawdz_mac_skladnia($mac))
+  {
+    return "Niewłaściwy format addresu mac!";
+  }
+  elseif(!$this->sprawdz_mac($mac))
+  {
+    return "zajety adres mac!";
+  }
+  elseif($dev_id)
+  {
+    $query = "UPDATE Device SET mac='$mac' WHERE dev_id='$dev_id'";
+    $result = $this->query_update($query, $dev_id, 'Device', 'dev_id');
+    $this->loguj($dev_id, $this->getDeviceLoc($dev_id), $user, "zmiana adresu mac ($old_mac)", 'modyfikuj');
+    if($result)
+      return "Zmieniono adres mac w SEU";
+    return "Nie udało się zmienić adresu mac w SEU!";
+  }
+}
+
+
+
 private function getOldMac()
 {
 //	$query = "SELECT * FROM Device WHERE dev_id='$this->dev_id'";

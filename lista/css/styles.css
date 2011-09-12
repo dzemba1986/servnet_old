@@ -214,6 +214,7 @@ table, th, td {
         padding: 0;
         margin: 1px;
         width: 400px;
+        height: 100px;
  	background: grey;
 }
 .td_name {

@@ -1,5 +1,4 @@
 <?php
-define('HOST_PATH', ROOT.'/seu/include/classes/host.php');
 Class Connections
 {
   public function update($id, $field_name, $value, $value2)
@@ -93,6 +92,7 @@ Class Connections
     }
     elseif($field_name=='switch_loc') 
     {
+
       $daddy = new Daddy();
       $switch_loc = $daddy->getSwitchLocString($value);
       $query = "UPDATE Connections SET switch_loc='$value', switch_loc_str='$switch_loc', last_modyfication=NOW() WHERE id='$id'";

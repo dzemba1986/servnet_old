@@ -922,6 +922,20 @@ class Daddy extends MysqlMain
 		$wynik = $this->query($zapytanie);
 		return $wynik['device_type'];
 	}
+	public function getDeviceLoc($dev_id)
+	{
+		$dev_id = intval($dev_id);
+		$zapytanie = "SELECT lokalizacja FROM Device WHERE dev_id='$dev_id'";
+		$wynik = $this->query($zapytanie);
+		return $wynik['lokalizacja'];
+	}
+	public function getDeviceMac($dev_id)
+	{
+		$dev_id = intval($dev_id);
+		$zapytanie = "SELECT mac FROM Device WHERE dev_id='$dev_id'";
+		$wynik = $this->query($zapytanie);
+		return $wynik['mac'];
+	}
 	public function getDevId($con_id)
 	{
 		$con_id = intval($con_id);
@@ -947,6 +961,18 @@ class Daddy extends MysqlMain
 		$wynik = $this->query($zapytanie);
 		return $wynik['parent_device'];
 	}
+        public function getParentDeviceString($dev_id)
+        {
+          $query = "SELECT CONCAT(t.short_name, l.nr_bloku, l.klatka, ' ', d.other_name, ' (', i.ip, ')') as parent_string 
+          FROM Agregacja a
+          INNER JOIN Device d ON d.dev_id=a.device
+          LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
+          LEFT JOIN Teryt t ON l.ulic=t.ulic
+          LEFT JOIN Adres_ip i ON i.device=d.dev_id
+          WHERE a.device='$dev_id' AND uplink='1'";
+	  $wynik = $this->query($query);
+	  return $wynik['parent_string'];
+        }
 	public function getAvaiblePorts($dev_id, $parent=null, $child=null)
 	{
           if(!$dev_id)
@@ -996,6 +1022,14 @@ class Daddy extends MysqlMain
 		$wynik = $this->query_assoc_array($zapytanie);
 		return $wynik;
 	}		
+        public function getParentPortsString($dev_id)
+        {
+          $uplink_arr = $this->getUplinkConnections($dev_id);
+          $str_out = "";
+          foreach($uplink_arr as $link)
+            $str_out.= $link['parent_port']."\t";
+          return $str_out;
+        }
 	public function findDuplicates($_array)
 	{
 		if(count($_array)>0)
@@ -1050,12 +1084,22 @@ class Daddy extends MysqlMain
 
         public function getSwitchLoc($ulic, $blok, $mieszkanie)
         {
-          $query = "SELECT id_loc FROM Mieszkania WHERE ulic='$ulic' AND blok='$blok' AND od<=$mieszkanie AND do>=$mieszkanie";
+          $query = "SELECT id_lok FROM Mieszkania WHERE ulic='$ulic' AND blok='$blok' AND od<=$mieszkanie AND do>=$mieszkanie";
           $result = $this->query($query);
           if($result[0])
             return $result[0];
           return false;
         }
+        public function getSwitchLocString($id_lok)
+        {
+          $id_lok = intval($id_lok);
+          $query = "SELECT CONCAT(t.short_name, l.nr_bloku, l.klatka) as loc  FROM Lokalizacja l LEFT JOIN Teryt t ON t.ulic=l.ulic  WHERE l.id='$id_lok'";
+          $result = $this->query($query);
+          if($result['loc'])
+            return $result['loc'];
+          return false;
+        }
+
         public function getL2SwitchesLoc()
         {
           $query = "SELECT t.short_name, l.id as id_lok, l.nr_bloku, l.klatka, d.other_name, i.ip 
@@ -1066,6 +1110,7 @@ class Daddy extends MysqlMain
           WHERE d.device_type='switch_bud' AND d.lokalizacja!='111'
           ORDER BY t.short_name, l.nr_bloku, l.klatka";
           $switches = $this->query_assoc_array($query);
+          return $switches;
         }
 	public function getMagazynEntries()		
 	{
