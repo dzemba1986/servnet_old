@@ -370,7 +370,7 @@ class Host extends Daddy
                 
 //deleting old files
                 $sysout = system("rm $files_path/regions/*");
-                echo "<br><br><strong>$sysout</strong><br><br>";
+//                echo "<br><br><strong>$sysout</strong><br><br>";
 
 
 		$update_file_name = $files_path.'/regions/.update_notify';
@@ -439,14 +439,6 @@ max-lease-time $lease_time;
 					if($ips_array[$ip_counter])
 						$data .= $ips_array[$ip_counter];
   				$data .= "}";
-if($subnet['id']==87)
-{
-//print_r($query);
-//print_r($ips);
-//print_r($ips_array);
-echo ($data);
-
-}
 				$filename = $files_path."/regions/".$subnet['opis'].".conf";
 //				echo"<br>$filename<br>";
 				$file = fopen($filename, "w");

@@ -12,7 +12,7 @@ if($device_type):
 </div>
 <?php if($device_type): ?>
 <div class="right">
-<?php require('device_menu.php');?>
+<?php require('device_menus/device_menu.php');?>
 </div>
 <?php endif?>
 </div>

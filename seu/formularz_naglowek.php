@@ -23,8 +23,12 @@ else
 <? if(!isset($_GET['device']))
 	echo("<script language=\"JavaScript\" SRC=\"js/dodaj.js\"></script>");
   else
+{
 	echo("<script language=\"JavaScript\" SRC=\"js/modyfikuj.js\"></script>");
-?>
+	echo("<script language=\"JavaScript\" SRC=\"js/ajax_base.js\"></script>");
+	echo("<script language=\"JavaScript\" SRC=\"js/changeMac.js\"></script>");
+}
+        ?>
 	
 </head>
 <body>
@@ -51,10 +55,4 @@ else
 <? 
 } else
 	echo("<b>$device_type</b>"); 
-if($device_type):?>
-
-<form method="post" action="<?php echo $form_action; ?>">
-<input type="hidden" name="device_type" value="<?php  echo($device_type);?>">
-<table id="tabela_danych_wejsciowych">
-<?php endif; ?>
 

@@ -120,7 +120,7 @@ class Daddy extends MysqlMain
 	}
 	public function sprawdz_mac_skladnia($mac)
 	{
-		$pattern = '/^\b(([0-9a-zA-Z]{2}):){5}([0-9a-zA-Z]{2})\b$/';
+		$pattern = '/^\b(([0-9a-fA-F]{2}):){5}([0-9a-fA-F]{2})\b$/';
 		if(preg_match($pattern, $mac))
 			return true;
 		else

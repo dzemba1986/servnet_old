@@ -24,14 +24,38 @@ function activateParentDevice(value)
 			getHostUplink(value);
 }
 </script>
-<tr bgcolor="#D8D8D8">
-	<td style="width:330px">Device exists *</td>
-	<td><input class="" type="checkbox" name="exists" <?php if($device['exists'] || !$device['dev_id']) echo "checked";  ?>>
-</tr>
+<?php if($device['dev_id']): ?>
+<table class="tabela_danych_wejsciowych">
 <tr>
-	<td>Adres MAC *</td>
-	<td><input class="" type="text" name="mac" value="<?php echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
+	<td class="tabela_danych_wejsciowych_label" style="background: #999999; border: 1px solid black; border-right: none;">Adres MAC *</td>
+	<td style="background: #999999; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<?php echo($device['mac']); ?>" readonly>
+	<button onclick="changeMac(this,'<?php echo($device['dev_id']); ?>',document.getElementById('mac').value); return false;" style=" margin-left: 30px;">Zmień</button></td>
+</tr>
+</table>
+<?php if($device_type):?>
+
+<form method="post" action="<?php echo $form_action; ?>">
+<input type="hidden" name="device_type" value="<?php  echo($device_type);?>">
+<table class="tabela_danych_wejsciowych">
+<?php endif; ?>
+<?php
+else :?>
+<?php if($device_type):?>
+
+<form method="post" action="<?php echo $form_action; ?>">
+<input type="hidden" name="device_type" value="<?php  echo($device_type);?>">
+<table class="tabela_danych_wejsciowych">
+<?php endif; ?>
+<tr>
+	<td class="tabela_danych_wejsciowych_label" style="background: gray; border: 1px solid black; border-right: none;">Adres MAC *</td>
+	<td style="background: gray; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<?php echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
 	</td>
+</tr>
+
+<?php endif;?>
+<tr bgcolor="#D8D8D8">
+	<td class="tabela_danych_wejsciowych_label" style="width:330px">Device exists *</td>
+	<td><input class="" type="checkbox" name="exists" <?php if($device['exists'] || !$device['dev_id']) echo "checked";  ?>>
 </tr>
 <tr>
 <td><input class="" type="hidden" name="dev_id" value="<?php echo($device['dev_id']); ?>">	

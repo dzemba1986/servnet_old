@@ -1,11 +1,14 @@
-#tabela_danych_wejsciowych{
+.tabela_danych_wejsciowych{
   font-weight: normal;
   font-family: Verdana;
   font-size: 12px;
   width: 1010px;
 }
-#tabela_danych_wejsciowych tr {
+.tabela_danych_wejsciowych tr {
   background: #f2f2f2;
+}
+.tabela_danych_wejsciowych_label {
+  width: 330px;
 }
 #formularz {
   float: left;
