@@ -85,6 +85,25 @@ class Host extends Daddy
       }
     }
   }
+  public function reset_start_date($dev_id)
+  {
+    $dev_id = intval($dev_id);
+    if($dev_id)
+    {
+      $zapytanie = "SELECT d.*, i.*, l.*, h.* FROM Device d INNER JOIN Lokalizacja l ON d.lokalizacja=l.id INNER JOIN Adres_ip i ON (i.device=d.dev_id AND i.main=1) INNER JOIN Host h ON h.device=d.dev_id WHERE d.dev_id='$dev_id'";
+      $wynik = $this->query($zapytanie);
+      {
+        $zapytanie = "INSERT INTO Historia_ip SET osiedle='".$wynik['osiedle']."', blok='".$wynik['nr_bloku']."', ip='".$wynik['ip']."', 
+          mieszkanie='".$wynik['nr_mieszkania']."', data_od='".$wynik['data_uruchomienia']."', data_do=NOW(), 
+          con_id='".$wynik['con_id']."'";
+        $this->query($zapytanie);	
+        $this->queryLogger($zapytanie);
+        $zapytanie = "UPDATE Host SET data_uruchomienia=NOW() WHERE device='$dev_id'";
+        $this->query_update($zapytanie, $dev_id, 'Host', 'device');	
+        $this->queryLogger($zapytanie);
+      }
+    }
+  }
   public function modyfikuj(&$_device, $_nr_mieszkania, $_pakiet, $_data_uruchomienia, $_con_id, $_opis_historii, $_data_zakonczenia)
   {
     $errors = 0;
@@ -382,7 +401,8 @@ class Host extends Daddy
                 $dns_array = array();
                 $dns_array[0] = "option domain-name-servers $dns1, $dns2;";
                 $dns_array[1] = "option domain-name-servers $dns2, $dns1;";
-		$lease_time = '86400';
+	//	$lease_time = '86400';
+		$lease_time = '7200';
                 $counter = 1;
 		foreach($subnets as $subnet)
 		{

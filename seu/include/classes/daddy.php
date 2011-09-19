@@ -145,7 +145,7 @@ class Daddy extends MysqlMain
 			return true;
 		return false;
 	}
-	protected function loguj($dev_id, $lokalizacja, $porzucony, $opis_historii, $typ_akcji)
+	public function loguj($dev_id, $lokalizacja, $porzucony, $opis_historii, $typ_akcji)
 	{
 		$user = $_SESSION['user_id'];
 		$sql = $this->connect();

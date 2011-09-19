@@ -108,6 +108,61 @@ class IpAddress
 		$dec = intval($dec);
 		$this->address += $dec;
 	}
+  public static function reorg($old_ip, $old_mask, $new_ip, $new_mask, $lock_file)
+  {
+    $filename = $lock_file;
+    echo "$filename";
+    if (file_exists($filename))
+     die("Skrypt mozna uruchomic tylko raz!");
 
+    $daddy = new Host();
+
+    $query = "SELECT a.*, p.*, l.id as lokalizacja FROM Podsiec p 
+      LEFT JOIN Adres_ip a ON p.id=a.podsiec 
+      LEFT JOIN Device d ON d.dev_id=a.device 
+      LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id 
+      WHERE p.address='$old_ip' AND p.netmask='$old_mask'";
+
+    $ips = $daddy->query($query);
+    if(!$ips)
+      die('brak adresów!');
+    $first_ip_obj = new IpAddress($ips[0]['ip'], $ips[0]['netmask']);
+    $podsiec = $ips[0]['id'];
+    $network_ip_old = $first_ip_obj->getNetworkAddress();
+    $new_ip_obj = new IpAddress($new_ip, $new_mask);
+    $network_ip_new = $new_ip_obj->getNetworkAddress();
+    $diff = $network_ip_new - $network_ip_old;
+    echo (" diff $diff <br>\n");
+    echo (" subnet $podsiec <br>\n");
+    $query = "SET AUTOCOMMIT=0";
+    $daddy->query($query);
+    $query = "BEGIN";
+    $daddy->query($query);
+    foreach($ips as $ip)
+    {
+            $ip_obj = new IpAddress($ip['ip'], $ip['netmask']);
+            $ip_obj->shift($diff);
+            $daddy->reset_start_date($ip['device']);
+            $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE ip='".$ip['ip']."' AND podsiec='$podsiec'";
+            if($daddy->query($query, 'Adres_ip')===false)
+            {
+              $daddy->query("ROLLBACK");
+              die("Nie udało się zmienić adresu IP ".$ip['ip']."!!");
+            }
+            $daddy->loguj($ip['device'], $ip['lokalizacja'], $user, "Zmiana IP z ".$ip['ip']."/$old_mask na ".$ip_obj->getAddress()."/$new_mask", 'modyfikuj');
+            
+    }
+    $query = "UPDATE Podsiec SET address='".$new_ip_obj->getHrNetworkAddress()."', netmask='$new_mask' WHERE id='$podsiec'";
+    if($daddy->query_update($query, $podsiec, 'Podsiec', 'id')===false)
+    {
+      $daddy->query("ROLLBACK");
+      die("Nie udało się zmienić adresu IP podsieci $network_ip_old");
+    }
+    $daddy->query("COMMIT");
+    $file = fopen($filename, "w+");
+    fwrite($file, "REORGLOCK");
+    fclose($file);
+    echo " Reorganizacja zakonczona pomyslnie.";
+  }
 }
 ?>
