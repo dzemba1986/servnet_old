@@ -6,13 +6,8 @@
   <td style="text-align:center; width:60px;"><a href="connected.php?order=net_start&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Data zgł.</a></td>
   <td><a href="connected.php?order=adres&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Adres</a></td>
   <td style="width:110px;">Telefon</td>
-  <td style="width:110px;"><a href="connected.php?order=net_switch&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Przełącznik</a></td>
-  <td>Switch_loc_str</td>
-  <td>Port</td>
   <td>Przewód</td>
-  <td>MAC</td>
   <td><a href="connected.php?order=net_service&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Usługa</a></td>
-  <td>Prędkość</td>
   <td style="text-align:center; width:60px;">Gniazdko</td>
   <td style="text-align:center; width:60px;">Opłaty</td>
   <td style="text-align:center; width:60px;"><a href="connected.php?order=net_activation&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Uruchom.</a></td>
@@ -38,13 +33,8 @@ foreach($wynik as $wiersz)
     <td style=\"text-align:center;\" >".$wiersz['_net_start']."</td>
     <td>".$wiersz['address']."</td>
     <td>".$wiersz['phone']."</td>
-    <td>".$wiersz['net_switch']."</td>
-    <td>".$wiersz['net_switch_loc_str']."</td>
-    <td>".$wiersz['net_port']."</td>
     <td>".$wiersz['net_wire']."</td>
-    <td>$mac_value</td>
     <td>".$wiersz['net_service']."</td>
-    <td>".$wiersz['speed']."</td>
     <td style=\"text-align:center;\" >".$wiersz['_net_socket_date']."</td>
     <td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>
     <td style=\"text-align:center;\" >".$wiersz['_net_activation']."</td>

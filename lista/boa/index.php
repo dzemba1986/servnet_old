@@ -88,6 +88,7 @@ $variables = "tryb=$tryb&amp;tryb2=$tryb2&amp;od=$od&amp;do=$do&amp;payment=$pay
 <td>Rezygnacja</td>
 <td>Data przew.</td>
 <td>Data gniazd.</td>
+<td>Dod. info</td>
 <td>Sync. user</td>
 <td>Ara</td>
 </tr>
@@ -152,6 +153,11 @@ foreach($wynik as $wiersz)
       $ara_style = "";
     }
   }
+  $info = null;
+  if(!$wiersz['info_boa'])
+    $info = "<div class=\"ara_id\" onclick=\"setInfo(this, '".$wiersz['id']."', '".$wiersz['address']."', '')\">...</div>";
+  else
+    $info = "<div class=\"ara_id\" onclick=\"setInfo(this, '".$wiersz['id']."', '".$wiersz['address']."', '".$wiersz['info_boa']."')\">".$wiersz['info_boa']."</div>";
   $rowcolor;
   $wina_abonenta ="#CBD665";
   if($wiersz['_net_date']=='00.00.00')
@@ -190,6 +196,7 @@ foreach($wynik as $wiersz)
     <td>".$wiersz['_resignation_date']."</td>
     <td>".$wiersz['_wire_date']."</td>
     <td>".$wiersz['_socket_date']."</td>
+    <td>$info</td>
     <td>".$wiersz['sync_user']."</td>
     <td$ara_style>".$ara."</td>
 

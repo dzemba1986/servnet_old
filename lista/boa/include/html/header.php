@@ -50,7 +50,7 @@ elseif($_POST['dodaj'])
   $phone = $_POST['phone'];
   $phone2 = $_POST['phone2'];
   $phone3 = $_POST['phone3'];
-  $info = $_POST['info'];
+  $info = $_POST['info_boa'];
   $connection->add($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $ara_id);
 }
 $tryb = mysql_real_escape_string($_GET['tryb']);
@@ -102,6 +102,7 @@ else
   <script type="text/javascript" src="js/ajax_base.js"></script>
   <script type="text/javascript" src="js/setPhones.js"></script>
   <script type="text/javascript" src="js/setAraId.js"></script>
+  <script type="text/javascript" src="js/setInfo.js"></script>
   <script type="text/javascript" src="js/dodaj.js"></script>
 </head>
 <body>

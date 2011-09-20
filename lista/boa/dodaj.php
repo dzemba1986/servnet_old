@@ -67,7 +67,7 @@ $ulic = $sql->getUlic();
 				</td>
          </tr>
          <tr>
-           <td>Dodatkowe info</td><td colspan="3"><textarea name="info" cols="70" rows="7"></textarea></td>
+           <td>Dodatkowe info</td><td colspan="3"><textarea name="info_boa" cols="70" rows="7"></textarea></td>
          </tr>
          <tr>
            <td>&nbsp;</td><td><input type="submit" name="dodaj" id="zapisz" value="zatwierdź" />

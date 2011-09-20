@@ -7,11 +7,7 @@
   <td style="width:60px;">Deadline</td>
   <td><a href="all.php?order=adres&amp;search_field=<?php echo $search_field;?>&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;find_phrase=<?php echo $find_phrase; ?>&amp;tryb=<?php echo $tryb; ?>" class="header">Adres</a></td>
   <td>Telefon</td>
-  <td><a href="all.php?order=net_switch&amp;search_field=<?php echo $search_field;?>&amp;find_phrase=<?php echo $find_phrase; ?>&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Przełącznik</a></td>
-  <td>Switch_loc_str</td>
-  <td>Port</td>
   <td>Przewód</td>
-  <td>MAC</td>
   <td><a href="all.php?order=net_service&amp;search_field=<?php echo $search_field;?>&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;find_phrase=<?php echo $find_phrase; ?>&amp;tryb=<?php echo $tryb; ?>" class="header">Usługa</a></td>
   <td style="width:60px;">Gniazdko</td>
   <td style="width:60px;">Opłaty</td>
@@ -64,11 +60,7 @@ foreach($wynik as $wiersz)
     <td style=\"text-align:center;\" >".$wiersz['_net_end_date']."</td>
     <td>".$wiersz['address']."</td>
     <td>".$wiersz['phone']."</td>
-    <td>".$wiersz['net_switch']."</td>
-    <td>".$wiersz['net_switch_loc_str']."</td>
-    <td>".$wiersz['net_port']."</td>
     <td>".$wiersz['net_wire']."</td>
-    <td>$mac_value</td>
     <td>".$wiersz['net_service']."</td>
     <td style=\"text-align:center;\" >".$wiersz['_net_socket_date']."</td>
     <td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>

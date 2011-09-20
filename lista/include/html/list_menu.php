@@ -37,6 +37,7 @@ Rekordów na stronie
   <select name="search_field">
     <option value="a.address">Adres</option>
     <option <?php if($_REQUEST['search_field']=='id') echo ' selected '; ?>value="id">ID podłączenia</option>
+    <option <?php if($_REQUEST['search_field']=='ara_id') echo ' selected '; ?>value="ara_id">ARA ID</option>
     <option <?php if($_REQUEST['search_field']=='start_date') echo ' selected '; ?>value="start_date">Data dodania</option>
     <option <?php if($_REQUEST['search_field']=='last_modyfication') echo ' selected '; ?>value="last_modyfication">Data modyfikacji</option>
     <option <?php if($_REQUEST['search_field']=='resignation_date') echo ' selected '; ?>value="resignation_date">Data rezygnacji</option>

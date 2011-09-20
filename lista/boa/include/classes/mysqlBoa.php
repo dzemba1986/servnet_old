@@ -80,22 +80,23 @@ class MysqlBoa extends MysqlMain
       b.ara_sync,
       c.speed, 
       c.switch, 
-        c.service,
-          c.mac,
-          DATE_FORMAT(c.payment_activation, '%d.%m.%y') AS _payment_activation,
-          DATE_FORMAT(b.ara_sync, '%d.%m.%y') AS ara,
-          DATE_FORMAT(c.service_activation, '%d.%m.%y') AS _net_date,
-          DATE_FORMAT(c.resignation_date, '%d.%m.%y') AS _resignation_date,
-          DATE_FORMAT(i.wire_installation_date, '%d.%m.%y') AS _wire_date,
-          DATE_FORMAT(i.socket_installation_date, '%d.%m.%y') AS _socket_date,
-          DATE_FORMAT(c.installation_date, '%d.%m.%y %H:%m') AS _installation_date,
-          i.socket_installation_date,
-          c.installation_date,
-          c.phone,
-          c.phone2,
-          c.phone3,
-          User_sync.login as sync_user,
-          User_add.login as add_user";
+      c.service,
+      c.mac,
+      c.info_boa,
+      DATE_FORMAT(c.payment_activation, '%d.%m.%y') AS _payment_activation,
+      DATE_FORMAT(b.ara_sync, '%d.%m.%y') AS ara,
+      DATE_FORMAT(c.service_activation, '%d.%m.%y') AS _net_date,
+      DATE_FORMAT(c.resignation_date, '%d.%m.%y') AS _resignation_date,
+      DATE_FORMAT(i.wire_installation_date, '%d.%m.%y') AS _wire_date,
+      DATE_FORMAT(i.socket_installation_date, '%d.%m.%y') AS _socket_date,
+      DATE_FORMAT(c.installation_date, '%d.%m.%y %H:%m') AS _installation_date,
+      i.socket_installation_date,
+      c.installation_date,
+      c.phone,
+      c.phone2,
+      c.phone3,
+      User_sync.login as sync_user,
+      User_add.login as add_user";
     if($tryb=='search' && $tryb2=='activation' && $od && $do)
     {
       if(!$activation && $payment)
@@ -216,7 +217,7 @@ class MysqlBoa extends MysqlMain
     $id=intval($id);
     $user = intval($_SESSION['user_id']);
     $query = "DELETE FROM Boa WHERE connection_id='$id'";
-    $this->query_update($query, $id, 'Boa');
+    $this->query_update($query, $id, 'Boa', null);
   }
   public function araSync($id)
   {

@@ -1,8 +1,9 @@
 <?php require('include/html/header.php'); 
-include('include/classes/daddy.php');
+define('DADDY_PATH', SEU_ABSOLUTE.'/include/classes/daddy.php');
+require(DADDY_PATH);
 $tryb = $_GET['tryb'];
-    require('include/classes/installations.php');
-    require('include/classes/connections.php');
+require('include/classes/installations.php');
+require('include/classes/connections.php');
 if($_REQUEST['field_name']=='add_installation')
 {
     $connection_id = $_REQUEST['connection_id'];

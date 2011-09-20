@@ -965,7 +965,7 @@ class Daddy extends MysqlMain
         {
           $query = "SELECT CONCAT(t.short_name, l.nr_bloku, l.klatka, ' ', d.other_name, ' (', i.ip, ')') as parent_string 
           FROM Agregacja a
-          INNER JOIN Device d ON d.dev_id=a.device
+          INNER JOIN Device d ON d.dev_id=a.parent_device
           LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
           LEFT JOIN Teryt t ON l.ulic=t.ulic
           LEFT JOIN Adres_ip i ON i.device=d.dev_id

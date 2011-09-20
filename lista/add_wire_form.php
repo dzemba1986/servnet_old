@@ -1,6 +1,7 @@
 <?php require('include/html/header.php'); 
 require('include/classes/localization.php');
-include('include/classes/daddy.php');
+define('DADDY_PATH', SEU_ABSOLUTE.'/include/classes/daddy.php');
+require(DADDY_PATH);
 $tryb = $_GET['tryb'];
     require('include/classes/installations.php');
     require('include/classes/connections.php');
@@ -59,12 +60,16 @@ if($_REQUEST['main_id'])
   $base_switch_loc = $daddy->getSwitchLoc($loc_array['ulic'], $loc_array['blok'], $loc_array['mieszkanie']);
   $switches_loc_array = $daddy->getL2SwitchesLoc();
   $switches_loc_opt;
+  echo $connection1['switch_loc'] ;
   foreach($switches_loc_array as $s_loc)
   {
-    if($s_loc['id_lok']!=$base_switch_loc)
-       $switches_loc_opt .= "<option value=\"".$s_loc['id_lok']."\">".$s_loc['short_name'].$s_loc['nr_bloku'].$s_loc['klatka']." ".$s_loc['other_name']." (".$s_loc['ip'].")</option>";
-    else
+
+    if($s_loc['id_lok']==$connection1['switch_loc'])
        $switches_loc_opt .= "<option value=\"".$s_loc['id_lok']."\" selected>".$s_loc['short_name'].$s_loc['nr_bloku'].$s_loc['klatka']." ".$s_loc['other_name']." (".$s_loc['ip'].")</option>";
+    elseif(!$connection1['switch_loc'] && $s_loc['id_lok']==$base_switch_loc)
+       $switches_loc_opt .= "<option value=\"".$s_loc['id_lok']."\" selected>".$s_loc['short_name'].$s_loc['nr_bloku'].$s_loc['klatka']." ".$s_loc['other_name']." (".$s_loc['ip'].")</option>";
+    else
+       $switches_loc_opt .= "<option value=\"".$s_loc['id_lok']."\">".$s_loc['short_name'].$s_loc['nr_bloku'].$s_loc['klatka']." ".$s_loc['other_name']." (".$s_loc['ip'].")</option>";
   }
 
 

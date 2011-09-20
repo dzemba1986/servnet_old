@@ -1,4 +1,5 @@
 <?php
+define('HOST_PATH', SEU_ABSOLUTE.'/include/classes/host.php');
 Class Connections
 {
   public function update($id, $field_name, $value, $value2)
@@ -17,7 +18,7 @@ Class Connections
       if($field_name=='service_activation' && (($permissions & 64)!=64))
         die("Nie masz uprawnień!");
     }
-    elseif($field_name=='phone' || $field_name=='phone2' || $field_name=='phone3')
+    elseif($field_name=='phone' || $field_name=='phone2' || $field_name=='phone3' || $field_name=='info_boa')
     {
       if(($permissions & 2)!=2 && ($permissions & 128)!=128)
         die("Nie masz uprawnień!");
@@ -270,7 +271,7 @@ require('../include/classes/localization.php');
         phone3='".$phone3."', 
         mac='".$mac."',
         service='".$service."',
-        info='".$info."', 
+        info_boa='".$info."', 
         speed='$speed',
         add_user='$user',
         ara_id='$ara_id',
