@@ -423,6 +423,18 @@ $dev_id = $daddy->getDevId($connection1['id']);
   </tr>
 </table>
 </form>
+<form action="edit.php?tryb=edit" method="post">
+<table class="tables">
+  <tr>
+    <td width="160">Boa info</td>
+    <td><textarea rows="8" cols="30" class="info_field" name="info_boa" id="info_3" onkeyup="changedField(this);"><?php echo($connection1['info_boa'])?></textarea></td>
+    <td><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="info_boa"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    </td>
+  </tr>
+</table>
+</form>
 </div>
 <div id="net_installation">
 <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?> - instalacja</div>
@@ -766,6 +778,18 @@ Brak instalacji
     <td width="160">Dodatkowe info</td>
     <td><textarea rows="8" cols="30" class="info_field" name="info" id="info_2" onkeyup="changedField(this);"><?php echo($connection2['info'])?></textarea></td>
     <td><input type="hidden" name="id" value="<?php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="info"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    </td>
+  </tr>
+</table>
+</form>
+<form action="edit.php?tryb=edit" method="post">
+<table class="tables">
+  <tr>
+    <td width="160">Boa info</td>
+    <td><textarea rows="8" cols="30" class="info_field" name="info_boa" id="info_4" onkeyup="changedField(this);"><?php echo($connection2['info_boa'])?></textarea></td>
+    <td><input type="hidden" name="id" value="<?php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="info_boa"><input type="submit" class="submit_field"  value="zmień">
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>

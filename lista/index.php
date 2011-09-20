@@ -20,6 +20,7 @@
   <td style="width:60px;">Inform.</td>
   <td><a href="index.php?order=installation_date&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż</a></td>
   <td>Dod. info</td>
+  <td>BOA info</td>
   <td style="width:90px;"><a href="index.php?order=modyf&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Ost. mod.</a></td>
   <td>Edytuj</td>
 </tr>
@@ -112,6 +113,7 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_informed']."</td>
       <td>".$wiersz['_installation_date']."</td>
       <td>".$wiersz['net_info']."</td>
+      <td>".$wiersz['net_info_boa']."</td>
       <td>".$wiersz['_net_modyf']."</td>
       <td><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."\">Edytuj</a>";
     echo" </td></tr>";
@@ -145,6 +147,7 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_informed']."</td>
       <td rowspan=\"2\">".$wiersz['_installation_date']."</td>
       <td>".$wiersz['net_info']."</td>
+      <td>".$wiersz['net_info_boa']."</td>
       <td>".$wiersz['_net_modyf']."</td>
       <td rowspan=\"2\"><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."&amp;phone_id=".$wiersz['phone_id']."\">Edytuj</a>";
     echo" </td></tr>";
@@ -169,6 +172,7 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_phone_configuration']."</td>
       <td style=\"text-align:center;\" >".$wiersz['_phone_informed']."</td>
       <td>".$wiersz['phone_info']."</td>
+      <td>".$wiersz['phone_info_boa']."</td>
       <td>".$wiersz['_phone_modyf']."</td>";
     echo"</tr>";
   }
