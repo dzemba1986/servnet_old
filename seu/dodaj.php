@@ -68,6 +68,7 @@ if(isset($_POST['dodaj']))
 
 		exit();
 	}
+        $dev_id = null;
 	switch($device['device_type'])
 	{
 	case 'Switch_rejon':
@@ -217,6 +218,7 @@ if(isset($_POST['dodaj']))
 		{
 			mysql_query("COMMIT", $sql) or die(mysql_error());
 			Daddy::error("Dodano hosta.");
+                        $dev_id = $host->device->dev_id;
 		}
 		else
 		{
@@ -242,7 +244,9 @@ if(isset($_POST['dodaj']))
 		}
 	break;
 	}
-	echo"<center><a href=\"index.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
+        if(!$dev_id)
+          $dev_id = $_POST['parent_device'];
+	echo"<center><a href=\"index.php?device=$dev_id\">Powrót</a></center>";
 }
 else
 {

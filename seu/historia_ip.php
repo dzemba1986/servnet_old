@@ -55,9 +55,10 @@ if($fraza && $tryb_wyszukiwania)
 		break;
 		case 'lok':
 		$zapytanie = "SELECT * FROM (
-			SELECT *, CONCAT(osiedle, ' ', blok, '/', mieszkanie) as lokalizacja
+			SELECT *, CONCAT(osiedle, ' ', blok, '/', mieszkanie) as lokalizacja, 
+                               CONCAT(osiedle, blok, '/', mieszkanie) as lokalizacja1
 			FROM Historia_ip) a
-			WHERE lokalizacja LIKE '%$fraza%' ORDER BY lokalizacja ASC";
+			WHERE lokalizacja1 LIKE '%$fraza%' ORDER BY lokalizacja ASC";
 		break;
 	}
 	$wynik = $daddy->query_assoc_array($zapytanie);

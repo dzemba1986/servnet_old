@@ -480,7 +480,7 @@ class Device extends Daddy
 	//	Po sprawdzeniu parametrow laczymy sie z baza i dodajemy do niej rekord
 		$zapytanie;
 		if($_device_type=='Host')
-			$zapytanie = "UPDATE `Device` SET `exists`='$_exists' `gateway`='$_gateway', `opis`='$_opis',
+			$zapytanie = "UPDATE `Device` SET `exists`='$_exists', `gateway`='$_gateway', `opis`='$_opis',
 			`device_type`='$_device_type', `lokalizacja`='$this->lokalizacja',
 			 `other_name`='$_other_name' WHERE dev_id='$_dev_id'"; 
 		else	

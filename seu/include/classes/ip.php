@@ -162,6 +162,7 @@ class IpAddress
     $file = fopen($filename, "w+");
     fwrite($file, "REORGLOCK");
     fclose($file);
+    $daddy->updateDhcp(1, 1, 'add');
     echo " Reorganizacja zakonczona pomyslnie.";
   }
 }

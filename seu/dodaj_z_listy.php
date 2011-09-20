@@ -60,6 +60,7 @@ if(isset($_POST['dodaj']))
 	if($device['device_type']!="Virtual")
 		$obj = new $device['device_type'] ();
 	$dev_obj = new Device();
+        $dev_id = null;
 	if(! $dev_obj->sprawdzIp($ip, $device_type=="Virtual") ||! $dev_obj->sprawdzDevice($device))
 	{
 //			$_SESSION['popraw'] = true;
@@ -83,13 +84,16 @@ if(isset($_POST['dodaj']))
         {
                 mysql_query("COMMIT", $sql) or die(mysql_error());
                 Daddy::error("Dodano hosta.");
+                $dev_id = $host->device->dev_id;
         }
         else
         {
                 mysql_query("ROLLBACK", $sql) or die(mysql_error());
                 Daddy::error("Nie dodano hosta!");
         }
-	echo"<center><a href=\"index.php?device=".$_POST['parent_device']."\">Powrót</a></center>";
+        if(!$dev_id)
+          $dev_id = $_POST['parent_device'];
+	echo"<center><a href=\"index.php?device=$dev_id\">Powrót</a></center>";
 }
 else
 {
