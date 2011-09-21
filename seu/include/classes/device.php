@@ -426,9 +426,6 @@ class Device extends Daddy
 			$this->mac = -1;
 			exit();
 		}
-//Sprawdzamy poprawność składniową danych
-		if($this->sprawdzDeviceSkladnia($_device) > 0 )
-			exit(0);
 //Zabezpieczenie przed sql injection		
 		$sql = $this->connect();
 		$_exists;
@@ -436,7 +433,6 @@ class Device extends Daddy
 			$_exists = 1;
 		else
 			$_exists = 0;
-		$_mac = strtolower(mysql_real_escape_string($_device['mac']));
 		$_dev_id = mysql_real_escape_string($_device['dev_id']);
 		$_other_name = mysql_real_escape_string(htmlspecialchars($_device['other_name']));
 		$_gateway = mysql_real_escape_string(htmlspecialchars($_device['gateway']));
