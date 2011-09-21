@@ -309,9 +309,6 @@ $dev_id = $daddy->getDevId($connection1['id']);
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
-    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/add_internet.php?mac=<?php echo($connection1['mac']."&amp;port=".$connection1['port']."&amp;address=".$connection1['address']."&amp;speed=".$connection1['speed']);?>">Konfiguruj</a></center></td>
-  </tr>
-  <tr>
     <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/dodaj_z_listy.php?con_id=<?php echo($connection1['id']);?>">Dodaj do bazy</a></center></td>
   </tr>
 </table>

@@ -26,46 +26,15 @@ $porty = array('first' => '1', 'last' => '44');
 //*******************************************************************
 
 $predkosc_str = array( 
-/*'2' =>
-"traffic-shape 2048 204800\n<br>
-rate-limit 5200<br>",
-		       '6' =>
-"traffic-shape 6144 614400\n<br>
-rate-limit 6792<br>",
-                        '10' =>
-"traffic-shape 10240 1024000\n<br>
-rate-limit 7987<br>",
-*/			'4' =>
+			'4' =>
 "traffic-shape 4096 409600\n<br>
 rate-limit 6500<br>",
 			'100' =>
 "traffic-shape 102400 1024000\n<br>
 rate-limit 100000<br>",
-			'50' =>
-"traffic-shape 51200 512000\n<br>
-rate-limit 60000<br>",
-/*			'50/25 Ci co mieli 6/3' =>
-"traffic-shape 51199 511999\n<br>
-rate-limit 59999<br>",
-			'20/10 z 10/5' => 
-"traffic-shape 20480 2048000\n<br>
-rate-limit 22000<br>",
-			'20/10 z 6/3' =>
-"traffic-shape 20480 2047999\n<br>
-rate-limit 21999<br>",
-*/			'30' =>
-"traffic-shape 30720 307200\n<br>
-rate-limit 28500<br>");
-/*			'30/15 z 6/3' =>
-"traffic-shape 30720 307199\n<br>
-rate-limit 28499<br>",
-			'40/20 z 10/5' => 
-"traffic-shape 40960 409600\n<br>
-rate-limit 50000<br>",
-			'40/20 z 6/3' =>
-"traffic-shape 40960 409599\n<br>
-rate-limit 49999<br>"*/
-
+			'200' =>
+"traffic-shape 204800 2048000\n<br>
+rate-limit 305000<br>"); 
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
