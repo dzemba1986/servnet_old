@@ -31,18 +31,17 @@ exit<br>
 ! Podac port klienta<br>
 interface ethernet g<?php echo($port); ?><br>
 shutdown<br>
-no description<br>
 ! Podac nazwe ACLki dla klienta<br>
 no service-acl input<br>
 no traffic-shape<br>
 no rate-limit<br>
 no port security<br>
+sw a v 555<br>
+no shutdown<br>
 exit<br>
 ! Podac nazwe ACLki: user3, user4 itd (nr taki jak port)<br>
 no ip access-list user<?php echo($port); ?><br>
 no ip access-list user<?php echo($port); ?><br>
-exit<br>
-<br>
 exit<br>
 copy r s<br>
 y<br>

@@ -1339,8 +1339,9 @@ public function usunVirtual($dev_id)
 public function changeMac($dev_id, $mac)
 {
   $mac = strtolower($mac);
-  $con_id = intval($con_id);
   $old_mac = $this->getDeviceMac($dev_id);
+  $host = new Host();
+  $con_id = $host->getConId($dev_id);
   if(!$this->sprawdz_mac_skladnia($mac))
   {
     echo  "Niewłaściwy format addresu mac!";
@@ -1355,6 +1356,12 @@ public function changeMac($dev_id, $mac)
   {
     $query = "UPDATE Device SET mac='$mac' WHERE dev_id='$dev_id'";
     $result = $this->query_update($query, $dev_id, 'Device', 'dev_id');
+    require(MYMYSQL_FILE);
+    require(CONNECTIONS_FILE);
+    $_SESSION['permissions']=2;
+    $con = new Connections();
+    if($con->update($con_id, 'mac', $mac, null))
+      echo("Uaktualniono listę podłączeń\n");
     if($this->getDeviceType($dev_id)=="Host")
     {
       $host = new Host();

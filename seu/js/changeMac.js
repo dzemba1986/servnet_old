@@ -24,7 +24,7 @@ function changeMac(obj, id, mac)
   fields[2]['obj'].onclick = function () {generateScript()}
   fields[2]['label'] = '';
   var vtop = getElementTopPosition(obj);
-  appendForm2('Modyfikacja MAC urządzenia <br>', fields, 'zmień', 'ajax/changeMac.php', vtop, 400, 250, 140, true);
+  appendForm2('Modyfikacja MAC urządzenia <br>', fields, 'zmień', 'ajax/changeMac.php', vtop, 400, 300, 190, true);
 }
 function generateScript()
 {

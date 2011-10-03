@@ -1166,7 +1166,12 @@ class Daddy extends MysqlMain
 						unset($dostepne[$klucz]);
 		return $dostepne;	
 	}
-	
+        public function getInactHostConId()
+        {
+          $query = "SELECT d.mac, h.con_id FROM Host h INNER JOIN Device d ON (d.dev_id=h.device) WHERE h.data_uruchomienia is null ORDER BY h.con_id";
+          $result = $this->query_assoc_array($zapytanie);
+          return $result;
+        }        
 	public function sprawdzIp($ip, $virtual=false)
 	{
 		$sql = $this->connect();

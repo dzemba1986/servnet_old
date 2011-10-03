@@ -405,7 +405,6 @@ if(!defined('HOST_CLASS'))
       //jeżeli jest device i mac i mac się zmienił to generujemy
       if($action == 'update' && $dev_id > 0)
       {
-        echo "Aktualizacja";
         $this->generateDhcpFiles();
       }
       //jeżeli dodajemy hosta to generuj dhcp
@@ -519,6 +518,13 @@ if(!defined('HOST_CLASS'))
       $query = "SELECT pakiet FROM Host WHERE device='$id'";
       $result = $this->query($query);
       return $result['pakiet'];
+    }
+    public function getConId($dev_id)
+    {
+      $id=intval($dev_id);
+      $query = "SELECT con_id FROM Host WHERE device='$id'";
+      $result = $this->query($query);
+      return $result['con_id'];
     }
   }
 }

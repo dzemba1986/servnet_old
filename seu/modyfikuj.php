@@ -150,7 +150,6 @@ if(isset($_POST['dodaj']))
 		$host = new Host();
 		$sql = $host->connect();
                 $daddy = new Daddy();
-                $mac_changed = $daddy->hostMacChanged($device['dev_id'], $device['mac']);
 		mysql_query("SET AUTOCOMMIT=0", $sql);
 		mysql_query("BEGIN", $sql);
 		$host->modyfikuj($device, 
@@ -164,15 +163,6 @@ if(isset($_POST['dodaj']))
 		{
 			mysql_query("COMMIT", $sql) or die(mysql_error());
 			Daddy::error("uaktualniono hosta.");
-                        if($_POST['con_id'] && $mac_changed)
-                        {
-                          require(MYMYSQL_FILE);
-                          require(CONNECTIONS_FILE);
-                          $_SESSION['permissions']=2;
-                          $con = new Connections();
-                          if($con->update($_POST['con_id'], 'mac', $device['mac'], null))
-			    Daddy::error("uaktualniono listę podłączeń");
-                        }  
 		}
 		else
 		{
