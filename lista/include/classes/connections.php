@@ -194,7 +194,7 @@ require('../include/classes/localization.php');
             $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
             break;
           case "Internet Komfort":
-            $speed = 100;
+            $speed = 200;
             $service = 'net';
             $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
             break;
@@ -210,7 +210,7 @@ require('../include/classes/localization.php');
             $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
             break;
           case "Internet Komfort + tel":
-            $speed = 100;
+            $speed = 200;
             $service = 'net';
             $this->insertOne($start_date, $address, $mac, 'net', $info, $phone, $phone2, $phone3, $speed, $ara_id);
             $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
