@@ -1,5 +1,5 @@
 <?php 
-require('include/html/security.php');
+require('security.php');
 //*******************************
 //Test uprawnień do odczytu listy
 if($_POST['wyloguj']=="Wyloguj")

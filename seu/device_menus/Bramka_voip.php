@@ -8,14 +8,15 @@ function generateMenu($device, $menu_rows)
   $loc = $device['osiedle'].$device['nr_bloku']; 
   $ips = $daddy->getIpAddresses($device['dev_id']);
   $ip = ''; 
-  foreach($ips as $_ip)
-  {
-    if($_ip[2]=1)
+  if($ips)
+    foreach($ips as $_ip)
     {
-      $ip = $_ip[3];
-      break;
+      if($_ip[2]=1)
+      {
+        $ip = $_ip[3];
+        break;
+      }
     }
-  }
   $port = '';
   $uplinks = $daddy->getUplinkConnections($device['dev_id']);
   $port = substr($uplinks[0]['parent_port'], 1);
@@ -25,10 +26,5 @@ function generateMenu($device, $menu_rows)
   echo $menu;
 }
 ?>
-<h2>Nawigacja</h2>
-<ul>
-  <li><a href="index.php?device=<?php echo $device['dev_id'];?>">Wróć</a></li>
-  <li><a href="modyfikuj.php?device=<?php echo $device['dev_id'];?>">Odśwież</a></li>
-</ul>
 <?php
 generateMenu($device, $menu_rows);

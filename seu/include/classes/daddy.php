@@ -471,10 +471,11 @@ class Daddy extends MysqlMain
 			$opis['Adres_MAC'] = $device['mac'];
 			$opis['Nazwa'] = $device['other_name'];
 			$adresy_ip = $this->getIpAddresses($dev_id);
-			foreach($adresy_ip as $key=>$adres)
-			{
-				$opis['IP_vlan_'.$adres[0]] = $adres[1];
-			}
+                        if($adresy_ip)
+                          foreach($adresy_ip as $key=>$adres)
+                          {
+                                  $opis['IP_vlan_'.$adres[0]] = $adres[1];
+                          }
 			$zapytanie2 = "SELECT * FROM Bramka_voip WHERE device='$dev_id'";
 			$wynik2 = mysql_query($zapytanie2);
 			if(mysql_affected_rows($sql)!="1")
@@ -660,13 +661,16 @@ class Daddy extends MysqlMain
 			WHERE device='$dev_id' 
 			ORDER BY data";
 		$rekordy = $this->query_assoc_array($zapytanie);
+                if($rekordy)
+                {
 			foreach($rekordy as &$rekord)
 			{
 				$zapytanie = "SELECT CONCAT(osiedle, ' ',nr_bloku, klatka) as 'lokalizacja1' FROM Lokalizacja WHERE id='".$rekord['lokalizacja']."'";
 				$tmp = $this->query($zapytanie);
 				$rekord['lokalizacja1'] = $tmp['lokalizacja1'];
-			}
-			return $rekordy;
+                        }
+                }
+		return $rekordy;
 	}
 	public function getDeviceAddresses($dev_id)
 	{

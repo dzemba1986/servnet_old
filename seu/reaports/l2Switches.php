@@ -44,4 +44,6 @@ foreach ($switchL2 as $switch)
   </table>
 </div>
 <br>
+</body>
+</html>
 <?php

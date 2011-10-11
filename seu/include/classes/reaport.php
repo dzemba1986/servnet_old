@@ -182,6 +182,100 @@ class Reaport
       $daddy = new Daddy();
       return $daddy->query_assoc_array($query);
     }
+    public function getRipeStats($date, $order, $direction, $dc)
+    {
+      $daddy = new Daddy();
+      if(!$daddy->validLongDate($date))
+        die("Wrong date format! Should be YYYY-MM-DD");
+      $query = "SELECT *, (POW(2, (32 - netmask))-used - 2) as unused FROM Ripe_stats WHERE date='$date' ORDER BY subnet";
+      $result = $daddy->query_assoc_array($query);
+      if($result)
+      {
+        $result = $this->tuneRipe($result, $dc);
+        if($direction!="asc" && $direction!="desc")
+          $direction="asc";
+        if(!$order)
+          $order='subnet';
+        if($order==="subnet" || $order=="netmask" || $order=="unused" || $order=="used") 
+          $this->keySort(&$result, $order, $direction);
+      }
+      return $result;
+    }
+    private function keySort($array, $key, $direction)
+    {
+      for($i=0; $i< count($array); $i++)
+        for($j=$i+1; $j< count($array); $j++)
+        {
+          if($direction == "asc")
+          {
+            if($array[$i][$key] > $array[$j][$key])
+            {
+              $tmp = $array[$j];
+              $array[$j] = $array[$i];
+              $array[$i] = $tmp;
+            }
+          }
+          elseif($direction == "desc")
+          {
+            if($array[$i][$key] < $array[$j][$key])
+            {
+              $tmp = $array[$j];
+              $array[$j] = $array[$i];
+              $array[$i] = $tmp;
+            }
+          }
+        }
+      return $array;
+    }
+    private function tuneRipe($in, $dc)
+    {
+      $out = array();
+      $wtvk = 0;
+      $serwis = 0;
+      foreach($in as &$row)
+      {
+        if($row['subnet']=='46.175.41.0')
+          $row['netmask'] = 24;
+        elseif($row['subnet']=='46.175.44.128')
+        {
+          $row['subnet'] = '46.175.44.0';
+          $row['netmask'] = 24;
+        }
+        elseif(substr($row['subnet'], 0, 10)=='213.5.208.')
+        {
+          $last8 = substr($row['subnet'], 10);
+          if($last8 >= 128)
+            $serwis += $row['used'];
+          else
+            $wtvk += $row['used'];
+        }
+        $row['used'] += $dc;
+        if($row['used'] > (pow(2, 32-$row['netmask'])-2))
+            $row['used'] = pow(2, 32-$row['netmask'])-2;
+      }
+      unset($row);
+      foreach($in as &$row)
+      {
+        if(substr($row['subnet'], 0, 3)=='10.')
+          continue;
+        elseif($row['subnet']=='213.5.208.0')
+        {
+          $row['netmask'] = 25;
+          $row['used'] = $wtvk;
+        }
+        elseif($row['subnet']=='213.5.208.128')
+        {
+          $row['netmask'] = 25;
+          $row['used'] = $serwis;
+        }
+        elseif(substr($row['subnet'], 0, 10)=='213.5.208.')
+          continue;
+        $out[] = $row;
+      }
+
+      return $out;
+    }
+
     public function getVlanIpUtilization($vid, $sort='ip')
     {
       $vid = intval($vid);

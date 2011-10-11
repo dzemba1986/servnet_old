@@ -4,7 +4,8 @@
 if(!defined('NESTED'))
     define('NESTED', true);
 require('path.php');
-$session_life_time = 14400; //4 godziny
+$session_iddle_time = 72; //2 godziny nieaktywności
+$session_life_time = 28800; //8 godzin
 //$session_life_time = 60; //6 godzin
 ini_set('session.gc_maxlifetime', $session_life_time);
 $ip = $_SERVER['REMOTE_ADDR'];
@@ -69,10 +70,15 @@ if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && 
     require(ROOT.'/lista/include/forms/formularz_zaloguj.php');
     die();
   }
+  elseif((time() - $_SESSION['timestamp']) > $session_iddle_time)
+  {
+    session_destroy();
+    require(ROOT.'/lista/include/forms/formularz_zaloguj.php');
+    die();
+  }
   elseif(!headers_sent())
   {
-    //session_set_cookie_params($session_life_time);
-//    session_regenerate_id(true); 
+    $_SESSION['timestamp'] = time();
   }
 }
 elseif($_POST['login'] && $_POST['password'])
@@ -95,6 +101,7 @@ elseif($_POST['login'] && $_POST['password'])
   $_SESSION['rows_per_page'] = $user['rows_per_page'];
   $_SESSION['remember_paging'] = $user['remember_paging'];
   $_SESSION['theme'] = $user['theme'];
+  $_SESSION['timestamp'] = time();
   $location = curPageURL();
 }
 else
@@ -102,3 +109,4 @@ else
   require(ROOT.'/lista/include/forms/formularz_zaloguj.php');
   die();
 }
+

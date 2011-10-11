@@ -2,6 +2,7 @@
 require("security.php");
 require("include/formDuplicat.php");
 require("include/definitions.php");
+define('MAGAZYN', true);
 $dev_id;
 $form_action = 'magazyn.php';
 if (isset($_GET['device']))

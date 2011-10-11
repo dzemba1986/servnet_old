@@ -235,7 +235,7 @@ function wyswietlHistoria(rekordy)
 	var rekordy = rekordy.documentElement.childNodes;
 	var wezel_nadrz = document.getElementById("historia");
 	//alert(dev_id);
-	var tabela = "<div style=\"margin-top:40px; text-align:center; font-style:italic; font-weight:bolder;\">Historia</div><table class=\"opis\"><tbody>";
+	var tabela = "<div style=\"margin-top:40px; text-align:center; font-style:italic; font-weight:bolder;\">Historia</div><table class=\"historia_table\"><tbody>";
 	tabela += "<tr style=\"font-weight: bold; background:#888;\">";
 	tabela +=	"<td style=\"width:125px;\">Czas</td>";
 	tabela += 	"<td style=\"width:295px;\">Opis</td>";

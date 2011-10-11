@@ -1,6 +1,9 @@
 <?php require("security.php");
 ?>
-<?php echo $device['device_type']; ?>
+<?php echo $device['device_type'];
+$device_type = $device['device_type']; ?>
+<form action="magazyn.php" method="post">
+<table class="tabela_danych_wejsciowych">
 <tr bgcolor="#D8D8D8">
 	<td>Adres MAC *</td>
 	<td><input class="" type="text" name="mac" value="<?php echo($device['mac']); ?>" readonly>
@@ -24,15 +27,19 @@
 <tr>
   <td colspan="3">
   Historia
-  <table border="1" cellpadding="3" cellspacing="0" style="font-family: Verdana; font-size: small; font-weight: normal;">
+  <table class="historia_table">
 <?php
 $daddy = new Daddy();
 $history = $daddy->getHistoryArray($device['dev_id'], $device['lokalizacja']);
-foreach($history as $wpis)
+if($history)
 {
-  echo"<tr><td>".$wpis['data_pl']."</td><td>".$wpis['lokalizacja1']."</td><td>".$wpis['opis']."</td><td>".$wpis['autor']."</td></tr>";
+  echo"<tr><td>czas</td><td>lokalizacja</td><td>opis</td><td>autor</td></tr>";
+  foreach($history as $wpis)
+  {
+    echo"<tr><td>".$wpis['data_pl']."</td><td>".$wpis['lokalizacja1']."</td><td>".$wpis['opis']."</td><td>".$wpis['autor']."</td></tr>";
+  }
 }
 ?>  
   </table>
   </td> 
-</tr> 
+</tr>

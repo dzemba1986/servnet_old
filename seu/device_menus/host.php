@@ -26,10 +26,5 @@ function generateMenu($device)
   echo $menu;
 }
 ?>
-<h2>Nawigacja</h2>
-<ul>
-  <li><a href="index.php?device=<?php echo $device['dev_id'];?>">Wróć</a></li>
-  <li><a href="modyfikuj.php?device=<?php echo $device['dev_id'];?>">Odśwież</a></li>
-</ul>
 <?php
 generateMenu($device);
