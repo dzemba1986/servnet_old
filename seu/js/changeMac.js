@@ -1,7 +1,9 @@
 function changeMac(obj, id, mac)
 {
-  if(!id || !mac)
-    exit();
+  if(!id)
+    return;
+  if(!mac)
+    mac = '';
   var fields = new Object();
   fields[0] = new Object();
   fields[0]['name'] = 'new_mac';

@@ -1360,8 +1360,11 @@ public function changeMac($dev_id, $mac)
     require(CONNECTIONS_FILE);
     $_SESSION['permissions']=2;
     $con = new Connections();
-    if($con->update($con_id, 'mac', $mac, null))
-      echo("Uaktualniono listę podłączeń\n");
+    if($con_id)
+    {
+      if($con->update($con_id, 'mac', $mac, null))
+        echo("Uaktualniono listę podłączeń\n");
+    }
     if($this->getDeviceType($dev_id)=="Host")
     {
       $host = new Host();

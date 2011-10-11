@@ -187,7 +187,7 @@ class Reaport
       $daddy = new Daddy();
       if(!$daddy->validLongDate($date))
         die("Wrong date format! Should be YYYY-MM-DD");
-      $query = "SELECT *, (POW(2, (32 - netmask))-used - 2) as unused FROM Ripe_stats WHERE date='$date' ORDER BY subnet";
+      $query = "SELECT * FROM Ripe_stats WHERE date='$date' ORDER BY subnet";
       $result = $daddy->query_assoc_array($query);
       if($result)
       {
@@ -251,22 +251,27 @@ class Reaport
         }
         $row['used'] += $dc;
         if($row['used'] > (pow(2, 32-$row['netmask'])-2))
+        {
             $row['used'] = pow(2, 32-$row['netmask'])-2;
+        }
       }
       unset($row);
       foreach($in as &$row)
       {
+        $row['unused'] = pow(2, 32-$row['netmask'])-2 - $row['used'];
         if(substr($row['subnet'], 0, 3)=='10.')
           continue;
         elseif($row['subnet']=='213.5.208.0')
         {
           $row['netmask'] = 25;
           $row['used'] = $wtvk;
+          $row['unused'] = pow(2, 32-$row['netmask'])-2 - $row['used'];
         }
         elseif($row['subnet']=='213.5.208.128')
         {
           $row['netmask'] = 25;
           $row['used'] = $serwis;
+          $row['unused'] = pow(2, 32-$row['netmask'])-2 - $row['used'];
         }
         elseif(substr($row['subnet'], 0, 10)=='213.5.208.')
           continue;
