@@ -4,7 +4,7 @@
 if(!defined('NESTED'))
     define('NESTED', true);
 require('path.php');
-$session_iddle_time = 72; //2 godziny nieaktywności
+$session_iddle_time = 7200; //2 godziny nieaktywności
 $session_life_time = 28800; //8 godzin
 //$session_life_time = 60; //6 godzin
 ini_set('session.gc_maxlifetime', $session_life_time);

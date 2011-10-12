@@ -1,5 +1,5 @@
 <?php
-require('../include/html/security.php');
+require('../security.php');
 require('../include/classes/connections.php');
 require('../include/classes/installations.php');
 $installation = new Installations();

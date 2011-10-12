@@ -1,5 +1,5 @@
 <?php
-require("../include/html/security.php");
+require("../security.php");
 if($_SESSION['user_login']!='root')
 	die("Nie masz uprawnień do tego pliku!");
 $sql = new myMysql();

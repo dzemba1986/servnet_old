@@ -1,5 +1,5 @@
 <?php
-require('../include/html/security.php');
+require('../security.php');
 require('../include/classes/localization.php');
 require('../include/classes/installations.php');
 require('../include/classes/connections.php');
