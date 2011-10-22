@@ -108,8 +108,12 @@ class IpAddress
 		$dec = intval($dec);
                 $sufix = 0;
                 if($llo)
+                {
                   $sufix = $this->address & 0xFF;
-		$this->address += $dec + $sufix;
+                  $this->address = (($this->address +$dec) & 0xFFFFFF00) + $sufix;
+                }
+                else
+		  $this->address += $dec;
 	}
   public static function reorg($old_ip, $old_mask, $new_ip, $new_mask, $lock_file, $leave_last_octet)
   {
