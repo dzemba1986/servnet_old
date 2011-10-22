@@ -103,12 +103,15 @@ class IpAddress
                 }
 		return false;
 	}	
-	public function shift($dec)
+	public function shift($dec, $llo)
 	{
 		$dec = intval($dec);
-		$this->address += $dec;
+                $sufix = 0;
+                if($llo)
+                  $sufix = $this->address & 0xFF;
+		$this->address += $dec + $sufix;
 	}
-  public static function reorg($old_ip, $old_mask, $new_ip, $new_mask, $lock_file)
+  public static function reorg($old_ip, $old_mask, $new_ip, $new_mask, $lock_file, $leave_last_octet)
   {
     $filename = $lock_file;
     echo "$filename";
@@ -138,10 +141,12 @@ class IpAddress
     $daddy->query($query);
     $query = "BEGIN";
     $daddy->query($query);
+    $leave = false;
     foreach($ips as $ip)
     {
             $ip_obj = new IpAddress($ip['ip'], $ip['netmask']);
-            $ip_obj->shift($diff);
+            $ip_obj->shift($diff, $leave);
+            $leave = $leave_last_octet;
             $daddy->reset_start_date($ip['device']);
             $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE ip='".$ip['ip']."' AND podsiec='$podsiec'";
             if($daddy->query($query, 'Adres_ip')===false)

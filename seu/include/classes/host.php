@@ -436,8 +436,8 @@ if(!defined('HOST_CLASS'))
                   $dns_array = array();
                   $dns_array[0] = "option domain-name-servers $dns1, $dns2;";
                   $dns_array[1] = "option domain-name-servers $dns2, $dns1;";
-                  $lease_time = '86400';
-                  //$lease_time = '7200';
+//                  $lease_time = '86400';
+                  $lease_time = '7200';
                   $counter = 1;
                   foreach($subnets as $subnet)
                   {
