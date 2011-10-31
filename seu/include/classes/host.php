@@ -466,7 +466,7 @@ if(!defined('HOST_CLASS'))
 # USERS
 #######################################\n";
                                           $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
-                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.exists='1')
+                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac!='' AND d.exists='1')
                                                   LEFT JOIN Host h ON h.device=d.dev_id
                                                   LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
                                                   LEFT JOIN Teryt t ON l.ulic=t.ulic
