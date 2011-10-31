@@ -12,13 +12,22 @@ $alert = nl2br($alert);
 <div id="wslogo"><img src="css/black/images/wachowiakisyn.png"></div>
   <div style="display: inline; float: left; padding-top: 4px;"><center>
   <a href="index.php">DRZEWO URZĄDZEŃ</a>  
-  <a href="lista_ip.php">ADRESY IP</a>
-  <a href="vlan_zarzadzaj.php">VLANY</a>
-  <a href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
-  <a href="historia_ip.php">HISTORIA IP</a>&nbsp&nbsp
   </div>
   <div id="menu">
   <ul id="sddm">
+      <li><a href="#" 
+          onmouseover="mopen('m3')" 
+          onmouseout="mclosetime()">ADRESACJA</a>
+          <div id="m3" 
+              onmouseover="mcancelclosetime()" 
+              onmouseout="mclosetime()">
+          <a href="lista_ip.php">ADRESY IP</a>
+          <a href="vlan_zarzadzaj.php">VLANY</a>
+          <a href="dhcp_conf.php">DHCP</a>
+          <a href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
+          <a href="historia_ip.php">HISTORIA IP</a>
+          </div>
+      </li>
       <li><a href="#" 
           onmouseover="mopen('m2')" 
           onmouseout="mclosetime()">URZĄDZENIA</a>

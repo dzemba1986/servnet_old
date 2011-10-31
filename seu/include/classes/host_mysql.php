@@ -1,93 +1,9 @@
 <?php 
-if(!defined('HOST_CLASS'))
+if(!defined('HOST_MYSQL_CLASS'))
 {
-  define('HOST_CLASS', true);
-  class Host extends Daddy
+  define('HOST_MYSQL_CLASS', true);
+  class Host_mysql extends Daddy
   {
-    public $device;
-    public $nr_mieszkania;
-    public function dodaj($_device, $_nr_mieszkania, $_pakiet, $_data_uruchomienia, $_con_id, $_opis_historii, $_data_zakonczenia)
-    {
-      $errors = 0;
-      if($_data_uruchomienia && !$this->validDate($_data_uruchomienia))
-      {
-        Daddy::error("Nieprawidłowa data uruchomienia!");
-        $errors++;
-      }
-      if($_data_zakonczenia && !$this->validDate($_data_zakonczenia))
-      {
-        Daddy::error("Nieprawidłowa data zakonczenia!");
-        $errors++;
-      }
-      if(! $this->validMieszkanie($_nr_mieszkania))
-      {
-        Daddy::error("Nieprawidłowy numer mieszkania");
-        $errors++;
-      }
-      if(! $_pakiet)
-      {
-        Daddy::error("Nieprawidłowy pakiet");
-        $errors++;
-      }
-      if(! $_con_id)
-      {
-        //			Daddy::error("Brak id z listy podłączeń!");
-        //			$errors++;
-      }
-      if ($errors > 0)
-        exit(0);
-      $this->device = new Device();
-      $this->device->sql = &$this->sql;
-      $this->device->dodaj($_device, $this);
-      if($this->device->dev_id != -1)
-      {
-        if(defined('DEBUG'))
-          echo("<br>".$this->device->dev_id."<br>");
-        $sql = $this->connect();
-        $this->device->dev_id = mysql_real_escape_string($this->device->dev_id);
-        $_nr_mieszkania = mysql_real_escape_string(htmlspecialchars($_nr_mieszkania));
-        if($_data_uruchomienia)
-        {
-          $tmp = preg_split('/\./', mysql_real_escape_string($_data_uruchomienia));
-          $_data_uruchomienia ="'20".$tmp['2']."-".$tmp[1]."-".$tmp[0]."'";
-        }
-        else
-          $_data_uruchomienia = 'null';
-        if($_data_zakonczenia)
-        {
-          $tmp = preg_split('/\./', mysql_real_escape_string($_data_zakonczenia));
-          $_data_zakonczenia = "'20".$tmp['2']."-".$tmp[1]."-".$tmp[0]."'";
-        }
-        else
-          $_data_zakonczenia = 'null';
-        $_id_abonenta = intval($_id_abonenta);
-        $_pakiet = mysql_real_escape_string($_pakiet);
-        $_con_id = intval($_con_id);
-        $_opis_historii = mysql_real_escape_string(htmlspecialchars($_opis_historii));
-
-        if($_data_uruchomienia!='null' && $_data_zakonczenia!='null')
-        {
-          $date_u = strtotime(substr($_data_uruchomienia, 1, 10));
-          $date_z = strtotime(substr($_data_zakonczenia, 1, 10));
-          if($date_u->getTimestamp() > $date_z->getTimestamp())
-            die("Data zakończenia wcześniejsza od daty uruchomienia!");
-        }
-        $zapytanie = "INSERT INTO Host (device, nr_mieszkania, pakiet, data_uruchomienia, data_zakonczenia, con_id) 
-          VALUES('".$this->device->dev_id."', '$_nr_mieszkania', '$_pakiet',
-              $_data_uruchomienia, $_data_zakonczenia, $_con_id)";
-        if(defined('DEBUG'))
-          echo "<br>$zapytanie";
-        $wynik = $this->query($zapytanie);
-        if (!$wynik)
-          $this->device = -1;	//zakonczone niepowodzeniem
-        else
-        {
-          $this->queryLogger($zapytanie);
-          $this->loguj($this->device->dev_id, $this->device->lokalizacja, $user, $_opis_historii, 'dodaj');
-          $this->updateDhcp($this->device->dev_id, mysql_real_escape_string($_device['mac']), 'add');
-        }
-      }
-    }
     public function reset_start_date($dev_id)
     {
       $dev_id = intval($dev_id);
@@ -466,7 +382,7 @@ if(!defined('HOST_CLASS'))
 # USERS
 #######################################\n";
                                           $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
-                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
+                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.exists='1')
                                                   LEFT JOIN Host h ON h.device=d.dev_id
                                                   LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
                                                   LEFT JOIN Teryt t ON l.ulic=t.ulic
