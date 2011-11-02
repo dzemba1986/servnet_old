@@ -62,7 +62,7 @@ if(!defined('CURPAGEURL'))
 if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && $_SESSION['user_nazwisko'])
 {
   //uzytkownik juz zalogowany
-  if($_SESSION['user_login']=='monter' && $ip!="46.175.42.130" && $ip!="46.175.42.132")
+  if($_SESSION['user_login']=='monter' && $ip!="195.80.132.130" && $ip!="195.80.132.132")
    die("Nieuprawnione logowanie na konto montera!");
   if($_GET['wyloguj'])
   {
@@ -84,7 +84,7 @@ if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && 
 elseif($_POST['login'] && $_POST['password'])
 {
   //uzytkownik sie loguje
-  if($_POST['login']=='monter' && $ip!="46.175.42.130" && $ip!="46.175.42.132")
+  if($_POST['login']=='monter' && $ip!="195.80.132.130" && $ip!="195.80.132.132")
     die("Nieuprawnione logowanie na konto montera!");
   $user = getUser($_POST['login'], $_POST['password']);
   if($user == false)
