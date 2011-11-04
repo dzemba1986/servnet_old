@@ -1,0 +1,16 @@
+# Session files #
+#################
+sess_*
+
+# Conf files #
+##############
+*.conf
+
+# Lock files #
+##############
+*.lock
+
+# Vim lock files #
+##################
+
+*.swp
