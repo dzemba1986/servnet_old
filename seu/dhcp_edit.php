@@ -1,5 +1,8 @@
 <?php
 require("security.php");
+require("include/definitions.php");
+$daddy = new Daddy();
+$vlans = $daddy->getVlansArray();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html>
 <head>
@@ -16,42 +19,51 @@ require("security.php");
   <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
   <script language="JavaScript" SRC="js/menu.js"></script>
   <script language="JavaScript" SRC="js/ajax_base.js"></script>
+  <script language="JavaScript" SRC="js/dhcp.js"></script>
 </head>
 <body>
 <div id="wrap">
 <div id="header"><?php include('menu.php') ?></div>
 <div id="gora"></div>
 <div id="tresc">
-    <?php if($_GET['mode']=='subnets'): ?>
 	<div id="lewa">
-	<div id="dodaj_vlan"><form>Vlan: <input maxlength="4" id="vlan_form" type="text" name="nowy_vlan"><br><input maxlength="15" id="opis_vlanu_form" type="text" name="nowy_opis_vlanu"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajVlan();"></form></div>
-		<b>Vlany:</b>
+    <?php if($_GET['mode']=='subnets'): ?>
+	<div><b>Podsieci</b>/<a href="?mode=groups">Grupy</a></div>
+	<div id="select_vlan">
+		<form>Vlan: 
+		<select id="vlan_id" onchange="pobierzListePodsieci(this.value);">
+		<?php foreach ($vlans as $vlan) echo "<option value=\"".$vlan['vid']."\">".$vlan['vid']." (".$vlan['opis'].")</option>"; ?>
+		</select> <input type="hidden" id="vlan_hidden_form">
+		</form>
+	</div>
+	<b>Podsieci</b>
 	</div>
 	<div id="prawa">
-		<div id="dodaj_podsiec"><form><input maxlength="15" id="podsiec_form" type="text" name="nowa_podsiec">/<input maxlength="2" id="maska_form" type="text" name="nowa_maska"> Opis (max 15 znaków):<input maxlength="15" id="opis_form" type="text" name="nowy_opis_podsieci"> <input type="hidden" name="timestamp" value="<?php echo(time());?>"> Generuj DHCP:<input type="checkbox" id="dhcp_form" name="nowa_dhcp"> <input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajPodsiec();"><input type="hidden" id="vlan_hidden_form" name="vlan"></form></div>
-		<div id="nazwa_vlanu">Wybierz Vlan</div>
-		<div id="podsieci"></div>
-		<div id="usun_vlan"></div>
+		<div id="nazwa_vlanu">Wybierz Podsieć</div>
+		<div id="groups"></div>
+		<div id="subnets"></div>
 	</div>
     <?php elseif($_GET['mode']=='groups'): ?>
-	<div id="lewa">
-	<div id="dodaj_vlan"><form>Vlan: <input maxlength="4" id="vlan_form" type="text" name="nowy_vlan"><br><input maxlength="15" id="opis_vlanu_form" type="text" name="nowy_opis_vlanu"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajVlan();"></form></div>
-		<b>Vlany:</b>
+	<div><a href="?mode=subnets">Podsieci</a>/<b>Grupy</b></div>
+	<div id="add_group"><form>Nazwa: <input maxlength="10" id="group_form" type="text" name="new_group"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="addGroup();"></form></div>
+	<b>Grupy</b>
 	</div>
 	<div id="prawa">
-		<div id="dodaj_podsiec"><form><input maxlength="15" id="podsiec_form" type="text" name="nowa_podsiec">/<input maxlength="2" id="maska_form" type="text" name="nowa_maska"> Opis (max 15 znaków):<input maxlength="15" id="opis_form" type="text" name="nowy_opis_podsieci"> <input type="hidden" name="timestamp" value="<?php echo(time());?>"> Generuj DHCP:<input type="checkbox" id="dhcp_form" name="nowa_dhcp"> <input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajPodsiec();"><input type="hidden" id="vlan_hidden_form" name="vlan"></form></div>
-		<div id="nazwa_vlanu">Wybierz Vlan</div>
-		<div id="podsieci"></div>
-		<div id="usun_vlan"></div>
+		<div id="nazwa_vlanu">Wybierz Grupę</div>
+		<div id="groups"></div>
+		<div id="subnets"></div>
+		<div id="remove_group"></div>
 	</div>
     <?php endif; ?>
 </div>
 <div id="dol"></div>
 </  div>
 <!-- tutaj wstaw tresc strony -->
-<script language="JavaScript" SRC="js/vlan.js"></script>
+<!-- <script language="JavaScript" SRC="js/vlan.js"></script>
 <script type="text/javascript">
 pobierzVlany();
+-->
+
 </script>
 </body>
 </html>

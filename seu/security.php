@@ -35,7 +35,7 @@ if(!defined('CURPAGEURL'))
 if($_SESSION['user_id'] && $_SESSION['user_login'] && $_SESSION['user_imie'] && $_SESSION['user_nazwisko'])
 {
 //uzytkownik juz zalogowany
-	if($_GET['wyloguj'])
+	if(isset($_GET['wyloguj']) && $_GET['wyloguj'])
 	{
 		session_destroy();
 		require('formularz_zaloguj.php');

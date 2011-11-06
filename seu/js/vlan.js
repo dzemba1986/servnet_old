@@ -33,7 +33,7 @@ function przetwarzajVlany()
 			else
 			{	
 		//		alert("wywoluje");
-				wyswietlVlany(lista);
+				wyswietlVlany(lista, "lista_vlanow");
 			}
 		}
 	}
@@ -60,7 +60,7 @@ function wynikDodawaniaVlanu()
 		}
 	}
 }
-function wyswietlVlany(lista)
+function wyswietlVlany(lista, root)
 {
 	var vlany = lista.documentElement.childNodes;
 	//alert(vlany.length);
@@ -72,14 +72,14 @@ function wyswietlVlany(lista)
 	}
 	else if(vlany.length > 0)
 	{	
-		var stara_lista = document.getElementById("lista_vlanow");
+		var stara_lista = document.getElementById(root);
 		if (stara_lista)
 		{
 //			alert("byla stara");
 			wezel_nadrz.removeChild(stara_lista);
 		}
 		var nowa_lista = document.createElement("ul");
-		nowa_lista.id = "lista_vlanow";
+		nowa_lista.id = "root";
 		for (var i=0; i<vlany.length; i++)
 		{
 			var element = document.createElement("li");

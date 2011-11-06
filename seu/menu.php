@@ -1,6 +1,6 @@
 <?php
 $alert_file=ROOT.'/.dhcp_files/error.lock';
-$alert;
+$alert = "";
 if(file_exists($alert_file))
 {
   $file = fopen($alert_file, 'r');
@@ -23,7 +23,7 @@ $alert = nl2br($alert);
               onmouseout="mclosetime()">
           <a href="lista_ip.php">ADRESY IP</a>
           <a href="vlan_zarzadzaj.php">VLANY</a>
-          <a href="dhcp_conf.php">DHCP</a>
+          <a href="dhcp_edit.php?mode=subnets">DHCP</a>
           <a href="mieszkania_zarzadzaj.php">ZAKRESY PRZEŁĄCZNIKÓW</a>
           <a href="historia_ip.php">HISTORIA IP</a>
           </div>
