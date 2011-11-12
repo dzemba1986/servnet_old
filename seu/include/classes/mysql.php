@@ -1,8 +1,12 @@
 <?php
-class MysqlSeu extends MysqlMain
+if(!defined('MYSQL_SEU_CLASS'))
 {
-  public function connect()
+  define('MYSQL_SEU_CLASS', true);
+  class MysqlSeu extends MysqlMain
   {
-    return $this->connect_pl('localhost', 'admin', 'WyGn2jEw0', 'siec');
+    public function connect()
+    {
+      return $this->connect_pl('localhost', 'admin', 'WyGn2jEw0', 'siec');
+    }
   }
 }

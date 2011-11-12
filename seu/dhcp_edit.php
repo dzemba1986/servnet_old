@@ -1,6 +1,7 @@
 <?php
 require("security.php");
 require("include/definitions.php");
+require("include/classes/dhcp.php");
 $daddy = new Daddy();
 $vlans = $daddy->getVlansArray();
 ?>
@@ -59,10 +60,8 @@ $vlans = $daddy->getVlansArray();
 <div id="dol"></div>
 </  div>
 <!-- tutaj wstaw tresc strony -->
-<!-- <script language="JavaScript" SRC="js/vlan.js"></script>
 <script type="text/javascript">
-pobierzVlany();
--->
+pobierzListePodsieci(1);
 
 </script>
 </body>
