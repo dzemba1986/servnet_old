@@ -157,7 +157,10 @@ foreach($wynik as $wiersz)
   if(!$wiersz['info_boa'])
     $info = "<div class=\"ara_id\" onclick=\"setInfo(this, '".$wiersz['id']."', '".$wiersz['address']."', '')\">...</div>";
   else
-    $info = "<div class=\"ara_id\" onclick=\"setInfo(this, '".$wiersz['id']."', '".$wiersz['address']."', '".$wiersz['info_boa']."')\">".$wiersz['info_boa']."</div>";
+  {
+    $info_boa = preg_replace('/[\n\r]{1,}/', '<br>', $wiersz['info_boa']);
+    $info = "<div class=\"ara_id\" onclick=\"setInfo(this, '".$wiersz['id']."', '".$wiersz['address']."', '".$info_boa."')\">".$info_boa."</div>";
+  }
   $rowcolor;
   $wina_abonenta ="#CBD665";
   if($wiersz['_net_date']=='00.00.00')
