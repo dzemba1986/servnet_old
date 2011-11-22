@@ -38,7 +38,7 @@ if(!defined('DHCP_CLASS'))
       $g_name = mysql_real_escape_string($g_name);
       $g_desc = mysql_real_escape_string($g_desc);
       $query = "INSERT INTO Dhcp_group (group_name, group_desc) VALUES('$g_name', '$g_desc')";
-      return $sql->query_update($query, , 'Dhcp_group', 'group_id'); 
+      return $sql->query_update($query,'', 'Dhcp_group', 'group_id'); 
     }
     public function setGroup($g_id, $g_name, $g_desc)
     {
@@ -50,7 +50,7 @@ if(!defined('DHCP_CLASS'))
       $g_desc = mysql_real_escape_string($g_desc);
       $g_id = intval($g_id);
       $query = "UPDATE Dhcp_group SET group_name='$g_name', group_desc='$g_desc' WHERE group_id=$g_id";
-      return $sql->query_update($query, , 'Dhcp_group', 'group_id'); 
+      return $sql->query_update($query, '', 'Dhcp_group', 'group_id'); 
     }
     public function delGroup($g_id)
     {
@@ -60,7 +60,7 @@ if(!defined('DHCP_CLASS'))
         return false;
       $g_id = intval($g_id);
       $query = "DELETE FROM Dhcp_group WHERE group_id=$g_id";
-      return $sql->query_update($query, , 'Dhcp_group', 'group_id'); 
+      return $sql->query_update($query, '', 'Dhcp_group', 'group_id'); 
     }
     public function getSubnet($s_id)
     {}
