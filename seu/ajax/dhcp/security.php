@@ -1,0 +1,1 @@
+/home/ftp/www/servnet/seu/ajax/security.php

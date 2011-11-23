@@ -32,30 +32,94 @@ function pobierzGrupy()
 	//alert("wywoluje z adresem ");
 	if(XMLHttpRequestObject)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/dhcp/getGroups.php');
+		XMLHttpRequestObject.open("POST", 'ajax/dhcp/groupsGet.php');
 		XMLHttpRequestObject.onreadystatechange = przetwarzajGrupy;
 		XMLHttpRequestObject.send(null);
 	}
 }
+function przetwarzajGrupy()
+{
+	if(XMLHttpRequestObject)
+	{
+		if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200)
+		{
+			var lista = XMLHttpRequestObject.responseXML;
+			if(!lista || !lista.documentElement)
+			{
+				alert("nic nie doszlo"+XMLHttpRequestObject.responseText);
+			}
+			else if(lista.documentElement.nodeName == "parsererror")
+			{
+				alert("blad parsera"+XMLHttpRequestObject.responseText);
+			}
+			else
+			{	
+				wyswietlGrupy(lista, 'grupy_lista');
+			}
+		}
+	}
+}
+function wyswietlGrupy(lista, root)
+{
+	var grupy = lista.documentElement.childNodes;
+	//alert(grupy.length);
+	var wezel_nadrz = document.getElementById("lewa");
+	if(!wezel_nadrz)
+	{
+		alert("nie odnaleziono wezla nadrzednego");
+		exit(0);	
+	}
+	else if(grupy.length > 0)
+	{	
+		var stara_lista = document.getElementById(root);
+		if (stara_lista)
+		{
+//			alert("byla stara");
+			wezel_nadrz.removeChild(stara_lista);
+		}
+		var nowa_lista = document.createElement("ul");
+		nowa_lista.id = root;
+		for (var i=0; i<grupy.length; i++)
+		{
+			var element = document.createElement("li");
+			element.className = 'vlan_lewa';
+			if(grupy[i].childNodes[1].firstChild)
+				element.title = grupy[i].childNodes[1].firstChild.nodeValue;
+			var g_id = grupy[i].firstChild.firstChild.nodeValue;
+			var g_name = grupy[i].childNodes[1].firstChild.nodeValue;
+			var text = document.createTextNode(g_name);
+			element.appendChild(text);
+	//		element.onclick = function() {pobierz(this.firstChild.nodeValue)}
+	//		alert(g_id);
+			nowa_lista.appendChild(element);
+		}
+		
+	//	alert(wezel_nadrz);
+		wezel_nadrz.appendChild(nowa_lista);
+	}
+	else alert(grupy.length);
+}
+
+
+
 function dodajGrupe()
 {
 	//alert("wywoluje z adresem ");
 	if(XMLHttpRequestObject)
 	{
-		var vid = document.getElementById("vlan_form").value;
-		var opis = document.getElementById("opis_vlanu_form").value;
-		XMLHttpRequestObject.open("POST", 'ajax/addVlan.php?vid='+vid+'&opis='+opis);
-		XMLHttpRequestObject.onreadystatechange = wynikDodawaniaVlanu;
+	        var group = document.getElementById("group_form").value;
+		XMLHttpRequestObject.open("POST", 'ajax/dhcp/groupAdd.php?g_name='+group+'&g_desc='+group);
+		XMLHttpRequestObject.onreadystatechange = wynikDodawaniaGrupy;
 		XMLHttpRequestObject.send(null);
 	}
 }
-function usunGrupe(vid)
+function usunGrupe(g_id)
 {
 	//alert("wywoluje z adresem ");
 	if(XMLHttpRequestObject)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/removeVlan.php?vid='+vid);
-		XMLHttpRequestObject.onreadystatechange = wynikUsuwaniaVlanu;
+		XMLHttpRequestObject.open("POST", 'ajax/groupDel.php?g_id='+g_id);
+		XMLHttpRequestObject.onreadystatechange = wynikUsuwaniaGrupy;
 		XMLHttpRequestObject.send(null);
 	}
 }

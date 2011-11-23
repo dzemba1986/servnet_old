@@ -20,7 +20,8 @@ $vlans = $daddy->getVlansArray();
   <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
   <script language="JavaScript" SRC="js/menu.js"></script>
   <script language="JavaScript" SRC="js/ajax_base.js"></script>
-  <script language="JavaScript" SRC="js/dhcp.js"></script>
+  <script language="JavaScript" SRC="js/subnet.js"></script>
+  <script language="JavaScript" SRC="js/dhcp/groups.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -46,7 +47,7 @@ $vlans = $daddy->getVlansArray();
 	</div>
     <?php elseif($_GET['mode']=='groups'): ?>
 	<div><a href="?mode=subnets">Podsieci</a>/<b>Grupy</b></div>
-	<div id="add_group"><form>Nazwa: <input maxlength="10" id="group_form" type="text" name="new_group"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="addGroup();"></form></div>
+	<div id="add_group"><form>Nazwa: <input maxlength="10" id="group_form" type="text" name="new_group"><br><input class="submit" type="button" name="dodaj" value="dodaj" onclick="dodajGrupe();"></form></div>
 	<b>Grupy</b>
 	</div>
 	<div id="prawa">
@@ -61,7 +62,11 @@ $vlans = $daddy->getVlansArray();
 </  div>
 <!-- tutaj wstaw tresc strony -->
 <script type="text/javascript">
-pobierzListePodsieci(1);
+<?php if($_GET['mode']=='subnets'): ?>
+  pobierzListePodsieci(1);
+<?php else: ?>
+  pobierzGrupy();
+<?php endif; ?>
 
 </script>
 </body>
