@@ -20,6 +20,7 @@ $vlans = $daddy->getVlansArray();
   <link rel="stylesheet" href="css/black/naglowek.css" type="text/css" >
   <script language="JavaScript" SRC="js/menu.js"></script>
   <script language="JavaScript" SRC="js/ajax_base.js"></script>
+  <script language="JavaScript" SRC="js/dhcp/options.js"></script>
   <script language="JavaScript" SRC="js/subnet.js"></script>
   <script language="JavaScript" SRC="js/dhcp/groups.js"></script>
 </head>

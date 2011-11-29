@@ -8,7 +8,7 @@ if(!defined('DHCP_CLASS'))
   {
     public function getGroups()
     {
-      $query = "SELECT * FROM Dhcp_group ORDER BY group_name";
+      $query = "SELECT * FROM Dhcp_group WHERE group_id!=1 ORDER BY group_name";
       $sql = new MysqlSeu();
       $sql->connect();
       return $sql->query_assoc_array($query); 
@@ -62,10 +62,31 @@ if(!defined('DHCP_CLASS'))
       $query = "DELETE FROM Dhcp_group WHERE group_id=$g_id";
       return $sql->query_update($query, '', 'Dhcp_group', 'group_id'); 
     }
-    public function getSubnet($s_id)
-    {}
-    public function getOptions($g_id, $s_id)
-    {}
+    public function getGroupOptions($g_id, $s_id)
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      $g_id = intval($g_id);
+      $s_id = intval($s_id);
+      $query;
+      if($g_id==1 && $s_id && $s_id!=1)
+        $query = "SELECT * FROM Dhcp_group_option WHERE subnet=$s_id ORDER BY `option`";
+      elseif($s_id==1 && $g_id && $g_id!=1)
+        $query = "SELECT * FROM Dhcp_group_option WHERE dhcp_group=$g_id ORDER BY `option`";
+      else
+      {
+        echo "Błędne parametry";
+        return false;
+      }
+      return $sql->query_assoc_array($query); 
+    }
+    public function getOptions()
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      $query = "SELECT * FROM Dhcp_option ORDER BY opt_name";
+      return $sql->query_assoc_array($query); 
+    }
   }
   Class DhcpOption
   {

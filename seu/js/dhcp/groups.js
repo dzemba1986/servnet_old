@@ -89,7 +89,8 @@ function wyswietlGrupy(lista, root)
 			var g_name = grupy[i].childNodes[1].firstChild.nodeValue;
 			var text = document.createTextNode(g_name);
 			element.appendChild(text);
-	//		element.onclick = function() {pobierz(this.firstChild.nodeValue)}
+                        var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title);};}                         }
+			element.onclick = createClickHandler('1', g_id, g_name);
 	//		alert(g_id);
 			nowa_lista.appendChild(element);
 		}

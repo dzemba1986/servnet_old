@@ -70,9 +70,9 @@ function wyswietlListePodsieci(lista, root)
 			opis += ' (' + podsieci[i].childNodes[4].firstChild.nodeValue + ')';
 			var text = document.createTextNode(opis);
 			element.appendChild(text);
-                        var createClickHandler = function(s_id, s_addr, s_mask, s_desc){return function(){ {pobierzDhcpPodsiec(s_id, s_addr, s_mask, s_desc);};}                         }
+                        var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title);};}                         }
 
-			element.onclick = createClickHandler(subnet_id, subnet_addr, subnet_mask, subnet_desc);
+			element.onclick = createClickHandler(subnet_id, '1', opis);
 	//		alert(vid);
 	//		wezel_nadrz.appendChild(element);
 			nowa_lista.appendChild(element);

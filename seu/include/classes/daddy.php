@@ -533,7 +533,7 @@ class Daddy extends MysqlMain
 			exit(0);
 		}
 		$vlan = mysql_real_escape_string($vlan);
-		$zapytanie = "SELECT * FROM Podsiec WHERE vlan='$vlan' ORDER BY opis";
+		$zapytanie = "SELECT * FROM Podsiec WHERE vlan='$vlan' AND id!=1 ORDER BY opis";
 		$wynik = mysql_query($zapytanie);
 		$wynik_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><lista>";
 		if ($wynik)
