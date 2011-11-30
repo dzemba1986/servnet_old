@@ -73,6 +73,8 @@ function wyswietlOpcjeDhcp(lista, root)
           titlebox.appendChild(document.createTextNode("Podsieć: "+title));
         else if(s_id==1)
           titlebox.appendChild(document.createTextNode("Grupa: "+title));
+
+
 	//alert(grupy.length);
 	var wezel_nadrz = document.getElementById("prawa");
 	if(!wezel_nadrz)
@@ -88,6 +90,31 @@ function wyswietlOpcjeDhcp(lista, root)
         }
         var nowa_lista = document.createElement("div");
         nowa_lista.id = root;
+
+        var labels = document.createElement('div');
+        labels.style.clear = "both";
+        var opt_lbl = document.createElement('div');
+        opt_lbl.style.cssFloat = "left";
+        opt_lbl.style.display = "inline";
+        opt_lbl.style.width = '240px';
+        opt_lbl.appendChild(document.createTextNode('Nazwa opcji'));
+        var val_lbl = document.createElement('div');
+        val_lbl.style.cssFloat = "left";
+        val_lbl.style.display = "inline";
+        val_lbl.style.width = '250px';
+        val_lbl.appendChild(document.createTextNode('Wartość'));
+        var weight_lbl = document.createElement('div');
+        weight_lbl.style.cssFloat = "left";
+        weight_lbl.style.display = "inline";
+        weight_lbl.style.width = '100px';
+        weight_lbl.appendChild(document.createTextNode('Waga (1-255)'));
+
+        labels.appendChild(opt_lbl);
+        labels.appendChild(val_lbl);
+        labels.appendChild(weight_lbl);
+        
+        nowa_lista.appendChild(labels);
+
         nowa_lista.appendChild(generateOptionRow('', s_id, g_id, '', opcje, '', '', true));
         for (var i=0; i<opcje_grupy.length; i++)
         {
@@ -125,10 +152,12 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
     o_weight.setAttribute('name', 'o_weight');
     o_weight.setAttribute('id', 'o_weight'+i);
     o_weight.setAttribute('value', weight);
+    o_weight.style.width = '50px';
 
     var o_option = document.createElement('select');
     o_option.setAttribute('name', 'o_option');
     o_option.setAttribute('id', 'o_option'+i);
+    o_option.style.width = '240px';
     for(var j=0; j<options.length; j++)
     {
       var opt = document.createElement('option');
@@ -144,6 +173,7 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
     o_value.setAttribute('name', 'o_value');
     o_value.setAttribute('id', 'o_value'+i);
     o_value.setAttribute('value', value);
+    o_value.style.width = '250px';
 
     element.appendChild(o_subnet);
     element.appendChild(o_group);
@@ -153,28 +183,25 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
 
     if(!add)
     {
-      var o_submit = document.createElement('input');
-      o_submit.setAttribute('type', 'submit');
+      var o_submit = document.createElement('button');
       o_submit.setAttribute('name', 'o_submit');
       o_submit.setAttribute('id', 'o_submit'+i);
-      o_submit.setAttribute('value', 'o_submit'+i);
+      o_submit.appendChild(document.createTextNode('popraw'));
 
-      var o_rm = document.createElement('input');
-      o_rm.setAttribute('type', 'submit');
+      var o_rm = document.createElement('button');
       o_rm.setAttribute('name', 'o_rm');
       o_rm.setAttribute('id', 'o_rm'+i);
-      o_rm.setAttribute('value', 'o_rm');
+      o_rm.appendChild(document.createTextNode('usuń'));
 
       element.appendChild(o_rm);
       element.appendChild(o_submit);
     }
     else
     {
-      var o_submit = document.createElement('input');
-      o_submit.setAttribute('type', 'submit');
+      var o_submit = document.createElement('button');
       o_submit.setAttribute('name', 'o_submit');
       o_submit.setAttribute('id', 'o_submit'+i);
-      o_submit.setAttribute('value', 'add');
+      o_submit.appendChild(document.createTextNode('dodaj'));
       o_submit.onclick = function() {dodajOpcjeDhcp(this.parentNode);};
       element.appendChild(o_submit);
     }
@@ -192,7 +219,7 @@ function dodajOpcjeDhcp(parentDiv)
           var o_value = parentDiv.childNodes[3].value; 
           var o_weight = parentDiv.childNodes[4].value; 
           var group = document.getElementById("group_form").value;
-          XMLHttpRequestObjectOptions.open("POST", 'ajax/dhcp/groupOptionAdd.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight);
+          XMLHttpRequestObjectOptions.open("POST", 'ajax/dhcp/optionAdd.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight);
           XMLHttpRequestObjectOptions.onreadystatechange = wynikDodawaniaOpcjeDhcp;
           XMLHttpRequestObjectOptions.send(null);
 	}

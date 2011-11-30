@@ -80,7 +80,7 @@ if(!defined('DHCP_CLASS'))
       }
       return $sql->query_assoc_array($query); 
     }
-    public function getOptions()
+    public static function getOptions()
     {
       $sql = new MysqlSeu();
       $sql->connect();
@@ -93,10 +93,125 @@ if(!defined('DHCP_CLASS'))
     public static function get($g_id, $s_id, $option)
     {}
     public static function add($g_id, $s_id, $option, $value, $weight)
-    {}
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      if(!DhcpOption::checkOption($option, $value))
+        return false;
+      if(!DhcpOption::checkParents($g_id, $s_id))
+        return false;
+      if(!DhcpOption::checkWeight($weight))
+        return false;
+      $query = "INSERT INTO Dhcp_group_option (dhcp_group, subnet, weight, option, value) VALUES('$g_id', '$s_id', '$weight', '$option', '$value')";
+      return $sql->query_update($query,'', 'Dhcp_group_option'); 
+    }
     public static function set($g_id, $s_id, $option, $value, $weight)
     {}
     public static function del($g_id, $s_id, $option)
     {}
+    private static function checkParents($g_id, $s_id)
+    {
+      //group and subnet values will be checked by MySQL database
+      //here we will only chech if those values are nuneric and if one is '1' and other is '>1'
+      if(($g_id==1 && DhcpOption::isInteger($s_id) && $s_id>1) || ($s_id==1 && DhcpOption::isInteger($g_id) && $g_id>1))
+        return true;
+      return false;
+    }
+
+    private static function checkWeight($weight)
+    {
+      //weight must be between 1 and 255
+      if(DhcpOption::isInteger($weight) && $weight>=1 && $weight<=255)
+      {
+        echo "Nieprawidłowa wartość wagi!";
+        return true;
+      }
+      return false;
+    }
+
+    private static function checkOption($option, $value)
+    {
+      //we will check if this option exists in database and if its the correct type 
+      if(!DhcpOption::isInteger($option))
+      {
+        echo "Nieprawidłowa opcja!";
+        return false;
+      }
+      if(!$value)
+      {
+        echo "Puste pole wartości!";
+        return false;
+      }
+      $options = Dhcp::getOptions();
+      foreach($options as $base_opt)
+      {
+        if($base_opt['opt_id']==$option)
+        {
+          //option exists now must check value type
+          if(DhcpOption::checkDataType($base_opt['opt_type'], $value))
+            return true;
+          echo "Błedna wartość parametru!";
+          return false;
+        }
+      }
+    }
+    private function checkDataType($type, $value)
+    {
+      switch($type)
+      {
+        case 'boolean':
+          if($value!=0 && $value!=1)
+            return false;
+          break;
+        case 'flag':
+          if($value!='on' && $value!='off')
+            return false;
+          break;
+        case 'int32':
+          if(!DhcpOption::isInteger($value) || abs($value) > 2147483647)
+            return false;
+          break;
+        case 'ip-address':
+          include(SEU_ABSOLUTE.'/include/classes/daddy.php');
+          $daddy = new Daddy();
+          if(!$daddy->sprawdz_ip($value))
+            return false;
+          break;
+        case 'string':
+          if(!DhcpOption::isAscii($value))
+            return false;
+          break;
+        case 'text':
+          if(!DhcpOption::isAscii($value))
+            return false;
+          break;
+        case 'uint16':
+          if(!DhcpOption::isInteger($value) || $value > 65535 || $value < 0)
+            return false;
+          break;
+        case 'uint32':
+          if(!DhcpOption::isInteger($value) || $value > 4294967295 || $value < 0)
+            return false;
+          break;
+        case 'uint8':
+          if(!DhcpOption::isInteger($value) || $value > 255 || $value < 0)
+            return false;
+          break;
+        default:
+          return false;
+          break;
+      }
+      return true;
+    }
+    private static function isAscii($string)
+    {
+      $mask = '/^\b[0-9a-zA-Z_\.]*\b$/';
+      return preg_match($mask, $string);
+    }
+    private static function isInteger($val)
+    {
+      $mask = '/^\b[1-9][0-9]*\b$/';
+      return preg_match($mask, $val);
+    }
   }
 }
