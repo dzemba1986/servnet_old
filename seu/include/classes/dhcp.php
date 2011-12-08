@@ -96,19 +96,45 @@ if(!defined('DHCP_CLASS'))
     {
       $sql = new MysqlSeu();
       $sql->connect();
-      if(!DhcpOption::checkOption($option, $value))
+      if(!DhcpOption::checkOption($option, $value, true))
         return false;
       if(!DhcpOption::checkParents($g_id, $s_id))
         return false;
       if(!DhcpOption::checkWeight($weight))
         return false;
-      $query = "INSERT INTO Dhcp_group_option (dhcp_group, subnet, weight, option, value) VALUES('$g_id', '$s_id', '$weight', '$option', '$value')";
-      return $sql->query_update($query,'', 'Dhcp_group_option'); 
+      $query = "INSERT INTO Dhcp_group_option (`dhcp_group`, `subnet`, `weight`, `option`, `value`) VALUES('$g_id', '$s_id', '$weight', '$option', '$value')";
+      return $sql->query_update($query,'', 'Dhcp_group_option', ''); 
     }
     public static function set($g_id, $s_id, $option, $value, $weight)
-    {}
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      if(!DhcpOption::checkOption($option, $value, true))
+        return false;
+      if(!DhcpOption::checkParents($g_id, $s_id))
+        return false;
+      if(!DhcpOption::checkWeight($weight))
+        return false;
+      $query = "UPDATE Dhcp_group_option SET `weight`='$weight', `value`='$value' WHERE `dhcp_group`='$g_id' AND `subnet`='$s_id' AND `option`='$option'";
+      if($g_id!=1)
+        return $sql->query_update($query, $g_id, 'Dhcp_group_option', 'dhcp_group'); 
+      else
+        return $sql->query_update($query, $s_id, 'Dhcp_group_option', 'subnet'); 
+    }
     public static function del($g_id, $s_id, $option)
-    {}
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      if(!DhcpOption::checkOption($option, false, false))
+        return false;
+      if(!DhcpOption::checkParents($g_id, $s_id))
+        return false;
+      $query = "DELETE FROM Dhcp_group_option WHERE `dhcp_group`=$g_id AND `subnet`=$s_id AND `option`=$option";
+      if($g_id!=1)
+        return $sql->query_update($query, $g_id, 'Dhcp_group_option', 'dhcp_group'); 
+      else
+        return $sql->query_update($query, $s_id, 'Dhcp_group_option', 'subnet'); 
+    }
     private static function checkParents($g_id, $s_id)
     {
       //group and subnet values will be checked by MySQL database
@@ -123,13 +149,13 @@ if(!defined('DHCP_CLASS'))
       //weight must be between 1 and 255
       if(DhcpOption::isInteger($weight) && $weight>=1 && $weight<=255)
       {
-        echo "Nieprawidłowa wartość wagi!";
         return true;
       }
+      echo "Nieprawidłowa wartość wagi!";
       return false;
     }
 
-    private static function checkOption($option, $value)
+    private static function checkOption($option, $value, $check_val=true)
     {
       //we will check if this option exists in database and if its the correct type 
       if(!DhcpOption::isInteger($option))
@@ -137,7 +163,7 @@ if(!defined('DHCP_CLASS'))
         echo "Nieprawidłowa opcja!";
         return false;
       }
-      if(!$value)
+      if(!$value && $check_val)
       {
         echo "Puste pole wartości!";
         return false;
@@ -148,7 +174,7 @@ if(!defined('DHCP_CLASS'))
         if($base_opt['opt_id']==$option)
         {
           //option exists now must check value type
-          if(DhcpOption::checkDataType($base_opt['opt_type'], $value))
+          if(!$check_val || DhcpOption::checkDataType($base_opt['opt_type'], $value))
             return true;
           echo "Błedna wartość parametru!";
           return false;

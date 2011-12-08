@@ -86,7 +86,7 @@ function wyswietlGrupy(lista, root)
 			if(grupy[i].childNodes[1].firstChild)
 				element.title = grupy[i].childNodes[1].firstChild.nodeValue;
 			var g_id = grupy[i].firstChild.firstChild.nodeValue;
-			var g_name = grupy[i].childNodes[1].firstChild.nodeValue;
+			var g_name = 'Grupa: '+grupy[i].childNodes[1].firstChild.nodeValue;
 			var text = document.createTextNode(g_name);
 			element.appendChild(text);
                         var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title);};}                         }

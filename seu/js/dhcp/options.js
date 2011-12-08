@@ -15,17 +15,57 @@ function getXMLHttpRequestObjectOptions()
 		}
 	}
 }
-function wynikDodawaniaOpcjeDhcp()
+function dodajOpcjeDhcp(parentDiv)
 {
-	if(XMLHttpRequestObjectOptions)
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectOptionAdd)
 	{
-		if(XMLHttpRequestObjectOptions.readyState == 4 && XMLHttpRequestObjectOptions.status == 200)
-		{
-			var wynik = XMLHttpRequestObjectOptions.responseText;
-			alert(wynik);
-//			pobierzOpcjeDhcp();
-		}
-	}
+          var o_subnet = parentDiv.childNodes[0].value; 
+          var o_group = parentDiv.childNodes[1].value; 
+          var o_id = parentDiv.childNodes[2].value; 
+          var o_value = parentDiv.childNodes[3].value; 
+          var o_weight = parentDiv.childNodes[4].value; 
+          XMLHttpRequestObjectOptionAdd.open("POST", 'ajax/dhcp/optionAdd.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight, false);
+	  XMLHttpRequestObjectOptionAdd.send(null);
+	  var wynik = XMLHttpRequestObjectOptionAdd.responseText;
+          alert(wynik);
+          var title = document.getElementById('nazwa_vlanu').firstChild.textContent;
+	  pobierzOpcjeDhcp(o_subnet, o_group, title);
+        }
+}
+function zmienOpcjeDhcp(parentDiv)
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectOptionAdd)
+	{
+          var o_subnet = parentDiv.childNodes[0].value; 
+          var o_group = parentDiv.childNodes[1].value; 
+          var o_id = parentDiv.childNodes[2].value; 
+          var o_value = parentDiv.childNodes[3].value; 
+          var o_weight = parentDiv.childNodes[4].value; 
+          XMLHttpRequestObjectOptionAdd.open("POST", 'ajax/dhcp/optionSet.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight, false);
+	  XMLHttpRequestObjectOptionAdd.send(null);
+	  var wynik = XMLHttpRequestObjectOptionAdd.responseText;
+          alert(wynik);
+          var title = document.getElementById('nazwa_vlanu').firstChild.textContent;
+	  pobierzOpcjeDhcp(o_subnet, o_group, title);
+        }
+}
+function usunOpcjeDhcp(parentDiv)
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectOptionAdd)
+	{
+          var o_subnet = parentDiv.childNodes[0].value; 
+          var o_group = parentDiv.childNodes[1].value; 
+          var o_id = parentDiv.childNodes[2].value; 
+          XMLHttpRequestObjectOptionAdd.open("POST", 'ajax/dhcp/optionDel.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id, false);
+	  XMLHttpRequestObjectOptionAdd.send(null);
+	  var wynik = XMLHttpRequestObjectOptionAdd.responseText;
+          alert(wynik);
+          var title = document.getElementById('nazwa_vlanu').firstChild.textContent;
+	  pobierzOpcjeDhcp(o_subnet, o_group, title);
+        }
 }
 function pobierzOpcjeDhcp(s_id, g_id, title)
 {
@@ -69,10 +109,7 @@ function wyswietlOpcjeDhcp(lista, root)
         var title = parents[2].firstChild.nodeValue;
         var titlebox = document.getElementById('nazwa_vlanu');
         titlebox.removeChild(titlebox.firstChild);
-        if(g_id==1)
-          titlebox.appendChild(document.createTextNode("Podsieć: "+title));
-        else if(s_id==1)
-          titlebox.appendChild(document.createTextNode("Grupa: "+title));
+        titlebox.appendChild(document.createTextNode(title));
 
 
 	//alert(grupy.length);
@@ -158,6 +195,8 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
     o_option.setAttribute('name', 'o_option');
     o_option.setAttribute('id', 'o_option'+i);
     o_option.style.width = '240px';
+    if(!add)
+      o_option.setAttribute('disabled', 'disabled');
     for(var j=0; j<options.length; j++)
     {
       var opt = document.createElement('option');
@@ -187,11 +226,13 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
       o_submit.setAttribute('name', 'o_submit');
       o_submit.setAttribute('id', 'o_submit'+i);
       o_submit.appendChild(document.createTextNode('popraw'));
+      o_submit.onclick = function() {zmienOpcjeDhcp(this.parentNode);};
 
       var o_rm = document.createElement('button');
       o_rm.setAttribute('name', 'o_rm');
       o_rm.setAttribute('id', 'o_rm'+i);
       o_rm.appendChild(document.createTextNode('usuń'));
+      o_rm.onclick = function() {usunOpcjeDhcp(this.parentNode);};
 
       element.appendChild(o_rm);
       element.appendChild(o_submit);
@@ -208,42 +249,5 @@ function generateOptionRow(i, subnet, group, option, options, weight, value, add
 
     return element;
 }
-function dodajOpcjeDhcp(parentDiv)
-{
-	//alert("wywoluje z adresem ");
-	if(XMLHttpRequestObjectOptions)
-	{
-          var o_subnet = parentDiv.childNodes[0].value; 
-          var o_group = parentDiv.childNodes[1].value; 
-          var o_id = parentDiv.childNodes[2].value; 
-          var o_value = parentDiv.childNodes[3].value; 
-          var o_weight = parentDiv.childNodes[4].value; 
-          var group = document.getElementById("group_form").value;
-          XMLHttpRequestObjectOptions.open("POST", 'ajax/dhcp/optionAdd.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight);
-          XMLHttpRequestObjectOptions.onreadystatechange = wynikDodawaniaOpcjeDhcp;
-          XMLHttpRequestObjectOptions.send(null);
-	}
-}
-function usunOpcjeDhcp(g_id)
-{
-	//alert("wywoluje z adresem ");
-	if(XMLHttpRequestObjectOptions)
-	{
-		XMLHttpRequestObjectOptions.open("POST", 'ajax/groupDel.php?g_id='+g_id);
-		XMLHttpRequestObjectOptions.onreadystatechange = wynikUsuwaniaOpcjeDhcp;
-		XMLHttpRequestObjectOptions.send(null);
-	}
-}
-function wynikUsuwaniaVlanu()
-{
-	if(XMLHttpRequestObjectOptions)
-	{
-		if(XMLHttpRequestObjectOptions.readyState == 4 && XMLHttpRequestObjectOptions.status == 200)
-		{
-			var wynik = XMLHttpRequestObjectOptions.responseText;
-			alert(wynik);
-			pobierzVlany();
-		}
-	}
-}
 var XMLHttpRequestObjectOptions = getXMLHttpRequestObjectOptions();
+var XMLHttpRequestObjectOptionAdd = getXMLHttpRequestObjectOptions();
