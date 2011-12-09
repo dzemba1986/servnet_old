@@ -17,46 +17,37 @@ function getXMLHttpRequestObject()
 }
 function wynikDodawaniaGrupy()
 {
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectG4)
 	{
-		if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200)
+		if(XMLHttpRequestObjectG4.readyState == 4 && XMLHttpRequestObjectG4.status == 200)
 		{
-			var wynik = XMLHttpRequestObject.responseText;
+			var wynik = XMLHttpRequestObjectG4.responseText;
 			alert(wynik);
 			pobierzGrupy();
 		}
 	}
 }
+function pobierzListeGrup()
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectG1)
+	{
+		XMLHttpRequestObjectG1.open("POST", 'ajax/dhcp/groupsGet.php', false);
+	        XMLHttpRequestObjectG1.send(null);
+	        var wynik = XMLHttpRequestObjectG1.responseXML;
+	        var grupy = wynik.documentElement.childNodes;
+                return grupy;
+	}
+}
 function pobierzGrupy()
 {
 	//alert("wywoluje z adresem ");
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectG2)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/dhcp/groupsGet.php');
-		XMLHttpRequestObject.onreadystatechange = przetwarzajGrupy;
-		XMLHttpRequestObject.send(null);
-	}
-}
-function przetwarzajGrupy()
-{
-	if(XMLHttpRequestObject)
-	{
-		if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200)
-		{
-			var lista = XMLHttpRequestObject.responseXML;
-			if(!lista || !lista.documentElement)
-			{
-				alert("nic nie doszlo"+XMLHttpRequestObject.responseText);
-			}
-			else if(lista.documentElement.nodeName == "parsererror")
-			{
-				alert("blad parsera"+XMLHttpRequestObject.responseText);
-			}
-			else
-			{	
-				wyswietlGrupy(lista, 'grupy_lista');
-			}
-		}
+		XMLHttpRequestObjectG2.open("POST", 'ajax/dhcp/groupsGet.php', false);
+		XMLHttpRequestObjectG2.send(null);
+		var lista = XMLHttpRequestObjectG2.responseXML;
+		wyswietlGrupy(lista, 'grupy_lista');
 	}
 }
 function wyswietlGrupy(lista, root)
@@ -89,7 +80,7 @@ function wyswietlGrupy(lista, root)
 			var g_name = 'Grupa: '+grupy[i].childNodes[1].firstChild.nodeValue;
 			var text = document.createTextNode(g_name);
 			element.appendChild(text);
-                        var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title);};}                         }
+                        var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title); dodajPrzyciskUsuwania(g_id) };}                         }
 			element.onclick = createClickHandler('1', g_id, g_name);
 	//		alert(g_id);
 			nowa_lista.appendChild(element);
@@ -100,40 +91,50 @@ function wyswietlGrupy(lista, root)
 	}
 	else alert(grupy.length);
 }
-
-
+function dodajPrzyciskUsuwania(g_id)
+{
+  var p = document.getElementById('aktywne_opcje_lista');
+  var przycisk = document.createElement('button');
+  przycisk.appendChild(document.createTextNode('Usuń grupę'));
+  var createClickHandler = function(g_id){return function(){ {usunGrupe(g_id); };}                         }
+  przycisk.onclick = createClickHandler(g_id);
+  p.appendChild(przycisk);
+}
 
 function dodajGrupe()
 {
 	//alert("wywoluje z adresem ");
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectG4)
 	{
 	        var group = document.getElementById("group_form").value;
-		XMLHttpRequestObject.open("POST", 'ajax/dhcp/groupAdd.php?g_name='+group+'&g_desc='+group);
-		XMLHttpRequestObject.onreadystatechange = wynikDodawaniaGrupy;
-		XMLHttpRequestObject.send(null);
+		XMLHttpRequestObjectG4.open("POST", 'ajax/dhcp/groupAdd.php?g_name='+group+'&g_desc='+group);
+		XMLHttpRequestObjectG4.onreadystatechange = wynikDodawaniaGrupy;
+		XMLHttpRequestObjectG4.send(null);
 	}
 }
 function usunGrupe(g_id)
 {
 	//alert("wywoluje z adresem ");
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectG3)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/groupDel.php?g_id='+g_id);
-		XMLHttpRequestObject.onreadystatechange = wynikUsuwaniaGrupy;
-		XMLHttpRequestObject.send(null);
+		XMLHttpRequestObjectG3.open("POST", 'ajax/dhcp/groupDel.php?g_id='+g_id, false);
+		XMLHttpRequestObjectG3.send(null);
+	        var wynik = XMLHttpRequestObjectG3.responseText;
+                alert(wynik);
+                removeChildren('aktywne_opcje_lista');
+                pobierzGrupy();
 	}
 }
-function wynikUsuwaniaVlanu()
+function removeChildren(nodeId)
 {
-	if(XMLHttpRequestObject)
-	{
-		if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200)
-		{
-			var wynik = XMLHttpRequestObject.responseText;
-			alert(wynik);
-			pobierzVlany();
-		}
-	}
+  var p = document.getElementById(nodeId);
+  if(!p)
+    return false;
+  var length =p.childNodes.length; 
+  for(i=0; i<length; i++)
+    p.removeChild(p.lastChild);
 }
-var XMLHttpRequestObject = getXMLHttpRequestObject();
+var XMLHttpRequestObjectG4 = getXMLHttpRequestObject();
+var XMLHttpRequestObjectG3 = getXMLHttpRequestObject();
+var XMLHttpRequestObjectG2 = getXMLHttpRequestObject();
+var XMLHttpRequestObjectG1 = getXMLHttpRequestObject();

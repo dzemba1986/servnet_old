@@ -1,17 +1,17 @@
 function przetwarzajListePodsieci()
 {
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectSubnet)
 	{
-		if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200)
+		if(XMLHttpRequestObjectSubnet.readyState == 4 && XMLHttpRequestObjectSubnet.status == 200)
 		{
-			var podsieci = XMLHttpRequestObject.responseXML;
+			var podsieci = XMLHttpRequestObjectSubnet.responseXML;
 			if(!podsieci || !podsieci.documentElement)
 			{
-				alert("nic nie doszlo"+XMLHttpRequestObject.responseText);
+				alert("nic nie doszlo"+XMLHttpRequestObjectSubnet.responseText);
 			}
 			else if(podsieci.documentElement.nodeName == "parsererror")
 			{
-		//		alert("blad parsera"+XMLHttpRequestObject.responseText);
+		//		alert("blad parsera"+XMLHttpRequestObjectSubnet.responseText);
 			}
 			else
 			{	
@@ -24,15 +24,15 @@ function przetwarzajListePodsieci()
 function pobierzListePodsieci(vlan)
 {
 	//alert("wywoluje z adresem "+dev_id);
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectSubnet)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/getSubnets.php?vlan='+vlan);
+		XMLHttpRequestObjectSubnet.open("POST", 'ajax/getSubnets.php?vlan='+vlan);
 		var nazwa = document.getElementById("nazwa_vlanu");
 		nazwa.innerHTML = "Podsieci vlanu "+vlan+":";
 		var ukryte_vid = document.getElementById("vlan_hidden_form");
 		ukryte_vid.value = vlan;
-		XMLHttpRequestObject.onreadystatechange = przetwarzajListePodsieci;
-		XMLHttpRequestObject.send(null);
+		XMLHttpRequestObjectSubnet.onreadystatechange = przetwarzajListePodsieci;
+		XMLHttpRequestObjectSubnet.send(null);
 	}
 }
 function wyswietlListePodsieci(lista, root)
@@ -86,15 +86,46 @@ function wyswietlListePodsieci(lista, root)
 function pobierzDhcpPodsiec(s_id)
 {
 	//alert("wywoluje z adresem "+dev_id);
-	if(XMLHttpRequestObject)
+	if(XMLHttpRequestObjectSubnet)
 	{
-		XMLHttpRequestObject.open("POST", 'ajax/getSubnets.php?s_id='+s_id);
+		XMLHttpRequestObjectSubnet.open("POST", 'ajax/getSubnets.php?s_id='+s_id);
 		var nazwa = document.getElementById("nazwa_vlanu");
 		nazwa.innerHTML = "Podsieci vlanu "+vlan+":";
 		var ukryte_vid = document.getElementById("vlan_hidden_form");
 		ukryte_vid.value = vlan;
-		XMLHttpRequestObject.onreadystatechange = przetwarzajListePodsieci;
-		XMLHttpRequestObject.send(null);
+		XMLHttpRequestObjectSubnet.onreadystatechange = przetwarzajListePodsieci;
+		XMLHttpRequestObjectSubnet.send(null);
 	}
 }
-var XMLHttpRequestObject = getXMLHttpRequestObject();
+function zmienOpcjeDhcp(parentDiv)
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectOptionAdd)
+	{
+          var o_subnet = parentDiv.childNodes[0].value; 
+          var o_group = parentDiv.childNodes[1].value; 
+          var o_id = parentDiv.childNodes[2].value; 
+          var o_value = parentDiv.childNodes[3].value; 
+          var o_weight = parentDiv.childNodes[4].value; 
+          XMLHttpRequestObjectOptionAdd.open("POST", 'ajax/dhcp/optionSet.php?g_id='+o_group+'&s_id='+o_subnet+'&o_id='+o_id+'&o_value='+o_value+'&o_weight='+o_weight, false);
+	  XMLHttpRequestObjectOptionAdd.send(null);
+	  var wynik = XMLHttpRequestObjectOptionAdd.responseText;
+          alert(wynik);
+          var title = document.getElementById('nazwa_vlanu').firstChild.textContent;
+	  pobierzOpcjeDhcp(o_subnet, o_group, title);
+        }
+}
+function ustawGrupePodsieci(grupa, podsiec)
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectSubnetGrAdd)
+	{
+          XMLHttpRequestObjectSubnetGrAdd.open("POST", 'ajax/dhcp/subnetSetGroup.php?g_id='+grupa+'&s_id='+podsiec, false);
+	  XMLHttpRequestObjectSubnetGrAdd.send(null);
+	  var wynik = XMLHttpRequestObjectSubnetGrAdd.responseText;
+          alert(wynik);
+          pobierzPodsieci(document.getElementById('vlan_hidden_form').value);
+        }
+}
+var XMLHttpRequestObjectSubnet = getXMLHttpRequestObject();
+var XMLHttpRequestObjectSubnetGrAdd = getXMLHttpRequestObject();

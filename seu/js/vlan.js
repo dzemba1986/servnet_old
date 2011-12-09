@@ -178,6 +178,7 @@ function wyswietlPodsieci(podsieci)
 	//alert(podsieci);
 	var podsieci = podsieci.documentElement.childNodes;
 	var wezel_nadrz = document.getElementById("podsieci");
+        var grupy = pobierzListeGrup(); 
 	//alert(dev_id);
 		var tabela = "<table class=\"opis\"><tbody><tr class=\"opis_naglowek\"><td class=\"opis_adres\">Adres</td><td class=\"opis_maska\">Maska</td><td class=\"opis_opis\">Opis</td><td class=\"opis_opis\">DHCP</td><td class=\"opis_przycisk\" bgcolor=\"black\">&nbsp</td><td class=\"opis_przycisk\" bgcolor=\"black\">&nbsp</td>";
 		for (var i=0; i<podsieci.length; i++)
@@ -195,7 +196,18 @@ function wyswietlPodsieci(podsieci)
 				if(podsieci[i].childNodes[5].firstChild.nodeValue==1)
                                   tabela+="checked ";
                         tabela+=" onclick=\"changeDhcp(this, " + podsieci[i].childNodes[0].firstChild.nodeValue + ")\">"
-			tabela+="</td><td> <a link=\"";
+			tabela+="</td><td><select onChange=\"ustawGrupePodsieci(";
+			tabela+='this.value, '+podsieci[i].childNodes[0].firstChild.nodeValue+')\">';
+                        tabela+="<option value=\"1\"></option>";
+                        for(j=0; j<grupy.length; j++)
+                        {
+                         // alert(grupy[j].childNodes[0].firstChild.nodeValue+'=='+podsieci[i].childNodes[7].firstChild.nodeValue);
+                          if(grupy[j].childNodes[0].firstChild.nodeValue==podsieci[i].childNodes[7].firstChild.nodeValue)
+                            tabela+="<option value=\""+grupy[j].childNodes[0].firstChild.nodeValue+"\" selected>"+grupy[j].childNodes[1].firstChild.nodeValue+"</option>";
+                          else
+                            tabela+="<option value=\""+grupy[j].childNodes[0].firstChild.nodeValue+"\">"+grupy[j].childNodes[1].firstChild.nodeValue+"</option>";
+                        }
+                        tabela+="</select></td><td> <a link=\"";
 			tabela+=podsieci[i].childNodes[0].firstChild.nodeValue;
 			tabela+="\">Urządzenia</a></td><td><input type=\"button\" class=\"submit\" onclick=\"usunPodsiec(";
 			tabela+=podsieci[i].childNodes[0].firstChild.nodeValue;

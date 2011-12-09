@@ -56,8 +56,6 @@ if(!defined('DHCP_CLASS'))
     {
       $sql = new MysqlSeu();
       $sql->connect();
-      if(!$g_name)
-        return false;
       $g_id = intval($g_id);
       $query = "DELETE FROM Dhcp_group WHERE group_id=$g_id";
       return $sql->query_update($query, '', 'Dhcp_group', 'group_id'); 

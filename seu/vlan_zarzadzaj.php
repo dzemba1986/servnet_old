@@ -38,6 +38,8 @@ require("include/formDuplicat.php");
 </  div>
 <!-- tutaj wstaw tresc strony -->
 <script language="JavaScript" SRC="js/vlan.js"></script>
+<script language="JavaScript" SRC="js/subnet.js"></script>
+<script language="JavaScript" SRC="js/dhcp/groups.js"></script>
 <script type="text/javascript">
 pobierzVlany();
 </script>

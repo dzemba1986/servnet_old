@@ -1,6 +1,5 @@
-<?php require("security.php"); ?>
-<?php require("path.php"); ?>
-<?php
+<?php require("security.php");
+require("path.php");
 require(SEU_ABSOLUTE.'/include/classes/xml.php');
 require(SEU_ABSOLUTE.'/include/classes/dhcp.php');
 $dhcp = new Dhcp();
