@@ -554,6 +554,19 @@ if(!defined('HOST_CLASS'))
                           $group_id = $subnet_obj->getGroup($sub_id);
                           $group_options = $dhcp->getGroupOptions($group_id, 1);
                           $subnet_options = $dhcp->getGroupOptions(1, $sub_id);
+                          $final_opts = array('[opt_code_routers]' => $sub_gateway, 
+                                              '[opt_code_broadcast]' => $sub_broascast);
+                          foreach ($group_options as $g_opt)
+                            foreach ($subnet_options as $s_opt)
+                            {
+                              if($g_opt['opt_code']==$s_opt['opt_code'])
+                              {
+                                if($g_opt['weight']<=$s_opt['weight'])
+                                  $final_opts[$g_opt['opt_code']] = $s_opt;
+                                else
+                                  $final_opts[] = $g_opt;
+                              }
+                            }   
 
                           $data = "# PODSIEC ".$subnet['opis']."
 #######################################

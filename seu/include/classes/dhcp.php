@@ -69,9 +69,9 @@ if(!defined('DHCP_CLASS'))
       $s_id = intval($s_id);
       $query;
       if($g_id==1 && $s_id && $s_id!=1)
-        $query = "SELECT * FROM Dhcp_group_option WHERE subnet=$s_id ORDER BY `option`";
+        $query = "SELECT * FROM Dhcp_group_option WHERE subnet=$s_id ORDER BY `opt_code`";
       elseif($s_id==1 && $g_id && $g_id!=1)
-        $query = "SELECT * FROM Dhcp_group_option WHERE dhcp_group=$g_id ORDER BY `option`";
+        $query = "SELECT * FROM Dhcp_group_option WHERE dhcp_group=$g_id ORDER BY `opt_code`";
       else
       {
         echo "Błędne parametry";
