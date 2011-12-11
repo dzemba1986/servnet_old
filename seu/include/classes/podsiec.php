@@ -121,11 +121,31 @@ if(!defined('PODSIEC_CLASS'))
         $odpowiedz[] = mysql_fetch_assoc($wykonaj);
       return $odpowiedz;
     }
+    public function getDhcpSubnets()
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      $zapytanie = "SELECT * FROM Podsiec WHERE dhcp=1";
+      $wykonaj = mysql_query($zapytanie);
+      $odpowiedz = array();
+      for($i=0; $i<mysql_num_rows($wykonaj); $i++)
+        $odpowiedz[] = mysql_fetch_assoc($wykonaj);
+      return $odpowiedz;
+    }
     public function pobierzVlan($id)
     {
-      $sql = $this->connect();
+      $sql = new MysqlSeu();
+      $sql->connect();
       $zapytanie = "SELECT vlan FROM Podsiec WHERE id='$id'";
-      $odpowiedz = $this->query($zapytanie);
+      $odpowiedz = $sql->query($zapytanie);
+      return $odpowiedz[0];
+    }
+    public function getGroup($s_id)
+    {
+      $sql = new MysqlSeu();
+      $sql->connect();
+      $zapytanie = "SELECT dhcp_group FROM Podsiec WHERE id='$s_id'";
+      $odpowiedz = $sql->query($zapytanie);
       return $odpowiedz[0];
     }
     public function changeDhcp($id, $dhcp)

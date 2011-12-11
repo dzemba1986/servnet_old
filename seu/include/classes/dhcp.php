@@ -1,6 +1,7 @@
 <?php
 require('path.php');
 require(SEU_ABSOLUTE.'/include/classes/mysql.php');
+require(SEU_ABSOLUTE.'/include/classes/dataTypes.php');
 if(!defined('DHCP_CLASS'))
 {
   define('DHCP_CLASS', true);
@@ -82,7 +83,7 @@ if(!defined('DHCP_CLASS'))
     {
       $sql = new MysqlSeu();
       $sql->connect();
-      $query = "SELECT * FROM Dhcp_option ORDER BY opt_name";
+      $query = "SELECT * FROM Dhcp_option ORDER BY rfc_name";
       return $sql->query_assoc_array($query); 
     }
   }
@@ -196,9 +197,13 @@ if(!defined('DHCP_CLASS'))
             return false;
           break;
         case 'ip-address':
-          include(SEU_ABSOLUTE.'/include/classes/daddy.php');
-          $daddy = new Daddy();
-          if(!$daddy->sprawdz_ip($value))
+          $data_types = new DataTypes();
+          if(!$data_types->is_ipv4($value))
+            return false;
+          break;
+        case 'ip-address-set':
+          $data_types = new DataTypes();
+          if(!$data_types->is_ipv4_set($value))
             return false;
           break;
         case 'string':

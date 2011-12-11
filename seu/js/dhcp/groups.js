@@ -77,9 +77,10 @@ function wyswietlGrupy(lista, root)
 			if(grupy[i].childNodes[1].firstChild)
 				element.title = grupy[i].childNodes[1].firstChild.nodeValue;
 			var g_id = grupy[i].firstChild.firstChild.nodeValue;
-			var g_name = 'Grupa: '+grupy[i].childNodes[1].firstChild.nodeValue;
+			var g_name = grupy[i].childNodes[1].firstChild.nodeValue;
 			var text = document.createTextNode(g_name);
 			element.appendChild(text);
+                        g_name = 'Grupa '+g_name;
                         var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title); dodajPrzyciskUsuwania(g_id) };}                         }
 			element.onclick = createClickHandler('1', g_id, g_name);
 	//		alert(g_id);

@@ -65,11 +65,12 @@ function wyswietlListePodsieci(lista, root)
 			var subnet_addr = podsieci[i].childNodes[1].firstChild.nodeValue;
 			var subnet_netmask = podsieci[i].childNodes[2].firstChild.nodeValue;
 			var subnet_desc = podsieci[i].childNodes[4].firstChild.nodeValue;
-			var opis = 'Podsiec: '+podsieci[i].childNodes[1].firstChild.nodeValue;
+			var opis = podsieci[i].childNodes[1].firstChild.nodeValue;
 			opis += '/' + podsieci[i].childNodes[2].firstChild.nodeValue;
 			opis += ' (' + podsieci[i].childNodes[4].firstChild.nodeValue + ')';
 			var text = document.createTextNode(opis);
 			element.appendChild(text);
+                        opis = 'Podsiec '+opis;
                         var createClickHandler = function(s_id, g_id, title){return function(){ {pobierzOpcjeDhcp(s_id, g_id, title);};}                         }
 
 			element.onclick = createClickHandler(subnet_id, '1', opis);

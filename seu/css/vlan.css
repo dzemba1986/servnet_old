@@ -7,7 +7,7 @@ html, body {
 
 
 #lewa {
-	width: 200px;
+	width: 250px;
 	padding-top: 10px;
 	float: left;
 	min-height: 400px;
@@ -19,7 +19,7 @@ html, body {
 
 #prawa {
 	position: relative;
-	width: 789px;
+	width: 739px;
 	padding-top: 10px;
 	min-height: 400px;
 	margin-left: 10px;
