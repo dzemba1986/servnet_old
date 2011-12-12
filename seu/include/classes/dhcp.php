@@ -69,9 +69,9 @@ if(!defined('DHCP_CLASS'))
       $s_id = intval($s_id);
       $query;
       if($g_id==1 && $s_id && $s_id!=1)
-        $query = "SELECT * FROM Dhcp_group_option WHERE subnet=$s_id ORDER BY `opt_code`";
+        $query = "SELECT dgo.*, do.* FROM Dhcp_group_option dgo INNER JOIN Dhcp_option do ON dgo.option=do.opt_id WHERE dgo.subnet=$s_id ORDER BY do.`opt_code`";
       elseif($s_id==1 && $g_id && $g_id!=1)
-        $query = "SELECT * FROM Dhcp_group_option WHERE dhcp_group=$g_id ORDER BY `opt_code`";
+        $query = "SELECT dgo.*, do.* FROM Dhcp_group_option dgo INNER JOIN Dhcp_option do ON dgo.option=do.opt_id WHERE dgo.dhcp_group=$g_id ORDER BY do.`opt_code`";
       else
       {
         echo "Błędne parametry";
@@ -85,6 +85,12 @@ if(!defined('DHCP_CLASS'))
       $sql->connect();
       $query = "SELECT * FROM Dhcp_option ORDER BY rfc_name";
       return $sql->query_assoc_array($query); 
+    }
+    public static function reloadDhcp()
+    {
+      require(SEU_ABSOLUTE.'/include/classes/host.php');
+      $host = new Host();
+      return $host->updateDhcp(0, 0, 'update');
     }
   }
   Class DhcpOption

@@ -135,6 +135,18 @@ function removeChildren(nodeId)
   for(i=0; i<length; i++)
     p.removeChild(p.lastChild);
 }
+function reloadDhcp()
+{
+	//alert("wywoluje z adresem ");
+	if(XMLHttpRequestObjectG5)
+	{
+		XMLHttpRequestObjectG5.open("POST", 'ajax/dhcp/reloadDhcp.php', false);
+		XMLHttpRequestObjectG5.send(null);
+	        var wynik = XMLHttpRequestObjectG5.responseText;
+                alert(wynik);
+	}
+}
+var XMLHttpRequestObjectG5 = getXMLHttpRequestObject();
 var XMLHttpRequestObjectG4 = getXMLHttpRequestObject();
 var XMLHttpRequestObjectG3 = getXMLHttpRequestObject();
 var XMLHttpRequestObjectG2 = getXMLHttpRequestObject();

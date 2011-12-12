@@ -407,17 +407,17 @@ if(!defined('HOST_CLASS'))
       //jeżeli jest device i mac i mac się zmienił to generujemy
       if($action == 'update' && $dev_id > 0)
       {
-        $this->generateDhcpFiles();
+        $this->generateDhcpFiles2();
       }
       //jeżeli dodajemy hosta to generuj dhcp
       elseif($action =='add' && $mac_new)
       {
-        $this->generateDhcpFiles();
+        $this->generateDhcpFiles2();
       }
       //jeżeli usuwamy hosta to generuj dhcp
       elseif($action =='del')
       {
-        $this->generateDhcpFiles();
+        $this->generateDhcpFiles2();
       }
     }
           private function generateDhcpFiles()
@@ -431,7 +431,8 @@ if(!defined('HOST_CLASS'))
 
 
                   $update_file_name = $files_path.'/regions/.update_notify';
-                  $subnets = $daddy->query_assoc($query);
+                  $query = "SELECT * FROM Podsiec WHERE dhcp=1";
+                  $subnets = $this->query_assoc($query);
                   $dns1 = '213.5.208.35';
                   $dns2 = '213.5.208.3';
                   $dns_array = array();
@@ -541,7 +542,9 @@ if(!defined('HOST_CLASS'))
                   $subnet_obj = new Podsiec();
                   $subnets = $subnet_obj->getDhcpSubnets();
                   $counter = 1;
+                  require(SEU_ABSOLUTE.'/include/classes/dhcp.php');
                   $dhcp = new Dhcp();
+                  $daddy = new Daddy();
                   foreach($subnets as $subnet)
                   {
                           //var_dump ($subnet);
@@ -552,64 +555,69 @@ if(!defined('HOST_CLASS'))
                           $sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
                           $sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
                           $group_id = $subnet_obj->getGroup($sub_id);
+                          $lease_time = 7200;
                           $group_options = $dhcp->getGroupOptions($group_id, 1);
                           $subnet_options = $dhcp->getGroupOptions(1, $sub_id);
-                          $final_opts = array('[opt_code_routers]' => $sub_gateway, 
-                                              '[opt_code_broadcast]' => $sub_broascast);
-                          foreach ($group_options as $g_opt)
-                            foreach ($subnet_options as $s_opt)
-                            {
-                              if($g_opt['opt_code']==$s_opt['opt_code'])
+                          $final_opts = array(3 => array('option' => 3, 'rfc_name' => 'routers', 'value' => $sub_gateway, 'weight' => 1),
+                                              28 => array('option' => 28, 'rfc_name' => 'broadcast-address', 'value' => $sub_broadcast,'weight' => 1),
+                                              1 => array('option' => 1, 'rfc_name' => 'subnet-mask', 'value' => $sub_hr_mask, 'weight' => 1),
+                                              49 => array('option' => 49, 'rfc_name' => 'dhcp-lease-time', 'value' => $lease_time, 'weight' => 1));
+                          if(count($group_options) > 0)
+                            foreach ($group_options as $g_opt)
+                              if($g_opt['option']==$final_opts[$g_opt['option']]['option'])
                               {
-                                if($g_opt['weight']<=$s_opt['weight'])
-                                  $final_opts[$g_opt['opt_code']] = $s_opt;
-                                else
-                                  $final_opts[] = $g_opt;
+                                if($g_opt['weight'] >= $final_opts[$g_opt['option']]['weight'])
+                                  $final_opts[$g_opt['option']] = $g_opt;
                               }
-                            }   
+                          if(count($subnet_options) > 0)
+                            foreach ($subnet_options as $s_opt)
+                              if($s_opt['option']==$final_opts[$s_opt['option']]['option'])
+                              {
+                                if($s_opt['weight'] >= $final_opts[$s_opt['option']]['weight'])
+                                  $final_opts[$s_opt['option']] = $s_opt;
+                              }
+                            $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
+                                    INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
+                                    LEFT JOIN Host h ON h.device=d.dev_id
+                                    LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
+                                    LEFT JOIN Teryt t ON l.ulic=t.ulic
+                                    WHERE a.podsiec='$sub_id' ORDER BY a.ip";
+                            $ips = $daddy->query_assoc_array($query);
+                            $ips_array = array();
+                            if(!$ips)
+                                    continue;
+                            foreach($ips as $ip)
+                            {
+                                    $host_name = str_replace(" ", "_", $ip['other_name']);
+                                    $host_name = $this->removePL($host_name);
+                                    if($host_name)
+                                            $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
+\thardware ethernet ".$ip['mac'].";
+\tfixed-address ".$ip['ip'].";
+}\n";
+                                    else
+                                            $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
+\thardware ethernet ".$ip['mac'].";
+\tfixed-address ".$ip['ip'].";
+}\n";
+                            }
 
                           $data = "# PODSIEC ".$subnet['opis']."
 #######################################
 #         INTERNET - ADRESACJA
 #######################################
 
-  subnet $sub_hr_ip netmask $sub_hr_mask {
-  option routers $sub_gateway;
-  ".$dns_array[$counter%2]."
-  option subnet-mask $sub_hr_mask;
-#option domain-name \"wtvk.pl\";
-  option broadcast-address $sub_broadcast;
-  default-lease-time $lease_time;
-  max-lease-time $lease_time;
+  subnet $sub_hr_ip netmask ".$final_opts[1]['value']." {\n";
+foreach($final_opts as $opt)
+  $data .= "  option ".$opt['rfc_name']." ".$opt['value'].";\n";
+  
+$data.="  default-lease-time ".$final_opts[49]['value'].";
+  max-lease-time ".$final_opts[49]['value'].";
+
 
 #######################################
 # USERS
 #######################################\n";
-                                          $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
-                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
-                                                  LEFT JOIN Host h ON h.device=d.dev_id
-                                                  LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
-                                                  LEFT JOIN Teryt t ON l.ulic=t.ulic
-                                                  WHERE a.podsiec='$sub_id' ORDER BY a.ip";
-                                          $ips = $daddy->query_assoc_array($query);
-                                          $ips_array = array();
-                                          if(!$ips)
-                                                  continue;
-                                          foreach($ips as $ip)
-                                          {
-                                                  $host_name = str_replace(" ", "_", $ip['other_name']);
-                                                  $host_name = $this->removePL($host_name);
-                                                  if($host_name)
-                                                          $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
-  \thardware ethernet ".$ip['mac'].";
-  \tfixed-address ".$ip['ip'].";
-  }\n";
-                                                  else
-                                                          $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
-  \thardware ethernet ".$ip['mac'].";
-  \tfixed-address ".$ip['ip'].";
-  }\n";
-                                          }
                                   foreach($sub_ip->generujPodsiec() as $ip_counter)
                                           if($ips_array[$ip_counter])
                                                   $data .= $ips_array[$ip_counter];

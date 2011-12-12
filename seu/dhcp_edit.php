@@ -30,6 +30,7 @@ $vlans = $daddy->getVlansArray();
 <div id="gora"></div>
 <div id="tresc">
 	<div id="lewa">
+        <button onclick="reloadDhcp();">Reload DHCP</button><br><br>
     <?php if($_GET['mode']=='subnets'): ?>
 	<div><b>Podsieci</b>/<a href="?mode=groups">Grupy</a></div>
 	<div id="select_vlan">
