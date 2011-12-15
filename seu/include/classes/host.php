@@ -560,11 +560,13 @@ if(!defined('HOST_CLASS'))
           $sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
           $group_id = $subnet_obj->getGroup($sub_id);
           $lease_time = 7200;
+          $dns = "213.5.208.3, 213.5.208.35;";
           $group_options = $dhcp->getGroupOptions($group_id, 1);
           $subnet_options = $dhcp->getGroupOptions(1, $sub_id);
           $final_opts = array(3 => array('option' => 3, 'rfc_name' => 'routers', 'value' => $sub_gateway, 'weight' => 1),
               28 => array('option' => 28, 'rfc_name' => 'broadcast-address', 'value' => $sub_broadcast,'weight' => 1),
               1 => array('option' => 1, 'rfc_name' => 'subnet-mask', 'value' => $sub_hr_mask, 'weight' => 1),
+              6 => array('option' => 1, 'rfc_name' => 'domain-name-servers', 'value' => $dns, 'weight' => 1),
               49 => array('option' => 49, 'rfc_name' => 'dhcp-lease-time', 'value' => $lease_time, 'weight' => 1));
           if(count($group_options) > 0)
             foreach ($group_options as $g_opt)
@@ -573,6 +575,8 @@ if(!defined('HOST_CLASS'))
                 if($g_opt['weight'] >= $final_opts[$g_opt['option']]['weight'])
                   $final_opts[$g_opt['option']] = $g_opt;
               }
+              else
+                $final_opts[$g_opt['option']] = $g_opt;
           if(count($subnet_options) > 0)
             foreach ($subnet_options as $s_opt)
               if($s_opt['option']==$final_opts[$s_opt['option']]['option'])
@@ -580,6 +584,8 @@ if(!defined('HOST_CLASS'))
                 if($s_opt['weight'] >= $final_opts[$s_opt['option']]['weight'])
                   $final_opts[$s_opt['option']] = $s_opt;
               }
+              else
+                $final_opts[$s_opt['option']] = $s_opt;
           $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
             INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
             LEFT JOIN Host h ON h.device=d.dev_id
