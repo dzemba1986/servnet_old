@@ -14,7 +14,7 @@ $mac2 = $_REQUEST['mac2'];
 $port = $_REQUEST['port']; //3 - 22
 $net_vlan = $_REQUEST['net_vlan'];
 $net_vlany = array('2', '4');
-$porty = array('first' => '1', 'last' => '44');
+$porty = array('first' => '1', 'last' => '47');
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])

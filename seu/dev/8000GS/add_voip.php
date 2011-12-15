@@ -12,7 +12,7 @@
 $port = $_REQUEST['port']; //3 - 22
 $ip = $_REQUEST['ip'];
 $description = $_REQUEST['description'];
-$porty = array('first' => '1', 'last' => '44');
+$porty = array('first' => '1', 'last' => '47');
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
