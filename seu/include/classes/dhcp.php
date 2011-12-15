@@ -90,7 +90,7 @@ if(!defined('DHCP_CLASS'))
     {
       require(SEU_ABSOLUTE.'/include/classes/host.php');
       $host = new Host();
-      return $host->updateDhcp(0, 0, 'update');
+      return $host->updateDhcp(1, 0, 'update');
     }
   }
   Class DhcpOption

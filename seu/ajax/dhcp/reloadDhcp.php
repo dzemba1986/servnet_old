@@ -1,4 +1,3 @@
-
 <?php require("security.php");
 require("path.php");
 require(SEU_ABSOLUTE.'/include/classes/dhcp.php');

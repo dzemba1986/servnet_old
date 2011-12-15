@@ -18,5 +18,11 @@ if(!defined('DATATYPES_CLASS'))
         return true;
       return false;
     }
+    public function removePL($in_string)
+    {
+      $arrPlSpecialChars = array('ą','ć','ę','ł','ń','ó','ś','ź','ż','Ą','Ć','Ę','Ł','Ń','Ó','Ś','Ź','Ż','(',')','+','/');
+      $arrAsciiChars = array('a','c','e','l','n','o','s','z','z','A','C','E','L','N','O','S','Z','Z','_','_','_','_');
+      return str_replace($arrPlSpecialChars, $arrAsciiChars, $in_string);
+    }
   }
 }
