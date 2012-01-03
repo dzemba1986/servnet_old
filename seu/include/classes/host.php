@@ -1,4 +1,8 @@
 <?php 
+require('path.php');
+require(SEU_ABSOLUTE.'/include/classes/daddy.php');
+require(SEU_ABSOLUTE.'/include/classes/ip.php');
+require(SEU_ABSOLUTE.'/include/classes/dataTypes.php');
 if(!defined('HOST_CLASS'))
 {
   define('HOST_CLASS', true);
@@ -400,55 +404,56 @@ if(!defined('HOST_CLASS'))
     public function updateDhcp($dev_id, $mac_new, $action)
     {
       $dev_id = intval($dev_id);
+      $this->connect();
       $mac_new = mysql_real_escape_string($mac_new);
 
       //jeżeli jest device i mac i mac się zmienił to generujemy
       if($action == 'update' && $dev_id > 0)
       {
-        $this->generateDhcpFiles();
+        return $this->generateDhcpFiles2();
       }
       //jeżeli dodajemy hosta to generuj dhcp
       elseif($action =='add' && $mac_new)
       {
-        $this->generateDhcpFiles();
+        return $this->generateDhcpFiles2();
       }
       //jeżeli usuwamy hosta to generuj dhcp
       elseif($action =='del')
       {
-        $this->generateDhcpFiles();
+        return $this->generateDhcpFiles2();
       }
     }
-          private function generateDhcpFiles()
-          {
-                  $files_path = '/home/ftp/www/servnet/.dhcp_files';
-                  
-  //deleting old files
-                  $sysout = system("rm $files_path/regions/*");
-  //                echo "<br><br><strong>$sysout</strong><br><br>";
+    private function generateDhcpFiles()
+    {
+      require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
+      $files_path = '/home/ftp/www/servnet/.dhcp_files';
+
+      //deleting old files
+      $sysout = system("rm $files_path/regions/*");
+      //                echo "<br><br><strong>$sysout</strong><br><br>";
 
 
-                  $update_file_name = $files_path.'/regions/.update_notify';
-                  $query = "SELECT * FROM Podsiec WHERE dhcp=1";
-                  $daddy = new Daddy();
-                  $subnets = $daddy->query_assoc($query);
-                  $dns1 = '213.5.208.35';
-                  $dns2 = '213.5.208.3';
-                  $dns_array = array();
-                  $dns_array[0] = "option domain-name-servers $dns1, $dns2;";
-                  $dns_array[1] = "option domain-name-servers $dns2, $dns1;";
-//                  $lease_time = '86400';
-                  $lease_time = '7200';
-                  $counter = 1;
-                  foreach($subnets as $subnet)
-                  {
-                          //var_dump ($subnet);
-                          $sub_ip = new IpAddress($subnet['address'], $subnet['netmask']);
-                          $sub_id = intval($subnet['id']);
-                          $sub_hr_ip = $sub_ip->getHrNetworkAddress();
-                          $sub_hr_mask = $sub_ip->getNetmask();
-                          $sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
-                          $sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
-                          $data = "# PODSIEC ".$subnet['opis']."
+      $update_file_name = $files_path.'/regions/.update_notify';
+      $query = "SELECT * FROM Podsiec WHERE dhcp=1";
+      $subnets = $this->query_assoc($query);
+      $dns1 = '213.5.208.35';
+      $dns2 = '213.5.208.3';
+      $dns_array = array();
+      $dns_array[0] = "option domain-name-servers $dns1, $dns2;";
+      $dns_array[1] = "option domain-name-servers $dns2, $dns1;";
+      //                  $lease_time = '86400';
+      $lease_time = '7200';
+      $counter = 1;
+      foreach($subnets as $subnet)
+      {
+        //var_dump ($subnet);
+        $sub_ip = new IpAddress($subnet['address'], $subnet['netmask']);
+        $sub_id = intval($subnet['id']);
+        $sub_hr_ip = $sub_ip->getHrNetworkAddress();
+        $sub_hr_mask = $sub_ip->getNetmask();
+        $sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
+        $sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
+        $data = "# PODSIEC ".$subnet['opis']."
 #######################################
 #         INTERNET - ADRESACJA
 #######################################
@@ -465,66 +470,183 @@ if(!defined('HOST_CLASS'))
 #######################################
 # USERS
 #######################################\n";
-                                          $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
-                                                  INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac!='' AND d.exists='1')
-                                                  LEFT JOIN Host h ON h.device=d.dev_id
-                                                  LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
-                                                  LEFT JOIN Teryt t ON l.ulic=t.ulic
-                                                  WHERE a.podsiec='$sub_id' ORDER BY a.ip";
-                                          $ips = $daddy->query_assoc_array($query);
-                                          $ips_array = array();
-                                          if(!$ips)
-                                                  continue;
-                                          foreach($ips as $ip)
-                                          {
-                                                  $host_name = str_replace(" ", "_", $ip['other_name']);
-                                                  $host_name = $this->removePL($host_name);
-                                                  if($host_name)
-                                                          $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
-  \thardware ethernet ".$ip['mac'].";
-  \tfixed-address ".$ip['ip'].";
-  }\n";
-                                                  else
-                                                          $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
-  \thardware ethernet ".$ip['mac'].";
-  \tfixed-address ".$ip['ip'].";
-  }\n";
-                                          }
-                                  foreach($sub_ip->generujPodsiec() as $ip_counter)
-                                          if($ips_array[$ip_counter])
-                                                  $data .= $ips_array[$ip_counter];
-                                  $data .= "}";
-                                  $filename = $files_path."/regions/".$subnet['opis'].".conf";
-  //				echo"<br>$filename<br>";
-                                  $file = fopen($filename, "w");
-                                  fwrite($file, $data);
-                                  fclose($file);
-                                  $counter++;
-                                  }
-                          $file = fopen($update_file_name, "w");
-                          $czas = time();
-                          fwrite($file, $czas);
-                          fclose($file);
-                  }
-    public function removePL($in_string)
-    {
-            $arrPlSpecialChars = array('ą','ć','ę','ł','ń','ó','ś','ź','ż','Ą','Ć','Ę','Ł','Ń','Ó','Ś','Ź','Ż','(',')','+','/');
-            $arrAsciiChars = array('a','c','e','l','n','o','s','z','z','A','C','E','L','N','O','S','Z','Z','_','_','_','_');
-            return str_replace($arrPlSpecialChars, $arrAsciiChars, $in_string);
+            $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
+              INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
+              LEFT JOIN Host h ON h.device=d.dev_id
+              LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
+              LEFT JOIN Teryt t ON l.ulic=t.ulic
+              WHERE a.podsiec='$sub_id' ORDER BY a.ip";
+            $ips = $daddy->query_assoc_array($query);
+            $ips_array = array();
+            if(!$ips)
+              continue;
+            foreach($ips as $ip)
+            {
+              $host_name = str_replace(" ", "_", $ip['other_name']);
+              $host_name = $this->removePL($host_name);
+              if($host_name)
+                $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
+                  \thardware ethernet ".$ip['mac'].";
+              \tfixed-address ".$ip['ip'].";
+            }\n";
+              else
+                $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
+                  \thardware ethernet ".$ip['mac'].";
+              \tfixed-address ".$ip['ip'].";
+            }\n";
+            }
+            foreach($sub_ip->generujPodsiec() as $ip_counter)
+              if($ips_array[$ip_counter])
+                $data .= $ips_array[$ip_counter];
+            $data .= "}";
+            $filename = $files_path."/regions/".$subnet['opis'].".conf";
+            //				echo"<br>$filename<br>";
+            $file = fopen($filename, "w");
+            fwrite($file, $data);
+            fclose($file);
+            $counter++;
+          }
+        $file = fopen($update_file_name, "w");
+        $czas = time();
+        fwrite($file, $czas);
+        fclose($file);
+        return true;
+      }
+      public function removePL($in_string)
+      {
+        $arrPlSpecialChars = array('ą','ć','ę','ł','ń','ó','ś','ź','ż','Ą','Ć','Ę','Ł','Ń','Ó','Ś','Ź','Ż','(',')','+','/');
+        $arrAsciiChars = array('a','c','e','l','n','o','s','z','z','A','C','E','L','N','O','S','Z','Z','_','_','_','_');
+        return str_replace($arrPlSpecialChars, $arrAsciiChars, $in_string);
+      }
+      public function getSpeed($dev_id)
+      {
+        $id=intval($dev_id);
+        $query = "SELECT pakiet FROM Host WHERE device='$id'";
+        $result = $this->query($query);
+        return $result['pakiet'];
+      }
+      public function getConId($dev_id)
+      {
+        $id=intval($dev_id);
+        $query = "SELECT con_id FROM Host WHERE device='$id'";
+        $result = $this->query($query);
+        return $result['con_id'];
+      }
+      private function generateDhcpFiles2()
+      {
+        require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
+        $files_path = '/home/ftp/www/servnet/.dhcp_files';
+
+        //deleting old files
+        $sysout = system("rm $files_path/regions/*");
+        //                echo "<br><br><strong>$sysout</strong><br><br>";
+
+
+        $update_file_name = $files_path.'/regions/.update_notify';
+        $subnet_obj = new Podsiec();
+        $subnets = $subnet_obj->getDhcpSubnets();
+        $counter = 1;
+        require(SEU_ABSOLUTE.'/include/classes/dhcp.php');
+        $dhcp = new Dhcp();
+        $daddy = new Daddy();
+        foreach($subnets as $subnet)
+        {
+          //var_dump ($subnet);
+          $sub_ip = new IpAddress($subnet['address'], $subnet['netmask']);
+          $sub_id = intval($subnet['id']);
+          $sub_hr_ip = $sub_ip->getHrNetworkAddress();
+          $sub_hr_mask = $sub_ip->getNetmask();
+          $sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
+          $sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
+          $group_id = $subnet_obj->getGroup($sub_id);
+          $lease_time = 7200;
+          $dns = "213.5.208.3, 213.5.208.35;";
+          $group_options = $dhcp->getGroupOptions($group_id, 1);
+          $subnet_options = $dhcp->getGroupOptions(1, $sub_id);
+          $final_opts = array(3 => array('option' => 3, 'rfc_name' => 'routers', 'value' => $sub_gateway, 'weight' => 1),
+              28 => array('option' => 28, 'rfc_name' => 'broadcast-address', 'value' => $sub_broadcast,'weight' => 1),
+              1 => array('option' => 1, 'rfc_name' => 'subnet-mask', 'value' => $sub_hr_mask, 'weight' => 1),
+              6 => array('option' => 1, 'rfc_name' => 'domain-name-servers', 'value' => $dns, 'weight' => 1),
+              49 => array('option' => 49, 'rfc_name' => 'dhcp-lease-time', 'value' => $lease_time, 'weight' => 1));
+          if(count($group_options) > 0)
+            foreach ($group_options as $g_opt)
+              if($g_opt['option']==$final_opts[$g_opt['option']]['option'])
+              {
+                if($g_opt['weight'] >= $final_opts[$g_opt['option']]['weight'])
+                  $final_opts[$g_opt['option']] = $g_opt;
+              }
+              else
+                $final_opts[$g_opt['option']] = $g_opt;
+          if(count($subnet_options) > 0)
+            foreach ($subnet_options as $s_opt)
+              if($s_opt['option']==$final_opts[$s_opt['option']]['option'])
+              {
+                if($s_opt['weight'] >= $final_opts[$s_opt['option']]['weight'])
+                  $final_opts[$s_opt['option']] = $s_opt;
+              }
+              else
+                $final_opts[$s_opt['option']] = $s_opt;
+          $query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id FROM Adres_ip a 
+            INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
+            LEFT JOIN Host h ON h.device=d.dev_id
+            LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
+            LEFT JOIN Teryt t ON l.ulic=t.ulic
+            WHERE a.podsiec='$sub_id' ORDER BY a.ip";
+          $ips = $daddy->query_assoc_array($query);
+          $ips_array = array();
+          if(!$ips)
+            continue;
+          foreach($ips as $ip)
+          {
+            $host_name = str_replace(" ", "_", $ip['other_name']);
+            $host_name = $this->removePL($host_name);
+            if($host_name)
+              $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
+\thardware ethernet ".$ip['mac'].";
+\tfixed-address ".$ip['ip'].";
+    }\n";
+            else
+              $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
+\thardware ethernet ".$ip['mac'].";
+\tfixed-address ".$ip['ip'].";
+    }\n";
+          }
+
+          $data = "# PODSIEC ".$subnet['opis']."
+#######################################
+#         INTERNET - ADRESACJA
+#######################################
+
+  subnet $sub_hr_ip netmask ".$final_opts[1]['value']." {\n";
+              foreach($final_opts as $opt)
+                $data .= "  option ".$opt['rfc_name']." ".$opt['value'].";\n";
+
+              $data.="  default-lease-time ".$final_opts[49]['value'].";
+  max-lease-time ".$final_opts[49]['value'].";
+
+
+#######################################
+# USERS
+#######################################\n";
+              foreach($sub_ip->generujPodsiec() as $ip_counter)
+                if($ips_array[$ip_counter])
+                  $data .= $ips_array[$ip_counter];
+              $data .= "}";
+              $dataTypes = new DataTypes();
+              $opis_ascii = $dataTypes->removePL($subnet['opis']);
+              $filename = $files_path."/regions/".$opis_ascii.".conf";
+              //				echo"<br>$filename<br>";
+              $file = fopen($filename, "w");
+              fwrite($file, $data);
+              fclose($file);
+              $counter++;
+            }
+          $file = fopen($update_file_name, "w");
+          $czas = time();
+          fwrite($file, $czas);
+          fclose($file);
+          return true;
+        }
+      }
+
     }
-    public function getSpeed($dev_id)
-    {
-      $id=intval($dev_id);
-      $query = "SELECT pakiet FROM Host WHERE device='$id'";
-      $result = $this->query($query);
-      return $result['pakiet'];
-    }
-    public function getConId($dev_id)
-    {
-      $id=intval($dev_id);
-      $query = "SELECT con_id FROM Host WHERE device='$id'";
-      $result = $this->query($query);
-      return $result['con_id'];
-    }
-  }
-}
