@@ -15,7 +15,7 @@ function getXMLHttpRequestObject()
 		}
 	}
 }
-function pobierz(dev_id)
+function pobierz(dev_id, is_target)
 {
 	//alert("wywoluje z adresem "+dev_id);
 	if(XMLHttpRequestObject)
@@ -26,10 +26,10 @@ function pobierz(dev_id)
 		if(! lista)
 			alert(XMLHttpRequestObject.responseText);
 		else
-			dodajWezel(lista);
+			dodajWezel(lista, is_target);
 	}
 }
-function dodajWezel(lista)
+function dodajWezel(lista, is_target)
 {
 	var dzieci = lista.documentElement.childNodes;
 	var parentMac = dzieci[0].firstChild.firstChild.nodeValue;
@@ -88,14 +88,17 @@ function dodajWezel(lista)
 			//alert (tmp);
 			var tekst = document.createElement("div");
 			tekst.innerHTML = tmp;
-			tekst.onclick = function() {pobierz(this.parentNode.id);}
+			tekst.onclick = function() {pobierz(this.parentNode.id, true);}
 			element.appendChild(tekst);
 			nowaLista.appendChild(element);
 		}
 		wezel_nadrz.appendChild(nowaLista);
 	}
-	pobierzOpcje(parentMac);
-	pobierzHistoria(parentMac, parentLoc);
+        if(is_target)
+        {
+          pobierzOpcje(parentMac);
+          pobierzHistoria(parentMac, parentLoc);
+        }
 }
 function przetwarzajOpcje()
 {
@@ -284,12 +287,12 @@ function getParentDeviceId(dev_id)
 		return dev_id;
 	}
 }
-function rozwinDrzewo(dev_id)
+function rozwinDrzewo(dev_id, is_target)
 {
 	var parent = getParentDeviceId(dev_id);
 	if(parent)
-		rozwinDrzewo(parent);
-	pobierz(dev_id);
+		rozwinDrzewo(parent, false);
+	  pobierz(dev_id, is_target);
 }
 var XMLHttpRequestObjectDevId = getXMLHttpRequestObject();
 var XMLHttpRequestObject = getXMLHttpRequestObject();

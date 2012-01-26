@@ -281,6 +281,14 @@ class Reaport
       return $out;
     }
 
+    public function get8000GS_IPS()
+    {
+      $output = array();
+      $sql = new MysqlSeu();
+      $query = "SELECT * FROM Allied_8000_ip";
+      $result = $sql->query_assoc_array($query);
+      return $result;
+    }
     public function getVlanIpUtilization($vid, $sort='ip')
     {
       $vid = intval($vid);

@@ -43,9 +43,9 @@ if($_GET['con_id'])
 <script type="text/javascript">
 var rozwin = '<?php echo $dev_id; ?>';
 if(!rozwin)
-	pobierz('3');
+	pobierz('3', true);
 else
-	rozwinDrzewo(rozwin);
+	rozwinDrzewo(rozwin, true);
 </script>
 </body>
 </html>
