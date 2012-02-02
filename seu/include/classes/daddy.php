@@ -1,6 +1,7 @@
 <?php 
 require('path.php');
 require(SEU_ABSOLUTE.'/include/classes/mysql.php');
+require(SEU_ABSOLUTE.'/include/classes/mysqlPdo.php');
 if(!defined('DADDY_CLASS'))
 {
   define('DADDY_CLASS', true);
@@ -241,19 +242,19 @@ if(!defined('DADDY_CLASS'))
           }
           public function getIpAddresses($dev_id)
           {
-                  $sql = $this->connect();
-                  $zapytanie = "SELECT Adres_ip.ip, Adres_ip.main, Podsiec.netmask as subnet_mask, Podsiec.vlan FROM Adres_ip LEFT JOIN  Podsiec ON Adres_ip.podsiec=Podsiec.id WHERE Adres_ip.device='$dev_id'"; 
-                  $wynik = mysql_query($zapytanie);
-                  if(mysql_affected_rows($sql)<1 && $this->getDeviceType($dev_id)!='Switch_bud')
+                  $sql = new MysqlSeuPdo();
+                  $zapytanie = "SELECT Adres_ip.ip, Adres_ip.main, Podsiec.netmask as subnet_mask, Podsiec.vlan FROM Adres_ip LEFT JOIN  Podsiec ON Adres_ip.podsiec=Podsiec.id WHERE Adres_ip.device=:dev_id";
+                  $ip_addr = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                  if(empty($ip_addr) && $this->getDeviceType($dev_id)!='Switch_bud')
                   {
                           return false;
   //		    Daddy::error("To urządzenie nie ma żadnego adresu ip?!");
   //		    exit();
                   }
                   $adresy_ip= array();
-                  for($i=0; $i<mysql_affected_rows($sql); $i++)
+                  for($i=0; $i<count($ip_addr); $i++)
                   {
-                          $tablica = mysql_fetch_assoc($wynik);
+                          $tablica = $ip_addr[$i];
                           $adresy_ip[$i][0] = $tablica['vlan'];
                           $adresy_ip[$i][1] = $tablica['ip']."/".$tablica['subnet_mask'];
                           $adresy_ip[$i][2] = $tablica['main'];
@@ -263,25 +264,18 @@ if(!defined('DADDY_CLASS'))
           }
           public function getParameters($dev_id)
           {
-                  $sql = $this->connect();
-                  if(!$sql)
-                  {
-                          Daddy::error("łączenie z bazą się nie powiodło");
-                          exit(0);
-                  }
-                  $dev_id = mysql_real_escape_string($dev_id);
-          //	$zapytanie = "SELECT Device.*, Lokalizacja.* , Switch_rejon.*, Switch_bud.* FROM Device LEFT JOIN  Lokalizacja ON Device.lokalizacja=Lokalizacja.id LEFT JOIN Switch_rejon ON Device.dev_id=Switch_rejon.device LEFT JOIN Switch_bud ON Device.dev_id=Switch_bud.device WHERE Device.dev_id='$dev_id'";
+                  $sql = new MysqlSeuPdo();
                   $zapytanie = "SELECT Device.*, Lokalizacja.*, Agregacja.* FROM Device 
                           LEFT JOIN Lokalizacja ON Device.lokalizacja=Lokalizacja.id 
                           LEFT JOIN Agregacja ON Agregacja.device=Device.dev_id 
-                          WHERE Device.dev_id='$dev_id'";
-                  $wynik = mysql_query($zapytanie);
-                  if(mysql_affected_rows($sql)<1)
+                          WHERE Device.dev_id=:dev_id";
+                  $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                  $device = $wynik[0];
+                  if(empty($wynik))
                   {
                           Daddy::error("Nie znaleziono urządzenia o podanym adresie dev_id");
                           exit();
                   }
-                  $device = mysql_fetch_assoc($wynik);
                   //pobieramy informacje o producencie i modelu
 
                   $opis = array();
@@ -305,18 +299,16 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_'.$key.'_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT * FROM Switch_rejon WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." przełączników rejonowych o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $switch = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Switch_rejon WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $switch = $wynik[0];
           //		print_r($switch);
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
                                           Producent.id='".$switch['producent']."' AND Model.id='".$switch['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                          $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $switch['producent'], 'model'=> $switch['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $switch['sn'];
@@ -333,18 +325,14 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT * FROM Switch_bud WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." przełączników budynkowych o podanym adresie $dev_id");
-                                  exit();
-                          }
-                          $switch = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Switch_bud WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $switch = $wynik[0];
                           $opis['Vlan'] = $switch['vlan'];
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
-                                          Producent.id='".$switch['producent']."' AND Model.id='".$switch['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $switch['producent'], 'model'=> $switch['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $switch['sn'];
@@ -362,17 +350,13 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT * FROM Serwer WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." serwerów o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $server = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Serwer WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $server = $wynik[0];
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
-                                          Producent.id='".$server['producent']."' AND Model.id='".$server['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $server['producent'], 'model'=> $server['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $server['sn'];
@@ -388,17 +372,13 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT * FROM Router WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." routerów o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $router = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Router WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $router = $wynik[0];
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
-                                          Producent.id='".$router['producent']."' AND Model.id='".$router['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $router['producent'], 'model'=> $router['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $router['sn'];
@@ -414,17 +394,13 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT * FROM Kamera WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." kamer o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $kamera = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Kamera WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $kamera = $wynik[0];
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
-                                          Producent.id='".$kamera['producent']."' AND Model.id='".$kamera['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $kamera['producent'], 'model'=> $kamera['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $kamera['sn'];
@@ -452,15 +428,10 @@ if(!defined('DADDY_CLASS'))
                           {
                                   $opis['IP_vlan_'.$adres[0]] = $adres[1];
                           }
-                          $zapytanie2 = "SELECT *,DATE_FORMAT(data_uruchomienia, '%d.%m.%y') AS start, DATE_FORMAT(data_zakonczenia, '%d.%m.%y') AS stop
-                                  FROM Host WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." hostów o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $host = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT *,DATE_FORMAT(data_uruchomienia, '%d.%m.%y') AS start
+                                  FROM Host WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $host = $wynik[0];
                           $opis['Numer_mieszkania'] = $host['nr_mieszkania'];
                           $opis['con_id'] = $host['con_id'];
                           $opis['Id_abonenta'] = $host['id_abonenta'];
@@ -481,18 +452,14 @@ if(!defined('DADDY_CLASS'))
                             {
                                     $opis['IP_vlan_'.$adres[0]] = $adres[1];
                             }
-                          $zapytanie2 = "SELECT * FROM Bramka_voip WHERE device='$dev_id'";
-                          $wynik2 = mysql_query($zapytanie2);
-                          if(mysql_affected_rows($sql)!="1")
-                          {
-                                  Daddy::error("Znaleziono ".mysql_affected_rows($sql)." bramek VoIP o podanym adresie dev_id");
-                                  exit();
-                          }
-                          $switch = mysql_fetch_assoc($wynik2);
+                          $zapytanie = "SELECT * FROM Bramka_voip WHERE device=:dev_id";
+                          $wynik = $sql->query($zapytanie, array('dev_id'=> $dev_id)); 
+                          $switch = $wynik[0];
                           $opis['Vlan'] = $switch['vlan'];
                           $zapytanie = "SELECT Producent.name as producent, Model.name as model FROM Producent, Model WHERE 
-                                          Producent.id='".$switch['producent']."' AND Model.id='".$switch['model']."'";
-                          $wynik = $this->query_assoc($zapytanie);
+                                          Producent.id=:producent AND Model.id=:model";
+                          $wynik = $sql->query($zapytanie, array('producent'=> $switch['producent'], 'model'=> $switch['model'])); 
+                          $wynik = $wynik[0];
                           $opis['Producent'] = $wynik['producent'];
                           $opis['Model'] = $wynik['model'];
                           $opis['sn'] = $switch['sn'];

@@ -26,9 +26,7 @@ if(! defined('PATH_MAIN_CONF'))
   if( !defined('TIMETABLE_RELATIVE'))
     define('TIMETABLE_RELATIVE', "timetable");
   // Defining core classes
-  if(! defined('MYSQL_CORE'))
-  {
-    define('MYSQL_CORE', true);
+
     require(CORE_ABSOLUTE.'/classes/mysqlMain.php');
-  }
+    require(CORE_ABSOLUTE.'/classes/mysqlPdo.php');
 }
