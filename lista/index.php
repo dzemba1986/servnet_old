@@ -7,7 +7,6 @@
   <td style="width:60px;">Deadline</td>
   <td><a href="index.php?order=adres&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Adres</a></td>
   <td>Telefon</td>
-  <td><a href="index.php?order=net_switch&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Przełącznik</a></td>
   <td>Switch_loc_str</td>
   <td>Port</td>
   <td style="width:50px;">Przewód</td>
@@ -17,7 +16,6 @@
   <td style="width:60px;">Gniazdko</td>
   <td style="width:60px;">Opłaty</td>
   <td style="width:60px;"><a href="index.php?order=net_configuration&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Konfig. usługi</a></td>
-  <td style="width:60px;">Inform.</td>
   <td><a href="index.php?order=installation_date&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż</a></td>
   <td>Dod. info</td>
   <td>BOA info</td>
@@ -94,7 +92,6 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_end_date']."</td>
       <td>".$wiersz['address']."</td>
       <td>".$wiersz['phone']."</td>
-      <td>".$wiersz['net_switch']."</td>
       <td>".$wiersz['net_switch_loc_str']."</td>
       <td>".$wiersz['net_port']."</td>";
     if($wiersz['net_wire']=='')
@@ -110,7 +107,6 @@ foreach($wynik as $wiersz)
       echo "<td style=\"text-align:center;\" >".$wiersz['_net_socket_date']."</td>";
     echo"	<td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>
       <td style=\"text-align:center;\" >".$wiersz['_net_configuration']."</td>
-      <td style=\"text-align:center;\" >".$wiersz['_net_informed']."</td>
       <td>".$wiersz['_installation_date']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
@@ -128,7 +124,6 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_end_date']."</td>
       <td rowspan=\"2\">".$wiersz['address']."</td>
       <td rowspan=\"2\">".$wiersz['phone']."</td>
-      <td>".$wiersz['net_switch']."</td>
       <td>".$wiersz['net_switch_loc_str']."</td>
       <td>".$wiersz['net_port']."</td>";
     if($wiersz['net_wire']=='')
@@ -144,7 +139,6 @@ foreach($wynik as $wiersz)
       echo "<td style=\"text-align:center;\" >".$wiersz['_net_socket_date']."</td>";
     echo "<td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>";
     echo"	<td style=\"text-align:center;\" >".$wiersz['_net_configuration']."</td>
-      <td style=\"text-align:center;\" >".$wiersz['_net_informed']."</td>
       <td rowspan=\"2\">".$wiersz['_installation_date']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
@@ -154,7 +148,6 @@ foreach($wynik as $wiersz)
     echo"<tr bgcolor=\"$phone_rowcolor\" class=\"row\">
       <td style=\"text-align:center;\" >".$wiersz['phone_start']."</td>
       <td style=\"text-align:center;\" >".$wiersz['phone_end_date']."</td>
-      <td>".$wiersz['phone_switch']."</td>
       <td>".$wiersz['phone_switch_loc_str']."</td>
       <td>".$wiersz['phone_port']."</td>";
     if($wiersz['phone_wire']=='')
@@ -170,7 +163,6 @@ foreach($wynik as $wiersz)
       echo"	<td style=\"text-align:center;\" >".$wiersz['_phone_socket_date']."</td>";
     echo"	<td style=\"text-align:center;\" >".$wiersz['_phone_payment_activation']."</td>
       <td style=\"text-align:center;\" >".$wiersz['_phone_configuration']."</td>
-      <td style=\"text-align:center;\" >".$wiersz['_phone_informed']."</td>
       <td>".$wiersz['phone_info']."</td>
       <td>".$wiersz['phone_info_boa']."</td>
       <td>".$wiersz['_phone_modyf']."</td>";
