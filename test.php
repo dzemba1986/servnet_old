@@ -42,5 +42,18 @@ else
       $ip_res[$seg++] = $ip_str_seg[$i];
 
 }
+for($i=0; $i<8; $i++)
+{
+  if($ip_res[$i])
+  {
+        $mask = '/^[0-9a-fA-F]{0,4}$/i';
+        return preg_match($mask, $value);
+
+     $ip_res[$i] = intval($ip_res[$i]);
+  }
+  else
+    $ip_res[$i] = 0;
+}
+
 var_dump($ip_str_tot);
 var_dump($ip_res);

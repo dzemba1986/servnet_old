@@ -1,12 +1,11 @@
 <?php
-if(!defined('IPADDRESS_CLASS'))
+if(!defined('IP_V4_CLASS'))
 {
-  define('IPADDRESS_CLASS', true);
+  define('IP_v4_CLASS', true);
   class IpAddress
   {
           private $address;
           private $netmask;
-          protected $version;
           public static function decToHR($decval)
           {
                   $wynik = array();
