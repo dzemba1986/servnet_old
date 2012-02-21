@@ -70,6 +70,39 @@ if(! defined('MYSQL_PDO_CORE'))
         return true;		//jezeli to bylo insert update delete drop lub wynik był pusty
       return $this->result;
     }
+    public function query_obj($query, $param, $class, $args=null)
+    {
+      $result_status = false;
+      $stmt = null;
+      try
+      {
+        $this->num_rows = 0;
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare($query);
+        if(is_array($param))
+          foreach($param as $key=>$p)
+          {
+            $stmt->bindValue(':'.$key, $p);
+          }
+        $result_status = $stmt->execute();
+      }
+      catch(PDOException $e)
+      {
+        printf("Query failed: ". $e->getMessage() . "<br/>");
+        exit();
+      }
+      if (!$result_status)
+      {
+        printf("Query failed: <br/>");
+        exit();
+      }
+      $this->result = array();
+      while($this->result[] =  $stmt->fetchObject($class, $args))
+          {};
+      if (empty($this->result))
+        return true;		//jezeli to bylo insert update delete drop lub wynik był pusty
+      return $this->result;
+    }
     public function query_update($query, $param, $id, $tabela, $id_field)
     {
       $sql = $this->connect();

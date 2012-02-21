@@ -1,4 +1,10 @@
 <?php 
+require('path.php');
+require(SEU_ABSOLUTE.'/include/classes/mysqlPdo.php');
+if(!defined('DADDY_CLASS'))
+{
+  define('DADDY_CLASS', true);
+  {
 class Device extends Daddy
 {
 	public $old_mac;
@@ -1378,12 +1384,10 @@ public function changeMac($dev_id, $mac)
     return false;
   }
 }
-
-
-
-private function getOldMac()
-{
-//	$query = "SELECT * FROM Device WHERE dev_id='$this->dev_id'";
-//	$
-}
+    private function getOldMac()
+    {
+    //	$query = "SELECT * FROM Device WHERE dev_id='$this->dev_id'";
+    //	$
+    }
+  }
 }

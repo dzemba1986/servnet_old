@@ -53,7 +53,7 @@ if(substr($tryb, -13)=="installations")
 {
   $wynik = $sql->getInstallationsList($tryb, $order, $paging, $find_phrase, $search_field); 
 }
-  elseif($tryb!='edit' && $tryb!='logout' && $tryb!='editUser')
+  elseif($tryb!='edit' && $tryb!='logout' && $tryb!='editUser' && $tryb!='active_modyfications')
 {
   $wynik = $sql->getList2($tryb, $order, $paging, $find_phrase, $search_field);
 }
@@ -97,6 +97,9 @@ switch($tryb)
   break;
   case 'for_configuration':
   $title = 'Przyłącza do skonfigurowania';
+  break;
+  case 'active_modyfications':
+  $title = 'Umówione montaże';
   break;
   default:
   $title = 'Do uruchomienia';

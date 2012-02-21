@@ -131,64 +131,9 @@ if(!defined('IP_V6_CLASS'))
             }
             return $result;
           }
-          public function getHrNetwork()
+          public function getHrNetwork($mask)
           {
-          }
-          public function getDbFirst($mask)
-          {
-          }
-          public function getHrFirst($mask)
-          {
-          }
-          public function getDbLast($mask)
-          {
-                  $rev_mask = bindec(substr(decbin(~$this->netmask),-32, 32));
-                  $last = $rev_mask | $this->address;
-                  return $last -1;
-          }
-
-          public function generujPodsiec()
-          {
-                  
-                  $first = $this->getFirst();
-                  $last = $this->getLast();
-                  $tmp = $first;
-                  $wynik = array();
-                  while($tmp <= $last)
-                  {
-                          $wynik[] = IpAddress::decToHR($tmp);
-                          $tmp++;
-                  }
-                  return $wynik;
-
-          }
-          public function czyIpNalezy($ip)
-          {
-                  $dec_ip = $this->hrToDec($ip);
-                  $network = $this->getNetworkAddress();
-          //	echo "<br> ".$ip;
-          //	echo " dec: ".$dec_ip;
-          //	echo " addr: ".$network;
-          //	echo " iloczyn: ".($dec_ip & $network);
-                  if((($dec_ip & $this->netmask) == $network) && ($dec_ip > $network))
-                          return true;
-                  else
-                  {
-                  //  echo $this->decToHR($dec_ip)." ".$this->decToHR($network)."/".$this->decToHR($this->netmask)."<br>"; 
-                  }
-                  return false;
-          }	
-          public function shift($dec, $llo)
-          {
-                  $dec = intval($dec);
-                  $sufix = 0;
-                  if($llo)
-                  {
-                    $sufix = $this->address & 0xFF;
-                    $this->address = (($this->address +$dec) & 0xFFFFFF00) + $sufix;
-                  }
-                  else
-                    $this->address += $dec;
+            return IpV6::dbToHr($this->getDbNetwork($mask));
           }
     public static function reorg($old_ip, $old_mask, $new_ip, $new_mask, $lock_file, $leave_last_octet)
     {

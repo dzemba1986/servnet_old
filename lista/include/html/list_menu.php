@@ -60,7 +60,7 @@ Rekordów na stronie
  
  
  
-<div id="menu">
+<div id="menu" style="position: relative; z-index:100">
 <ul id="sddm">
     <li><a href="#" 
         onmouseover="mopen('m1')" 
@@ -84,6 +84,17 @@ Rekordów na stronie
         <a href="installations.php?tryb=done_installations">Wykonane</a>
         <a href="installations.php?tryb=all_installations">Wszystkie</a>
         <a href="installations.php?tryb=pending_installations">Rozpoczęte</a>
+        </div>
+    </li>
+    <li><a href="#" 
+        onmouseover="mopen('m3')" 
+        onmouseout="mclosetime()">Montaże</a>
+        <div id="m3" 
+            onmouseover="mcancelclosetime()" 
+            onmouseout="mclosetime()">
+        <a href="modyfications.php?tryb=active_modyfications">Umówione</a>
+        <a href="modyfications.php?tryb=done_modyfications">Wykonane</a>
+        <a href="modyfications.php?tryb=new_modyfications">Nowy</a>
         </div>
     </li>
 </ul>
