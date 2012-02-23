@@ -57,7 +57,19 @@ else
 <br><h3>Generator konfiguracji przelacznika dla usunięcia abonenta internetowego</h3><br>
 <table>
 <tr><td>mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
-<tr><td>vlan</td><td><select name="net_vlan"><?php foreach($net_vlany as $form_vlan) echo"<option>$form_vlan</option>"; ?></select></td></tr>
+<tr>
+  <td>vlan</td>
+  <td>
+    <select name="net_vlan">
+      <?php foreach($net_vlany as $form_vlan) 
+      if($form_vlan==$net_vlan)
+        echo"<option selected>$form_vlan</option>"; 
+      else
+        echo"<option>$form_vlan</option>"; 
+      ?>
+    </select>
+  </td>
+</tr>
 <tr><td>port</td><td><select name="port">
 <?php for($i=$porty['first']; $i<=$porty['last']; $i++)
 {

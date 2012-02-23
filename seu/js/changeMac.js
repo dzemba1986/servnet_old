@@ -1,4 +1,4 @@
-function changeMac(obj, id, mac)
+function changeMac(obj, id, mac, vlan)
 {
   if(!id)
     return;
@@ -25,6 +25,13 @@ function changeMac(obj, id, mac)
   fields[2]['obj'].appendChild(document.createTextNode('8000gs script'));
   fields[2]['obj'].onclick = function () {generateScript()}
   fields[2]['label'] = '';
+  fields[3] = new Object();
+  fields[3]['obj'] = document.createElement('input');
+  fields[3]['obj'].setAttribute('type', 'hidden');
+  fields[3]['obj'].setAttribute('id', 'vlan');
+  fields[3]['obj'].setAttribute('name', 'vlan');
+  fields[3]['obj'].setAttribute('value', vlan);
+  fields[3]['label'] = '';
   var vtop = getElementTopPosition(obj);
   appendForm2('Modyfikacja MAC urządzenia <br>', fields, 'zmień', 'ajax/changeMac.php', vtop, 400, 300, 190, true);
 }
@@ -33,6 +40,7 @@ function generateScript()
     var port = document.getElementsByName('uplink_parent_select[0]')[0].value;
     var old_mac = document.getElementById('mac').value;
     var new_mac = document.getElementById('new_mac').value;
-    var alink = 'dev/8000GS/change_mac.php?mac=' + old_mac + '&port=' + port.substring(1) + '&mac2=' + new_mac;
+    var vlan = document.getElementById('vlan').value;
+    var alink = 'dev/8000GS/change_mac.php?mac=' + old_mac + '&port=' + port.substring(1) + '&mac2=' + new_mac + '&net_vlan=' + vlan;
     window.open(alink, 'add_internet');
 }

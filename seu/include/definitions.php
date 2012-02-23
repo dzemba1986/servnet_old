@@ -33,15 +33,15 @@
 define('MYMYSQL_FILE', ROOT.'/lista/include/classes/mysql.php');
 define('CONNECTIONS_FILE', ROOT.'/lista/include/classes/connections.php');
 
-if(!defined('DADDY'))
+if(!defined('DADDY_CLASS'))
 {
 	require(SEU_ABSOLUTE.'/include/classes/daddy.php');
-	define('DADDY', true);
+	define('DADDY_CLASS', true);
 }
-if(!defined('DEVICE'))
+if(!defined('DEVICE_CLASS'))
 {
 	require(SEU_ABSOLUTE.'/include/classes/device.php');
-	define('DEVICE', true);
+	define('DEVICE_CLASS', true);
 }
 if(! defined('LOKALIZACJA'))
 {

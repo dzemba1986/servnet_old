@@ -2,7 +2,7 @@
 if(!defined('IP_V4_CLASS'))
 {
   define('IP_v4_CLASS', true);
-  class IpAddress
+  class IpV4Address
   {
           private $address;
           private $netmask;
@@ -176,6 +176,19 @@ if(!defined('IP_V4_CLASS'))
       fclose($file);
       $daddy->updateDhcp(1, 1, 'add');
       echo " Reorganizacja zakonczona pomyslnie.";
+    }
+    public static function getIpVlan($dev_id)
+    {
+      $query = "SELECT p.vlan FROM Adres_ip ip 
+        INNER JOIN Podsiec p ON ip.podsiec=p.id
+        WHERE ip.main=1 AND ip.device=:device";
+      require(SEU_ABSOLUTE.'/include/classes/mysqlPdo.php');
+      $sql = new MysqlSeuPdo();
+      $result = $sql->query($query, array('device'=>$dev_id));
+      if($result)
+        return $result[0]['vlan'];
+      return false;
+
     }
   }
 }

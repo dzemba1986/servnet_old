@@ -78,7 +78,19 @@ else
 <tr><td>mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
 <tr><td>ip</td><td><input type="text" name="ip" value="<? echo ($ip) ?>"/></td></tr>
 <tr><td>description</td><td><input type="text" name="description" value="<? echo ($address) ?>"/></td></tr>
-<tr><td>vlan</td><td><select name="net_vlan"><?php foreach($net_vlany as $form_vlan) echo"<option>$form_vlan</option>"; ?></select></td></tr>
+<tr>
+  <td>vlan</td>
+  <td>
+    <select name="net_vlan">
+      <?php foreach($net_vlany as $form_vlan) 
+      if($form_vlan==$net_vlan)
+        echo"<option selected>$form_vlan</option>"; 
+      else
+        echo"<option>$form_vlan</option>"; 
+      ?>
+    </select>
+  </td>
+</tr>
 <tr><td>port</td><td><select name="port">
 <?php for($i=$porty['first']; $i<=$porty['last']; $i++)
 {

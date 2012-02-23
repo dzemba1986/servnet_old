@@ -29,7 +29,7 @@ function activateParentDevice(value)
 <tr>
 	<td class="tabela_danych_wejsciowych_label" style="background: #999999; border: 1px solid black; border-right: none;">Adres MAC *</td>
 	<td style="background: #999999; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<?php echo($device['mac']); ?>" readonly>
-	<button onclick="changeMac(this,'<?php echo($device['dev_id']); ?>',document.getElementById('mac').value); return false;" style=" margin-left: 30px;">Zmień</button></td>
+	<button onclick="changeMac(this,'<?php echo($device['dev_id']); ?>',document.getElementById('mac').value, document.getElementsByName('_vlan1')[0].value); return false;" style=" margin-left: 30px;">Zmień</button></td>
 </tr>
 </table>
 <?php if($device_type):?>
