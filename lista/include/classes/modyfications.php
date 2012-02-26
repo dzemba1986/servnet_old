@@ -1,10 +1,12 @@
 <?php 
 require('path.php');
 require(SEU_ABSOLUTE.'/include/classes/mysqlPdo.php');
+require(LISTA_ABSOLUTE.'/include/classes/mysqlPdo.php');
+require(LISTA_ABSOLUTE.'/include/classes/localization.php');
 if(!defined('MODYFICATION_CLASS'))
 {
   define('MODYFICATION_CLASS', true);
-  class Modyfication
+  class Modyfications
   {
     private $mod_id;
     private $mod_a_datetime;
@@ -22,11 +24,6 @@ if(!defined('MODYFICATION_CLASS'))
     private $mod_installer;
     private $mod_desc;
     private $mod_close_datetime;
-    public function __construct($id=null)
-    {
-      if($id)
-        $this->getById($id);
-    } 
     public function get_id()
     {
       return $this->mod_id;
@@ -91,6 +88,34 @@ if(!defined('MODYFICATION_CLASS'))
     {
       return $this->mod_close_datetime;
     }
+    public function get_s_date()
+    {
+      return null;
+    }
+    public function get_s_time()
+    {
+      return null;
+    }
+    public function get_e_date()
+    {
+      return null;
+    }
+    public function get_e_time()
+    {
+      return null;
+    }
+    public function get_street()
+    {
+      return null;
+    }
+    public function get_building()
+    {
+      return null;
+    }
+    public function get_flat()
+    {
+      return null;
+    }
     //***************************************
     // Setters
     //***************************************
@@ -106,10 +131,10 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_s_datetime($date, $time)
     {
-      require(SEU_ABSOLUTE.'/include/classes/datatypes.php');
+      require(SEU_ABSOLUTE.'/include/classes/dataTypes.php');
       if(DataTypes::is_Date($date) && DataTypes::is_Time($time))
       {
-        $this->mod_s_datetime = DateTime::date_to_longDate($date)." ".$time;
+        $this->mod_s_datetime = DataTypes::date_to_longDate($date)." ".$time.':00';
         return true;
       }
       elseif($date=='' && $time=='')
@@ -121,10 +146,10 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_e_datetime($date, $time)
     {
-      require(SEU_ABSOLUTE.'/include/classes/datatypes.php');
+      require(SEU_ABSOLUTE.'/include/classes/dataTypes.php');
       if(DataTypes::is_Date($date) && DataTypes::is_Time($time))
       {
-        $this->mod_e_datetime = DateTime::date_to_longDate($date)." ".$time;
+        $this->mod_e_datetime = DataTypes::date_to_longDate($date)." ".$time.':00';
         return true;
       }
       return false;
@@ -137,15 +162,16 @@ if(!defined('MODYFICATION_CLASS'))
     public function set_user_last_edit()
     {
       $this->mod_user_last_edit = $_SESSION['user_id'];
-      $return true;
+      return true;
     }
     public function set_user_closed()
     {
       $this->mod_user_closed = $_SESSION['user_id'];
-      $return true;
+      return true;
     }
     public function set_cost($cost)
     {
+      $cost = ((float) $cost);
       if(is_float($cost))
       {
         $this->mod_cost = $cost;
@@ -195,9 +221,9 @@ if(!defined('MODYFICATION_CLASS'))
       }
       return false;
     }
-    public function set_loc()
+    public function set_loc($loc)
     {
-      if(is_int($loc))
+      if(true)
       {
         $this->mod_loc = $loc;
         return true;
@@ -216,7 +242,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_desc($desc)
     {
-      $this->mode_desc = $desc;
+      $this->mod_desc = $desc;
       return true;
     }
 
@@ -224,13 +250,13 @@ if(!defined('MODYFICATION_CLASS'))
     // end of setters
     //*****************************************
 
-    public function getById($id)
+    public static function getById($id)
     {
       $query = "SELECT * FROM Modyfications WHERE mod_id=:mod_id"; 
-      $sql = new MysqlSeu();
+      $sql = new MysqlListaPdo();
       $sql->connect();
-      $wynik = $sql->query_obj($zapytanie, array('mod_id'=> $id), 'Modyfications'); 
-      if(count($wynik) == 1)
+      $wynik = $sql->query_obj($query, array('mod_id'=> $id), 'Modyfications'); 
+      if(count($wynik) == 2)
         return $wynik[0];
       else
         return false;
@@ -238,10 +264,10 @@ if(!defined('MODYFICATION_CLASS'))
     public function getByLoc($loc)
     {
       $query = "SELECT * FROM Modyfications WHERE mod_loc=:mod_loc"; 
-      $sql = new MysqlSeu();
+      $sql = new MysqlListaPdo();
       $sql->connect();
-      $wynik = $sql->query_obj($zapytanie, array('mod_loc'=> $loc), 'Modyfications'); 
-      if(count($wynik) == 1)
+      $wynik = $sql->query_obj($query, array('mod_loc'=> $loc), 'Modyfications'); 
+      if(count($wynik) == 2)
         return $wynik[0];
       else
         return false;
@@ -249,16 +275,22 @@ if(!defined('MODYFICATION_CLASS'))
     public function getByAddDate($date_from, $date_till)
     {
       $query = "SELECT * FROM Modyfications WHERE mod_a_datetime<=:date_from AND mod_a_datetime>=:date_till"; 
-      $sql = new MysqlSeu();
+      $sql = new MysqlListaPdo();
       $sql->connect();
-      $wynik = $sql->query_obj($zapytanie, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
+      $wynik = $sql->query_obj($query, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
       if(count($wynik) > 0)
         return $wynik;
       else
         return false;
     }
-    public static function add($s, $e, $user_add, $user_last_edit, $cost, $inst, $type, $cause, $loc, $installer, $desc)
+    public function add()
     {
+      var_dump($this);
+      if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
+          !$this->mod_user_last_edit || !$this->mod_inst || !$this->mod_type ||
+          !$this->mod_cause || !$this->mod_loc)
+        die("Nie podano wszystkich wymaganych parametrów montażu!");
+
       $query = "INSERT INTO Modyfications (
         mod_a_datetime,
         mod_s_datetime,
@@ -286,20 +318,19 @@ if(!defined('MODYFICATION_CLASS'))
        :mod_loc,
        :mod_installer,
        :mod_desc)";
-      $sql = new MysqlSeu();
-      $sql->connect();
-      $params = array('mod_s_datetime'=>$s,
-        'mod_e_datetime'=>$e,
-        'mod_user_add'=>$user_add,
-        'mod_user_last_edit'=>$user_last_edit,
-        'mod_cost'=>$cost,
-        'mod_inst'=>$inst,
-        'mod_type'=>$type,
-        'mod_cause'=>$cause,
-        'mod_loc'=>$loc,
-        'mod_installer'=>$installer,
-        'mod_desc'=>$desc);
-      return $sql->query($zapytanie, $params); 
+      $sql = new MysqlListaPdo();
+      $params = array('mod_s_datetime'=>$this->mod_s_datetime,
+        'mod_e_datetime'=>$this->mod_e_datetime,
+        'mod_user_add'=>$this->mod_user_add,
+        'mod_user_last_edit'=>$this->mod_user_last_edit,
+        'mod_cost'=>$this->mod_cost,
+        'mod_inst'=>$this->mod_inst,
+        'mod_type'=>$this->mod_type,
+        'mod_cause'=>$this->mod_cause,
+        'mod_loc'=>$this->mod_loc,
+        'mod_installer'=>$this->mod_installer,
+        'mod_desc'=>$this->mod_desc);
+      return $sql->query($query, $params); 
     }
     public function save()
     {
@@ -316,7 +347,7 @@ if(!defined('MODYFICATION_CLASS'))
         mod_installer=:mod_installer,
         mod_desc=:mod_desc
        WHERE mod_id=:id";
-      $sql = new MysqlSeu();
+      $sql = new MysqlListaPdo();
       $sql->connect();
       $params = array('mod_s_datetime'=>$this->mod_s_datetime,
         'mod_e_datetime'=>$e,
@@ -328,7 +359,7 @@ if(!defined('MODYFICATION_CLASS'))
         'mod_loc'=>$this->mod_loc,
         'mod_installer'=>$this->mod_installer,
         'mod_desc'=>$this->mod_desc);
-      return $sql->query_update($zapytanie, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
+      return $sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
     }
     public function close()
     {
@@ -347,7 +378,7 @@ if(!defined('MODYFICATION_CLASS'))
         mod_desc=:mod_desc,
         mod_close_datetime = NOW();
        WHERE mod_id=:id";
-      $sql = new MysqlSeu();
+      $sql = new MysqlListaPdo();
       $sql->connect();
       $params = array('mod_s_datetime'=>$this->mod_s_datetime,
         'mod_e_datetime'=>$e,
@@ -360,7 +391,7 @@ if(!defined('MODYFICATION_CLASS'))
         'mod_loc'=>$this->mod_loc,
         'mod_installer'=>$this->mod_installer,
         'mod_desc'=>$this->mod_desc);
-      return $sql->query_update($zapytanie, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
+      return $sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
     }
 
   }

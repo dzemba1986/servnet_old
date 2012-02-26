@@ -1,6 +1,7 @@
 <?php 
-if(!defined('LOKALIZACJA'))
+if(!defined('LOKALIZACJA_LISTA_CLASS'))
 {
+  define('LOKALIZACJA_LISTA_CLASS', true);
   class Lokalizacja 
   {
     public $id;

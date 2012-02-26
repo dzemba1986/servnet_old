@@ -36,7 +36,7 @@ if(!defined('DATATYPES_CLASS'))
       if(!DataTypes::is_Date($date))
         die('Wrong Date format!');
       $value = preg_split('/\./', $date);
-      return "'20".$value[2]."-".$value[1]."-".$value[0];
+      return "20".$value[2]."-".$value[1]."-".$value[0];
     }
     public static function is_LongDate($value)
     {
@@ -50,6 +50,23 @@ if(!defined('DATATYPES_CLASS'))
       $mask = '/^\b((([0-1][0-9])|(2[1-3])):([0-5][0-9]))\b$/';
       if(preg_match($mask, $value))
         return true;
+      return false;
+    }
+    public static function is_DateTime($value)
+    {
+      $mask = '/^((2[0-9][0-9][0-9])-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[01]))) (([01][0-9])|(2[0-3]):[0-5][0-9]:[0-5][0-9])$/';
+      if(preg_match($mask, $value))
+        return true;
+      return false;
+    }
+    public static function datetime_to_date_time($value)
+    {
+      if(DataType::is_DateTime($value))
+      {
+        $date = array('date'=>substr($value, 0, 10),
+                     'time'=>substr($value, -8));
+        return $date;
+      }
       return false;
     }
   }

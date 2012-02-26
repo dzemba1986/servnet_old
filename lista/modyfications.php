@@ -1,6 +1,55 @@
 <?php require('include/html/header.php'); ?>
+<?php require(LISTA_ABSOLUTE.'/include/classes/modyfications.php'); ?>
 <?php
-$c_width = 150; //collumn width;
+
+//***********************************
+//saving changes section
+//***********************************
+
+//Zapisz
+if($_POST['id'])
+{
+  $mod = new Modyfication($_POST['id']);
+  $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
+  $mod->set_e_datetime($_POST['e_date'], $_POST['e_time']);
+  $mod->set_cost($_POST['cost']);
+  $mod->set_inst($_POST['inst']);
+  $mod->set_type($_POST['type']);
+  $mod->set_cause($_POST['cause']);
+  $mod->set_loc($_POST['loc_id']);
+  $mod->set_desc($_POST['desc']);
+  $mod->set_user_last_edit();
+  $mod->save();
+}
+elseif($_POST['s_date'])
+{
+  $mod = new Modyfications();
+  $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
+  $mod->set_e_datetime($_POST['e_date'], $_POST['e_time']);
+  $mod->set_cost($_POST['cost']);
+  $mod->set_inst($_POST['inst']);
+  $mod->set_type($_POST['type']);
+  $mod->set_cause($_POST['cause']);
+  if($_POST['loc_id'])
+    $mod->set_loc($_POST['loc_id']);
+  else
+  {
+    $loc = new Lokalizacja();
+    $loc_id = $loc->add($_POST['street'], $_POST['building'], false, $_POST['flat'], false);
+    $mod->set_loc($loc_id);
+  }
+
+  $mod->set_desc($_POST['desc']);
+  $mod->set_user_add();
+  $mod->set_user_last_edit();
+  $mod->add();
+}
+
+//***********************************
+//week display section
+//***********************************
+
+$c_width = 60; //collumn width;
 $c_height = 40; //collumn height;
 $start_h = 9*60; //starting hour in minutes;
 $end_h = 17*60; // last hour;
@@ -13,7 +62,7 @@ $px_per_min = $c_height/60;
 $rows = ($end_h - $start_h)/60 + 1; //extra row is for day name and date
 $table_height = $rows * $c_height;
 $table_width = ($days-1) * $c_width + $hours_width;
-
+$week_days = array(1=>'Pon.', 2=>'Wt.', 3=>'Śr.', 4=>'Czw.', 5=>'Pt.', 6=>'Sob.', 7=>'Nd.');
 
 $mods = array(array('day'=> 2, 's_time'=>(9*60+10), 'e_time'=>(10*60)+20));
 
@@ -35,7 +84,7 @@ for($i=0; $i<$rows; $i++)
       }
       else
       {
-        echo '<div style="border: '.$cell_border.'px solid black; background: gray; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$c_width.'px; height:'.$c_height.'px;"></div>'."\n"; 
+        echo '<div style="border: '.$cell_border.'px solid black; background: gray; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$c_width.'px; height:'.$c_height.'px;">'.$week_days[$j].'</div>'."\n"; 
       }
     }
     elseif($j==0)

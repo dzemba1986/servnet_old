@@ -63,6 +63,7 @@ if(! defined('MYSQL_PDO_CORE'))
       if (!$result_status)
       {
         printf("Query failed: <br/>");
+        var_dump($stmt->errorInfo());
         exit();
       }
       $this->result = $stmt->fetchAll();
@@ -94,6 +95,7 @@ if(! defined('MYSQL_PDO_CORE'))
       if (!$result_status)
       {
         printf("Query failed: <br/>");
+        var_dump($stmt->errorInfo());
         exit();
       }
       $this->result = array();
