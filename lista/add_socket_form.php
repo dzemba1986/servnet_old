@@ -4,6 +4,7 @@ require(DADDY_PATH);
 $tryb = $_GET['tryb'];
 require('include/classes/installations.php');
 require('include/classes/connections.php');
+require(LISTA_ABSOLUTE.'/include/classes/modyfications.php'); 
 if($_REQUEST['field_name']=='add_installation')
 {
     $connection_id = $_REQUEST['connection_id'];
@@ -48,6 +49,11 @@ if($_REQUEST['main_id'])
 //    print_r($installation1);
   }
 }
+$mod=null;
+if($connection1['modyfication'])
+  $mod = Modyfications::getById($connection1['modyfication']);
+else
+  $mod = new Modyfications();
 
 
 ?>
@@ -93,15 +99,24 @@ if($_REQUEST['main_id'])
   <input type="hidden" name="installation_id" value="<?php echo($installation1['installation_id'])?>">
   <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
   <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
-  <input type="submit" class="submit_field" id="save_button" value="zmień">
+<?php if($connection1['modyfication']>0): ?>
 </div>
 </form>
+  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, '<?php echo ($mod->get_desc()); ?>', '<?php echo ($mod->get_cost()); ?>'); return false;">Zmień</button>
+<?php else: ?>
+  <input type="submit"  class="submit_field" id="save_button" value="Zmień">
+</div>
+</form>
+<?php endif; ?>
+<script type="text/javascript" src="js/closeModyfication.js"></script>
 <script type="text/javascript">testAddSocketForm('<?php echo $connection1['service']?>');</script>
 <?php else: ?>
 Brak instalacji
 </div></form>
 <form method="GET" action="add_socket_form.php">
-<input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="add_installation"><input type="submit" class="submit_field" value="Dodaj">
+<input type="hidden" name="id" value="<?php echo($connection1['id'])?>">
+<input type="hidden" name="field_name" value="add_installation">
+<input type="submit" class="submit_field" value="Dodaj">
 <input type="hidden" name="connection_id" value="<?php echo($connection1['id'])?>">
 <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
 <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">

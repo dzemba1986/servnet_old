@@ -92,9 +92,9 @@ Rekordów na stronie
         <div id="m3" 
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
-        <a href="modyfications.php?tryb=active_modyfications">Umówione</a>
-        <a href="modyfications.php?tryb=done_modyfications">Wykonane</a>
-        <a href="modyfications.php?tryb=new_modyfications">Nowy</a>
+        <a href="modyfications.php?tryb=modyfications">Umówione</a>
+        <a href="modyfications.php?tryb=modyfications">Wykonane</a>
+        <a href="modyfications_form.php?tryb=modyfications">Nowy</a>
         </div>
     </li>
 </ul>

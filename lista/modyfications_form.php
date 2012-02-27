@@ -8,7 +8,18 @@ $mod_id = $_GET['mod_id'];
 $con_id = $_GET['con_id'];
 $mod = null;
 $loc_arr = null;
-
+$inst_arr = array('net' => 'Internet',
+                  'tv' => 'Telewizja',
+                  'phone' => 'Telefon',
+                  'other' => 'Inna');
+$type_arr = array('inst_new' => 'Nowa instalacja',
+                  'inst_change' => 'Wymiana instalacji',
+                  'socket_add' => 'Nowe gniazdo',
+                  'socket_change' => 'Wymiana gniazda',
+                  'wire_change' => 'Wymiana przewodu',
+                  'modyfication' => 'Inne przeróbki');
+$cause_arr = array('devastation_in' => 'W lokalu',
+                  'devastation_out' => 'Poza lokalem');
 if($con_id)
 {
   $mod_id = Connections::getModId($con_id);
@@ -20,7 +31,6 @@ if($con_id)
 
 if($mod_id)
 {
-  echo $mod_id;
   $mod = Modyfications::getById($mod_id);
   if(!$con_id)
   {
@@ -32,12 +42,12 @@ if($mod_id)
 }
 else
   $mod = new Modyfications();
-var_dump($mod);
 $sql = new myMysql();
 $streets = $sql->getUlic();
+
 ?>
 <div>
-  <form action="modyfications.php?tryb=active_modyfications" method="post">
+  <form action="modyfications.php?tryb=modyfications" method="post">
   <table class="tables" style="margin: 50px 0px 0px 50px">
   <tr>
     <td>Początek</td>
@@ -55,10 +65,16 @@ $streets = $sql->getUlic();
     <td>Typ instalacji</td>
     <td>
     <select name="inst">
-      <option>net</option>
-      <option>tv</option>
-      <option>phone</option>
-      <option>other</option>
+      <option></option>
+      <?php 
+      $inst = $mod->get_inst();
+      foreach($inst_arr as $key=>$val)
+      {
+        if($key==$inst)
+          echo "<option value=\"$key\" selected>$val</option>";
+        else
+          echo "<option value=\"$key\">$val</option>";
+      }?>
     </select>
     </td>
   </tr>
@@ -66,12 +82,16 @@ $streets = $sql->getUlic();
     <td>Rodzaj przeróbki</td>
     <td>
     <select name="type">
-      <option>inst_new</option>
-      <option>inst_change</option>
-      <option>socket_add</option>
-      <option>socket_change</option>
-      <option>wire_change</option>
-      <option>modyfication</option>
+      <option></option>
+      <?php 
+      $type = $mod->get_type();
+      foreach($type_arr as $key=>$val)
+      {
+        if($key==$type)
+          echo "<option value=\"$key\" selected>$val</option>";
+        else
+          echo "<option value=\"$key\">$val</option>";
+      }?>
     </select>
     </td>
   </tr>
@@ -79,8 +99,15 @@ $streets = $sql->getUlic();
     <td>Przyczyna przeróbki</td>
     <td>
     <select name="cause">
-      <option>devastation_out</option>
-      <option>devastation_in</option>
+      <?php 
+      $cause = $mod->get_cause();
+      foreach($cause_arr as $key=>$val)
+      {
+        if($key==$cause)
+          echo "<option value=\"$key\" selected>$val</option>";
+        else
+          echo "<option value=\"$key\">$val</option>";
+      }?>
     </select>
     </td>
   </tr>
@@ -90,7 +117,7 @@ $streets = $sql->getUlic();
     <?php if($loc_arr):
     echo($loc_arr['str']);
     ?>
-    <input type="hidden" name="street" value="<?php echo($loc_arr['id']); ?>" />
+    <input type="hidden" name="loc_id" value="<?php echo($loc_arr['id']); ?>" />
     <?php else: ?>
     <select name="street">
       <option></option>
@@ -115,6 +142,7 @@ $streets = $sql->getUlic();
   </tr>
   </table>
     <input type="hidden" name="id" value="<?php echo($mod->get_id()); ?>"/>
+    <input type="hidden" name="con_id" value="<?php echo(intval($con_id)); ?>"/>
   </form>
 </table>
 </div>

@@ -388,6 +388,12 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['modyfication'];
     }
+    public static function setModId($sql, $con_id, $mod_id)
+    {
+      $query = "UPDATE Connections SET modyfication = :mod_id WHERE id=:con_id";
+      $result = $sql->query_update($query, array('con_id'=>$con_id, 'mod_id'=>$mod_id), $con_id, 'Connections', 'id');
+        return $result;
+    }
     public function validDate($value)
     {
       $mask = '/^(((0[1-9])|([1-2][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.([0-9][0-9]))$/';

@@ -71,6 +71,35 @@ if(! defined('MYSQL_PDO_CORE'))
         return true;		//jezeli to bylo insert update delete drop lub wynik był pusty
       return $this->result;
     }
+    public function query_insert($query, $param)
+    {
+      $result_status = false;
+      $stmt = null;
+      try
+      {
+        $this->num_rows = 0;
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare($query);
+        if(is_array($param))
+          foreach($param as $key=>$p)
+          {
+            $stmt->bindValue(':'.$key, $p);
+          }
+        $result_status = $stmt->execute();
+      }
+      catch(PDOException $e)
+      {
+        printf("Query failed: ". $e->getMessage() . "<br/>");
+        exit();
+      }
+      if (!$result_status)
+      {
+        printf("Query failed: <br/>");
+        var_dump($stmt->errorInfo());
+        exit();
+      }
+      return $pdo->lastInsertId();
+    }
     public function query_obj($query, $param, $class, $args=null)
     {
       $result_status = false;
@@ -154,6 +183,57 @@ if(! defined('MYSQL_PDO_CORE'))
       catch(PDOException $e)
       {
         printf("Logging failed: ". $e->getMessage() . "<br/>");
+        exit();
+      }
+    }
+    public function begin()
+    {
+      $result_status = false;
+      $stmt = null;
+      try
+      {
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare("BEGIN");
+        $result_status = $stmt->execute();
+        return $result_status;
+      }
+      catch(PDOException $e)
+      {
+        printf("Query failed: ". $e->getMessage() . "<br/>");
+        exit();
+      }
+    }
+    public function rollback()
+    {
+      $result_status = false;
+      $stmt = null;
+      try
+      {
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare("ROLLBACK");
+        $result_status = $stmt->execute();
+        return $result_status;
+      }
+      catch(PDOException $e)
+      {
+        printf("Query failed: ". $e->getMessage() . "<br/>");
+        exit();
+      }
+    }
+    public function commit()
+    {
+      $result_status = false;
+      $stmt = null;
+      try
+      {
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare("COMMIT");
+        $result_status = $stmt->execute();
+        return $result_status;
+      }
+      catch(PDOException $e)
+      {
+        printf("Query failed: ". $e->getMessage() . "<br/>");
         exit();
       }
     }

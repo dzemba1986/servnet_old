@@ -9,7 +9,7 @@
 //Zapisz
 if($_POST['id'])
 {
-  $mod = new Modyfication($_POST['id']);
+  $mod = Modyfications::getById($_POST['id']);
   $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
   $mod->set_e_datetime($_POST['e_date'], $_POST['e_time']);
   $mod->set_cost($_POST['cost']);
@@ -42,7 +42,7 @@ elseif($_POST['s_date'])
   $mod->set_desc($_POST['desc']);
   $mod->set_user_add();
   $mod->set_user_last_edit();
-  $mod->add();
+  $mod->add($_POST['con_id']);
 }
 
 //***********************************
