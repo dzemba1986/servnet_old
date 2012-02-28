@@ -647,7 +647,6 @@ if(!defined('DEVICE_CLASS'))
         $_exists = 1;
       else
         $_exists = 0;
-      $_mac = strtolower(mysql_real_escape_string($_device['mac']));
       $_dev_id = mysql_real_escape_string($_device['dev_id']);
       $_other_name = mysql_real_escape_string($_device['other_name']);
       $_opis = mysql_real_escape_string($_device['opis']);
@@ -686,7 +685,7 @@ if(!defined('DEVICE_CLASS'))
       if($this->findDuplicates($_uplink_parent_ports) || $this->findDuplicates($_uplink_local_ports))
         die("Porty uplinku nie moga się powtarzać!!!");
       //	Po sprawdzeniu parametrow laczymy sie z baza i dodajemy do niej rekord
-      $zapytanie = "UPDATE `Device` SET `exists`='$_exists', `virtual`='1', `mac`='$_mac', `gateway`='$_gateway', `opis`='$_opis',
+      $zapytanie = "UPDATE `Device` SET `exists`='$_exists', `virtual`='1', `gateway`='$_gateway', `opis`='$_opis',
         `device_type`='$_device_type', `lokalizacja`='$this->lokalizacja',
         `other_name`='$_other_name' WHERE dev_id='$_dev_id'"; 
           $wynik = $this->query($zapytanie);
