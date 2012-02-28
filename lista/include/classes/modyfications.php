@@ -248,7 +248,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_installer($installer)
     {
-      $this->mod_installer = null;
+      $this->mod_installer = $installer;
       return true;
     }
     public function set_desc($desc)
@@ -259,9 +259,9 @@ if(!defined('MODYFICATION_CLASS'))
     public function set_fullfill($val)
     {
       if($val==1)
-        $this->mod_id = 1;
+        $this->mod_fullfill = 1;
       else
-        $this->mod_id = null;
+        $this->mod_fullfill = null;
       return true;
     }
     //*****************************************
@@ -303,6 +303,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function add($con_id)
     {
+      var_dump($this);
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
           !$this->mod_user_last_edit || !$this->mod_inst || !$this->mod_type ||
           !$this->mod_cause || !$this->mod_loc)
@@ -390,7 +391,7 @@ if(!defined('MODYFICATION_CLASS'))
         'mod_id'=>$this->mod_id);
       return $sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
     }
-    public function close()
+    public function close($con_id)
     {
       $query = "UPDATE Modyfications SET 
         mod_s_datetime=:mod_s_datetime,
@@ -407,11 +408,11 @@ if(!defined('MODYFICATION_CLASS'))
         mod_desc=:mod_desc,
         mod_close_datetime = NOW(),
         mod_fullfill = :mod_fullfill
-       WHERE mod_id=:id";
+       WHERE mod_id=:mod_id";
       $sql = new MysqlListaPdo();
       $sql->connect();
       $params = array('mod_s_datetime'=>$this->mod_s_datetime,
-        'mod_e_datetime'=>$e,
+        'mod_e_datetime'=>$this->mod_e_datetime,
         'mod_user_last_edit'=>$this->mod_user_last_edit,
         'mod_user_closed'=>$this->mod_user_closed,
         'mod_cost'=>$this->mod_cost,
@@ -421,10 +422,21 @@ if(!defined('MODYFICATION_CLASS'))
         'mod_loc'=>$this->mod_loc,
         'mod_installer'=>$this->mod_installer,
         'mod_desc'=>$this->mod_desc,
-        'mod_fullfill'=>$this->mod_fullfill);
-      return $sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'); 
+        'mod_fullfill'=>$this->mod_fullfill,
+        'mod_id'=>$this->mod_id);
+      $sql->begin();
+      if($sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'))
+      {
+        $con = new Connections();
+        if($con->setModId($sql, $con_id, 0))
+        {
+          $sql->commit();
+          return true;
+        }
+      }
+      $sql->rollback();
+      return false;
     }
-
   }
 }
 

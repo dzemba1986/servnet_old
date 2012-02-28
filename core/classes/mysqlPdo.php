@@ -147,9 +147,9 @@ if(! defined('MYSQL_PDO_CORE'))
       $user = intval($_SESSION['user_id']);
       $ip = $_SERVER['REMOTE_ADDR'];
       $log_query = strtolower($log_query);
-      if(!$id || !$table || !$id_field)
+      if($id===null || !$table || !$id_field)
       {
-        printf("Missing manadatory logging field!<br/>");
+        printf("Missing manadatory logging field! id=$id, table=$table, id_field=$id_field, query=$log_query<br/>");
         exit();
       }
 

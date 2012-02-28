@@ -53,7 +53,8 @@ $mod=null;
 if($connection1['modyfication'])
   $mod = Modyfications::getById($connection1['modyfication']);
 else
-  $mod = new Modyfications();
+  $mod = false;
+  var_dump ($mod);
 
 
 ?>
@@ -63,7 +64,7 @@ else
 <div style="clear:both;"></div>
 <div id="net">
 <center>
-<form method="POST" onsubmit="return checkMacSocketForm();" action="add_socket_form.php?tryb=edit">
+<form id="socket_form" method="POST" onsubmit="return checkMacSocketForm();" action="add_socket_form.php?tryb=edit">
 <div id="net_connection">
     <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
   <table class="tables">
@@ -102,7 +103,7 @@ else
 <?php if($connection1['modyfication']>0): ?>
 </div>
 </form>
-  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, '<?php echo ($mod->get_desc()); ?>', '<?php echo ($mod->get_cost()); ?>'); return false;">Zmień</button>
+  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, '<?php echo ($mod->get_desc()); ?>', '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>'); return false;">Zmień</button>
 <?php else: ?>
   <input type="submit"  class="submit_field" id="save_button" value="Zmień">
 </div>

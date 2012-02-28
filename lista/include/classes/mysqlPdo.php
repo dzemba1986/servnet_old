@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('MYSQL_LISTA_PDO_CLASS'))
 {
   define('MYSQL_LISTA_PDO_CLASS', true);

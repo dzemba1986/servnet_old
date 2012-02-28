@@ -145,11 +145,12 @@ function appendForm2(title, fields, submit_text, target, top_position, left, wid
   b_close = document.createElement('button');
   b_close.innerHTML = 'zamknij';
   b_close.setAttribute('id','newdiv_b_close');
-  b_close.onclick = function (){removeForm(false);};
+  addEvent(b_close, "click", function (){removeForm(false);});
   newdiv.appendChild(document.createElement("br"));
   newdiv.appendChild(b_close);
   append = document.createElement('button');
   append.innerHTML = submit_text;
+  append.setAttribute('id','newdiv_b_append');
   append.onclick = function (){sendForm(newdiv, target, reload);};
   newdiv.appendChild(append);
   var result = document.createElement('div');
@@ -329,3 +330,15 @@ function getElementTopPosition(e)
   }
   return y;
 }
+function addEvent(obj, evType, fn) {
+  if (obj.addEventListener) {
+    obj.addEventListener(evType, fn, false);
+    return true;
+  } else if (obj.attachEvent) {
+    var r = obj.attachEvent("on" + evType, fn);
+    return r;
+  } else {
+    alert("Handler could not be attached");
+  }
+}
+

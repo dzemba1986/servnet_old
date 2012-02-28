@@ -1,22 +1,23 @@
 <?php
 require('../security.php');
 require('path.php');
-require('../include/classes/localization.php');
-require('../include/classes/installations.php');
-require('../include/classes/connections.php');
-$connection = new Connections();
-if($_GET['reason']==1)
-  $connection->updateAddress($_GET['id'], $_GET['osiedle'], $_GET['blok'], $_GET['mieszkanie'], $_GET['klatka'], $_GET['other_name']);
-elseif($_GET['reason']==2)
-{
-  $sql = new myMysql();
-  $addAndSer = $sql->getConnectionAddressAndService($_GET['id']);
-  $id_lok = $connection->updateAddress($_GET['id'], $_GET['osiedle'], $_GET['blok'], $_GET['mieszkanie'], $_GET['klatka'], $_GET['other_name']);
-  if(!$id_lok)
-    die("Błąd lokalizacji połączenia!");
-  $installation = new Installations();
-  $installation->updateAddress($addAndSer, $id_lok);
- // $installation->updateAddress();
-}
+require(LISTA_ABSOLUTE.'/include/classes/connections.php');
+require(LISTA_ABSOLUTE.'/include/classes/modyfications.php');
+$mod_id = $_GET['id'];
+$con_id = $_GET['con_id'];
+$mod_installer = $_GET['installer'];
+$mod_fullfill = $_GET['fullfill'];
+$mod_desc = $_GET['desc'];
+$mod_cost = $_GET['cost'];
+
+$mod = Modyfications::getById($mod_id);
+$mod->set_installer($mod_installer);
+$mod->set_fullfill($mod_fullfill);
+$mod->set_desc($mod_desc);
+$mod->set_cost($mod_cost);
+$mod->set_user_closed();
+$result = $mod->close($con_id);
+if($result)
+  echo('Zamknięto montaż');
 else
-  die('Nie wybrano powodu');
+  echo('Nie zamknięto montażu!!!');

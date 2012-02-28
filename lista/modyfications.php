@@ -11,7 +11,7 @@ if($_POST['id'])
 {
   $mod = Modyfications::getById($_POST['id']);
   $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
-  $mod->set_e_datetime($_POST['e_date'], $_POST['e_time']);
+  $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
   $mod->set_cost($_POST['cost']);
   $mod->set_inst($_POST['inst']);
   $mod->set_type($_POST['type']);
@@ -25,7 +25,7 @@ elseif($_POST['s_date'])
 {
   $mod = new Modyfications();
   $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
-  $mod->set_e_datetime($_POST['e_date'], $_POST['e_time']);
+  $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
   $mod->set_cost($_POST['cost']);
   $mod->set_inst($_POST['inst']);
   $mod->set_type($_POST['type']);

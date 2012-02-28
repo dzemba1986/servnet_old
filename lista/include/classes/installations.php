@@ -1,6 +1,17 @@
 <?php
 class Installations
 {
+  private $installation_id;
+  private $address;
+  private $localization;
+  private $wire_length;
+  private $wire_installation_date;
+  private $socket_installation_date;
+  private $wire_installer;
+  private $socket_installer;
+  private $type;
+  private $connection_id;
+
   public function updateWire($id, $length, $date, $installer)
   {
     $permissions = $_SESSION['permissions'];

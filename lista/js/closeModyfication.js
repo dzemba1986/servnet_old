@@ -5,8 +5,8 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   fields[0]['name'] = 'installer';
   fields[0]['obj'] = document.createElement('input');
   fields[0]['obj'].setAttribute('type', 'text');  
-  fields[0]['obj'].setAttribute('id', 'info');
-  fields[0]['obj'].setAttribute('name', 'info');  
+  fields[0]['obj'].setAttribute('id', 'installer');
+  fields[0]['obj'].setAttribute('name', 'installer');  
   fields[0]['obj'].setAttribute('value', installer);  
   fields[0]['label'] = 'Monter';
   fields[1] = new Object();
@@ -18,12 +18,12 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   fields[1]['obj'].appendChild(option);
 
   option = document.createElement('option');
-  option.setAttribute('value', 0);
+  option.setAttribute('value', 1);
   option.appendChild(document.createTextNode('Tak'));
   fields[1]['obj'].appendChild(option);
 
   option = document.createElement('option');
-  option.setAttribute('value', 1);
+  option.setAttribute('value', 0);
   option.appendChild(document.createTextNode('Nie'));
   fields[1]['obj'].appendChild(option);
 
@@ -61,5 +61,56 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   fields[5]['obj'].setAttribute('value', con_id);  
   fields[5]['label'] = '';
   var vtop = obj.parentNode.offsetTop + 200;
-  appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 310, 240, true);
+  appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 310, 260, true);
+  var form = document.getElementById('socket_form');
+  var append_button = document.getElementById('newdiv_b_append');
+  var ff = document.getElementById('fullfill');
+  var inst = document.getElementById('installer');
+  addEvent(ff, "change", function() {checkModyfF()});
+  addEvent(inst, "keyup" , function() {checkModyfF()});
+  checkModyfF();
+
+
+
+    addEvent(append_button, "click", function () {alert("Zamknięto montaż, teraz nastąpi dopisanie danych instalacji do bazy")});
+    addEvent(append_button, "click", function () {form.submit()});
+  }
+  function checkModyfF()
+{
+  var ff = document.getElementById('fullfill');
+  var inst = document.getElementById('installer');
+  inst.disabled = true;
+  var ab = document.getElementById('newdiv_b_append');
+  var ff_disable = false;
+  var inst_disable = false;
+  if(ff.value!='1' && ff.value!='0')
+  {
+    ff.style.backgroundColor="red";
+    ff_disable = true;
+  }
+  else
+  {
+    ff.style.backgroundColor="white";
+    ff_disable = false;
+  }
+  if(inst.value=='')
+  {
+    inst.style.backgroundColor="red";
+    inst_disable = true;
+  }
+  else
+  {
+    inst.style.backgroundColor="white";
+      inst_disable = false;
+  }
+  if(ff_disable==true || inst_disable==true)
+  {
+    ab.disabled = true;
+    ab.style.backgroundColor="red";
+  }
+  else
+  {
+    ab.style.backgroundColor="white";
+    ab.disabled = false;
+  }
 }

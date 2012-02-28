@@ -55,7 +55,7 @@ $streets = $sql->getUlic();
   </tr>
   <tr>
     <td>Koniec</td>
-    <td width="185"><div style="float: left; padding-top:5px">D:</div><input class="date_field" type="text" value="<?php echo($mod->get_e_date())?>" name="e_date" id="e_date"> T:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time"></td>
+    <td width="185"><div style="float: left; padding-top:5px"></div>T:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time"></td>
   </tr>
   <tr>
     <td>Cena</td>
