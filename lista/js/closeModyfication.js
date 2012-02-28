@@ -66,8 +66,10 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   var append_button = document.getElementById('newdiv_b_append');
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
+  var cost_f = document.getElementById('cost');
   addEvent(ff, "change", function() {checkModyfF()});
   addEvent(inst, "keyup" , function() {checkModyfF()});
+  addEvent(cost_f, "keyup" , function() {checkModyfF()});
   checkModyfF();
 
 
@@ -79,10 +81,12 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
 {
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
+  var cost_f = document.getElementById('cost');
   inst.disabled = true;
   var ab = document.getElementById('newdiv_b_append');
   var ff_disable = false;
-  var inst_disable = false;
+  var inst_disable = testInstaller(inst);
+  var cost_disable = !testCost(cost_f);
   if(ff.value!='1' && ff.value!='0')
   {
     ff.style.backgroundColor="red";
@@ -103,7 +107,7 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
     inst.style.backgroundColor="white";
       inst_disable = false;
   }
-  if(ff_disable==true || inst_disable==true)
+  if(ff_disable==true || inst_disable==true || cost_disable==true)
   {
     ab.disabled = true;
     ab.style.backgroundColor="red";

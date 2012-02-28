@@ -184,6 +184,36 @@ function testInstaller(field, sub_button)
     return false;
   }
 }
+function testInstaller(field)
+{
+  var value = field.value;
+  var result = value.match(/^[a-zA-Z\s&ąćęłńóśźżĄĆĘŁŃÓŚŹŻ.]{2,}$/);
+  if(result)
+  {
+    field.style.backgroundColor="white";
+    return true;
+  }
+  else
+  {
+    field.style.backgroundColor="red";
+    return false;
+  }
+}
+function testCost(field)
+{
+  var value = field.value;
+  var result = value.match(/^[0-9]{1,}(.[0-9]{1,2})?$/);
+  if(result)
+  {
+    field.style.backgroundColor="white";
+    return true;
+  }
+  else
+  {
+    field.style.backgroundColor="red";
+    return false;
+  }
+}
 function testWire(field, sub_button)
 {
   var value = field.value;
