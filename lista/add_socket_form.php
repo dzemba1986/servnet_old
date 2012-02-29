@@ -64,7 +64,7 @@ else
 <div style="clear:both;"></div>
 <div id="net">
 <center>
-<form id="socket_form" method="POST" onsubmit="return checkMacSocketForm();" action="add_socket_form.php?tryb=edit">
+<form id="socket_form" method="POST" action="add_socket_form.php?tryb=edit">
 <div id="net_connection">
     <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
   <table class="tables">

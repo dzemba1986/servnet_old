@@ -26,6 +26,7 @@ if(!defined('MODYFICATION_CLASS'))
     private $mod_desc;
     private $mod_close_datetime;
     private $mod_fullfill;
+    private $mod_col;
     public function get_id()
     {
       return $this->mod_id;
@@ -126,6 +127,10 @@ if(!defined('MODYFICATION_CLASS'))
     public function get_fullfill()
     {
       return $this->mod_fullfill;
+    }
+    public function get_col()
+    {
+      return $this->mod_col;
     }
     //***************************************
     // Setters
@@ -264,6 +269,11 @@ if(!defined('MODYFICATION_CLASS'))
         $this->mod_fullfill = null;
       return true;
     }
+    public function set_col($val)
+    {
+      $this->mod_col = intval($col);
+      return true;
+    }
     //*****************************************
     // end of setters
     //*****************************************
@@ -290,11 +300,20 @@ if(!defined('MODYFICATION_CLASS'))
       else
         return false;
     }
-    public function getByAddDate($date_from, $date_till)
+    public static function getByAddDate($date_from, $date_till)
     {
-      $query = "SELECT * FROM Modyfications WHERE mod_a_datetime<=:date_from AND mod_a_datetime>=:date_till"; 
+      $query = "SELECT * FROM Modyfications WHERE mod_a_datetime>=:date_from AND mod_a_datetime<:date_till ORDER BY mod_a_datime ASC"; 
       $sql = new MysqlListaPdo();
-      $sql->connect();
+      $wynik = $sql->query_obj($query, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
+      if(count($wynik) > 0)
+        return $wynik;
+      else
+        return false;
+    }
+    public static function getByStartDate($date_from, $date_till)
+    {
+      $query = "SELECT * FROM Modyfications WHERE mod_s_datetime>=:date_from AND mod_s_datetime<:date_till ORDER BY mod_s_datetime ASC"; 
+      $sql = new MysqlListaPdo();
       $wynik = $sql->query_obj($query, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
       if(count($wynik) > 0)
         return $wynik;
@@ -437,6 +456,142 @@ if(!defined('MODYFICATION_CLASS'))
       $sql->rollback();
       return false;
     }
+    public function interfere($mod)
+    {
+      if(!is_object($mod))
+      {
+        var_dump($mod);
+        die('Wrong Modyfication comparition input!');
+      }
+      $u11 = strtotime($this->mod_s_datetime);
+      $u12 = strtotime($this->mod_e_datetime);
+      $u21 = strtotime($mod->mod_s_datetime);
+      $u22 = strtotime($mod->mod_e_datetime);
+      if((($u11 < $u22) && ($u12 > $u21)) || (($u21 < $u12) && ($u22 > $u11)))
+        return true;
+      return false;
+    }
+  }
+  class ModDay {
+    private $day_dateTime; //unix_timestamp
+    private $day_time_min; //array(hh, mm)
+    private $day_time_max; //array(hh, mm)
+    private $day_cols; //int
+    private $day_offset; //cols offset i week view
+    private $day_active; //bool
+    private $day_modyfications; //array(modyfications)
+    public function get_cols()
+    {
+      return $this->day_cols;
+    }
+    public function get_offset()
+    {
+      return $this->day_offset;
+    }
+    public function set_offset($val)
+    {
+      $this->day_offset = intval($val);
+    }
+    function __construct($init_date)
+    {
+      $this->day_offset = 0;
+      $datetime =null;
+      if($init_date) 
+      {
+        if(!DataTypes::is_DateTime($init_date))
+          die("Wrong date format");
+       $datetime = new DateTime($init_date);
+      }
+      else
+       $datetime = new DateTime();
+      $this->day_dateTime = $datetime;
+      $this->arrange_cols(Modyfications::getByStartDate($datetime->format('Y-m-d').' 00:00:00', $datetime->add(new DateInterval('P1D'))->format('Y-m-d').' 00:00:00'));
+      $datetime->sub(new DateInterval('P1D'));
+    }
+    private function arrange_cols($arr)
+    {
+      if(count($arr) > 0)
+      {
+        $cols_num = 1;
+        $cols_arr = array();
+        $e_unix_max = 0;
+        foreach($arr as $mod1)
+        {
+          if(!is_object($mod1))
+            continue;
+          $e_unix = strtotime($mod1->get_e_datetime());
+          if($e_unix > $e_unix_max)
+            $e_unix_max = $e_unix;
+          if(count($cols_arr)==0) //if there is no collumn create a new one and place there filst obj
+          {
+            $cols_arr[0][] = $mod1;
+            $this->day_time_min = $mod1->get_s_time();
+          }
+          else
+          {
+            $placed = false;
+            for($i=0; $i<count($cols_arr); $i++) //go through every created collumn list
+            {
+              if(!$mod1->interfere($cols_arr[$i][count($cols_arr[$i])-1])) 
+                //if the object doesnt interfere with last one add it to the collumn and break the loop
+              {
+                $cols_arr[$i][] = $mod1;
+                $placed = true;
+                break;
+              }
+            }
+            if(!$placed)
+              //else create an other loop
+            {
+              $cols_arr[$cols_num++][] = $mod1;
+            }
+          }
+        }
+      }
+      $this->day_cols = $cols_num;
+      $this->modyfications = $cols_arr;
+      $this->day_time_max = date('H:i', $e_unix_max);
+    }
+  }
+  class ModWeek {
+    private $week_days;
+    private $week_cols;
+    private $week_start_DateTime;
+    public function get_cols()
+    {
+      return $this->week_cols;
+    }
+    function __construct($day)
+    {
+      if(!DataTypes::is_DateTime($day))
+          die("Wrong week init date format");
+      $day_obj = new DateTime($day);
+      $dow = $day_obj->format('N');
+      $to_sub = $dow - 1;
+      $day_obj->sub(new DateInterval("P".$to_sub."D"));
+      $this->week_start_DateTime = new DateTime($day_obj->format('Y-m-d').' 00:00:00');
+      $this->genWeek();
+
+
+    }
+    private function genWeek()
+    {
+      if(!$this->week_start_DateTime)
+        die("No week starting date set!");
+      $days = array();
+      $date_obj = new DateTime($this->week_start_DateTime->format('Y-m-d H:i:s'));
+      $days[1] = new ModDay($date_obj->format('Y-m-d H:i:s')); 
+      $this->week_cols += $days[1]->get_cols();
+      for($i = 2; $i <=7; $i++)
+      {
+        $date_obj->add(new DateInterval('P1D')); 
+        $days[$i] = new ModDay($date_obj->format('Y-m-d H:i:s')); 
+        $days[$i]->set_offset($this->week_cols);
+        $this->week_cols += $days[$i]->get_cols();
+      }
+      $this->week_days = $days;
+    }
+
   }
 }
 

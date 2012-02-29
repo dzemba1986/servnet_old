@@ -46,25 +46,29 @@ $sql = new myMysql();
 $streets = $sql->getUlic();
 
 ?>
+<script type="text/javascript" src="js/edit.js"></script>
+<script type="text/javascript" src="js/modyfications.js"></script>
 <div>
   <form action="modyfications.php?tryb=modyfications" method="post">
   <table class="tables" style="margin: 50px 0px 0px 50px">
   <tr>
     <td>Początek</td>
-    <td width="185"><div style="float: left; padding-top:5px">D:</div><input class="date_field" type="text" value="<?php echo($mod->get_s_date())?>" name="s_date" id="s_date"> T:<input class="time_field" type="text" value="<?php echo($mod->get_s_time())?>" name="s_time" id="s_time"></td>
+    <td width="185"><div style="float: left; padding-top:5px">D:</div>
+      <input class="date_field" type="text" value="<?php echo($mod->get_s_date())?>" name="s_date" id="s_date" onkeyup="testModForm();">
+      T:<input class="time_field" type="text" value="<?php echo($mod->get_s_time())?>" name="s_time" id="s_time" onkeyup="testModForm();"></td>
   </tr>
   <tr>
     <td>Koniec</td>
-    <td width="185"><div style="float: left; padding-top:5px"></div>T:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time"></td>
+    <td width="185"><div style="float: left; padding-top:5px"></div>T:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time" onkeyup="testModForm();"></td>
   </tr>
   <tr>
     <td>Cena</td>
-    <td><input type="text" name="cost" style="width:50px" value="<?php echo($mod->get_cost())?>"/> zł</td>
+    <td><input type="text" name="cost" id="cost" style="width:50px" value="<?php echo($mod->get_cost())?>" onkeyup="testModForm();"/> zł</td>
   </tr>
   <tr>
     <td>Typ instalacji</td>
     <td>
-    <select name="inst">
+    <select name="inst" id="inst" onchange="testModForm();">
       <option></option>
       <?php 
       $inst = $mod->get_inst();
@@ -81,7 +85,7 @@ $streets = $sql->getUlic();
   <tr>
     <td>Rodzaj przeróbki</td>
     <td>
-    <select name="type">
+    <select name="type" id="type" onchange="testModForm();">
       <option></option>
       <?php 
       $type = $mod->get_type();
@@ -98,7 +102,7 @@ $streets = $sql->getUlic();
   <tr>
     <td>Przyczyna przeróbki</td>
     <td>
-    <select name="cause">
+    <select name="cause" id="cause" onchange="testModForm();">
       <?php 
       $cause = $mod->get_cause();
       foreach($cause_arr as $key=>$val)
@@ -119,13 +123,13 @@ $streets = $sql->getUlic();
     ?>
     <input type="hidden" name="loc_id" value="<?php echo($loc_arr['id']); ?>" />
     <?php else: ?>
-    <select name="street">
+    <select name="street" id="street" onchange="testModForm();">
       <option></option>
     <?php foreach ($streets as $street)
       echo '<option value="'.$street['ULIC'].'">'.$street['short_name']."</option>\n";
     ?>
     </select><br />
-    <input type="text" name="building" style="width:50px" value="<?php echo($mod->get_building())?>" /> /<input type="text" name="flat" style="width:50px" value="<?php echo($mod->get_flat())?>" />
+    <input type="text" name="building" id="building" style="width:50px" value=""  onkeyup="testModForm();"/> /<input type="text" name="flat" id="flat" style="width:50px" value=""  onkeyup="testModForm();"/>
     Niepowiązany z Abonentem
     <?php endif; ?>
     </td>
@@ -137,7 +141,7 @@ $streets = $sql->getUlic();
   <tr>
     <td><button onclick="closeMod()">Zamknij</button>
     </td>
-    <td><input type="submit" value="Zapisz" />
+    <td><input type="submit" value="Zapisz" id="save_button"/>
     </td>
   </tr>
   </table>
@@ -146,5 +150,8 @@ $streets = $sql->getUlic();
   </form>
 </table>
 </div>
+<script type="text/javascript">testModForm();</script>
+<?php
+?>
 </body>
 </html>

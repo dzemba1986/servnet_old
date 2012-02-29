@@ -80,75 +80,65 @@ function setSubmit(field, active, sub_button)
   sub_button.style.backgroundColor="red";
   if(active)
   {
-    if(field)
-      field.style.backgroundColor="white";
     sub_button.disabled=false;
 
   }
   else
   {
-    if(field)
-      field.style.backgroundColor="red";
     sub_button.disabled=true;
   }
 }
-function testDate(field, sub_button)
+function testDate(field, null_val)
 {
-  var value = field.value;
-  var result = value.match(/^(((0[1-9])|([1-2][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.([0-9][0-9]))$/);
-  if(!value || result)
-  {
-    field.style.backgroundColor="white";
-    setSubmit(field, true, sub_button);
-    return true;
-  }
-  else
-  {
-    field.style.backgroundColor="red";
-    setSubmit(field, false, sub_button);
-    return false;
-  }
+  return testField(field, /^(((0[1-9])|([1-2][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.([0-9][0-9]))$/, null_val, 'white', 'red');
 }
-function testTime(field)
+function testTime(field, null_val)
 {
-  var value = field.value;
-  var result = value.match(/^((([0-1][0-9])|(2[1-3])):([0-5][0-9]))$/);
-  if(!value || result)
-  {
-    field.style.backgroundColor="white";
-    setSubmit(field, true, '');
-    return true;
-  }
-  else
-  {
-    field.style.backgroundColor="red";
-    setSubmit(field, false, '');
-    return false;
-  }
+  return testField(field, /^((([0-1][0-9])|(2[1-3])):([0-5][0-9]))$/, null_val, 'white', 'red');
 }
 function testInstallDateTime(sector)
 {
   var date_field = document.getElementById('installation_date_'+sector);
   var time_field = document.getElementById('installation_time_'+sector);
-  if(testTime(time_field) && testDate(date_field))
+  var null_val = (time_field.value=='' && date_field.value=='');
+  var time_res = testTime(time_field, null_val);
+  var date_res = testDate(date_field, null_val);
+  if(time_res && date_res)
     setSubmit(date_field, true, '');
   else
     setSubmit(date_field, false, '');
 }
 function testAddress(field)
 {
+  return testField(field, /^((O((P(L|[a-z1-9]))|(Z)|(K)|(WW))|WILCZAK|NARAMOWICKA)[^_\s]{1}.*)$/, false, 'white', 'red');
+}
+function testSelect(field, null_val)
+{
+  return testField(field, /^.+/, null_val, 'white', 'red');
+}
+
+function testField(field, mask, null_val, act_color, inact_color)
+{
   var value = field.value;
-  var result = value.match(/^((O((P(L|[a-z1-9]))|(Z)|(K)|(WW))|WILCZAK|NARAMOWICKA)[^_\s]{1}.*)$/);
-  if(result)
+  var result = value.match(mask);
+  if((!value &&null_val) || result)
   {
-    field.style.backgroundColor="white";
-    setSubmit(field, true, '');
+    field.style.backgroundColor=act_color;
+    return true;
   }
   else
   {
-    field.style.backgroundColor="red";
-    setSubmit(field, false, '');
+    field.style.backgroundColor=inact_color;
+    return false;
   }
+}
+function testBuilding(field, null_val)
+{
+  return testField(field, /^[1-9][0-9]{0,2}[a-z]?$/, null_val, 'white', 'red');
+}
+function testFlat(field, null_val)
+{
+  return testField(field, /^[1-9][0-9]{0,2}[a-z]?$/, null_val, 'white', 'red');
 }
 function testMac(field, sub_button)
 {

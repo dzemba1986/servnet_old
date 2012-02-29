@@ -49,9 +49,11 @@ elseif($_POST['s_date'])
 //week display section
 //***********************************
 
+$week = new ModWeek('2012-03-23 09:00:00');
+
 $c_width = 60; //collumn width;
 $c_height = 40; //collumn height;
-$start_h = 9*60; //starting hour in minutes;
+$start_h = 8*60; //starting hour in minutes;
 $end_h = 17*60; // last hour;
 $cell_border = 1;
 $days = 1 + 7; // day 1 is hour col
@@ -61,7 +63,7 @@ $hours_width = 50;
 $px_per_min = $c_height/60;
 $rows = ($end_h - $start_h)/60 + 1; //extra row is for day name and date
 $table_height = $rows * $c_height;
-$table_width = ($days-1) * $c_width + $hours_width;
+$table_width = ($week->get_cols()) * $c_width + $hours_width;
 $week_days = array(1=>'Pon.', 2=>'Wt.', 3=>'Śr.', 4=>'Czw.', 5=>'Pt.', 6=>'Sob.', 7=>'Nd.');
 
 $mods = array(array('day'=> 2, 's_time'=>(9*60+10), 'e_time'=>(10*60)+20));
@@ -111,5 +113,8 @@ foreach($mods as $mod)
 }
 ?>
 </div>
+<?php
+var_dump($week);
+?>
 </body>
 </html>
