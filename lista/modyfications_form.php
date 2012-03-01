@@ -52,17 +52,18 @@ $streets = $sql->getUlic();
   <form action="modyfications.php?tryb=modyfications" method="post">
   <table class="tables" style="margin: 50px 0px 0px 50px">
   <tr>
-    <td>Początek</td>
-    <td width="185"><div style="float: left; padding-top:5px">D:</div>
+    <td>Dzień</td>
+    <td width="185"><div style="float: left; padding-top:5px"></div>
       <input class="date_field" type="text" value="<?php echo($mod->get_s_date())?>" name="s_date" id="s_date" onkeyup="testModForm();">
-      T:<input class="time_field" type="text" value="<?php echo($mod->get_s_time())?>" name="s_time" id="s_time" onkeyup="testModForm();"></td>
+      </td>
   </tr>
   <tr>
-    <td>Koniec</td>
-    <td width="185"><div style="float: left; padding-top:5px"></div>T:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time" onkeyup="testModForm();"></td>
+    <td>Godziny</td>
+    <td width="185"><div style="float: left; padding-top:5px"></div>Od:<input class="time_field" type="text" value="<?php echo($mod->get_s_time())?>" name="s_time" id="s_time" onkeyup="testModForm();">
+     Do:<input class="time_field" type="text" value="<?php echo($mod->get_e_time())?>" name="e_time" id="e_time" onkeyup="testModForm();"></td>
   </tr>
   <tr>
-    <td>Cena</td>
+    <td>Koszt</td>
     <td><input type="text" name="cost" id="cost" style="width:50px" value="<?php echo($mod->get_cost())?>" onkeyup="testModForm();"/> zł</td>
   </tr>
   <tr>
@@ -100,7 +101,7 @@ $streets = $sql->getUlic();
     </td>
   </tr>
   <tr>
-    <td>Przyczyna przeróbki</td>
+    <td>Miejsce przeróbki</td>
     <td>
     <select name="cause" id="cause" onchange="testModForm();">
       <?php 

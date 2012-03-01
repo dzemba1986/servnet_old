@@ -1,0 +1,57 @@
+.week {
+background: white;
+  position: absolute; 
+}
+.net {
+background: white;
+  border: 1px solid black; 
+  border-left: 1px solid black; 
+  border-right: 2px solid black; 
+  position: absolute; 
+}
+.net_dark {
+background: gray;
+  border: 1px solid black; 
+  position: absolute; 
+}
+.day_name {
+background: #50834B;
+  border: 1px solid black; 
+  border-top: 2px solid black; 
+  border-bottom: 2px solid black; 
+  position: absolute; 
+}
+.day_name div {
+  font-size: 16px;
+  color: black;
+  font-family: courier;
+  font-weight: bold;
+  padding: 3px;
+}
+.hour {
+background: white;
+  border: 1px solid black; 
+  border-left: 2px solid black; 
+  border-right: 2px solid black; 
+  position: absolute; 
+}
+.hour div {
+  font-size: 14px;
+  color: black;
+  font-family: courier;
+  font-weight: bold;
+  padding: 3px;
+}
+.modyf {
+background: #BDC8BC;
+  border: 1px solid black; 
+  position: absolute; 
+}
+.modyf a {
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-family: courier;
+  padding: 3px;
+}

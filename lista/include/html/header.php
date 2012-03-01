@@ -117,6 +117,10 @@ switch($tryb)
 
   <link rel="stylesheet" href="css/themes/<?php echo($theme); ?>/styles.css" type="text/css">
   <link rel="stylesheet" href="css/menu.css" type="text/css">
+  <?php
+  if($tryb=='modyfications')
+  echo '<link rel="stylesheet" href="css/modyf.css" type="text/css">';
+  ?>
   <script type="text/javascript" src="js/menu.js"></script>
  <script type="text/javascript" src="js/ajax_base.js"></script>
 </head>

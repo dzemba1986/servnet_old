@@ -49,21 +49,20 @@ elseif($_POST['s_date'])
 //week display section
 //***********************************
 
-$cell_border = 1;
 $days = 1 + 7; // day 1 is hour col
 $hours_width = 50;
 
-$c_width = 80; //collumn width;
+$c_width = 120; //collumn width;
 $c_height = 40; //collumn height;
 
 $week = new ModWeek('2012-03-23 09:00:00');
 $days_obj_arr = $week->get_days();
-//var_dump($days_obj_arr);
+//var_dump($week);
 $week_cols = $week->get_cols();
 $week_time_min = $week->get_time_min();
 $week_time_max = $week->get_time_max();
 
-$start_h = 8*60; //starting hour in minutes;
+$start_h = 9*60; //starting hour in minutes;
 if($week_time_min!==null && $week_time_min < $start_h)
   $start_h = intval($week_time_min / 60) * 60;
 
@@ -104,7 +103,7 @@ for($i=0; $i<$rows; $i++)
       }
       else
       {
-        echo '<div style="border: '.$cell_border.'px solid black; background: gray; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$c_width * $day_cols.'px; height:'.$c_height.'px;">'.$week_days[$j].'</div>'."\n"; 
+        echo '<div class="day_name" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width * $day_cols - 2).'px; height:'.($c_height - 3).'px;"><div>'.$week_days[$j].'</div></div>'."\n"; 
       }
     }
     elseif($j==0)
@@ -112,7 +111,7 @@ for($i=0; $i<$rows; $i++)
       $x_pos = 0;
       $hour = $i + ($start_h / 60) - 1 .':00';
       //hours col
-      echo '<div style="border: '.$cell_border.'px solid black; background: yellow; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$hours_width.'px; height:'.$c_height.'px;">'.$hour.'</div>'."\n"; 
+      echo '<div class="hour" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($hours_width - 3).'px; height:'.$c_height.'px;"><div>'.$hour.'</div></div>'."\n"; 
     }
     else
     {
@@ -120,25 +119,37 @@ for($i=0; $i<$rows; $i++)
       {
         $x_pos = ($days_obj_arr[$j]->get_offset() + $k)*$c_width + $hours_width;
         $y_pos = $i*$c_height;
-        echo '<div style="border: '.$cell_border.'px solid blue; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$c_width.'px; height:'.$c_height.'px;"></div>'."\n"; 
+        $hour_int = intval(substr($hour, 0, 2));
+        $border_substr = 1;
+        if($k+1 == $day_cols)
+          $border_substr = 2;
+        if((($hour=='12:00' || $hour_int>15 || $hour_int < 9) && $j!=3 && $j < 6) || ($j==3 && ($hour_int < 11) || $hour_int > 17) || $j >=6)
+          echo '<div class="net_dark" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
+        else
+          echo '<div class="net" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
       }
     }
   }
-  for($j=1; $j<$days; $j++)
+}
+for($j=1; $j<$days; $j++)
+{
+  if($days_obj_arr[$j]->get_modyfications())
   {
-    if($days_obj_arr[$j]->get_modyfications())
+    foreach($days_obj_arr[$j]->get_modyfications() as $mod_obj_col)
     {
-      foreach($days_obj_arr[$j]->get_modyfications() as $mod_obj_col)
+      foreach($mod_obj_col as $mod)
       {
-        foreach($mod_obj_col as $mod)
-        {
-          $x_pos = ($days_obj_arr[$j]->get_offset() + $mod->get_col())*$c_width + $hours_width;
-          $y_pos = ($mod->get_s_time_mins() - $start_h + 60) * $px_per_min;
-          $height = ($mod->get_e_time_mins() - $mod->get_s_time_mins()) * $px_per_min;
-          $loc_str = $mod->get_loc_str();
-          $mod_id = $mod->get_id();
-            echo '<div style="border: '.$cell_border.'px solid black; background: green; position: absolute; top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.$c_width.'px; height:'.$height.'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'">'.$loc_str.'</a></div>'."\n"; 
-        }
+        $x_pos = ($days_obj_arr[$j]->get_offset() + $mod->get_col())*$c_width + $hours_width;
+        $y_pos = ($mod->get_s_time_mins() - $start_h + 60) * $px_per_min;
+        $height = ($mod->get_e_time_mins() - $mod->get_s_time_mins()) * $px_per_min;
+        $loc_str = $mod->get_loc_str();
+        $mod_id = $mod->get_id();
+        $s_time = $mod->get_s_time();
+        $e_time = $mod->get_e_time();
+        if(($mod->get_col() + 1)< $days_obj_arr[$j]->get_cols())
+          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 1).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'"><b>'.$loc_str.'</b><br />'.$s_time.' - '.$e_time.'</a></div>'."\n"; 
+        else
+          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 2).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'"><b>'.$loc_str.'</b><br />'.$s_time.' - '.$e_time.'</a></div>'."\n"; 
       }
     }
   }

@@ -536,11 +536,11 @@ if(!defined('MODYFICATION_CLASS'))
     }
     private function arrange_cols($arr)
     {
+      $e_unix_max = 0;
+      $cols_num = 1;
+      $cols_arr = array();
       if(count($arr) > 0)
       {
-        $cols_num = 1;
-        $cols_arr = array();
-        $e_unix_max = 0;
         foreach($arr as $mod1)
         {
           if(!is_object($mod1))
@@ -602,7 +602,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function get_time_max()
     {
-      return $this->week_time_min;
+      return $this->week_time_max;
     }
     function __construct($day)
     {
