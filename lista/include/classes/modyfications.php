@@ -108,6 +108,14 @@ if(!defined('MODYFICATION_CLASS'))
       $date_time = DataTypes::datetime_to_date_time($datetime);
       return $date_time['time'];
     }
+    public function get_s_time_mins()
+    {
+      return intval(substr($this->get_s_time(), 0, 2)) * 60 + intval(substr($this->get_s_time(), -2, 2));
+    }
+    public function get_e_time_mins()
+    {
+      return intval(substr($this->get_e_time(), 0, 2)) * 60 + intval(substr($this->get_e_time(), -2, 2));
+    }
     public function get_e_date()
     {
       $datetime = $this->get_e_datetime();
@@ -131,6 +139,10 @@ if(!defined('MODYFICATION_CLASS'))
     public function get_col()
     {
       return $this->mod_col;
+    }
+    public function get_loc_str()
+    {
+      return Lokalizacja::getAddressStr($this->mod_loc);
     }
     //***************************************
     // Setters
@@ -271,7 +283,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_col($val)
     {
-      $this->mod_col = intval($col);
+      $this->mod_col = intval($val);
       return true;
     }
     //*****************************************
@@ -322,7 +334,6 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function add($con_id)
     {
-      var_dump($this);
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
           !$this->mod_user_last_edit || !$this->mod_inst || !$this->mod_type ||
           !$this->mod_cause || !$this->mod_loc)
@@ -460,7 +471,6 @@ if(!defined('MODYFICATION_CLASS'))
     {
       if(!is_object($mod))
       {
-        var_dump($mod);
         die('Wrong Modyfication comparition input!');
       }
       $u11 = strtotime($this->mod_s_datetime);
@@ -474,8 +484,8 @@ if(!defined('MODYFICATION_CLASS'))
   }
   class ModDay {
     private $day_dateTime; //unix_timestamp
-    private $day_time_min; //array(hh, mm)
-    private $day_time_max; //array(hh, mm)
+    private $day_time_min; // in minutes
+    private $day_time_max; // in minutes
     private $day_cols; //int
     private $day_offset; //cols offset i week view
     private $day_active; //bool
@@ -487,6 +497,22 @@ if(!defined('MODYFICATION_CLASS'))
     public function get_offset()
     {
       return $this->day_offset;
+    }
+    public function get_time_min()
+    {
+      return $this->day_time_min;
+    }
+    public function get_time_max()
+    {
+      return $this->day_time_max;
+    }
+    public function get_dateTime()
+    {
+      return $this->day_dateTime;
+    }
+    public function get_modyfications()
+    {
+      return $this->day_modyfications;
     }
     public function set_offset($val)
     {
@@ -525,7 +551,8 @@ if(!defined('MODYFICATION_CLASS'))
           if(count($cols_arr)==0) //if there is no collumn create a new one and place there filst obj
           {
             $cols_arr[0][] = $mod1;
-            $this->day_time_min = $mod1->get_s_time();
+            $mod1->set_col(0);
+            $this->day_time_min = intval(substr($mod1->get_s_time(), 0, 2)) * 60 + intval(substr($mod1->get_s_time(), -2, 2));
           }
           else
           {
@@ -536,6 +563,7 @@ if(!defined('MODYFICATION_CLASS'))
                 //if the object doesnt interfere with last one add it to the collumn and break the loop
               {
                 $cols_arr[$i][] = $mod1;
+                $mod1->set_col($i);
                 $placed = true;
                 break;
               }
@@ -544,22 +572,37 @@ if(!defined('MODYFICATION_CLASS'))
               //else create an other loop
             {
               $cols_arr[$cols_num++][] = $mod1;
+              $mod1->set_col($cols_num - 1);
             }
           }
         }
       }
       $this->day_cols = $cols_num;
-      $this->modyfications = $cols_arr;
-      $this->day_time_max = date('H:i', $e_unix_max);
+      $this->day_modyfications = $cols_arr;
+      $this->day_time_max = intval(date('H', $e_unix_max)) * 60 + intval(date('i', $e_unix_max));
     }
   }
   class ModWeek {
-    private $week_days;
-    private $week_cols;
-    private $week_start_DateTime;
+    private $week_days; // arrary of days
+    private $week_cols; // total cols in a week
+    private $week_start_DateTime; //
+    private $week_time_min; // in minutes
+    private $week_time_max; // in minutes
+    public function get_days()
+    {
+      return $this->week_days;
+    }
     public function get_cols()
     {
       return $this->week_cols;
+    }
+    public function get_time_min()
+    {
+      return $this->week_time_min;
+    }
+    public function get_time_max()
+    {
+      return $this->week_time_min;
     }
     function __construct($day)
     {
@@ -582,12 +625,21 @@ if(!defined('MODYFICATION_CLASS'))
       $date_obj = new DateTime($this->week_start_DateTime->format('Y-m-d H:i:s'));
       $days[1] = new ModDay($date_obj->format('Y-m-d H:i:s')); 
       $this->week_cols += $days[1]->get_cols();
+      if($days[1]->get_time_min() !== null)
+        $this->week_time_min = $days[1]->get_time_min();
+      $this->week_time_max = $days[1]->get_time_max();
       for($i = 2; $i <=7; $i++)
       {
         $date_obj->add(new DateInterval('P1D')); 
         $days[$i] = new ModDay($date_obj->format('Y-m-d H:i:s')); 
         $days[$i]->set_offset($this->week_cols);
         $this->week_cols += $days[$i]->get_cols();
+        if($this->week_time_min ===null && $days[$i]->get_time_min()!==null)
+          $this->week_time_min = $days[$i]->get_time_min();
+        elseif($this->week_time_min > $days[$i]->get_time_min() && $days[$i]->get_time_min()!==null)
+          $this->week_time_min = $days[$i]->get_time_min();
+        if($this->week_time_max < $days[$i]->get_time_max())
+          $this->week_time_max = $days[$i]->get_time_max();
       }
       $this->week_days = $days;
     }

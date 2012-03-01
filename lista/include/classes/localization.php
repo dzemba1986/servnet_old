@@ -35,7 +35,7 @@ if(!defined('LOKALIZACJA_LISTA_CLASS'))
       $this->id = mysql_insert_id();
       return $this->id;
     }
-    public function getAddressStr($id)
+    public static function getAddressStr($id)
     {
       $sql = new myMysql();
       $id = intval($id);
