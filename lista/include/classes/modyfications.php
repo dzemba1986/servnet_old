@@ -332,6 +332,16 @@ if(!defined('MODYFICATION_CLASS'))
       else
         return false;
     }
+    public static function getUnfinished()
+    {
+      $query = "SELECT * FROM Modyfications WHERE mod_close_datetime IS NULL ORDER BY mod_s_datetime ASC"; 
+      $sql = new MysqlListaPdo();
+      $wynik = $sql->query_obj($query, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
+      if(count($wynik) > 0)
+        return $wynik;
+      else
+        return false;
+    }
     public function add($con_id)
     {
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 

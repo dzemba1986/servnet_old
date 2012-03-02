@@ -1,21 +1,37 @@
 .week {
-background: white;
+  background: white;
   position: absolute; 
+  margin: 50px 10px 10px 50px;
+  position: relative;
+  display: box;
+  background: white; 
+}
+.mod_table {
+  background: white;
+  color: black;
+  margin: 50px 10px 10px 50px;
+}
+.mod_table td {
+  padding: 2px;
+}
+.mod_table_top {
+  padding: 2px;
+  background: #50834B;
 }
 .net {
-background: white;
+  background: white;
   border: 1px solid black; 
   border-left: 1px solid black; 
   border-right: 2px solid black; 
   position: absolute; 
 }
 .net_dark {
-background: gray;
+  background: gray;
   border: 1px solid black; 
   position: absolute; 
 }
 .day_name {
-background: #50834B;
+  background: #50834B;
   border: 1px solid black; 
   border-top: 2px solid black; 
   border-bottom: 2px solid black; 
@@ -26,6 +42,7 @@ background: #50834B;
   color: black;
   font-family: courier;
   font-weight: bold;
+  line-height: 13px;
   padding: 3px;
 }
 .hour {
@@ -51,7 +68,22 @@ background: #BDC8BC;
   font-size: 14px;
   color: black;
   text-decoration: none;
-  display: block;
+  display: inline;
   font-family: courier;
-  padding: 3px;
+  font-weight: bold;
+  padding: 1px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.modyf div {
+  font-size: 10px;
+  color: black;
+  text-decoration: none;
+  display: inline;
+  font-family: courier;
+  font-weight: normal;
+  padding: 1px;
+  padding-top: 0px;
+  margin-top: 0px;
+  letter-spacing: -2px;
 }

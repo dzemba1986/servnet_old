@@ -45,9 +45,9 @@ elseif($_POST['s_date'])
   $mod->add($_POST['con_id']);
 }
 
-//***********************************
-//week display section
-//***********************************
+//################################################
+//week display code
+//################################################
 
 $days = 1 + 7; // day 1 is hour col
 $hours_width = 50;
@@ -78,8 +78,17 @@ $week_days = array(1=>'Pon.', 2=>'Wt.', 3=>'Śr.', 4=>'Czw.', 5=>'Pt.', 6=>'Sob.
 foreach($days_obj_arr as $key=>$_day)
   $week_days[$key] .= '<br />'.$_day->get_dateTime()->format('d.m.y');
 
+//################################################
+// Unfinished list display code
+//################################################
+
+$mod_arr = Modyfications::getUnfinished();
+
+//################################################
+// week display section html
+//################################################
 ?>
-<div class="week" style="margin: 50px 10px 10px 50px; position: relative; display: box; background: white; <?php echo 'width:'.$table_width.'px; height: '.$table_height.'px;'; ?>">
+<div class="week" style="<?php echo 'width:'.$table_width.'px; height: '.$table_height.'px;'; ?>">
 <?php
 for($i=0; $i<$rows; $i++)
 {
@@ -147,9 +156,9 @@ for($j=1; $j<$days; $j++)
         $s_time = $mod->get_s_time();
         $e_time = $mod->get_e_time();
         if(($mod->get_col() + 1)< $days_obj_arr[$j]->get_cols())
-          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 1).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'"><b>'.$loc_str.'</b><br />'.$s_time.' - '.$e_time.'</a></div>'."\n"; 
+          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 1).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'">'.$loc_str.'</a><div>'.$s_time.'-'.$e_time.'</div></div>'."\n"; 
         else
-          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 2).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'"><b>'.$loc_str.'</b><br />'.$s_time.' - '.$e_time.'</a></div>'."\n"; 
+          echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 2).'px; height:'.($height - 1).'px;"><a href="modyfications_form.php?mod_id='.$mod_id.'">'.$loc_str.'</a><div>'.$s_time.'-'.$e_time.'</div></div>'."\n"; 
       }
     }
   }
@@ -157,6 +166,28 @@ for($j=1; $j<$days; $j++)
 ?>
 </div>
 <?php
+//################################################
+// Unfinished modyfications display section html
+//################################################
 ?>
+<div>
+<table class="mod_table">
+<thead>
+</thead>
+  <tr class="mod_table_top">
+    <td>Data start</td><td>Data koniec</td><td>Lokalizacja</td><td>Typ instalacji</td><td>Rodzaj montażu</td><td>opis</td><td>edycja</td><td>podłączenia</td><td>zamknij</td>
+  </tr>
+  <?php
+  if($mod_arr)
+    foreach($mod_arr as $mod)
+    {
+      if(!is_object($mod))
+        continue;
+      echo "<tr>\n";
+      echo "<td>".$mod->get_s_datetime()."</td><td>".$mod->get_e_datetime()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type()."</td><td>".$mod->get_desc()."</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>podłączenia</td><td>zamknij</td>\n";
+      echo "</tr>\n";
+    }
+?>
+</div>
 </body>
 </html>
