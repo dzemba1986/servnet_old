@@ -1,8 +1,11 @@
-<?php require('include/html/header.php');
-require('include/classes/installations.php');
-require('include/classes/connections.php');
-require('include/classes/phpToJs.php');
-require('include/classes/localization.php');
+<?php 
+require('path.php');
+require(LISTA_ABSOLUTE.'/include/html/header.php');
+require(LISTA_ABSOLUTE.'/include/classes/installations.php');
+require(LISTA_ABSOLUTE.'/include/classes/connections.php');
+require(LISTA_ABSOLUTE.'/include/classes/phpToJs.php');
+require(LISTA_ABSOLUTE.'/include/classes/localization.php');
+require(LISTA_ABSOLUTE.'/include/classes/modyfications.php');
 define('DADDY_PATH', SEU_ABSOLUTE.'/include/classes/daddy.php');
 require(DADDY_PATH);
 $connection = new Connections();
@@ -63,6 +66,8 @@ if($_REQUEST['main_id'])
     $sql = new myMysql();
     $connection1 = $sql->getConnection($_REQUEST['main_id']);
     $installation1 = $sql->getInstallation($connection1['address'], $connection1['service']);
+    if($connection1['modyfication'])
+      $modyfication1 = Modyfications::getById($connection1['modyfication']);
 //    print_r($installation1);
   }
   $loc = new Lokalizacja();
@@ -392,11 +397,11 @@ $dev_id = $daddy->getDevId($connection1['id']);
 <table class="tables">
   <tr>
     <td width="160">Montaż</td>
-    <td width="185"><div style="float: left; padding-top:5px">D:</div><input class="date_field" type="text" value="<?php echo($connection1['_installation_date_date'])?>" name="installation_date" id="installation_date_1" onkeyup="testInstallDateTime('1');"> T:<input class="time_field" type="text" value="<?php echo($connection1['_installation_date_time'])?>" name="installation_time" id="installation_time_1" onkeyup="testInstallDateTime('1');"><?php echo($connection1['i_user'])?></td>
+    <td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
     <td ><input type="hidden" name="id"value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="installation_date"><input type="submit" class="submit_field"  id="install_date_time_sub" value="zmień">
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
-      <a href="modyfications_form.php?con_id=<?php echo($connection1['id'])?>">Zmień</a>
+      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php echo($connection1['id'])?>">Zmień</a>
     </td>
   </tr>
 </table>

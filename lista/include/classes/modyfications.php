@@ -342,6 +342,18 @@ if(!defined('MODYFICATION_CLASS'))
       else
         return false;
     }
+    public function get_con_id()
+    {
+      $query = "SELECT id FROM Connections WHERE modyfication=:modyfication"; 
+      $sql = new MysqlListaPdo();
+      $mod_id = $this->get_id();
+      if(!$mod_id)
+        return false;
+      $result = $sql->query($query, array('modyfication'=>$mod_id));
+      if(count($result)!=1)
+        return false;
+      return $result[0]['id'];
+    }
     public function add($con_id)
     {
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
@@ -652,6 +664,16 @@ if(!defined('MODYFICATION_CLASS'))
           $this->week_time_max = $days[$i]->get_time_max();
       }
       $this->week_days = $days;
+    }
+    public function get_next_week_date()
+    {
+      $datetime = new DateTime($this->week_start_DateTime->format('Y-m-d H:i:s'));
+      return $datetime->add(new DateInterval('P7D'))->format('d.m.y');
+    }
+    public function get_prev_week_date()
+    {
+      $datetime = new DateTime($this->week_start_DateTime->format('Y-m-d H:i:s'));
+      return $datetime->sub(new DateInterval('P7D'))->format('d.m.y');
     }
 
   }

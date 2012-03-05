@@ -4,8 +4,8 @@
 <?php require(LISTA_ABSOLUTE.'/include/classes/localization.php'); ?>
 <?php require(LISTA_ABSOLUTE.'/include/classes/connections.php'); ?>
 <?php
-$mod_id = $_GET['mod_id'];
-$con_id = $_GET['con_id'];
+$mod_id = intval($_GET['mod_id']);
+$con_id = intval($_GET['con_id']);
 $mod = null;
 $loc_arr = null;
 $inst_arr = array('net' => 'Internet',
@@ -27,6 +27,8 @@ if($con_id)
   $loc = new Lokalizacja();
   $loc_arr = $loc->getLoc($loc_id);
   $loc_arr['str'] = $loc->getAddressStr($loc_id);
+  if(!$mod_id)
+    $desc = Connections::getInfo($con_id)."\n".Connections::getBoaInfo($con_id);
 }
 
 if($mod_id)
@@ -38,6 +40,8 @@ if($mod_id)
     $loc = new Lokalizacja();
     $loc_arr = $loc->getLoc($loc_id);
     $loc_arr['str'] = $loc->getAddressStr($loc_id);
+    $week_start_date = $mod->get_s_date();
+    $desc = $mod->get_desc();
   }
 }
 else
@@ -137,7 +141,7 @@ $streets = $sql->getUlic();
   </tr>
   <tr>
     <td>Info</td>
-    <td><textarea name="desc"><?php echo($mod->get_desc())?></textarea></td>
+    <td><textarea name="desc"><?php echo($desc)?></textarea></td>
   </tr>
   <tr>
     <td><button onclick="closeMod()">Zamknij</button>
@@ -153,6 +157,8 @@ $streets = $sql->getUlic();
 </div>
 <script type="text/javascript">testModForm();</script>
 <?php
+$form_target = 'modyfications_form.php?tryb=modyfications&mod_id='.$mod_id.'&con_id='.$con_id;
+require(LISTA_ABSOLUTE.'/include/html/modyfications.php');
 ?>
 </body>
 </html>

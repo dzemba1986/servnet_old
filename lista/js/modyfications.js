@@ -33,3 +33,13 @@ function testModForm()
   else
     setSubmit('',false, sub_button);
 }
+function testWeekDayForm()
+{
+  var sub_button = document.getElementById('save_button');
+  var s_date = document.getElementById('week_start_date');
+  var result = testStartDate(s_date, sub_button);
+  if(result)
+    setSubmit('',true, sub_button);
+  else
+    setSubmit('',false, sub_button);
+}

@@ -1,7 +1,7 @@
 .week {
   background: white;
   position: absolute; 
-  margin: 50px 10px 10px 50px;
+  margin: 20px 10px 10px 50px;
   position: relative;
   display: box;
   background: white; 
@@ -9,7 +9,7 @@
 .mod_table {
   background: white;
   color: black;
-  margin: 50px 10px 10px 50px;
+  margin: 20px 10px 10px 50px;
 }
 .mod_table td {
   padding: 2px;
@@ -86,4 +86,13 @@ background: #BDC8BC;
   padding-top: 0px;
   margin-top: 0px;
   letter-spacing: -2px;
+}
+#week_start_day {
+  margin: 20px 0px 0px 250px;
+  color: black;
+  font-family: Arial;
+  font-size: 14px;
+}
+#week_start_day form input {
+width: 80px;
 }
