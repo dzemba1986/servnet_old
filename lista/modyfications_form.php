@@ -40,7 +40,8 @@ if($mod_id)
     $loc = new Lokalizacja();
     $loc_arr = $loc->getLoc($loc_id);
     $loc_arr['str'] = $loc->getAddressStr($loc_id);
-    $week_start_date = $mod->get_s_date();
+    if(!$_REQUEST['week_start_date'])
+      $week_start_date = $mod->get_s_date();
     $desc = $mod->get_desc();
   }
 }

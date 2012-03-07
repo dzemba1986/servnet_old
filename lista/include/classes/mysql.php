@@ -528,6 +528,336 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
       }
       return $rows;
     }
+    public function getList3($mode, $order, &$paging, $find_phrase=null, $search_field=null)
+    {
+      if ($order)
+      {
+        if($order =="adres")
+        {
+          $isnull = "";
+          $order = " ORDER BY address ASC";
+        }
+        elseif($order =="modyf")
+        {
+          $isnull = "";
+          $order = " ORDER BY net_modyf DESC";
+        }
+        else
+        {
+          $isnull = ", $order is null AS isnull ";
+          $order = " ORDER BY isnull ASC, $order ASC";
+        }
+      }
+      else 
+      {
+        $isnull = ", UNIX_TIMESTAMP(net_start)=0 AS isnull ";
+        $order = " ORDER BY isnull ASC, net_start ASC";
+      }
+      $query;
+      $search;
+      if($find_phrase && $search_field)
+      {
+        if($search_field=='id')
+          $search=" $search_field LIKE '$find_phrase' ";
+        elseif($search_field=='last_modyfication')
+          $search=" date($search_field) LIKE '$find_phrase' ";
+        else
+          $search=" $search_field LIKE '%$find_phrase%' ";
+      }
+      switch($mode)
+      {
+        case 'in_progress':
+          $inner_query="
+            SELECT	a.id as net_id,
+                          a.start_date as net_start, 
+                          DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                          DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
+                          DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _net_end_date,
+                          a.address,
+                          a.phone,
+                          a.switch as net_switch,
+                          a.switch_loc_str as net_switch_loc_str,
+                          a.port as net_port,
+                          c.wire_length as net_wire,
+                          a.mac,
+                          a.service as net_service, 
+                          a.speed,
+                          c.socket_installation_date as net_socket_date,
+                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                          a.payment_activation as net_payment_activation,
+                          DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                          a.service_activation as net_activation, 
+                          DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                          a.service_configuration as net_configuration, 
+                          DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration, 
+                          a.informed as net_informed, 
+                          DATE_FORMAT(a.informed, '%d.%m.%y') as _net_informed, 
+                          a.installation_date,
+                          DATE_FORMAT(a.installation_date, '<b>%W</b><br>%d.%m.%y %H:%i') as _installation_date,
+                          DATE_FORMAT(m.mod_s_datetime, '<b>%W</b><br>%d.%m.%y %H:%i') as _mod_s_datetime,
+                          a.info as net_info,
+                          a.info_boa as net_info_boa,
+                          a.last_modyfication as net_modyf,
+                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
+                          (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time,
+                          b.id as phone_id,
+                          DATE_FORMAT(b.start_date, '%d.%m.%y') as phone_start, 
+                          DATE_FORMAT(DATE_ADD(b.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS phone_end_date,
+                          b.switch as phone_switch, 
+                          b.switch_loc_str as phone_switch_loc_str,
+                          b.port as phone_port, 
+                          d.wire_length as phone_wire,
+                          b.service as phone_service, 
+                          d.socket_installation_date as phone_socket_date,
+                          DATE_FORMAT(d.socket_installation_date, '%d.%m.%y') as _phone_socket_date, 
+                          b.payment_activation as phone_payment_activation,
+                          DATE_FORMAT(b.payment_activation, '%d.%m.%y') as _phone_payment_activation, 
+                          b.service_activation as phone_activation, 
+                          DATE_FORMAT(b.service_activation, '%d.%m.%y') as _phone_activation, 
+                          b.service_configuration as phone_configuration, 
+                          DATE_FORMAT(b.service_configuration, '%d.%m.%y') as _phone_configuration, 
+                          b.informed as phone_informed, 
+                          DATE_FORMAT(b.informed, '%d.%m.%y') as _phone_informed, 
+                          b.info as phone_info, 
+                          b.info_boa as phone_info_boa, 
+                          b.last_modyfication as phone_modyf,
+                          DATE_FORMAT(b.last_modyfication, '%d.%m.%y %H:%i') as _phone_modyf,
+                          (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(b.start_date)) AS phone_awaiting_time
+                            FROM internet.Connections a 
+                            INNER JOIN internet.Connections b
+                            ON b.service_activation is null and b.resignation_date is null AND a.localization=b.localization and a.service!=b.service 
+                            LEFT JOIN internet.Installations c
+                            ON a.service=c.type AND a.localization=c.localization 
+                            LEFT JOIN internet.Installations d
+                            ON  b.service=d.type AND b.localization=d.localization
+                            LEFT JOIN Modyfications m
+                            ON a.modyfication=m.mod_id
+                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null
+                            UNION
+                            select	a.id,
+                          a.start_date as net_start, 
+                          DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                          DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
+                          DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _net_end_date,
+                          a.address,
+                          a.phone,
+                          a.switch as net_switch,
+                          a.switch_loc_str as net_switch_loc_str,
+                          a.port as net_port,
+                          c.wire_length as net_wire,
+                          a.mac,
+                          a.service as net_service, 
+                          a.speed,
+                          c.socket_installation_date as net_socket_date,
+                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                          a.payment_activation as net_payment_activation,
+                          DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                          a.service_activation as net_activation, 
+                          DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                          a.service_configuration as net_configuration, 
+                          DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration, 
+                          a.informed as net_informed, 
+                          DATE_FORMAT(a.informed, '%d.%m.%y') as _net_informed, 
+                          a.installation_date,
+                          DATE_FORMAT(a.installation_date, '<b>%W</b><br>%d.%m.%y %H:%i') as _installation_date,
+                          DATE_FORMAT(m.mod_s_datetime, '<b>%W</b><br>%d.%m.%y %H:%i') as _mod_s_datetime,
+                          a.info,
+                          a.info_boa,
+                          a.last_modyfication as net_modyf,
+                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
+                          (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null
+                            FROM Connections a 
+                            LEFT JOIN Installations c
+                            ON a.service=c.type AND a.localization=c.localization 
+                            LEFT JOIN Modyfications m
+                            ON a.modyfication=m.mod_id
+                            WHERE a.service_activation is null and (SELECT count(*) from Connections where localization=a.localization and service_activation is null and service!=a.service and resignation_date is null)='0' and a.resignation_date is null";
+          break;
+        case 'for_configuration':
+          $inner_query="
+            SELECT	a.id as net_id,
+                          a.start_date as net_start, 
+                          DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                          DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
+                          DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _net_end_date,
+                          a.address,
+                          a.speed,
+                          a.phone,
+                          a.switch as net_switch,
+                          a.switch_loc_str as net_switch_loc_str,
+                          a.port as net_port,
+                          c.wire_length as net_wire,
+                          a.mac,
+                          a.service as net_service, 
+                          c.socket_installation_date as net_socket_date,
+                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                          a.payment_activation as net_payment_activation,
+                          DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                          a.service_activation as net_activation, 
+                          DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                          a.service_configuration as net_configuration, 
+                          DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration, 
+                          a.informed as net_informed, 
+                          DATE_FORMAT(a.informed, '%d.%m.%y') as _net_informed, 
+                          a.installation_date,
+                          DATE_FORMAT(a.installation_date, '<b>%W</b><br>%d.%m.%y %H:%i') as _installation_date,
+                          a.info as net_info,
+                          a.info_boa as net_info_boa,
+                          a.last_modyfication as net_modyf,
+                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
+                          (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time
+                            FROM Connections a 
+                            LEFT JOIN Installations c
+                            ON a.localization=c.localization AND a.service=c.type
+                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null AND a.mac!='' AND a.service_configuration is null AND c.socket_installation_date is not null";
+          break;
+        case 'done':
+          $inner_query="
+            select a.id,
+                   a.start_date as net_start, 
+                   DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                   a.address,
+                   a.speed,
+                   a.phone,
+                   a.switch as net_switch,
+                   a.switch_loc_str as net_switch_loc_str,
+                   a.port as net_port,
+                   c.wire_length as net_wire,
+                   a.mac,
+                   a.service as net_service, 
+                   c.socket_installation_date as net_socket_date,
+                   DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                   a.payment_activation as net_payment_activation,
+                   DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                   a.service_activation as net_activation, 
+                   DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                   a.service_configuration as net_configuration, 
+                   DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration 
+                     FROM Connections a 
+                     LEFT JOIN Installations c
+                     ON a.service=c.type AND a.localization=c.localization 
+                     WHERE a.service_activation is not null AND a.resignation_date is null";
+          break;
+        case 'all':
+          $no_resignations;
+          if($search) 
+            $no_resignations='';
+          else
+            $no_resignations='a.resignation_date is null';
+            $inner_query = "
+            SELECT	a.id as net_id,
+                          a.start_date as net_start, 
+                          DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                          DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
+                          DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _net_end_date,
+                          a.address as net_address,
+                          a.address,
+                          a.phone,
+                          a.switch as net_switch,
+                          a.switch_loc_str as net_switch_loc_str,
+                          a.port as net_port,
+                          c.wire_length as net_wire,
+                          c.wire_installation_date,
+                          c.socket_installation_date,
+                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                          c.wire_installer,
+                          c.socket_installer,
+                          a.mac,
+                          a.service as net_service, 
+                          c.socket_installation_date as net_socket_date,
+                          a.payment_activation as net_payment_activation,
+                          a.service_activation as net_activation, 
+                          a.service_configuration as net_configuration, 
+                          a.resignation_date as net_resignation, 
+                          DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                          DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration, 
+                          DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                          DATE_FORMAT(a.informed, '%d.%m.%y') as _net_informed, 
+                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y') as _last_modyfication, 
+                          DATE_FORMAT(a.resignation_date, '%d.%m.%y') as _net_resignation, 
+                          a.last_modyfication as net_modyf,
+                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
+                          a.informed as net_informed 
+                            FROM Connections a 
+                            LEFT JOIN Installations c
+                            ON a.service=c.type AND a.localization=c.localization
+                            WHERE $no_resignations $search";
+          break;
+        case 'resignations':
+          $inner_query="
+            select a.id,
+                   a.start_date as net_start, 
+                   DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
+                   DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
+                   DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS _net_end_date,
+                   a.address,
+                   a.phone,
+                   a.switch as net_switch,
+                   a.port as net_port,
+                   c.wire_length as net_wire,
+                   a.mac,
+                   a.service as net_service, 
+                   c.socket_installation_date as net_socket_date,
+                   DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _net_socket_date, 
+                   a.payment_activation as net_payment_activation,
+                   DATE_FORMAT(a.payment_activation, '%d.%m.%y') as _net_payment_activation, 
+                   a.service_activation as net_activation, 
+                   DATE_FORMAT(a.service_activation, '%d.%m.%y') as _net_activation, 
+                   a.service_configuration as net_configuration, 
+                   DATE_FORMAT(a.service_configuration, '%d.%m.%y') as _net_configuration, 
+                   a.resignation_date as net_resignation, 
+                   DATE_FORMAT(a.resignation_date, '%d.%m.%y') as _net_resignation, 
+                   (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time
+                     FROM Connections a 
+                     LEFT JOIN Installations c
+                     ON  a.service=c.type AND a.localization=c.localization
+                     WHERE a.resignation_date is not null";
+          break;
+        case 'installations':
+          break;
+      }
+      //echo $query;
+      $this->connect();
+      $num_rows = $this->num_rows($inner_query);
+      $paging->setTotalRows($num_rows);
+      $offset = $paging->getOffset();
+      $pages = $paging->getPages();
+      $rows_per_page = $paging->getRowsPerPage();
+      if($rows_per_page)
+      {
+        $query="SELECT * $isnull FROM ( $inner_query) z $order  LIMIT $offset, $rows_per_page";
+        $rows = $this->query_assoc_array($query);
+      }
+      else
+      {
+        $query="SELECT * $isnull FROM ( $inner_query) z $order";
+        $rows = $this->query_assoc_array($query);
+      }
+      return $rows;
+    }
     public function getList($mode, $order, &$paging, $find_phrase=null, $search_field=null)
     {
       if ($order)

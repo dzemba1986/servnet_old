@@ -17,6 +17,7 @@
   <td style="width:60px;">Opłaty</td>
   <td style="width:60px;"><a href="index.php?order=net_configuration&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Konfig. usługi</a></td>
   <td><a href="index.php?order=installation_date&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż</a></td>
+  <td>mont2</td>
   <td>Dod. info</td>
   <td>BOA info</td>
   <td style="width:90px;"><a href="index.php?order=modyf&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Ost. mod.</a></td>
@@ -108,6 +109,7 @@ foreach($wynik as $wiersz)
     echo"	<td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>
       <td style=\"text-align:center;\" >".$wiersz['_net_configuration']."</td>
       <td>".$wiersz['_installation_date']."</td>
+      <td>".$wiersz['_mod_s_datetime']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
       <td>".$wiersz['_net_modyf']."</td>
@@ -140,6 +142,7 @@ foreach($wynik as $wiersz)
     echo "<td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>";
     echo"	<td style=\"text-align:center;\" >".$wiersz['_net_configuration']."</td>
       <td rowspan=\"2\">".$wiersz['_installation_date']."</td>
+      <td rowspan=\"2\">".$wiersz['_mod_s_datetime']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
       <td>".$wiersz['_net_modyf']."</td>

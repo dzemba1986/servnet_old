@@ -55,7 +55,7 @@ if(substr($tryb, -13)=="installations")
 }
   elseif($tryb!='edit' && $tryb!='logout' && $tryb!='editUser' && $tryb!='modyfications')
 {
-  $wynik = $sql->getList2($tryb, $order, $paging, $find_phrase, $search_field);
+  $wynik = $sql->getList3($tryb, $order, $paging, $find_phrase, $search_field);
 }
 switch($tryb)
 {
