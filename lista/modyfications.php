@@ -3,7 +3,6 @@
 <?php
 $form_target = 'modyfications.php?tryb=modyfications';
 require(LISTA_ABSOLUTE.'/include/html/modyfications.php');
-Modyfications::import_from_con();
 ?>
 </body>
 </html>
