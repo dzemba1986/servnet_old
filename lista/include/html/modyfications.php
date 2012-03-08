@@ -188,6 +188,7 @@ for($j=1; $j<$days; $j++)
 // Unfinished modyfications display section html
 //################################################
 ?>
+<script type="text/javascript" src="js/closeModyficatonUnrelated.js"></script>
 <div>
 <table class="mod_table">
 <thead>
@@ -202,9 +203,14 @@ for($j=1; $j<$days; $j++)
       if(!is_object($mod))
         continue;
       if($con_id = $mod->get_con_id())
+      {
         $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'">podłączenia</a>';
+        $close_str = '<a href="add_socket.php?tryb=edit&main_id='.$con_id.'">podłączenia</a>';
+      }
       else
+      {
         $con_str = "podłączenia";
+      }
       echo "<tr>\n";
       echo "<td>".$mod->get_s_datetime()."</td><td>".$mod->get_e_datetime()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type()."</td><td>".$mod->get_desc()."</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>zamknij</td>\n";
       echo "</tr>\n";
