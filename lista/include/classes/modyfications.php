@@ -480,7 +480,7 @@ if(!defined('MODYFICATION_CLASS'))
       if($sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'))
       {
         $con = new Connections();
-        if($con->setModId($sql, $con_id, 0))
+        if(!$_con_id || $con->setModId($sql, $con_id, 0))
         {
           $sql->commit();
           return true;
@@ -502,6 +502,68 @@ if(!defined('MODYFICATION_CLASS'))
       if((($u11 < $u22) && ($u12 > $u21)) || (($u21 < $u12) && ($u22 > $u11)))
         return true;
       return false;
+    }
+    public static function import_from_con()
+    {
+      $sql = new MysqlListaPdo();
+      $sql->begin();
+      $query = "SELECT * FROM Connections WHERE installation_date is not null";
+      $conns = $sql->query($query, null);
+      foreach($conns as $conn)
+      {
+        $query = "INSERT INTO Modyfications (
+          mod_a_datetime,
+          mod_s_datetime,
+          mod_e_datetime,
+          mod_last_edit_datetime,
+          mod_user_add,
+          mod_user_last_edit,
+          mod_cost,
+          mod_inst,
+          mod_type,
+          mod_cause,
+          mod_loc,
+          mod_installer,
+          mod_desc) VALUES (
+            NOW(),
+            :mod_s_datetime,
+            :mod_e_datetime,
+            NOW(),
+            :mod_user_add,
+            :mod_user_last_edit,
+            :mod_cost,
+            :mod_inst,
+            :mod_type,
+            :mod_cause,
+            :mod_loc,
+            :mod_installer,
+            :mod_desc)";
+        $datetime = new DateTime($conn['installation_date']);
+        $datetime->add(new DateInterval('PT1H'));
+        $params = array('mod_s_datetime'=>$conn['installation_date'],
+            'mod_e_datetime'=>$datetime->format('Y-m-d H:i:s'),
+            'mod_user_add'=> 1,
+            'mod_user_last_edit'=> 1,
+            'mod_cost'=> 0,
+            'mod_inst'=>$conn['service'],
+            'mod_type'=> 'inst_new',
+            'mod_cause'=> 'devastation_in',
+            'mod_loc'=> $conn['localization'],
+            'mod_installer'=> '',
+            'mod_desc'=>$conn['info'].'<br />'.$conn['info_boa']);
+
+        if($mod_id=$sql->query_insert($query, $params))
+        {
+          $con = new Connections();
+          if(!$con->setModId($sql, $conn['id'], $mod_id))
+          {
+            $sql->rollback();
+            return false;
+          }
+        }
+      }
+      $sql->commit();
+      return true;
     }
   }
   class ModDay {

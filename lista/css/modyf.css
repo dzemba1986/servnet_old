@@ -96,3 +96,11 @@ background: #BDC8BC;
 #week_start_day form input {
 width: 80px;
 }
+.close_href {
+  cursor: normal;
+  font-weight: normal;
+  text-decoration: underline;
+}
+.close_href:hover {
+  cursor: pointer;
+}

@@ -398,10 +398,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
   <tr>
     <td width="160">Montaż</td>
     <td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
-    <td ><input type="hidden" name="id"value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="installation_date"><input type="submit" class="submit_field"  id="install_date_time_sub" value="zmień">
-      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
-      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
-      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php echo($connection1['id'])?>">Zmień</a>
+    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php echo($connection1['id'])?>">Zmień</a>
     </td>
   </tr>
 </table>

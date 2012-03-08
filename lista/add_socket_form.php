@@ -54,7 +54,6 @@ if($connection1['modyfication'])
   $mod = Modyfications::getById($connection1['modyfication']);
 else
   $mod = false;
-  var_dump ($mod);
 
 
 ?>

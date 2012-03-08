@@ -17,7 +17,7 @@
   <td style="width:60px;">Opłaty</td>
   <td style="width:60px;"><a href="index.php?order=net_configuration&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Konfig. usługi</a></td>
   <td><a href="index.php?order=installation_date&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż</a></td>
-  <td>mont2</td>
+  <td><a href="index.php?order=mod_s_datetime&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż2</a></td>
   <td>Dod. info</td>
   <td>BOA info</td>
   <td style="width:90px;"><a href="index.php?order=modyf&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Ost. mod.</a></td>

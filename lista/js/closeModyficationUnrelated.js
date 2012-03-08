@@ -1,4 +1,4 @@
-function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
+function modyficationCloseFormUnrelated(obj, id, installer, desc, cost, con_id)
 {
   var fields = new Object();
   fields[0] = new Object();
@@ -52,14 +52,6 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   fields[4]['obj'].setAttribute('name', 'id');  
   fields[4]['obj'].setAttribute('value', id);  
   fields[4]['label'] = '';
-  fields[5] = new Object();
-  fields[5]['name'] = 'id';
-  fields[5]['obj'] = document.createElement('input');
-  fields[5]['obj'].setAttribute('type', 'hidden');  
-  fields[5]['obj'].setAttribute('id', 'con_id');
-  fields[5]['obj'].setAttribute('name', 'con_id');  
-  fields[5]['obj'].setAttribute('value', con_id);  
-  fields[5]['label'] = '';
   var vtop = obj.parentNode.offsetTop + 200;
   appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 310, 260, true);
   var form = document.getElementById('socket_form');
@@ -75,13 +67,13 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
 
 
     addEvent(append_button, "click", function () {alert("Zamknięto montaż")});
+    addEvent(append_button, "click", function () {location.reload(true)});
   }
   function checkModyfF()
 {
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
   var cost_f = document.getElementById('cost');
-  inst.disabled = true;
   var ab = document.getElementById('newdiv_b_append');
   var ff_disable = false;
   var inst_disable = testInstaller(inst);
