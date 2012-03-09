@@ -52,6 +52,14 @@ background: white;
   border-right: 2px solid black; 
   position: absolute; 
 }
+.hour a {
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  display: inline;
+  font-family: monospace;
+  font-weight: bold;
+}
 .hour div {
   font-size: 13px;
   color: black;

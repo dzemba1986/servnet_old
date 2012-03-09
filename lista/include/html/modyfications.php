@@ -55,7 +55,7 @@ $days = 1 + 7; // day 1 is hour col
 $hours_width = 50;
 
 $c_width = 130; //collumn width;
-$c_height = 40; //collumn height;
+$c_height = 50; //collumn height;
 if($week_start_date || $week_start_date = $_REQUEST['week_start_date'])
 {
   if(!DataTypes::is_Date($week_start_date))
@@ -126,7 +126,7 @@ for($i=0; $i<$rows; $i++)
       //week days
       if($j==0)
       {
-        echo '<div class="hour" style="top: 0px; left: 0px; width: '.($hours_width - 2).'px; height: '.($c_height).'px;"><a href="'.$form_target.'&week_start_date='.$week->get_prev_week_date().'"> &lt; </a> <a href="'.$form_target.'&week_start_date='.$week->get_next_week_date().'"> &gt; </a></div>';
+        echo '<div class="hour" style="top: 0px; left: 0px; width: '.($hours_width - 2).'px; height: '.($c_height).'px;"><br /><a href="'.$form_target.'&week_start_date='.$week->get_prev_week_date().'"> &lt;&lt; </a> <a href="'.$form_target.'&week_start_date='.$week->get_next_week_date().'"> &gt;&gt; </a></div>';
       }
       else
       {
@@ -150,7 +150,7 @@ for($i=0; $i<$rows; $i++)
         $border_substr = 1;
         if($k+1 == $day_cols)
           $border_substr = 2;
-        if((($hour=='12:00' || $hour_int>15 || $hour_int < 9) && $j!=3 && $j < 6) || ($j==3 && ($hour_int < 11) || $hour_int > 17) || $j >=6)
+        if((($hour=='12:00' || $hour_int>15 || $hour_int < 9) && $j!=3 && $j < 6) || ($j==3 && ($hour_int < 11 || $hour_int > 17 || $hour_int == 14)) || $j >=6)
           echo '<div class="net_dark" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
         else
           echo '<div class="net" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
