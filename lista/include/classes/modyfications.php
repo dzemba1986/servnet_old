@@ -71,6 +71,26 @@ if(!defined('MODYFICATION_CLASS'))
     {
       return $this->mod_type;
     }
+    public function get_type_hr()
+    {
+      switch($this->mod_type)
+      {
+        case 'inst_new':
+          return 'Nowa instalacja';
+        case 'inst_change':
+          return 'Wymiana instalacji';
+        case 'socket_add':
+          return 'Nowe gniazdo';
+        case 'socket_change':
+          return 'Wymiana gniazda';
+        case 'socket_move':
+          return 'Przeniesienie gniazda';
+        case 'wire_change':
+          return 'Wymiana przewodu';
+        case 'modyfication':
+          return 'Inne';
+      }
+    }
     public function get_cause()
     {
       return $this->mod_cause;
@@ -214,7 +234,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_inst($inst)
     {
-      if($inst=='tv' || $inst=='net' || $inst=='phone' || $inst=='other')
+      if($inst=='tv' || $inst=='net' ||$inst=='net_phone' || $inst=='phone' || $inst=='other')
       {
         $this->mod_inst = $inst;
         return true;
@@ -223,7 +243,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_type($type)
     {
-      if($type=='inst_new' || $type=='inst_change' || $type=='socket_add' || $type=='socket_change' || $type=='wire_change' || $type=='modyfication')
+      if($type=='inst_new' || $type=='inst_change' || $type=='socket_add' || $type=='socket_change' || $type=='socket_move' || $type=='wire_change' || $type=='modyfication')
       {
         $this->mod_type = $type;
         return true;

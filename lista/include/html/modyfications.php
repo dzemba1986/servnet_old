@@ -214,7 +214,7 @@ for($j=1; $j<$days; $j++)
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$mod->get_desc().'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
       echo "<tr>\n";
-      echo "<td>".$mod->get_s_datetime()."</td><td>".$mod->get_e_datetime()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type()."</td><td>".$mod->get_desc()."</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
+      echo "<td>".$mod->get_s_datetime()."</td><td>".$mod->get_e_datetime()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
       echo "</tr>\n";
     }
 ?>

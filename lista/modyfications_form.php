@@ -11,11 +11,13 @@ $loc_arr = null;
 $inst_arr = array('net' => 'Internet',
                   'tv' => 'Telewizja',
                   'phone' => 'Telefon',
+                  'net_phone' => 'Internet + telefon',
                   'other' => 'Inna');
 $type_arr = array('inst_new' => 'Nowa instalacja',
                   'inst_change' => 'Wymiana instalacji',
                   'socket_add' => 'Nowe gniazdo',
                   'socket_change' => 'Wymiana gniazda',
+                  'socket_move' => 'Przeniesienie gniazda',
                   'wire_change' => 'Wymiana przewodu',
                   'modyfication' => 'Inne przeróbki');
 $cause_arr = array('devastation_in' => 'W lokalu',
