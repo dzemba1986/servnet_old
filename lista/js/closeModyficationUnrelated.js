@@ -53,7 +53,7 @@ function modyficationCloseFormUnrelated(obj, id, installer, desc, cost, con_id)
   fields[4]['obj'].setAttribute('value', id);  
   fields[4]['label'] = '';
   var vtop = obj.parentNode.offsetTop + 200;
-  appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 310, 260, true);
+  appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 320, 260, true);
   var form = document.getElementById('socket_form');
   var append_button = document.getElementById('newdiv_b_append');
   var ff = document.getElementById('fullfill');

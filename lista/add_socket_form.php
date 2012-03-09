@@ -102,7 +102,7 @@ else
 <?php if($connection1['modyfication']>0): ?>
 </div>
 </form>
-  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, '<?php echo ($mod->get_desc()); ?>', '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>'); return false;">Zmień</button>
+  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, document.getElementById('info_1').value, '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>'); return false;">Zmień</button>
 <?php else: ?>
   <input type="submit"  class="submit_field" id="save_button" value="Zmień">
 </div>
