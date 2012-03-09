@@ -1,4 +1,5 @@
 <?php
+require('path.php');
 require('../../security.php');
 require('../../include/classes/connections.php');
     $con = new Connections();
