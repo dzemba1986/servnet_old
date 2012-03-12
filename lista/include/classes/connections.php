@@ -406,6 +406,15 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['info_boa'];
     }
+    public static function getService($id)
+    {
+      $sql = new MysqlListaPdo();
+      $query = "SELECT service FROM Connections WHERE id=:id";
+      $result = $sql->query($query, array('id'=>$id));
+      if(count($result)!=1)
+        return false;
+      return $result[0]['service'];
+    }
     public static function setModId($sql, $con_id, $mod_id)
     {
       $query = "UPDATE Connections SET modyfication = :mod_id WHERE id=:con_id";

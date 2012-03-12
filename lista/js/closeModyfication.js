@@ -67,6 +67,9 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
   var cost_f = document.getElementById('cost');
+  var desc = document.getElementById('desc');
+  inst.disabled = true;
+  desc.disabled = true;
   addEvent(ff, "change", function() {checkModyfF()});
   addEvent(inst, "keyup" , function() {checkModyfF()});
   addEvent(cost_f, "keyup" , function() {checkModyfF()});
@@ -82,7 +85,6 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id)
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
   var cost_f = document.getElementById('cost');
-  inst.disabled = true;
   var ab = document.getElementById('newdiv_b_append');
   var ff_disable = false;
   var inst_disable = testInstaller(inst);

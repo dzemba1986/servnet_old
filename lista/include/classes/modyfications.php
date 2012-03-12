@@ -144,6 +144,22 @@ if(!defined('MODYFICATION_CLASS'))
       $date_time = DataTypes::datetime_to_date_time($datetime);
       return DataTypes::longDate_to_date($date_time['date']);
     }
+    public function get_last_edit_time()
+    {
+      $datetime = $this->get_last_edit_datetime();
+      if(!$datetime)
+        return null;
+      $date_time = DataTypes::datetime_to_date_time($datetime);
+      return $date_time['time'];
+    }
+    public function get_last_edit_date()
+    {
+      $datetime = $this->get_last_edit_datetime();
+      if(!$datetime)
+        return null;
+      $date_time = DataTypes::datetime_to_date_time($datetime);
+      return DataTypes::longDate_to_date($date_time['date']);
+    }
     public function get_e_time()
     {
       $datetime = $this->get_e_datetime();
@@ -500,7 +516,7 @@ if(!defined('MODYFICATION_CLASS'))
       if($sql->query_update($query, $params, $this->mod_id, 'Modyfications', 'mod_id'))
       {
         $con = new Connections();
-        if(!$_con_id || $con->setModId($sql, $con_id, 0))
+        if(!$con_id || $con->setModId($sql, $con_id, 0))
         {
           $sql->commit();
           return true;

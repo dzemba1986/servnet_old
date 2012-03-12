@@ -6,41 +6,57 @@ $mod = null;
 //Zapisz
 if($_POST['id'])
 {
-  $mod = Modyfications::getById($_POST['id']);
-  $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
-  $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
-  $mod->set_cost($_POST['cost']);
-  $mod->set_inst($_POST['inst']);
-  $mod->set_type($_POST['type']);
-  $mod->set_cause($_POST['cause']);
-  $mod->set_loc($_POST['loc_id']);
-  $mod->set_desc($_POST['desc']);
-  $mod->set_user_last_edit();
-  $mod->save();
+  if(! $_SESSION['mod_sub'])
+  {
+    $mod = Modyfications::getById($_POST['id']);
+    $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
+    $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
+    $mod->set_cost($_POST['cost']);
+    $mod->set_inst($_POST['inst']);
+    $mod->set_type($_POST['type']);
+    $mod->set_cause($_POST['cause']);
+    $mod->set_loc($_POST['loc_id']);
+    $mod->set_desc($_POST['desc']);
+    $mod->set_user_last_edit();
+    $mod->save();
+    $_SESSION['mod_sub'] = true;
+    echo'<script type="text/javascript">alert("Zapisano zdarzenie.");</script>';
+  }
+  else
+    $_SESSION['mod_sub'] = false;
 }
 elseif($_POST['s_date'])
 {
-  $mod = new Modyfications();
-  $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
-  $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
-  $mod->set_cost($_POST['cost']);
-  $mod->set_inst($_POST['inst']);
-  $mod->set_type($_POST['type']);
-  $mod->set_cause($_POST['cause']);
-  if($_POST['loc_id'])
-    $mod->set_loc($_POST['loc_id']);
-  else
+  if(! $_SESSION['mod_sub'])
   {
-    $loc = new Lokalizacja();
-    $loc_id = $loc->add($_POST['street'], $_POST['building'], false, $_POST['flat'], false);
-    $mod->set_loc($loc_id);
-  }
+    $mod = new Modyfications();
+    $mod->set_s_datetime($_POST['s_date'], $_POST['s_time']);
+    $mod->set_e_datetime($_POST['s_date'], $_POST['e_time']);
+    $mod->set_cost($_POST['cost']);
+    $mod->set_inst($_POST['inst']);
+    $mod->set_type($_POST['type']);
+    $mod->set_cause($_POST['cause']);
+    if($_POST['loc_id'])
+      $mod->set_loc($_POST['loc_id']);
+    else
+    {
+      $loc = new Lokalizacja();
+      $loc_id = $loc->add($_POST['street'], $_POST['building'], false, $_POST['flat'], false);
+      $mod->set_loc($loc_id);
+    }
 
-  $mod->set_desc($_POST['desc']);
-  $mod->set_user_add();
-  $mod->set_user_last_edit();
-  $mod->add($_POST['con_id']);
+    $mod->set_desc($_POST['desc']);
+    $mod->set_user_add();
+    $mod->set_user_last_edit();
+    $mod->add($_POST['con_id']);
+    $_SESSION['mod_sub'] = true;
+    echo'<script type="text/javascript">alert("Dodano zdarzenie.");</script>';
+  }
+  else
+    $_SESSION['mod_sub'] = false;
 }
+else
+  $_SESSION['mod_sub'] = false;    
 if($mod)
 {
   $week_start_date = $mod->get_s_date();
@@ -199,12 +215,36 @@ for($j=1; $j<$days; $j++)
 <thead>
 </thead>
   <tr class="mod_table_top">
-    <td>Data start</td><td>Data koniec</td><td>Lokalizacja</td><td>Typ instalacji</td><td>Rodzaj montażu</td><td>opis</td><td>edycja</td><td>podłączenia</td><td>zamknij</td>
+    <td>Data</td>
+    <td>Start</td>
+    <td>Koniec</td>
+    <td>Lokalizacja</td>
+    <td>Typ instalacji</td>
+    <td>Rodzaj montażu</td>
+    <td>Opis</td>
+    <td>Dodał</td>
+    <td>Ost. mod.</td>
+    <td>Edycja</td>
+    <td>Podłączenia</td>
+    <td>Zamknij</td>
   </tr>
   <?php
   if($mod_arr)
     foreach($mod_arr as $mod)
     {
+      if(!is_object($mod))
+        continue;
+
+      $mod_user_add_obj = User::getById($mod->get_user_add());
+      $mod_user_add_login = null;
+      if($mod_user_add_obj)
+        $mod_user_add_login = $mod_user_add_obj->get_login();
+
+      $mod_user_last_obj = User::getById($mod->get_user_last_edit());
+      $mod_user_last_login = null;
+      if($mod_user_last_obj)
+        $mod_user_last_login = $mod_user_last_obj->get_login();
+
       if(!is_object($mod))
         continue;
       if($con_id = $mod->get_con_id())
@@ -218,7 +258,7 @@ for($j=1; $j<$days; $j++)
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$mod->get_desc().'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
       echo "<tr>\n";
-      echo "<td>".$mod->get_s_datetime()."</td><td>".$mod->get_e_datetime()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
+      echo "<td>".$mod->get_s_date()."</td><td>".$mod->get_s_time()."</td><td>".$mod->get_e_time()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td>$mod_user_add_login</td><td>".$mod->get_last_edit_date()." ".$mod->get_last_edit_time()." $mod_user_last_login</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
       echo "</tr>\n";
     }
 ?>

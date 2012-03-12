@@ -1,4 +1,5 @@
 <?php require('include/html/header.php'); ?>
+<?php require(LISTA_ABSOLUTE.'/include/classes/user.php'); ?>
 <?php require(LISTA_ABSOLUTE.'/include/classes/modyfications.php'); ?>
 <?php require(LISTA_ABSOLUTE.'/include/classes/mysql.php'); ?>
 <?php require(LISTA_ABSOLUTE.'/include/classes/localization.php'); ?>
@@ -30,7 +31,13 @@ if($con_id)
   $loc_arr = $loc->getLoc($loc_id);
   $loc_arr['str'] = $loc->getAddressStr($loc_id);
   if(!$mod_id)
-    $desc = Connections::getInfo($con_id)."\n".Connections::getBoaInfo($con_id);
+  {
+    $mod = new Modyfications();
+    $mod->set_desc(Connections::getInfo($con_id)."\n".Connections::getBoaInfo($con_id));
+    $mod->set_inst(Connections::getService($con_id));
+    $mod->set_cost(0);
+    $mod->set_type('inst_new');
+  }
 }
 
 if($mod_id)
@@ -44,10 +51,9 @@ if($mod_id)
     $loc_arr['str'] = $loc->getAddressStr($loc_id);
     if(!$_REQUEST['week_start_date'])
       $week_start_date = $mod->get_s_date();
-    $desc = $mod->get_desc();
   }
 }
-else
+if(!$mod)
   $mod = new Modyfications();
 $sql = new myMysql();
 $streets = $sql->getUlic();
@@ -144,7 +150,7 @@ $streets = $sql->getUlic();
   </tr>
   <tr>
     <td>Info</td>
-    <td><textarea name="desc"><?php echo($desc)?></textarea></td>
+    <td><textarea name="desc"><?php echo($mod->get_desc())?></textarea></td>
   </tr>
   <tr>
     <td><button onclick="closeMod()">Zamknij</button>
