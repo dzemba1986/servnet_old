@@ -137,7 +137,8 @@ if(! defined('MYSQL_PDO_CORE'))
     public function query_update($query, $param, $id, $tabela, $id_field)
     {
       $sql = $this->connect();
-      $this->query_log($query, $id, $tabela, $id_field);
+      $log_query = $query."\n".print_r($param, true);
+      $this->query_log($log_query, $id, $tabela, $id_field);
       return $this->query($query, $param);
     }
     protected function query_log($log_query, $id=null, $table=null, $id_field=null)
@@ -157,26 +158,25 @@ if(! defined('MYSQL_PDO_CORE'))
       try
       {
 
-        $query = 'SELECT * FROM :table WHERE :id_field = :id';
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(':table', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':id_field', $id_field, PDO::PARAM_INT);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $query = "SELECT * FROM $table WHERE $id_field = :id";
+        $pdo = $this->connect();
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
-        $old = print_r($result[0]);
+        $old = print_r($result, true);
 
         //inserting log record
 
         $query = "INSERT INTO History (query_time, user_name, user_ip, query_text, old_value, object_id, table_name, id_field) VALUES(NOW(), :user, :ip, :log_query, :old, :id, :table, :id_field)";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(':user', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':ip', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':log_query', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':old', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':id', $table, PDO::PARAM_STR);
-        $stmt->bindValue(':table', $id_field, PDO::PARAM_STR);
-        $stmt->bindValue(':id_field', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':user', intval($_SESSION['user_id']), PDO::PARAM_STR);
+        $stmt->bindValue(':ip', $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
+        $stmt->bindValue(':log_query', $log_query, PDO::PARAM_STR);
+        $stmt->bindValue(':old', $old, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        $stmt->bindValue(':table', $table, PDO::PARAM_STR);
+        $stmt->bindValue(':id_field', $id_field, PDO::PARAM_INT);
         $stmt->execute();
         //      echo $query;
       }
