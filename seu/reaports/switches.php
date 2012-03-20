@@ -24,6 +24,7 @@ foreach ($switchL3 as $switch)
 {
   $ports = $repo->getSwitchPorts($switch['dev_id']);
   $ips = $repo->getDevIps($switch['dev_id']);
+
 ?>
 <div class="switch">
   <div class="sw_desc">
@@ -47,6 +48,10 @@ foreach ($switchL3 as $switch)
     <tr>
       <td class="title">SN</td>
       <td><?php echo ($switch['sn']);?></td>
+    </tr>
+    <tr>
+      <td class="title">Wykorzystanych portów</td>
+      <td><?php echo (count($ports));?></td>
     </tr>
     </table>
   </div>
@@ -83,6 +88,21 @@ foreach ($switchL2 as $switch)
 {
   $ports = $repo->getSwitchPorts($switch['dev_id']);
   $ips = $repo->getDevIps($switch['dev_id']);
+  $bramek = 0;
+  $net['4'] = 0;
+  $net['200'] = 0;
+  foreach($ports as $p)
+  {
+    if($p['device_type']=='Bramka_voip')
+      $bramek++;
+    elseif($p['device_type']=='Host')
+    {
+      if($p['pakiet']=='200/100')
+        $net['200']++;
+      elseif($p['pakiet']=='4/2')
+        $net['4']++;
+    }
+  }
 ?>
 <div class="switch">
   <div class="sw_desc">
@@ -106,6 +126,22 @@ foreach ($switchL2 as $switch)
     <tr>
       <td class="title">SN</td>
       <td><?php echo ($switch['sn']);?></td>
+    </tr>
+    <tr>
+      <td class="title">Wyk. portów</td>
+      <td><?php echo (count($ports));?></td>
+    </tr>
+    <tr>
+      <td class="title">Bramek</td>
+      <td><?php echo ($bramek);?></td>
+    </tr>
+    <tr>
+      <td class="title">Ab. 200/100</td>
+      <td><?php echo ($net['200']);?></td>
+    </tr>
+    <tr>
+      <td class="title">Ab. 4/2</td>
+      <td><?php echo ($net['4']);?></td>
     </tr>
     </table>
   </div>

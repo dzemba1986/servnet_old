@@ -102,7 +102,8 @@ else
 <?php if($connection1['modyfication']>0): ?>
 </div>
 </form>
-  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, document.getElementById('info_1').value, '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>'); return false;">Zmień</button>
+  <button class="submit_field" id="save_button" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, document.getElementById('info_1').value, '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>', true); return false;" style="width:120px;">Montaż wykonany</button>
+  <button class="submit_field" onclick="modyficationCloseForm(document.getElementById('net'), '<?php echo ($mod->get_id()); ?>', document.getElementById('socket_installer_1').value, document.getElementById('info_1').value, '<?php echo ($mod->get_cost()); ?>', '<?php echo($connection1['id'])?>', false); return false;" style="width: 120px;">Montaż Niewykonany</button>
 <?php else: ?>
   <input type="submit"  class="submit_field" id="save_button" value="Zmień">
 </div>

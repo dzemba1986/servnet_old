@@ -209,7 +209,6 @@ for($j=1; $j<$days; $j++)
 // Unfinished modyfications display section html
 //################################################
 ?>
-<script type="text/javascript" src="js/closeModyficationUnrelated.js"></script>
 <div>
 <table class="mod_table">
 <thead>
