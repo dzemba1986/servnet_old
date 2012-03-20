@@ -244,27 +244,31 @@ function testAddWireForm(service)
 function testAddSocketForm(service)
 {
   var sub_button = document.getElementById('save_button');
+  var sub_button2 = document.getElementById('save_button2');
   var socket_date = document.getElementById('socket_installation_date_1');
   var socket_installer = document.getElementById('socket_installer_1');
   var result = testStartDate(socket_date, sub_button);
-  if(!testInstaller(socket_installer, sub_button))
+  if(!testInstaller(socket_installer))
     result = false;
+
   if(service=='net')
   {
     var mac = document.getElementById('mac_1');
     if(!testMac(mac, sub_button))
       result = false;
   }
-  else if(service=='phone')
+  if(result != false)
   {
-    var service_activation = document.getElementById('service_activation_1');
-    if(!testDate(service_activation, sub_button))
-      result = false;
+    sub_button.disabled = false;
+    if(sub_button2)
+      sub_button2.disabled = false;
   }
-  if(result)
-    setSubmit('',true, sub_button);
   else
-    setSubmit('',false, sub_button);
+  {
+    sub_button.disabled = true;
+    if(sub_button2)
+      sub_button2.disabled = true;
+  }
 }
 function testEditWireForm(footer)
 {

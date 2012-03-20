@@ -1,4 +1,4 @@
-function modyficationCloseForm(obj, id, installer, desc, cost, con_id, inst_dis)
+function prepareCloseForm(id, installer, desc, cost, con_id, ff)
 {
   var fields = new Object();
   fields[0] = new Object();
@@ -10,24 +10,15 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id, inst_dis)
   fields[0]['obj'].setAttribute('value', installer);  
   fields[0]['label'] = 'Monter';
   fields[1] = new Object();
-  fields[1]['obj'] = document.createElement('select');
+  fields[1]['obj'] = document.createElement('input');
+  fields[1]['obj'].setAttribute('type', 'hidden');  
   fields[1]['obj'].setAttribute('id', 'fullfill');
   fields[1]['obj'].setAttribute('name', 'fullfill');  
-
-  var option = document.createElement('option');
-  fields[1]['obj'].appendChild(option);
-
-  option = document.createElement('option');
-  option.setAttribute('value', 1);
-  option.appendChild(document.createTextNode('Tak'));
-  fields[1]['obj'].appendChild(option);
-
-  option = document.createElement('option');
-  option.setAttribute('value', 0);
-  option.appendChild(document.createTextNode('Nie'));
-  fields[1]['obj'].appendChild(option);
-
-  fields[1]['label'] = 'Wykonano';
+  if(ff)
+    fields[1]['obj'].setAttribute('value', 1);  
+  else
+    fields[1]['obj'].setAttribute('value', 0);  
+  fields[1]['label'] = '';
   fields[2] = new Object();
   fields[2]['name'] = 'desc';
   fields[2]['obj'] = document.createElement('textarea');
@@ -60,14 +51,18 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id, inst_dis)
   fields[5]['obj'].setAttribute('name', 'con_id');  
   fields[5]['obj'].setAttribute('value', con_id);  
   fields[5]['label'] = '';
+  return fields;
+}
+function modyficationCloseForm(obj, id, installer, desc, cost, con_id, ff)
+{
+  var fields = prepareCloseForm(id, installer, desc, cost, con_id, ff);
   var vtop = obj.parentNode.offsetTop + 200;
   appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 320, 260, true);
   var form = document.getElementById('socket_form');
   var append_button = document.getElementById('newdiv_b_append');
   var ff = document.getElementById('fullfill');
   var inst = document.getElementById('installer');
-  if(inst_dis)
-    inst.disabled = true;
+  inst.disabled = true;
   var cost_f = document.getElementById('cost');
   var desc = document.getElementById('desc');
   inst.disabled = true;
@@ -76,12 +71,28 @@ function modyficationCloseForm(obj, id, installer, desc, cost, con_id, inst_dis)
   addEvent(inst, "keyup" , function() {checkModyfF()});
   addEvent(cost_f, "keyup" , function() {checkModyfF()});
   checkModyfF();
-
-
-
-    addEvent(append_button, "click", function () {alert("Zamknięto montaż, teraz nastąpi dopisanie danych instalacji do bazy")});
-    addEvent(append_button, "click", function () {form.submit()});
-  }
+  addEvent(append_button, "click", function () {alert("Zamknięto montaż, teraz nastąpi dopisanie danych instalacji do bazy")});
+  addEvent(append_button, "click", function () {form.submit()});
+}
+function modyficationCloseFormNoSocket(obj, id, installer, desc, cost, con_id, ff)
+{
+  var fields = prepareCloseForm(id, installer, desc, cost, con_id, ff);
+  var vtop = obj.parentNode.offsetTop + 200;
+  appendForm2('Zamykanie zdarzenia montażu<br>', fields, 'Zamknij zdarzenie', 'ajax/closeModyfication.php', vtop, 400, 320, 260, true);
+  var form = document.getElementById('socket_form');
+  var append_button = document.getElementById('newdiv_b_append');
+  var ff = document.getElementById('fullfill');
+  var inst = document.getElementById('installer');
+  inst.disabled = true;
+  var cost_f = document.getElementById('cost');
+  var desc = document.getElementById('desc');
+  inst.disabled = true;
+  desc.disabled = true;
+  addEvent(ff, "change", function() {checkModyfF()});
+  addEvent(inst, "keyup" , function() {checkModyfF()});
+  addEvent(cost_f, "keyup" , function() {checkModyfF()});
+  checkModyfF();
+}
 function modyficationCloseFormUnrelated(obj, id, installer, desc, cost, con_id)
 {
   var fields = new Object();

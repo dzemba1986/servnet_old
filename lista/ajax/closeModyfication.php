@@ -17,7 +17,6 @@ $mod->set_desc($mod_desc);
 $mod->set_cost($mod_cost);
 $mod->set_user_closed();
 $result = $mod->close($con_id);
-var_dump($_GET);
 if($result)
   echo('Zamknięto montaż');
 else
