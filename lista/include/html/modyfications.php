@@ -257,7 +257,8 @@ for($j=1; $j<$days; $j++)
       else
       {
         $con_str = "podłączenia";
-        $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$mod->get_desc().'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
+        $desc = str_replace(array("\r", "\n"), '', $mod->get_desc());
+        $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$desc.'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
       echo "<tr>\n";
       echo "<td>".$mod->get_s_date()."</td><td>".$mod->get_s_time()."</td><td>".$mod->get_e_time()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td>$mod_user_add_login</td><td>".$mod->get_last_edit_date()." ".$mod->get_last_edit_time()." $mod_user_last_login</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
