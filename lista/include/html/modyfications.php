@@ -182,6 +182,8 @@ for($j=1; $j<$days; $j++)
     {
       foreach($mod_obj_col as $mod)
       {
+        if($mod->get_close_datetime() && !$mod->get_fullfill())
+          continue;
         $x_pos = ($days_obj_arr[$j]->get_offset() + $mod->get_col())*$c_width + $hours_width;
         $y_pos = floor(($mod->get_s_time_mins() - $start_h + 60) * $px_per_min);
         $height = ceil(($mod->get_e_time_mins() - $mod->get_s_time_mins()) * $px_per_min);
@@ -210,6 +212,7 @@ for($j=1; $j<$days; $j++)
 //################################################
 ?>
 <div>
+<script type="text/javascript" src="js/closeModyfication.js"></script>
 <table class="mod_table">
 <thead>
 </thead>

@@ -7,8 +7,8 @@
   <td style="width:60px;">Deadline</td>
   <td><a href="index.php?order=adres&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Adres</a></td>
   <td>Telefon</td>
-  <td>Switch_loc_str</td>
-  <td>Port</td>
+  <td>Switch</td>
+<!--  <td>Port</td> -->
   <td style="width:50px;">Przewód</td>
   <td>MAC</td>
   <td><a href="index.php?order=net_service&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Usługa</a></td>
@@ -92,8 +92,8 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_end_date']."</td>
       <td>".$wiersz['address']."</td>
       <td>".$wiersz['phone']."</td>
-      <td>".$wiersz['net_switch_loc_str']."</td>
-      <td>".$wiersz['net_port']."</td>";
+      <td>".$wiersz['net_switch_loc_str']."</td>";
+   // echo"  <td>".$wiersz['net_port']."</td>";
     if($wiersz['net_wire']=='')
       echo"<td><a class=\"edit\" href=\"add_wire_form.php?tryb=edit&amp;main_id=".$wiersz['net_id']."\">+p.</a></td>";
     else	
@@ -124,8 +124,8 @@ foreach($wynik as $wiersz)
       <td style=\"text-align:center;\" >".$wiersz['_net_end_date']."</td>
       <td rowspan=\"2\">".$wiersz['address']."</td>
       <td rowspan=\"2\">".$wiersz['phone']."</td>
-      <td>".$wiersz['net_switch_loc_str']."</td>
-      <td>".$wiersz['net_port']."</td>";
+      <td>".$wiersz['net_switch_loc_str']."</td>";
+   // echo"  <td>".$wiersz['net_port']."</td>";
     if($wiersz['net_wire']=='')
       echo"<td><a class=\"edit\" href=\"add_wire_form.php?tryb=edit&amp;main_id=".$wiersz['net_id']."\">+p.</a></td>";
     else	
@@ -148,8 +148,8 @@ foreach($wynik as $wiersz)
     echo"<tr bgcolor=\"$phone_rowcolor\" class=\"row\">
       <td style=\"text-align:center;\" >".$wiersz['phone_start']."</td>
       <td style=\"text-align:center;\" >".$wiersz['phone_end_date']."</td>
-      <td>".$wiersz['phone_switch_loc_str']."</td>
-      <td>".$wiersz['phone_port']."</td>";
+      <td>".$wiersz['phone_switch_loc_str']."</td>";
+    //echo"  <td>".$wiersz['phone_port']."</td>";
     if($wiersz['phone_wire']=='')
       echo"<td><a class=\"edit\" href=\"add_wire_form.php?tryb=edit&amp;main_id=".$wiersz['phone_id']."\">+p.</a></td>";
     else	

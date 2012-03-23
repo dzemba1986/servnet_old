@@ -87,10 +87,10 @@ else
   <?php if($installation1['installation_id']): ?>
   <table class="tables">
   <tr>
-  <td>Data zamontowania gniazdka</td>
+  <td>Data zdarzenia</td>
   <td><input class="date_field" type="text" style="float:left;" value="<?php echo($installation1['_socket_installation_date'])?>" name="socket_installation_date" id="socket_installation_date_1" onkeyup="testAddSocketForm('<?php echo $connection1['service']?>');"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php echo(date("d.m.y")) ?>'); testAddSocketForm('<?php echo $connection1['service']?>');">Dziś</div></td>
   <tr>
-  <td>Gniazdko zamontował</td>
+  <td>Monter</td>
   <td><input title="Minimum 2 znaki alfanumeryczne, dozwolone też &amp;,." class="installer_field" name="socket_installer" id="socket_installer_1" onkeyup="testAddSocketForm('<?php echo $connection1['service']?>');" value="<?php echo($installation1['socket_installer'])?>"></td>
   </tr>
   </table>
