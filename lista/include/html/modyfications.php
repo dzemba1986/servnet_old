@@ -234,7 +234,7 @@ for($j=1; $j<$days; $j++)
     {
       if(!is_object($mod))
         continue;
-
+      $phone_id = Connections::getPhoneId($mod->get_con_id());
       $mod_user_add_obj = User::getById($mod->get_user_add());
       $mod_user_add_login = null;
       if($mod_user_add_obj)
@@ -249,8 +249,9 @@ for($j=1; $j<$days; $j++)
         continue;
       if($con_id = $mod->get_con_id())
       {
-        $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'">podłączenia</a>';
-        $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'">zamknij</a>';
+        $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">podłączenia</a>';
+        $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
+     //   $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
       }
       else
       {

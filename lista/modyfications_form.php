@@ -7,6 +7,7 @@
 <?php
 $mod_id = intval($_GET['mod_id']);
 $con_id = intval($_GET['con_id']);
+$phone_id = intval($_GET['phone_id']);
 $mod = null;
 $loc_arr = null;
 $inst_arr = array('net' => 'Internet',
@@ -34,7 +35,12 @@ if($con_id)
   {
     $mod = new Modyfications();
     $mod->set_desc(Connections::getInfo($con_id)."\n".Connections::getBoaInfo($con_id));
-    $mod->set_inst(Connections::getService($con_id));
+    $service1 = Connections::getService($con_id);
+    $service2 = Connections::getService($phone_id);
+    if($service1=='net' && $service2=='phone')
+      $mod->set_inst('net_phone');
+    else 
+      $mod->set_inst(Connections::getService($con_id));
     $mod->set_cost(0);
     $mod->set_type('inst_new');
   }

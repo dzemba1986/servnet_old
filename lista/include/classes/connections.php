@@ -415,6 +415,15 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['service'];
     }
+    public static function getPhoneId($id)
+    {
+      $sql = new MysqlListaPdo();
+      $query = "SELECT p.id FROM Connections p JOIN Connections n ON (n.id=:id AND n.localization=p.localization AND p.service='phone' AND p.service_activation is null and p.resignation_date is null)";
+      $result = $sql->query($query, array('id'=>$id));
+      if(count($result)!=1)
+        return false;
+      return $result[0]['id'];
+    }
     public static function setModId($sql, $con_id, $mod_id)
     {
       $query = "UPDATE Connections SET modyfication = :mod_id WHERE id=:con_id";
