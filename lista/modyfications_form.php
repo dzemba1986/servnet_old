@@ -159,7 +159,7 @@ $streets = $sql->getUlic();
     <td><textarea name="desc" cols="30" rows="5"><?php echo($mod->get_desc())?></textarea></td>
   </tr>
   <tr>
-    <td><button onclick="closeMod()">Zamknij</button>
+    <td>
     </td>
     <td><input type="submit" value="Zapisz" id="save_button"/>
     </td>
