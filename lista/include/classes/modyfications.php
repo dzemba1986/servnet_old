@@ -665,6 +665,8 @@ if(!defined('MODYFICATION_CLASS'))
         {
           if(!is_object($mod1))
             continue;
+          if($mod1->get_close_datetime() && !$mod1->get_fullfill())
+            continue;
           $e_unix = strtotime($mod1->get_e_datetime());
           if($e_unix > $e_unix_max)
             $e_unix_max = $e_unix;

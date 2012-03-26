@@ -182,8 +182,6 @@ for($j=1; $j<$days; $j++)
     {
       foreach($mod_obj_col as $mod)
       {
-        if($mod->get_close_datetime() && !$mod->get_fullfill())
-          continue;
         $x_pos = ($days_obj_arr[$j]->get_offset() + $mod->get_col())*$c_width + $hours_width;
         $y_pos = floor(($mod->get_s_time_mins() - $start_h + 60) * $px_per_min);
         $height = ceil(($mod->get_e_time_mins() - $mod->get_s_time_mins()) * $px_per_min);
@@ -260,7 +258,7 @@ for($j=1; $j<$days; $j++)
         $desc = str_replace(array("\r", "\n"), '', $mod->get_desc());
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$desc.'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
-      echo "<tr>\n";
+      echo "<tr class=\"row\">\n";
       echo "<td>".$mod->get_s_date()."</td><td>".$mod->get_s_time()."</td><td>".$mod->get_e_time()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td>$mod_user_add_login</td><td>".$mod->get_last_edit_date()." ".$mod->get_last_edit_time()." $mod_user_last_login</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
       echo "</tr>\n";
     }

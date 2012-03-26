@@ -150,7 +150,7 @@ $streets = $sql->getUlic();
   </tr>
   <tr>
     <td>Info</td>
-    <td><textarea name="desc"><?php echo($mod->get_desc())?></textarea></td>
+    <td><textarea name="desc" cols="30" rows="5"><?php echo($mod->get_desc())?></textarea></td>
   </tr>
   <tr>
     <td><button onclick="closeMod()">Zamknij</button>
