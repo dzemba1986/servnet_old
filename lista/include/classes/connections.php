@@ -6,6 +6,37 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
   define('CONNECTIONS_LISTA_CLASS', true);
   Class Connections
   {
+    private $id;
+    private $ara_id;
+    private $start_date;
+    private $add_user;
+    private $address;
+    private $localization;
+    private $switch;
+    private $port;
+    private $switch_loc;
+    private $switch_loc_str;
+    private $mac;
+    private $service;
+    private $speed;
+    private $service_configuration;
+    private $informed;
+    private $service_activation;
+    private $veryfication_method;
+    private $configuration_user;
+    private $payment_activation;
+    private $resignation_date;
+    private $phone;
+    private $phone2;
+    private $phone3;
+    private $installation_date;
+    private $installation_user;
+    private $info;
+    private $last_modyfication;
+    private $info_boa;
+    private $boss_id;
+    private $modyfication;
+
     public function update($id, $field_name, $value, $value2)
     {
       $permissions = $_SESSION['permissions'];
