@@ -19,11 +19,12 @@ if($_REQUEST['date'])
   <link REL="icon" HREF="images/url.png" TYPE="image/png">
   <title>Subnets stats</title>
 
-  <link rel="stylesheet" href="../../css/reaport.css" type="text/css" />
+  <link rel="stylesheet" href="css/reaport.css" type="text/css" />
 </head>
 <body>
 <div style="margin-left: auto; margin-right: auto; text-align: center; margin-top: 50px; margin-bottom: 20px;">
 <div style="margin: 20px; font-family: Verdana; font-size: 20px;">IP address utilization table for PSM Winogrady</div>
+<div style="margin: 20px; font-family: Verdana; font-size: 12px;">Date format: YYYY-MM-DD</div>
 <form method="post">
 Date: <input type="text" name="date" value="<?php echo $date ?>"> 
 <input type="submit" value="Show">

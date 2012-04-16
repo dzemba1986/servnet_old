@@ -64,6 +64,18 @@ elseif($_POST['login'] && $_POST['password'])
 	$_SESSION['user_email'] = $user['email'];
 	$_SESSION['timestamp'] = time();
 }
+elseif($_SERVER['DOCUMENT_ROOT']=='/home/ftp/www/servnet/seu/reaports/ripe/')
+{
+	require("include/definitions.php");
+	$daddy = new Daddy();
+	session_set_cookie_params($session_life_time);
+	session_regenerate_id(true);
+	$_SESSION['user_login'] = 'ripe';
+	$_SESSION['user_id'] = 23;
+	$_SESSION['user_imie'] = 'RIPE';
+	$_SESSION['user_nazwisko'] = 'RIPE';
+	$_SESSION['timestamp'] = time();
+}
 else
 {
 	$location = curPageURL();
