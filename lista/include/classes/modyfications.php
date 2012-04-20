@@ -390,8 +390,18 @@ if(!defined('MODYFICATION_CLASS'))
         return false;
       return $result[0]['id'];
     }
+    public static function sameLocTimeNum($loc, $s_datetime)
+    {
+      $query = "SELECT COUNT(*) FROM Modyfications WHERE mod_s_datetime=:start AND mod_loc=:loc"; 
+      $sql = new MysqlListaPdo();
+      $wynik = $sql->query($query, array('start'=> $s_datetime, 'loc'=> $loc), 'Modyfications'); 
+      return $wynik[0][0];
+    }
+
     public function add($con_id)
     {
+      if(Modyfications::sameLocTimeNum($this->get_loc(), $this->get_s_datetime()))
+        return;
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
           !$this->mod_user_last_edit || !$this->mod_inst || !$this->mod_type ||
           !$this->mod_cause || !$this->mod_loc)

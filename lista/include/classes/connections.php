@@ -446,6 +446,15 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['service'];
     }
+    public static function getActivationDate($id)
+    {
+      $sql = new MysqlListaPdo();
+      $query = "SELECT service_activation FROM Connections WHERE id=:id";
+      $result = $sql->query($query, array('id'=>$id));
+      if(count($result)!=1)
+        return false;
+      return $result[0]['service_activation'];
+    }
     public static function getPhoneId($id)
     {
       $sql = new MysqlListaPdo();

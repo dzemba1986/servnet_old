@@ -141,4 +141,13 @@ class Installations
     $mask = '/^\b[0-9]*\b$/';
     return preg_match($mask, $value);
   }
+  public static function getSocketDate($id)
+  {
+    $sql = new MysqlListaPdo();
+    $query = "SELECT socket_installation_date FROM Installations WHERE installation_id=:id";
+    $result = $sql->query($query, array('id'=>$id));
+    if(count($result)!=1)
+      return false;
+    return $result[0]['socket_installation_date'];
+  }
 }

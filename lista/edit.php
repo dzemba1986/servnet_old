@@ -285,7 +285,8 @@ $dev_id = $daddy->getDevId($connection1['id']);
   <tr>
     <td width="160">Data aktywacji usługi</td>
     <td width="185"><input class="date_field" type="text" value="<?php echo($connection1['_service_activation'])?>" name="service_activation" id="service_activation_1" onkeyup="testDate(this);"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
-    <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="service_activation"><input type="submit" class="submit_field"  value="zmień">
+    <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="service_activation">
+    <?php if($installation1['_socket_installation_date']): ?><input type="submit" class="submit_field"  value="zmień"><?php endif; ?>
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
     </td>
