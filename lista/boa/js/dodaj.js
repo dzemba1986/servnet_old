@@ -6,7 +6,6 @@ function check()
   var ulic = document.getElementById('ulic');
   var blok = document.getElementById('blok');
   var mieszkanie = document.getElementById('mieszkanie');
-  var klatka = document.getElementById('klatka');
   var other_name = document.getElementById('other_name');
   var phone = document.getElementById('phone');
   var phone2 = document.getElementById('phone2');
@@ -27,16 +26,6 @@ function check()
   }
   if(!testMieszkanie(mieszkanie))
   {
-    result = false;
-  }
-  if(!testKlatka(klatka))
-  {
-    result = false;
-  }
-  if((mieszkanie.value && klatka.value)||(!mieszkanie.value && !klatka.value))
-  {
-    mieszkanie.style.backgroundColor="red";
-    klatka.style.backgroundColor="red";
     result = false;
   }
   if(!testOtherName(other_name))
@@ -134,23 +123,8 @@ function testBlok(field)
 function testMieszkanie(field)
 {
   var value = field.value;
-  var result = value.match(/^\b[0-9a-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]{0,10}\b$/i);
-  if(!value || result)
-  {
-    field.style.backgroundColor="white";
-    return true;
-  }
-  else
-  {
-    field.style.backgroundColor="red";
-    return false;
-  }
-}
-function testKlatka(field)
-{
-  var value = field.value;
-  var result = value.match(/^\b[0-9a-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]{0,10}\b$/i);
-  if(!value || result)
+  var result = value.match(/^\b[0-9a-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,10}\b$/i);
+  if(result)
   {
     field.style.backgroundColor="white";
     return true;

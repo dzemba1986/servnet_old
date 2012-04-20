@@ -33,10 +33,7 @@ $ulic = $sql->getUlic();
            <td>Blok*</td><td><input type="text" size="10" name="blok" id="blok" onkeyup="check();" value="" /></td>
          </tr>
          <tr>
-           <td>Mieszkanie</td><td><input type="text" size="10" name="mieszkanie" id="mieszkanie" onkeyup="check();" value="" /></td>
-         </tr>
-         <tr>
-           <td>Klatka</td><td><input type="text" size="10" name="klatka" id="klatka" value="" onkeyup="check();" /></td>
+           <td>Mieszkanie lub Klatka</td><td><input type="text" size="10" name="mieszkanie" id="mieszkanie" onkeyup="check();" value="" /></td>
          </tr>
          <tr>
            <td>Nazwa inna</td><td><input type="text" size="30" name="other_name" id="other_name" value="" onkeyup="check();" /></td>

@@ -1060,6 +1060,9 @@ if(!defined('DADDY_CLASS'))
 
           public function getSwitchLoc($ulic, $blok, $mieszkanie)
           {
+            //funkcja jest wykonywana tylko gdy mieszkanie jest wartością liczbową a taki warunek sprawdza funkcja validId
+            if(!Daddy::validId($mieszkanie))
+              return false;
             $query = "SELECT id_lok FROM Mieszkania WHERE ulic='$ulic' AND blok='$blok' AND od<=$mieszkanie AND do>=$mieszkanie";
             $result = $this->query($query);
             if($result[0])

@@ -42,7 +42,6 @@ elseif($_POST['dodaj'])
   $ara_id = $_POST['ara_id'];
   $address = array('ulic' => $_POST['ulic'],
       'blok' => $_POST['blok'],
-      'klatka' => $_POST['klatka'],
       'mieszkanie' =>$_POST['mieszkanie'],
       'other_name' =>$_POST['other_name']);
   $mac = $_POST['mac'];
