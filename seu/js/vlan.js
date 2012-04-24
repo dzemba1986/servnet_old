@@ -283,7 +283,7 @@ function changeDhcp(obj, id)
   parameters['id'] = id;
   parameters['dhcp'] = obj.checked;
 //  alert(id + '-' +obj.checked);
-  var response = getAjaxData(parameters, 'ajax/changeDhcp', 'POST');
+  var response = getAjaxData(parameters, 'ajax/changeDhcp.php', 'POST');
   alert(response);
 }
 
