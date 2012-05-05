@@ -3,7 +3,7 @@ class Vlan extends Daddy
 {
 	public function dodajVlan($vid, $opis)
 	{
-		if ($vid >= 1 && $vid < 4097 && $opis && strlen($opis)<15)
+		if (($vid==='0' ||  ($vid >= 1 && $vid < 4097)) && $opis && strlen($opis)<15)
 		{
 			$sql = $this->connect();
 			$opis = mysql_real_escape_string($opis);
@@ -33,7 +33,7 @@ class Vlan extends Daddy
 	public function usunVlan($vid)
 	{
 		$odpowiedz;
-		if($vid > 1 && $vid < 4097)
+		if($vid==='0' || ($vid > 1 && $vid < 4097))
 		{
 			if (Vlan::vlanIstnieje($vid))
 			{

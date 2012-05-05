@@ -1,6 +1,5 @@
 var XMLHttpRequestObjectAdresy = getXMLHttpRequestObject();
 var XMLHttpRequestObjectAdres = getXMLHttpRequestObject();
-var XMLHttpRequestObjectAdresModel = getXMLHttpRequestObject();
 
 
 function pobierzAdresy(dev_id)
@@ -25,6 +24,7 @@ function getDeviceAddresses(dev_id)
 {
 	if(XMLHttpRequestObjectAdres)
 	{
+                XMLHttpRequestObjectAdres = getXMLHttpRequestObject();
 		XMLHttpRequestObjectAdres.open("POST", 'ajax/getDeviceAddresses.php?dev_id=' + dev_id, false);
 		XMLHttpRequestObjectAdres.send(null);
 		przetwarzajAdresy();
@@ -73,6 +73,7 @@ function getVlan(id)
 {
 	if(XMLHttpRequestObject)
 	{
+                XMLHttpRequestObject = getXMLHttpRequestObject();
 		XMLHttpRequestObject.open("POST", 'ajax/getVlan.php?id='+id, false);
 		XMLHttpRequestObject.send(null);
 		if(XMLHttpRequestObject)
@@ -141,6 +142,7 @@ function pobierzVlany()
 	//alert("wywoluje z adresem ");
 	if(XMLHttpRequestObject)
 	{
+                XMLHttpRequestObject = getXMLHttpRequestObject();
 		XMLHttpRequestObject.open("POST", 'ajax/getVlans.php', false);
 		XMLHttpRequestObject.send(null);
 		przetwarzajVlany();
@@ -225,6 +227,7 @@ function pobierzPodsieci(vlan, active)
 {
 	if(XMLHttpRequestObject)
 	{
+                XMLHttpRequestObject = getXMLHttpRequestObject();
 		XMLHttpRequestObject.open("POST", 'ajax/getSubnets.php?vlan='+vlan.value, false);
 		XMLHttpRequestObject.send(null);
 		przetwarzajPodsieci(vlan.parentNode.parentNode.childNodes[1].name, active, null);
@@ -234,6 +237,7 @@ function pobierzPodsieci(vlan, active, ip)
 {
 	if(XMLHttpRequestObject)
 	{
+                XMLHttpRequestObject = getXMLHttpRequestObject();
 		XMLHttpRequestObject.open("POST", 'ajax/getSubnets.php?vlan='+vlan.value, false);
 		XMLHttpRequestObject.send(null);
 		przetwarzajPodsieci(vlan.parentNode.parentNode.childNodes[1].name, active, ip);
@@ -294,6 +298,7 @@ function getIpAddressesForDevice(podsiec, ip_counter, ip)
 {
 	if(XMLHttpRequestObjectAdresy)
 	{
+                XMLHttpRequestObjectAdresy = getXMLHttpRequestObject();
 		if(ip)
 			XMLHttpRequestObjectAdresy.open("POST", 'ajax/getIpAddressesForDevice.php?subnet='+podsiec+'&dev_ip='+ip, false);
 		else

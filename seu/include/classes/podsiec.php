@@ -13,7 +13,7 @@ if(!defined('PODSIEC_CLASS'))
         $dhcp = "'1'";
       else
         $dhcp = "null";
-      if($vlan > 0 && $vlan < 4097 && $this->sprawdz_ip($ip) && Daddy::sprawdz_maske($maska) && (($opis && strlen($opis)<15) || !$opis) )
+      if(($vlan==='0' || ($vlan > 0 && $vlan < 4097)) && $this->sprawdz_ip($ip) && Daddy::sprawdz_maske($maska) && (($opis && strlen($opis)<15) || !$opis) )
       {
         $ip_dec = new Ipaddress($ip, $maska);
         $ip_cec = $ip_dec->getHrNetworkAddress();

@@ -576,11 +576,12 @@ if(!defined('DADDY_CLASS'))
           }
           public static function toXml($tablica, $main=false)
           {
-                  $wynik_xml;
+                  $wynik_xml="";
                   if($main)
                           $wynik_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><lista>";
                   if ($tablica)
                   {
+                    if(!$main)
                           $elementy = array();
                           foreach ($tablica as $key=>$element)
                           {
@@ -589,24 +590,22 @@ if(!defined('DADDY_CLASS'))
                                           $key2='row'.$key;
                                   else
                                           $key2=$key;
-                                  $wynik_xml = $wynik_xml."<$key2>";
+                                  $wynik_xml .= "<".$key2.">";
 
                                   if(!is_array($element))
-                                          $wynik_xml = $wynik_xml.$element;
+                                          $wynik_xml .= $element;
                                   else
-                                          $wynik_xml = $wynik_xml.(Daddy::toXml($element));
-                                  $wynik_xml = $wynik_xml."</$key2>";
+                                  {
+                                          $wynik_xml .= (Daddy::toXml($element, false));
+                                  }
+                                  $wynik_xml .= "</$key2>";
                           }
-                          if ($main)
-                                  $wynik_xml = $wynik_xml."</lista>";
-                          return $wynik_xml;
                   }	
                   if($main)
                   {
                     $wynik_xml .="</lista>";
-                    return $wynik_xml;
                   }
-
+                  return $wynik_xml;
           }
           public function getHistory($dev_id, $lokalizacja)
           {

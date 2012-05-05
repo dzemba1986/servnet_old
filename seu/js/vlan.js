@@ -79,7 +79,7 @@ function wyswietlVlany(lista, root)
 			wezel_nadrz.removeChild(stara_lista);
 		}
 		var nowa_lista = document.createElement("ul");
-		nowa_lista.id = "root";
+		nowa_lista.id = root;
 		for (var i=0; i<vlany.length; i++)
 		{
 			var element = document.createElement("li");

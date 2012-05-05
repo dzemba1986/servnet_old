@@ -99,6 +99,8 @@ if($fraza && $tryb_wyszukiwania)
 		$rekord = $wiersz;
 		if($rekord['device_type']=="Host")	
 			echo"<tr><td>".$rekord['fraza']."</td><td><a href=\"index.php?device=".$rekord['dev_id']."\">".$rekord['osiedle'].$rekord['nr_bloku'].$rekord['klatka']."/".$rekord['nr_mieszkania']."(".$rekord['device_type'].")</a></td></tr>";
+		elseif($rekord['osiedle']=="Virtual")
+			echo"<tr><td>".$rekord['fraza']."</td><td><a href=\"modyfikuj.php?device=".$rekord['dev_id']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 		elseif($rekord['other_name'])	
 			echo"<tr><td>".$rekord['fraza']."</td><td><a href=\"index.php?device=".$rekord['dev_id']."\">".$rekord['other_name']."(".$rekord['device_type'].")</a></td></tr>";
 		elseif($rekord['osiedle']=="MAGAZYN")

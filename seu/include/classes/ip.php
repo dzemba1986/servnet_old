@@ -9,6 +9,7 @@ if(!defined('IPADDRESS_CLASS'))
           protected $version;
           public static function decToHR($decval)
           {
+            /*
                   $wynik = array();
                   $tmp = $decval;
                   for($i=3; $i >= 0; $i--)
@@ -17,6 +18,8 @@ if(!defined('IPADDRESS_CLASS'))
                           $tmp = $tmp/256.0;
                   }
                   return $wynik[0].".".$wynik[1].".".$wynik[2].".".$wynik[3];
+          */
+            return long2ip($decval);
           }
           public function getAddress()
           {
@@ -54,13 +57,15 @@ if(!defined('IPADDRESS_CLASS'))
           }
           public static function hrToDec($ip)
           {
+            /*
                   $address = preg_split('/\./', $ip, -1, PREG_SPLIT_NO_EMPTY);
                   $tmp = null;
                   foreach($address as $key=>$oktet)
                   {
                           $tmp = $tmp + $oktet * pow(256.0, 3 - $key);
                   }
-                  return $tmp;
+                  return $tmp;*/
+            return ip2long($ip);
           }
           public function __construct($str_ip, $dec_mask)
           {
@@ -69,7 +74,7 @@ if(!defined('IPADDRESS_CLASS'))
                   if(Daddy::sprawdz_ip($str_ip) && $dec_mask >0 && $dec_mask <=32)
                   {
                           $this->address = $this->hrToDec($str_ip);
-                          $this->netmask = (pow(2, $dec_mask)-1) << 32-$dec_mask;
+                          $this->netmask = (pow(2, $dec_mask)-1) * pow(2, (32-$dec_mask));
                           //$this->netmask_bin[0] = 
                   }
                   else
