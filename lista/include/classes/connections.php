@@ -113,15 +113,23 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         {
           if($field_name=='service_activation')
           {
-            include(HOST_PATH);
-            $host = new Host();
-            $host->uruchom(preg_replace('/\'/', '', $value_date), $id, 'uruchomienie z listy podłączeń');
+            $service_type = Connections::getService($id);
+            if($service_type=='net')
+            {
+              include(HOST_PATH);
+              $host = new Host();
+              $host->uruchom(preg_replace('/\'/', '', $value_date), $id, 'uruchomienie z listy podłączeń');
+            }
           }
           elseif($field_name=='resignation_date')
           {
-            include(HOST_PATH);
-            $host = new Host();
-            $host->zakoncz(preg_replace('/\'/', '', $value_date), $id, 'rezygnacja z listy podłączeń');
+            $service_type = Connections::getService($id);
+            if($service_type=='net')
+            {
+              include(HOST_PATH);
+              $host = new Host();
+              $host->zakoncz(preg_replace('/\'/', '', $value_date), $id, 'rezygnacja z listy podłączeń');
+            }
           }
           $query = "UPDATE Connections SET $field_name=$value_date, last_modyfication=NOW() WHERE id='$id'"; 
         }

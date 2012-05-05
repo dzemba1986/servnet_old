@@ -39,13 +39,13 @@ if($_REQUEST['field_name'])
       $value2 = $_REQUEST['installation_time'];
       $connection->update($id, $field_name, $field_value, $value2);
     }
-    elseif($field_name!='type')
+    elseif($field_name=='type')
     {
-      $connection->update($id, $field_name, $field_value, null);
+      $installation->updateType($id, $field_value);
     }
     else
     {
-      $installation->updateType($id, $field_value);
+      $connection->update($id, $field_name, $field_value, null);
     }
   }
 }
