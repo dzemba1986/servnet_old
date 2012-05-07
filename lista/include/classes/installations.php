@@ -150,4 +150,20 @@ class Installations
       return false;
     return $result[0]['socket_installation_date'];
   }
+  public static function getInvoicedDates()
+  {
+    $sql = new MysqlListaPdo();
+    $query = "SELECT invoiced FROM `Installations` WHERE invoiced is not null group by invoiced order by invoiced";
+    $result = $sql->query($query, null);
+    return $result;
+  }
+  public static function generateInvoiced()
+  {
+    $sql = new MysqlListaPdo();
+    $query = "SET AUTOCOMMIT=false";
+    $result = $sql->query($query, array('id'=>$id));
+    if(count($result)!=1)
+      return false;
+    return $result[0]['socket_installation_date'];
+  }
 }

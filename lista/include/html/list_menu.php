@@ -84,6 +84,7 @@ Rekordów na stronie
         <a href="installations.php?tryb=done_installations">Wykonane</a>
         <a href="installations.php?tryb=all_installations">Wszystkie</a>
         <a href="installations.php?tryb=pending_installations">Rozpoczęte</a>
+        <a href="invoiced.php?tryb=invoice">Zestawienie</a>
         </div>
     </li>
     <li><a href="#" 

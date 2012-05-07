@@ -53,7 +53,7 @@ if(substr($tryb, -13)=="installations")
 {
   $wynik = $sql->getInstallationsList($tryb, $order, $paging, $find_phrase, $search_field); 
 }
-  elseif($tryb!='edit' && $tryb!='logout' && $tryb!='editUser' && $tryb!='modyfications')
+  elseif($tryb!='edit' && $tryb!='logout' && $tryb!='editUser' && $tryb!='modyfications' && $tryb!='invoice')
 {
   $wynik = $sql->getList3($tryb, $order, $paging, $find_phrase, $search_field);
 }
@@ -100,6 +100,9 @@ switch($tryb)
   break;
   case 'modyfications':
   $title = 'Montaże';
+  break;
+  case 'invoice':
+  $title = 'Zestawienia montaży';
   break;
   default:
   $title = 'Do uruchomienia';
