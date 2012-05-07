@@ -280,14 +280,18 @@ class Reaport
 
       return $out;
     }
-
-    public function get8000GS_IPS()
+    public function getSwitch_IPS($type)
     {
+      $query="";
       $output = array();
       $sql = new MysqlSeu();
-      $query = "SELECT * FROM Allied_8000_ip";
-      $result = $sql->query_assoc_array($query);
-      return $result;
+      if($type=='bud')
+        $query = "SELECT * FROM Switch_bud_ip";
+      elseif($type=='rejon')
+        $query = "SELECT * FROM Switch_rejon_ip";
+      if($query)
+        return $sql->query_assoc_array($query);
+      return false;
     }
     public function getVlanIpUtilization($vid, $sort='ip')
     {

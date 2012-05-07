@@ -50,7 +50,8 @@ $alert = nl2br($alert);
           <a target="_blank" href="reaports/voipGateways.php">Bramki voip</a>
           <a target="_blank" href="reaports/switches.php">Szczegółowe</a>
           <a target="_blank" href="reaports/vlanIpUtilization.php">Wykorzystanie adresów IP</a>
-          <a target="_blank" href="reaports/8000GS_ip.php">Adresy IP 8000GS</a>
+          <a target="_blank" href="reaports/switch_IPS.php?switch_type=bud">Adresy IP Przełączników budynkowych</a>
+          <a target="_blank" href="reaports/switch_IPS.php?switch_type=rejon">Adresy IP Przełączników rejonowych</a>
           </div>
       </li>
   </ul>
