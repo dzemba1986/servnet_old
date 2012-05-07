@@ -133,11 +133,13 @@ if(!defined('IPADDRESS_CLASS'))
 
       $daddy = new Host();
 
+//pobieramy listę urządzeń z podsieci która ma zostać przeorganizowana
+
       $query = "SELECT a.*, p.*, l.id as lokalizacja FROM Podsiec p 
         LEFT JOIN Adres_ip a ON p.id=a.podsiec 
         LEFT JOIN Device d ON d.dev_id=a.device 
         LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id 
-        WHERE p.address='$old_ip' AND p.netmask='$old_mask'";
+        WHERE p.address='$old_ip' AND p.netmask='$old_mask' ORDER BY a.ip";
 
       $ips = $daddy->query($query);
       if(!$ips)
@@ -161,7 +163,7 @@ if(!defined('IPADDRESS_CLASS'))
               $ip_obj->shift($diff, $leave);
               $leave = $leave_last_octet;
               $daddy->reset_start_date($ip['device']);
-              $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE ip='".$ip['ip']."' AND podsiec='$podsiec'";
+              $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE device=".$ip['device']." AND ip='".$ip['ip']."' AND podsiec='$podsiec'";
               if($daddy->query($query, 'Adres_ip')===false)
               {
                 $daddy->query("ROLLBACK");
