@@ -34,7 +34,6 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
     private $info;
     private $last_modyfication;
     private $info_boa;
-    private $boss_id;
     private $modyfication;
 
     public function update($id, $field_name, $value, $value2)
@@ -306,9 +305,6 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         if($in_base[0] != 0) 
           die("Wpis już istnieje!");
         $user = intval($_SESSION['user_id']);
-        $zapytanie = "SELECT (SELECT COUNT(*) FROM Connections) + 1";
-        $boss_id = $sql->query($zapytanie);
-        $boss_id = $boss_id[0];
         $zapytanie = "INSERT INTO Connections SET start_date='20".$start_date['2']."-".$start_date[1]."-".$start_date[0]."',
           address='".$address_string."',
           localization='".$id_lok."',
@@ -321,7 +317,6 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
           speed='$speed',
           add_user='$user',
           ara_id='$ara_id',
-          boss_id='$boss_id',
           last_modyfication=NOW()";
         $wykonaj = $sql->query($zapytanie) or die(mysql_error());
   //      if($wykonaj)
