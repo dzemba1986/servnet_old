@@ -476,6 +476,13 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['id'];
     }
+    public static function getBoaReaport()
+    {
+      $sql = new MysqlListaPdo();
+      $query = "SELECT * FROM Ara_zestawienie";
+      $result = $sql->query($query, null);
+        return $result;
+    }
     public static function setModId($sql, $con_id, $mod_id)
     {
       $query = "UPDATE Connections SET modyfication = :mod_id WHERE id=:con_id";
