@@ -413,6 +413,15 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         return false;
       return $result[0]['localization'];
     }
+    public static function getInstId($id)
+    {
+      $sql = new MysqlListaPdo();
+      $query = "SELECT i.installation_id FROM Connections c Join Installations i  ON c.localization=i.localization AND c.service=i.type WHERE c.id=:id";
+      $result = $sql->query($query, array('id'=>$id));
+      if(count($result)!=1)
+        return false;
+      return $result[0]['installation_id'];
+    }
     public static function getModId($id)
     {
       $sql = new MysqlListaPdo();

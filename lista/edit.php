@@ -399,7 +399,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
   <tr>
     <td width="160">Montaż</td>
     <td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
-    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php echo($connection1['id'])?>&phone_id=<?php echo($connection2['id'])?>">Zmień</a>
+    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation1['_socket_installation_date']) echo($connection1['id'])?>&phone_id=<?php echo($connection2['id'])?>">Zmień</a>
     </td>
   </tr>
 </table>

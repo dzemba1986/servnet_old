@@ -1,4 +1,6 @@
 <?php
+require(LISTA_ABSOLUTE.'/include/classes/installations.php');
+
 //***********************************
 //saving changes section
 //***********************************
@@ -247,7 +249,8 @@ for($j=1; $j<$days; $j++)
 
       if(!is_object($mod))
         continue;
-      if($con_id = $mod->get_con_id())
+      $con_id = $mod->get_con_id();
+      if($con_id )
       {
         $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">podłączenia</a>';
         $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
