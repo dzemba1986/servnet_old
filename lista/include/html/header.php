@@ -102,7 +102,7 @@ switch($tryb)
   $title = 'Montaże';
   break;
   case 'invoice':
-  $title = 'Zestawienia montaży';
+  $title = 'Zestawienia wykonanych instalacji';
   break;
   default:
   $title = 'Do uruchomienia';

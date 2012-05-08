@@ -76,5 +76,45 @@ if(!defined('DATATYPES_CLASS'))
       }
       return false;
     }
+    public static function arrayToCsv($arr, $add_row_numb)
+    {
+      $out = "";
+      $header = "";
+      if($add_row_numb==true)
+        $header.='nr;';
+      //jeżeli jest tablica i są wiersze
+      if($arr && is_array($arr))
+        foreach($arr as $key=>$row)
+        {
+          //dodajemy nr wiersza jeżeli takowy ma być
+          if($add_row_numb==true)
+            $out .= ($key + 1).';';
+          //jest wiersz nie jest pusty i jest tablicą
+          $counter = 0;
+          if($row && is_array($row))
+            foreach($row as $key2=>$cell)
+            {
+              if(!is_int($key2))
+              {
+                if($counter < count($row) - 2)
+                {
+                  if($key == 0)
+                    $header .= $key2.';';
+                  $out .= $cell.";";
+                }
+                else
+                {
+                  if($key == 0)
+                    $header .= $key2."\n";;
+                  $out .= $cell."\n";
+                }
+              }
+              $counter++;
+            }
+
+
+        }
+      return $header.$out;
+    }
   }
 }

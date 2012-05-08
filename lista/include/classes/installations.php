@@ -157,13 +157,48 @@ class Installations
     $result = $sql->query($query, null);
     return $result;
   }
+  public static function getInvoiced($date)
+  {
+    if(!DataTypes::is_DateTime($date))
+      die("Wrong date format!");
+    $sql = new MysqlListaPdo();
+    $query = "
+      SELECT  a.id as Id,
+              a.start_date as 'Data umowy', 
+              DATE_ADD(a.start_date,INTERVAL 21 DAY) AS 'Deadline',
+              a.address as Adres,
+              a.phone as 'Nr telefonu',
+              c.wire_length as 'Przewód',
+              c.wire_installation_date as 'Data przewodu',
+              c.socket_installation_date as 'Data gniazdka',
+              c.wire_installer as 'Instalator przewodu',
+              c.socket_installer as 'Instalator gniazdka',
+              a.mac,
+              a.service as 'Typ usługi', 
+              a.payment_activation as 'Opłaty',
+              a.service_activation as 'Aktywacja usługi', 
+              a.service_configuration as 'Konfiguracja usługi', 
+              a.resignation_date as 'Rezygnacja',
+              c.invoiced as 'Zaksięgowano'
+                FROM Connections a 
+                JOIN Installations c
+                ON (c.invoiced='$date' AND a.service=c.type AND a.localization=c.localization)
+                ORDER BY id ASC;";
+    $result = $sql->query($query, null);
+    if(count($result)<1)
+      return false;
+    return $result;
+  }
   public static function generateInvoiced()
   {
     $sql = new MysqlListaPdo();
-    $query = "SET AUTOCOMMIT=false";
-    $result = $sql->query($query, array('id'=>$id));
-    if(count($result)!=1)
-      return false;
-    return $result[0]['socket_installation_date'];
+    $query = "
+      UPDATE  Connections a 
+      JOIN Installations c ON c.invoiced is null AND a.service=c.type AND a.localization=c.localization and c.socket_installation_date is not null
+      SET c.invoiced=NOW() 
+      WHERE ((a.service_activation is not null OR a.payment_activation is not null OR a.resignation_date is not null));";
+    if($sql->query($query, null))
+      return true;
+    return false;
   }
 }
