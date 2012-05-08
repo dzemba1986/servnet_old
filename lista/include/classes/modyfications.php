@@ -372,7 +372,17 @@ if(!defined('MODYFICATION_CLASS'))
     {
       $query = "SELECT * FROM Modyfications WHERE mod_close_datetime IS NULL ORDER BY mod_s_datetime ASC"; 
       $sql = new MysqlListaPdo();
-      $wynik = $sql->query_obj($query, array('date_from'=> $date_from, 'date_till'=> $date_till), 'Modyfications'); 
+      $wynik = $sql->query_obj($query, null, 'Modyfications'); 
+      if(count($wynik) > 0)
+        return $wynik;
+      else
+        return false;
+    }
+    public static function getFinished()
+    {
+      $query = "SELECT * FROM Modyfications WHERE mod_close_datetime IS NOT NULL ORDER BY mod_s_datetime ASC"; 
+      $sql = new MysqlListaPdo();
+      $wynik = $sql->query_obj($query, null, 'Modyfications'); 
       if(count($wynik) > 0)
         return $wynik;
       else
