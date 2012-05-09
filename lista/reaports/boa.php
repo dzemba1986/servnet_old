@@ -9,7 +9,7 @@ if($rows)
 {
   header("Content-type: application/octet-stream");
   header("Content-Disposition: attachment; filename=\"$date.connections.csv\""); 
-  echo DataTypes::arrayToCsv($rows, true);
+  echo DataTypes::arrayToCsv($rows, false);
 }
 else
  die("Nic do pobrania");
