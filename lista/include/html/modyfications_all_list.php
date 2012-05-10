@@ -1,9 +1,9 @@
-<div>
+<div style="margin-top: 50px">
 <script type="text/javascript" src="js/closeModyfication.js"></script>
 <table class="mod_table">
 <thead>
 </thead>
-  <tr class="mod_table_top">
+  <tr  class="title_row">
     <td>Data</td>
     <td>Start</td>
     <td>Koniec</td>
@@ -11,14 +11,15 @@
     <td>Typ instalacji</td>
     <td>Rodzaj montażu</td>
     <td>Opis</td>
+    <td>Dodano</td>
     <td>Dodał</td>
     <td>Ost. mod.</td>
+    <td>Modyfikował</td>
+    <td>Zamknięto</td>
     <td>Zamknął</td>
     <td>koszt</td>
     <td>Monter</td>
-    <td>Data zamknięcia</td>
     <td>Wykonano</td>
-    <td>Opis</td>
     <td>Edytuj</td>
     <td>Podłączenia</td>
   </tr>
@@ -39,6 +40,11 @@
       if($mod_user_last_obj)
         $mod_user_last_login = $mod_user_last_obj->get_login();
 
+      $mod_user_close_obj = User::getById($mod->get_user_closed());
+      $mod_user_close_login = null;
+      if($mod_user_close_obj)
+        $mod_user_close_login = $mod_user_close_obj->get_login();
+
       if(!is_object($mod))
         continue;
       $con_id = $mod->get_con_id();
@@ -55,7 +61,24 @@
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$desc.'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
       echo "<tr class=\"row\">\n";
-      echo "<td>".$mod->get_s_date()."</td><td>".$mod->get_s_time()."</td><td>".$mod->get_e_time()."</td><td>".$mod->get_loc_str()."</td><td>".$mod->get_inst()."</td><td>".$mod->get_type_hr()."</td><td>".$mod->get_desc()."</td><td>$mod_user_add_login</td><td>".$mod->get_last_edit_date()." ".$mod->get_last_edit_time()." $mod_user_last_login</td><td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td><td>$con_str</td><td>$close_str</td>\n";
+      echo "<td>".$mod->get_s_date()."</td>
+        <td>".$mod->get_s_time()."</td>
+        <td>".$mod->get_e_time()."</td>
+        <td>".$mod->get_loc_str()."</td>
+        <td>".$mod->get_inst()."</td>
+        <td>".$mod->get_type_hr()."</td>
+        <td>".$mod->get_desc()."</td>
+        <td>".$mod->get_a_datetime()."</td>
+        <td>$mod_user_add_login</td>
+        <td>".$mod->get_last_edit_date()." ".$mod->get_last_edit_time()."</td>
+        <td>$mod_user_last_login</td>
+        <td>".$mod->get_close_datetime()."</td>
+        <td>$mod_user_close_login</td>
+        <td>".$mod->get_cost()."</td>
+        <td>".$mod->get_installer()."</td>
+        <td>".$mod->get_fullfill()."</td>
+        <td><a href=\"modyfications_form.php?tryb=modyfications&mod_id=".$mod->get_id()."\">edycja</a></td>
+        <td>$con_str</td>\n";
       echo "</tr>\n";
     }
 ?>
