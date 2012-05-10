@@ -4,6 +4,7 @@
 <thead>
 </thead>
   <tr  class="title_row">
+    <td>&nbsp;</td>
     <td>Data</td>
     <td>Start</td>
     <td>Koniec</td>
@@ -25,6 +26,7 @@
   </tr>
   <?php
   if($mod_arr)
+  $row_number = $paging->getOffset() + 1;
     foreach($mod_arr as $mod)
     {
       if(!is_object($mod))
@@ -61,7 +63,8 @@
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$desc.'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }
       echo "<tr class=\"row\">\n";
-      echo "<td>".$mod->get_s_date()."</td>
+      echo "<td>".$row_number++."</td>
+       <td>".$mod->get_s_date()."</td>
         <td>".$mod->get_s_time()."</td>
         <td>".$mod->get_e_time()."</td>
         <td>".$mod->get_loc_str()."</td>
@@ -81,5 +84,12 @@
         <td>$con_str</td>\n";
       echo "</tr>\n";
     }
+?>
+</div>
+<div id="paging_menu" style="text-align:center; left-margin: auto; right-margin: auto;">
+<?php
+$site_url='modyfications_finished.php';
+define('PAGING_MENU', true);
+require('include/html/paging_menu.php');
 ?>
 </div>

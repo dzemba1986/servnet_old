@@ -378,10 +378,17 @@ if(!defined('MODYFICATION_CLASS'))
       else
         return false;
     }
-    public static function getFinished()
+    public static function getFinished($paging)
     {
-      $query = "SELECT * FROM Modyfications WHERE mod_close_datetime IS NOT NULL ORDER BY mod_s_datetime ASC"; 
       $sql = new MysqlListaPdo();
+      $query = "SELECT COUNT(*) FROM Modyfications WHERE mod_close_datetime IS NOT NULL"; 
+      $wynik = $sql->query($query, null); 
+      $num_rows = $wynik[0][0];
+      $paging->setTotalRows($num_rows);
+      $offset = $paging->getOffset();
+      $pages = $paging->getPages();
+      $rows_per_page = $paging->getRowsPerPage();
+      $query = "SELECT * FROM Modyfications WHERE mod_close_datetime IS NOT NULL ORDER BY mod_s_datetime ASC LIMIT $offset, $rows_per_page"; 
       $wynik = $sql->query_obj($query, null, 'Modyfications'); 
       if(count($wynik) > 0)
         return $wynik;
