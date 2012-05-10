@@ -40,8 +40,8 @@
       if($con_id )
       {
         $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">podłączenia</a>';
-        $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
-     //   $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
+     //   $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
+        $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
       }
       else
       {
