@@ -74,9 +74,9 @@ for($j=1; $j<$days; $j++)
         $e_time = $mod->get_e_time();
         $finished_str = ' style="color:#8A8A5C;"';
         if($mod->get_close_datetime())
-          $mod_html_str = '<a href="modyfications_form.php?tryb=modyfications&mod_id='.$mod_id.'"'.$finished_str.'>'.$loc_str.'</a><div'.$finished_str.'><b>['.$mod->get_inst().']</b> '.$s_time.'-'.$e_time.'</div></div>'."\n";
+          $mod_html_str = '<a href="modyfications_form.php?tryb=modyfications&mod_id='.$mod_id.'"'.$finished_str.'>'.$loc_str.'</a><div'.$finished_str.'>['.$mod->get_inst().'] '.$s_time.'-'.$e_time.'</div></div>'."\n";
         else
-          $mod_html_str = '<a href="modyfications_form.php?tryb=modyfications&mod_id='.$mod_id.'">'.$loc_str.'</a><div><b>['.$mod->get_inst().']</b> '.$s_time.'-'.$e_time.'</div></div>'."\n";
+          $mod_html_str = '<a href="modyfications_form.php?tryb=modyfications&mod_id='.$mod_id.'">'.$loc_str.'</a><div>['.$mod->get_inst().'] '.$s_time.'-'.$e_time.'</div></div>'."\n";
         if(($mod->get_col() + 1)< $days_obj_arr[$j]->get_cols())
           echo '<div class="modyf" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width- 1).'px; height:'.($height - 1).'px;">'.$mod_html_str; 
         else
