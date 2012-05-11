@@ -150,6 +150,7 @@ if(!defined('IPADDRESS_CLASS'))
       $network_ip_old = $first_ip_obj->getNetworkAddress();
       $new_ip_obj = new IpAddress($new_ip, $new_mask);
       $network_ip_new = $new_ip_obj->getNetworkAddress();
+      $network_last_ip_new_ = $new_ip_obj->getLast();
       $diff = $network_ip_new - $network_ip_old;
       echo (" diff $diff <br>\n");
       echo (" subnet $podsiec <br>\n");
@@ -162,6 +163,8 @@ if(!defined('IPADDRESS_CLASS'))
       {
               $ip_obj = new IpAddress($ip['ip'], $ip['netmask']);
               $ip_obj->shift($diff, $leave);
+              if($ip_obj->getAddress() > $network_last_ip_new)
+                die('Adres IP poza podsiecią!');
               $leave = $leave_last_octet;
               $daddy->reset_start_date($ip['device']);
               $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE device=".$ip['device']." AND ip='".$ip['ip']."' AND podsiec='$podsiec'";
@@ -230,6 +233,7 @@ if(!defined('IPADDRESS_CLASS'))
       $network_ip1 = $first_ip_obj1->getNetworkAddress();
       $new_ip_obj = new IpAddress($ip_out, $mask_out);
       $network_ip_new = $new_ip_obj->getNetworkAddress();
+      $network_last_ip_new = $new_ip_obj->getLast();
       $diff1 = $network_ip_new - $network_ip1;
 
 //podisec 2
@@ -260,6 +264,10 @@ if(!defined('IPADDRESS_CLASS'))
         $daddy->reset_start_date($ip['device']);
         if($last_ip_dec < $ip_obj->getAddress())
           $last_ip_dec = $ip_obj->getAddress();
+
+        if($ip_obj->getAddress() > $network_last_ip_new)
+          die('Adres IP poza podsiecią!');
+
         $query = "UPDATE Adres_ip SET ip='".$ip_obj->getAddress()."' WHERE device=".$ip['device']." AND ip='".$ip['ip']."' AND podsiec='$podsiec1'";
         //echo "$query \n";
         if($daddy->query($query, 'Adres_ip')===false)
@@ -281,6 +289,10 @@ if(!defined('IPADDRESS_CLASS'))
         }
         else
           $ip_obj->shift($diff2_not_leave_last_octet, $leave);
+
+        if($ip_obj->getAddress() > $network_last_ip_new)
+          die('Adres IP poza podsiecią!');
+
         if($key==0)  //gateway2
         {
           $query = "DELETE FROM Adres_ip WHERE device=".$ip['device']." AND ip='".$ip['ip']."' AND podsiec='$podsiec2'";
