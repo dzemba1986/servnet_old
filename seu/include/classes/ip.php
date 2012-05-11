@@ -150,7 +150,7 @@ if(!defined('IPADDRESS_CLASS'))
       $network_ip_old = $first_ip_obj->getNetworkAddress();
       $new_ip_obj = new IpAddress($new_ip, $new_mask);
       $network_ip_new = $new_ip_obj->getNetworkAddress();
-      $network_last_ip_new_ = $new_ip_obj->getLast();
+      $network_last_ip_new = $new_ip_obj->getLast();
       $diff = $network_ip_new - $network_ip_old;
       echo (" diff $diff <br>\n");
       echo (" subnet $podsiec <br>\n");
