@@ -21,6 +21,9 @@ if(!defined('MAGAZYN'))
     case "Virtual":
       require('device_menus/virtual.php');
       break;
+    case "Switch_bud":
+      require('device_menus/switch_bud.php');
+      break;
     case "":
       break;
   }
