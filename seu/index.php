@@ -3,9 +3,9 @@ require('security.php');
 require('include/definitions.php');
 $daddy = new Daddy();
 $dev_id;
-if($_GET['device'])
+if(isset($_GET['device']) && $_GET['device'])
   $dev_id = htmlspecialchars($_GET['device']);
-if($_GET['con_id'])
+if(isset($_GET['con_id']) && $_GET['con_id'])
   $dev_id = $daddy->getDevId($_GET['con_id']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html>
