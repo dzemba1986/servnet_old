@@ -149,23 +149,20 @@ class Switch_bud extends Daddy
 	public static function get_all_hosts($dev_id)
 	
 	{
-
-	$sql = $this->connect();
-		
 	$zapytanie = "Select a.ip as adres_ip, p.vlan, ag.parent_device, ag.parent_port,
        		ag.local_port ,concat(l.osiedle, l.nr_bloku,'/', h.nr_mieszkania) as adres,
        		h.pakiet, d.* from Device d
-        	JOIN Agregacja ag ON d.dev_id=ag.device AND ag.parent_device='$dev_id' AND
+        	JOIN Agregacja ag ON d.dev_id=ag.device AND ag.parent_device=:dev_id AND
         	ag.uplink=1
         	JOIN Adres_ip a ON d.dev_id=a.device AND a.main=1
         	LEFT JOIN Lokalizacja l ON l.id=d.lokalizacja
         	JOIN Host h ON h.device=d.dev_id
         	JOIN Podsiec p ON a.podsiec=p.id
         	where d.device_type='Host'";
-
-	$wynik = $this->query($zapytanie);
+        $sql = new MysqlSeuPdo();
+	$wynik = $sql->query($zapytanie, array('dev_id' => $dev_id));
         if (!$wynik)
-        	die("Nie można pobrać parametrów hostó!");     //zakonczone niepowodzeniem
+        	die("Nie można pobrać parametrów hostów!");     //zakonczone niepowodzeniem
         else
    	     {
 		return $wynik;
