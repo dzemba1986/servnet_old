@@ -7,14 +7,49 @@ require('../../include/definitions.php');
 //*******************************************************************
 $dev_id = $_GET['device'];
 $hosty = Switch_bud::get_all_hosts($dev_id);
-var_dump($hosty);
+//var_dump($hosty);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
 <html>
 <head>
 <title>Get all hosts</title>
 </head>
 <body>
+<?php
+foreach ( $hosty as $index => $par_hosta )
+  {
+	?>
+	interface vlan <?php echo $par_hosta['vlan']; ?><br>
+	bridge address <b><?php echo $par_hosta['mac']; ?></b> permanent ethernet <b><?php $par_hosta['parent_port']; ?></b><br>
+	exit<br>
+	ip access-list <b>user<?php echo substr($par_hosta['parent_port'],-1); ?></b><br>
+	deny-udp any any any 68<br>
+	deny-tcp any any any 25<br>
+	permit any <b><?php echo $par_hosta['adres_ip'];?></b> 0.0.0.0 any<br>
+	permit-udp 0.0.0.0 0.0.0.0 68 any 67<br>
+	exit<br>
+	interface ethernet <b><?php echo $par_hosta['parent_port']; ?></b><br>
+	shutdown<br>
+	<?php
+	echo "switchport access vlan".$par_hosta['vlan']."<br>\n";
+	?>
+	description <b><?php echo $par_hosta['adres']; ?></b><br>
+	service-acl input <b>user<?php echo substr($par_hosta['parent_port'],-1); ?></b><br>
+	<?php if ($par_hosta['pakiet'] == 4)
+		echo "traffic-shape 4096 409600 <br> rate-limit 6500";
+	      elseif ($par_hosta['pakiet'] == 200)
+	echo "traffic-shape 204800 2048000 <br> rate-limit 305000";		
+	 ?>
+	port security mode lock<br>
+	port security discard<br>
+	no shutdown<br>
+	exit<br>
+	exit<br>
+	copy r s<br>
+	y<br>
+	<?php
+  }  
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
 </body>
 </html>
