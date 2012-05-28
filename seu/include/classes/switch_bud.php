@@ -151,14 +151,16 @@ class Switch_bud extends Daddy
 	{
 	$zapytanie = "Select a.ip as adres_ip, p.vlan, ag.parent_device, ag.parent_port,
        		ag.local_port ,concat(l.osiedle, l.nr_bloku,'/', h.nr_mieszkania) as adres,
+		concat(l.osiedle, l.nr_bloku) as adres_voip,
        		h.pakiet, d.* from Device d
         	JOIN Agregacja ag ON d.dev_id=ag.device AND ag.parent_device=:dev_id AND
         	ag.uplink=1
         	JOIN Adres_ip a ON d.dev_id=a.device AND a.main=1
         	LEFT JOIN Lokalizacja l ON l.id=d.lokalizacja
-        	JOIN Host h ON h.device=d.dev_id
+        	LEFT JOIN Host h ON h.device=d.dev_id
+        	LEFT JOIN Bramka_voip b ON b.device=d.dev_id
         	JOIN Podsiec p ON a.podsiec=p.id
-        	where d.device_type='Host'";
+        	where d.device_type='Host' OR d.device_type='Bramka_voip'";
         $sql = new MysqlSeuPdo();
 	$wynik = $sql->query($zapytanie, array('dev_id' => $dev_id));
         if (!$wynik)
