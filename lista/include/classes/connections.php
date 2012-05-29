@@ -231,12 +231,12 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
           switch($service)
           {
             case "Internet Standard":
-              $speed = 4;
+              $speed = 8;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
             case "Internet Komfort":
-              $speed = 200;
+              $speed = 250;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
@@ -246,13 +246,13 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
             case "Internet Standard + tel":
-              $speed = 4;
+              $speed = 8;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, 'net', $info, $phone, $phone2, $phone3, $speed, $ara_id);
               $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
               break;
             case "Internet Komfort + tel":
-              $speed = 200;
+              $speed = 250;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, 'net', $info, $phone, $phone2, $phone3, $speed, $ara_id);
               $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
