@@ -31,14 +31,14 @@ foreach ( $hosty as $index => $par_hosta )
 		interface ethernet <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		shutdown<br>
 		<?php
-		echo "switchport access vlan".$par_hosta['vlan']."<br>\n";
+		echo "switchport access vlan ".$par_hosta['vlan']."<br>\n";
 		?>
 		description <b><?php echo $par_hosta['adres']; ?></b><br>
 		service-acl input <b>user<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
-		<?php if ($par_hosta['pakiet'] == 4)
-			echo "traffic-shape 4096 409600 <br> rate-limit 6500";
-		      elseif ($par_hosta['pakiet'] == 200)
-		echo "traffic-shape 204800 2048000 <br> rate-limit 305000";		
+		<?php if ($par_hosta['pakiet'] == 8)
+			echo "traffic-shape 8192 819200 <br> rate-limit 6900<br>";
+		      elseif ($par_hosta['pakiet'] == 250)
+		echo "traffic-shape 250000 2500000 <br> rate-limit 305002<br>";		
 		 ?>
 		port security mode lock<br>
 		port security discard<br>
@@ -57,7 +57,7 @@ foreach ( $hosty as $index => $par_hosta )
 		interface ethernet <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		shutdown<br>
 		! Podac lokalizację bramki<br>
-		description <b><?php echo $par_hosta['adres_voip']; ?></b><br>
+		description vo<b><?php echo $par_hosta['adres_voip']; ?></b><br>
 		! Podac nazwe ACLki dla klienta<br>
 		switchport access vlan 3<br>
 		service-acl input <b>voip<?php echo substr($par_hosta['parent_port'],1); ?></b><br>

@@ -195,7 +195,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
     <?php if(!$dev_id): ?>
     <td width="185"><select class="port_field" name="port" id="port_1" onchange="changedField(this);">
       <option></option>
-      <?php for($i=1; $i<=46; $i++)
+      <?php for($i=1; $i<=47; $i++)
       {
         if($connection1['port']==$i)
           echo "<option selected>$i</option>";
@@ -268,7 +268,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
 </table>
 </form>
 <?php endif; ?>
-<form action="edit.php?tryb=edit" method="post">
+<!--<form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
     <td width="160">Poinformowano abonenta</td>
@@ -279,7 +279,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
     </td>
   </tr>
 </table>
-</form>
+</form>-->
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
@@ -293,7 +293,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
 </tr>
 </table>
 </form>
-<form action="edit.php?tryb=edit" method="post">
+<!--<form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
     <td width="160">Metoda weryfikacji</td>
@@ -310,7 +310,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
     </td>
   </tr>
 </table>
-</form>
+</form>-->
 <?php if($connection1['service']=='net' && !$connection1['service_configuration']): ?>
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">

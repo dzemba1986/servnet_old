@@ -68,7 +68,7 @@ else
     <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
   <table class="tables">
   <tr>
-  <td>Adres</td>
+  <td>Adre</td>
   <td><?php echo($connection1['address'])?></td>
   </tr>
 <?php if($connection1['service']=="net"): ?>
