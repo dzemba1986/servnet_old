@@ -231,12 +231,12 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
           switch($service)
           {
             case "Internet Standard":
-              $speed = 8;
+              $speed = 30;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
             case "Internet Komfort":
-              $speed = 250;
+              $speed = 300;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
@@ -246,13 +246,13 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
               $this->insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id);
               break;
             case "Internet Standard + tel":
-              $speed = 8;
+              $speed = 30;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, 'net', $info, $phone, $phone2, $phone3, $speed, $ara_id);
               $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
               break;
             case "Internet Komfort + tel":
-              $speed = 250;
+              $speed = 300;
               $service = 'net';
               $this->insertOne($start_date, $address, $mac, 'net', $info, $phone, $phone2, $phone3, $speed, $ara_id);
               $this->insertOne($start_date, $address, '', 'phone', $info, $phone, $phone2, $phone3, '', $ara_id);
@@ -507,7 +507,7 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
     public function validPort($value)
     {
       $mask = '/^\b[0-9]*\b$/';
-      if(preg_match($mask, $value) && ($value>0 && $value<47))
+      if(preg_match($mask, $value) && ($value>0 && $value<48))
         return true;
       return false;
     }

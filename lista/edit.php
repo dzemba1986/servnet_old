@@ -272,10 +272,10 @@ $dev_id = $daddy->getDevId($connection1['id']);
 <table class="tables">
   <tr>
     <td width="160">Poinformowano abonenta</td>
-    <td width="185"><input class="date_field" type="text" value="<?php echo($connection1['_informed'])?>" name="informed" id="informed_1" onkeyup="testDate(this);"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
-    <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="informed"><input type="submit" class="submit_field"  value="zmień">
-      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
-      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    <td width="185"><input class="date_field" type="text" value="<?php// echo($connection1['_informed'])?>" name="informed" id="informed_1" onkeyup="testDate(this);"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php// echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
+    <td ><input type="hidden" name="id" value="<?//php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="informed"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?//php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?//php echo($connection2['id'])?>">
     </td>
   </tr>
 </table>
@@ -299,14 +299,14 @@ $dev_id = $daddy->getDevId($connection1['id']);
     <td width="160">Metoda weryfikacji</td>
     <td width="185"><select style="float:left;" name="veryfication_method" id="veryfication_method_1" onchange="changedField(this);">
       <option value=""></option>
-      <option value="phone" <?php if($connection1['veryfication_method']=="phone") echo"selected";?>>Telefonicznie</option>
-      <option value="dhcp" <?php if($connection1['veryfication_method']=="dhcp") echo"selected";?>>DHCP</option>
-      <option value="personal" <?php if($connection1['veryfication_method']=="personal") echo"selected";?>>Osobiście</option>
+      <option value="phone" <?//php if($connection1['veryfication_method']=="phone") echo"selected";?>>Telefonicznie</option>
+      <option value="dhcp" <?//php if($connection1['veryfication_method']=="dhcp") echo"selected";?>>DHCP</option>
+      <option value="personal" <?//php if($connection1['veryfication_method']=="personal") echo"selected";?>>Osobiście</option>
     </select>
     </td>
-    <td ><input type="hidden" name="id" value="<?php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="veryfication_method"><input type="submit" class="submit_field"  value="zmień">
-      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
-      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    <td ><input type="hidden" name="id" value="<?//php echo($connection1['id'])?>"><input type="hidden" name="field_name" value="veryfication_method"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?//php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?//php echo($connection2['id'])?>">
     </td>
   </tr>
 </table>
@@ -646,18 +646,18 @@ Brak instalacji
 </table>
 </form>
 <?php endif; ?>
-<form action="edit.php?tryb=edit" method="post">
+<!--<form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
     <td width="160">Poinformowano abonenta</td>
-    <td width="185"><input class="date_field" type="text" value="<?php echo($connection2['_informed'])?>" name="informed" id="informed_2" onkeyup="testDate(this);"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?php echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
-    <td ><input type="hidden" name="id" value="<?php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="informed"><input type="submit" class="submit_field"  value="zmień">
-      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
-      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    <td width="185"><input class="date_field" type="text" value="<?//php echo($connection2['_informed'])?>" name="informed" id="informed_2" onkeyup="testDate(this);"><div style="float:left; cursor:pointer" onclick="setToday(this, '<?//php echo(date("d.m.y")) ?>'); testDate(this.previousSibling);">Dziś</div></td>
+    <td ><input type="hidden" name="id" value="<?//php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="informed"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?//php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?//php echo($connection2['id'])?>">
     </td>
   </tr>
 </table>
-</form>
+</form>-->
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
@@ -670,24 +670,24 @@ Brak instalacji
 </tr>
 </table>
 </form>
-<form action="edit.php?tryb=edit" method="post">
+<!--<form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
     <td width="160">Metoda weryfikacji</td>
     <td width="185"><select style="float:left;" name="veryfication_method" id="veryfication_method_2" onchange="changedField(this);">
       <option value=""></option>
-      <option value="phone" <?php if($connection2['veryfication_method']=="phone") echo"selected";?>>Telefonicznie</option>
-      <option value="dhcp" <?php if($connection2['veryfication_method']=="dhcp") echo"selected";?>>DHCP</option>
-      <option value="personal" <?php if($connection2['veryfication_method']=="personal") echo"selected";?>>Osobiście</option>
+      <option value="phone" <?//php if($connection2['veryfication_method']=="phone") echo"selected";?>>Telefonicznie</option>
+      <option value="dhcp" <?//php if($connection2['veryfication_method']=="dhcp") echo"selected";?>>DHCP</option>
+      <option value="personal" <?//php if($connection2['veryfication_method']=="personal") echo"selected";?>>Osobiście</option>
     </select>
     </td>
-    <td ><input type="hidden" name="id" value="<?php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="veryfication_method"><input type="submit" class="submit_field"  value="zmień">
-      <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
-      <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    <td ><input type="hidden" name="id" value="<?//php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="veryfication_method"><input type="submit" class="submit_field"  value="zmień">
+      <input type="hidden" name="main_id" value="<?//php echo($connection1['id'])?>">
+      <input type="hidden" name="phone_id" value="<?//php echo($connection2['id'])?>">
     </td>
   </tr>
 </table>
-</form>
+</form>-->
 <?php if($connection2['service']=='net' && !$connection2['service_configuration']): ?>
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">

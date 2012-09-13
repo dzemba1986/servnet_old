@@ -11,7 +11,7 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 ?>
 <html>
 <head>
-<title>Get all hosts</title>
+<title>Add all hosts</title>
 </head>
 <body>
 <?php
@@ -35,10 +35,10 @@ foreach ( $hosty as $index => $par_hosta )
 		?>
 		description <b><?php echo $par_hosta['adres']; ?></b><br>
 		service-acl input <b>user<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
-		<?php if ($par_hosta['pakiet'] == 8)
-			echo "traffic-shape 8192 819200 <br> rate-limit 6900<br>";
-		      elseif ($par_hosta['pakiet'] == 250)
-		echo "traffic-shape 250000 2500000 <br> rate-limit 305002<br>";		
+		<?php if ($par_hosta['pakiet'] == 30)
+			echo "traffic-shape 30720 307200 <br> rate-limit 28500<br>";
+		      elseif ($par_hosta['pakiet'] == 300)
+		echo "traffic-shape 307200 3072000 <br> rate-limit 305004<br>";		
 		 ?>
 		port security mode lock<br>
 		port security discard<br>
