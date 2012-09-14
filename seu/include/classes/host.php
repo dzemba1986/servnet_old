@@ -605,7 +605,7 @@ if(!defined('HOST_CLASS'))
               $data.="  default-lease-time ".$final_opts[49]['value'].";
   max-lease-time ".$final_opts[49]['value'].";
 
-
+# include \"etc/dhcp/options/".$subnet['opis']."\";
 #######################################
 # USERS
 #######################################\n";
