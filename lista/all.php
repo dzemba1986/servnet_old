@@ -53,7 +53,7 @@ foreach($wynik as $wiersz)
     $wiersz['net_port']='';
   $mac_value;
   $mac_dec = hexdec(preg_replace('/:/', '', $wiersz['mac']));
-  $mac_value = "<a class=\"header\" href=\"http://172.20.4.19/src/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\">".$wiersz['mac']."</a>";
+  $mac_value = "<a class=\"header\" href=\"http://172.20.4.17/loganalyzer/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\">".$wiersz['mac']."</a>";
   echo"<tr bgcolor=\"$net_rowcolor\" class=\"row\">
     <td>".($row)."</td>	 
     <td style=\"text-align:center;\" >".$wiersz['_net_start']."</td>

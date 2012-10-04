@@ -19,7 +19,7 @@
   <td><a href="index.php?order=mod_s_datetime&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Montaż</a></td>
   <td>Dod. info</td>
   <td>BOA info</td>
-  <td style="width:90px;"><a href="index.php?order=modyf&amp;page_number=<?php echo $paging->getPageNum();?>&amp;rows_per_page=<?php echo $paging->getRowsPerPage();?>&amp;tryb=<?php echo $tryb; ?>" class="header">Ost. mod.</a></td>
+  <!--<td style="width:90px;"><a href="index.php?order=modyf&amp;page_number=<?//php echo $paging->getPageNum();?>&amp;rows_per_page=<?//php echo $paging->getRowsPerPage();?>&amp;tryb=<?//php echo $tryb; ?>" class="header">Ost. mod.</a></td>-->
   <td>Edytuj</td>
 </tr>
 <?php
@@ -81,7 +81,7 @@ foreach($wynik as $wiersz)
   }
   $mac_value;
   $mac_dec = hexdec(preg_replace('/:/', '', $wiersz['mac']));
-  $mac_value = "<a class=\"header\" target=\"_blank\" href=\"http://172.20.4.19/src/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\">".$wiersz['mac']."</a>";
+  $mac_value = "<a class=\"header\" target=\"_blank\" href=\"http://172.20.4.17/loganalyzer/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\">".$wiersz['mac']."</a>";
   if(!$wiersz['net_port'])
     $wiersz['net_port']='';
   if(!$wiersz['phone_id'])
@@ -110,7 +110,6 @@ foreach($wynik as $wiersz)
       <td>".$wiersz['_mod_s_datetime']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
-      <td>".$wiersz['_net_modyf']."</td>
       <td><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."\">Edytuj</a>";
     echo" </td></tr>";
   }
@@ -142,7 +141,6 @@ foreach($wynik as $wiersz)
       <td rowspan=\"2\">".$wiersz['_mod_s_datetime']."</td>
       <td>".$wiersz['net_info']."</td>
       <td>".$wiersz['net_info_boa']."</td>
-      <td>".$wiersz['_net_modyf']."</td>
       <td rowspan=\"2\"><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."&amp;phone_id=".$wiersz['phone_id']."\">Edytuj</a>";
     echo" </td></tr>";
     echo"<tr bgcolor=\"$phone_rowcolor\" class=\"row\">
@@ -164,8 +162,7 @@ foreach($wynik as $wiersz)
     echo"	<td style=\"text-align:center;\" >".$wiersz['_phone_payment_activation']."</td>
       <td style=\"text-align:center;\" >".$wiersz['_phone_configuration']."</td>
       <td>".$wiersz['phone_info']."</td>
-      <td>".$wiersz['phone_info_boa']."</td>
-      <td>".$wiersz['_phone_modyf']."</td>";
+      <td>".$wiersz['phone_info_boa']."</td>";
     echo"</tr>";
   }
 

@@ -163,7 +163,7 @@ function wyswietlOpcje(opcje)
                         if(opcje[2].firstChild.nodeValue=="Host" && opcje[i].nodeName=="Adres_MAC")
                         {
                           var mac_dec = parseInt(opcje[i].firstChild.nodeValue.replace(/:/g, ""),16);
-                          nodeValue = "<a class=\"mac\" target=\"_blank\" href=\"http://172.20.4.19/src/index.php?sourceid=3&amp;filter=clientmac%3A%3D"+mac_dec+"&amp;search=Search\">"+opcje[i].firstChild.nodeValue+"</a>";
+                          nodeValue = "<a class=\"mac\" target=\"_blank\" href=\"http://172.20.4.17/loganalyzer/index.php?sourceid=3&amp;filter=clientmac%3A%3D"+mac_dec+"&amp;search=Search\">"+opcje[i].firstChild.nodeValue+"</a>";
                         }
 			else if(opcje[i].nodeName=="Lokalizacja" && opcje[2].firstChild.nodeValue=="Host" && opcje[i].firstChild && opcje[6].nodeName=="Numer_mieszkania")
                           nodeValue = '<b>' + opcje[i].firstChild.nodeValue + '/' + opcje[6].firstChild.nodeValue + '</b>';

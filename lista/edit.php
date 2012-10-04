@@ -73,7 +73,7 @@ if($_REQUEST['main_id'])
   $loc = new Lokalizacja();
   $address = $loc->getAddressStr($connection1['localization']);
     $mac_dec = hexdec(preg_replace('/:/', '', $connection1['mac']));
-    $mac_link = "<a class=\"header\" href=\"http://172.20.4.19/src/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\" target=\"_blank\">Syslog</a>";
+    $mac_link = "<a class=\"header\" href=\"http://172.20.4.17/loganalyzer/index.php?sourceid=3&amp;filter=clientmac%3A%3D$mac_dec&amp;search=Search\" target=\"_blank\">Syslog</a>";
   $daddy = new Daddy();
   $switch_loc;
   if($connection1['switch_loc'])
