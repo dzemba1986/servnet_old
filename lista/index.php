@@ -33,16 +33,24 @@ foreach($wynik as $wiersz)
   $wina_abonenta ="#CBD665";
   $long_activation_time = 3600*24*17;
   $total_activation_time = 3600*24*21;
+  $seven_activation_time = 3600*24*7;
+  $abon7days = "#00CCFF";
   if($tryb=='in_progress' || $tryb='for_configuration')
   {
-    if($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time)
-      if($wiersz['net_socket_date'] && $wiersz['net_wire'])
+    if($wiersz['net_awaiting_time'] < $seven_activation_time)
+      $net_rowcolor = $abon7days;
+    elseif($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time)
+      if($wiersz['net_socket_date'] && $wiersz['net_wire'] && $wiersz['net_start'] > $wiersz['net_socket_date'])
+        $net_rowcolor = $abon7days;
+      elseif($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
       else
         $net_rowcolor = "#E9993E";
     elseif($wiersz['net_awaiting_time'] > $total_activation_time)
     {
-      if($wiersz['net_socket_date'] && $wiersz['net_wire'])
+      if($wiersz['net_socket_date'] && $wiersz['net_wire'] && $wiersz['net_start'] > $wiersz['net_socket_date'])
+        $net_rowcolor = $abon7days;
+      elseif($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
       elseif($wiersz['installation_date'])
         $net_rowcolor = "#E9993E";
