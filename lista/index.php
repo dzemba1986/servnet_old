@@ -31,26 +31,77 @@ foreach($wynik as $wiersz)
   $net_rowcolor;
   $phone_rowcolor;
   $wina_abonenta ="#CBD665";
+  $abon7days = "#00CCFF";
   $long_activation_time = 3600*24*17;
   $total_activation_time = 3600*24*21;
-  $seven_activation_time = 3600*24*7;
-  $abon7days = "#00CCFF";
+  
   if($tryb=='in_progress' || $tryb='for_configuration')
-  {
-    if($wiersz['net_awaiting_time'] < $seven_activation_time)
-      $net_rowcolor = $abon7days;
-    elseif($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time)
-      if($wiersz['net_socket_date'] && $wiersz['net_wire'] && $wiersz['net_start'] > $wiersz['net_socket_date'])
-        $net_rowcolor = $abon7days;
-      elseif($wiersz['net_socket_date'] && $wiersz['net_wire'])
+  {	
+  	switch (true){
+  		//abonent 7 dniowy
+  		case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && $wiersz['net_wire'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
+  			$net_rowcolor = $abon7days;
+  			break;
+  		// jeżeli mamy od 17 do 21 dni
+  		case ($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time):
+  			if($wiersz['net_socket_date'] && $wiersz['net_wire'])
+  				$net_rowcolor = $wina_abonenta;
+  			else
+  				$net_rowcolor = "#E9993E";
+  			break;
+  		// jeżeli mamy powyżej 21 dni
+  		case ($wiersz['net_awaiting_time'] > $total_activation_time):
+  			if($wiersz['net_socket_date'] && $wiersz['net_wire'])
+  				$net_rowcolor = $wina_abonenta;
+  			elseif($wiersz['installation_date'])
+  			  $net_rowcolor = "#E9993E";
+  			else
+  				$net_rowcolor = "#EC5223";
+  			break;
+  		// robimy przeplatankę kolorów co 2 wiersz	
+  		case ($row%2):
+  			$net_rowcolor = "#dcde98";
+  			break;
+  		default: 
+  			$net_rowcolor = "#f2f5a9";
+  	} 
+  	
+  	if($wiersz['phone_id']){
+  		switch (true){
+  		  //jeśeli mamy 17 - 24 dni
+  			case ($wiersz['phone_awaiting_time'] > $long_activation_time && $wiersz['phone_awaiting_time'] <= $total_activation_time): 
+  				if($wiersz['phone_connect'] && $wiersz['phone_wire'])
+  					$phone_rowcolor = $wina_abonenta;
+  				else
+  					$phone_rowcolor = "#E9993E";
+  				break;
+  			//jeżeli mamy powyżej 24
+  			case ($wiersz['awaiting_time'] > $total_activation_time):
+  				if($wiersz['phone_connect'] && $wiersz['phone_wire'])
+          	$phone_rowcolor = $wina_abonenta;
+        	elseif($wiersz['installation_date'])
+          	$phone_rowcolor = "#E9993E";
+        	else
+          	$phone_rowcolor = "#EC5223";
+        	break;
+  			case ($row%2):
+  				$phone_rowcolor = "#dcde98";
+  				//break;
+  			default :
+  				$phone_rowcolor = "#f2f5a9";
+  	}
+  }
+  
+ /*  if($tryb=='in_progress' || $tryb='for_configuration')
+  { 
+    if($wiersz['net_awaiting_time'] > $long_activation_time && $wiersz['net_awaiting_time'] <= $total_activation_time)
+      if($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
       else
         $net_rowcolor = "#E9993E";
     elseif($wiersz['net_awaiting_time'] > $total_activation_time)
     {
-      if($wiersz['net_socket_date'] && $wiersz['net_wire'] && $wiersz['net_start'] > $wiersz['net_socket_date'])
-        $net_rowcolor = $abon7days;
-      elseif($wiersz['net_socket_date'] && $wiersz['net_wire'])
+      if($wiersz['net_socket_date'] && $wiersz['net_wire'])
         $net_rowcolor = $wina_abonenta;
       elseif($wiersz['installation_date'])
         $net_rowcolor = "#E9993E";
@@ -81,7 +132,7 @@ foreach($wynik as $wiersz)
         $phone_rowcolor = "#dcde98";
       else
         $phone_rowcolor = "#f2f5a9";
-    }
+    } */
   }
   elseif($tryb=='done')
   {
