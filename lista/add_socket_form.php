@@ -65,10 +65,10 @@ else
 <center>
 <form id="socket_form" method="POST" action="add_socket_form.php?tryb=edit">
 <div id="net_connection">
-    <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
+    <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; elseif($connection1['service']=="phone") echo "Telefon"; else echo "Telefon i Internet"?></div>
   <table class="tables">
   <tr>
-  <td>Adre</td>
+  <td>Adres</td>
   <td><?php echo($connection1['address'])?></td>
   </tr>
 <?php if($connection1['service']=="net"): ?>

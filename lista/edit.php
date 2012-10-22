@@ -112,6 +112,18 @@ $dev_id = $daddy->getDevId($connection1['id']);
 ?>
 <script type="text/javascript" src="js/edit.js"></script>
 <div style="clear:both;"></div>
+<div id="montaz_glowny">
+	<form action="edit.php?tryb=edit" method="post">
+		<table class="tables">
+  		<tr>
+    		<td width="160">Montaż</td>
+    		<td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
+    		<td ><a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation1['_socket_installation_date']) echo($connection1['id'])?>&phone_id=<?php echo($connection2['id'])?>">Zmień</a>
+    		</td>
+  		</tr>
+		</table>
+	</form>
+</div>
 <div id="net">
 <center><div id="net_connection">
 <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
@@ -399,7 +411,7 @@ $dev_id = $daddy->getDevId($connection1['id']);
   <tr>
     <td width="160">Montaż</td>
     <td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
-    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation1['_socket_installation_date']) echo($connection1['id'])?>&phone_id=<?php echo($connection2['id'])?>">Zmień</a>
+    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation1['_socket_installation_date']) echo($connection1['id'])?>">Zmień</a>
     </td>
   </tr>
 </table>
@@ -761,6 +773,16 @@ Brak instalacji
     <td ><input type="hidden" name="id" value="<?php echo($connection2['id'])?>"><input type="hidden" name="field_name" value="phone3"><input type="submit" class="submit_field"  value="zmień">
       <input type="hidden" name="main_id" value="<?php echo($connection1['id'])?>">
       <input type="hidden" name="phone_id" value="<?php echo($connection2['id'])?>">
+    </td>
+  </tr>
+</table>
+</form>
+<form action="edit.php?tryb=edit" method="post">
+<table class="tables">
+  <tr>
+    <td width="160">Montaż</td>
+    <td width="185"><?php if($modyfication2) echo $modyfication2->get_s_date().' '.$modyfication2->get_s_time() ; ?></td>
+    <td >      <a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation2['_socket_installation_date']) echo($connection2['id'])?>">Zmień</a>
     </td>
   </tr>
 </table>
