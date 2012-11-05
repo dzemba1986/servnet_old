@@ -42,7 +42,7 @@
         $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">podłączenia</a>';
      //   $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
         if($con_id && $phone_id)
-        	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id=">zamknij</a>';
+        	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
         elseif ($con_id)
           $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id=">zamknij</a>';
         elseif ($phone_id) 
