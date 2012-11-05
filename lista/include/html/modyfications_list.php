@@ -45,7 +45,7 @@
         	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id=">zamknij</a>';
         elseif ($con_id)
           $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id=">zamknij</a>';
-        else 
+        elseif ($phone_id) 
         	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$phone_id.'&phone_id=">zamknij</a>';
       }
       else

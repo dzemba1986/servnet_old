@@ -112,18 +112,6 @@ $dev_id = $daddy->getDevId($connection1['id']);
 ?>
 <script type="text/javascript" src="js/edit.js"></script>
 <div style="clear:both;"></div>
-<div id="montaz_glowny">
-	<form action="edit.php?tryb=edit" method="post">
-		<table class="tables">
-  		<tr>
-    		<td width="160">Montaż</td>
-    		<td width="185"><?php if($modyfication1) echo $modyfication1->get_s_date().' '.$modyfication1->get_s_time() ; ?></td>
-    		<td ><a href="modyfications_form.php?tryb=modyfications&con_id=<?php if(!$installation1['_socket_installation_date']) echo($connection1['id'])?>&phone_id=<?php echo($connection2['id'])?>">Zmień</a>
-    		</td>
-  		</tr>
-		</table>
-	</form>
-</div>
 <div id="net">
 <center><div id="net_connection">
 <div class="edit_little_header"><?php if($connection1['service']=="net") echo "Internet"; else echo "Telefon";?></div>
