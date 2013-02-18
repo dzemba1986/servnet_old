@@ -42,7 +42,8 @@ foreach ( $hosty as $index => $par_hosta )
 		 ?>
 		port security mode lock<br>
 		port security discard<br>
-		no shutdown<br>
+		<?php if ($par_hosta['exists'] == 0) echo 'shutdown'; 
+					else	echo 'no shutdown';?><br>
 		exit<br>
 		<?php
 	} else {?>
