@@ -28,6 +28,7 @@ if(is_array($wynik))
 	  
     $rowcolor;
     $abon7days = "red";
+    $abon_phone = "blue";
     $total_activation_time = 3600*24*21;
            
     if($tryb=='in_progress' || $tryb='for_configuration')
@@ -37,6 +38,10 @@ if(is_array($wynik))
   			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && $wiersz['net_wire'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
   				$rowcolor = $abon7days;
   		    break;
+  		  //abonent telefoniczny - aktywacja po zrobieniu gniazda
+  		  case ($wiersz['net_service']=='phone' && $wiersz['_net_socket_date'] && $wiersz['net_wire'] && $wiersz['_moved_phone'] == null):
+  		   	$rowcolor = $abon_phone;
+  		   	break;
   		  // jeżeli mamy powyżej 21 dni
   		  case ($wiersz['net_awaiting_time'] > $total_activation_time):
   			  if($row%2)
@@ -56,21 +61,25 @@ if(is_array($wynik))
 	  		switch (true){
 	  			//abonent 7 dniowy
 	  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && $wiersz['net_wire'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
-	  				$rowcolor = $abon7days;
+	  				$rowcolor2 = $abon7days;
 	  		    break;
+	  		  //abonent telefoniczny - aktywacja po zrobieniu gniazda
+	  		  case ($wiersz['phone_socket_date'] && $wiersz['phone_wire'] && $wiersz['_phone_moved_phone'] == null):
+	  		   	$rowcolor2 = $abon_phone;
+	  		   	break;
 	  		  // jeżeli mamy powyżej 21 dni
 	  		  case ($wiersz['net_awaiting_time'] > $total_activation_time):
 	  			  if($row%2)
-	  			  	$rowcolor = "#c7c7c7";
+	  			  	$rowcolor2 = "#c7c7c7";
 	  			  else
-	  			    $rowcolor = "#aaaaaa";
+	  			    $rowcolor2 = "#aaaaaa";
 	  		    break;
 	  		  // robimy przeplatankę kolorów co 2 wiersz
 	  		  case ($row%2):
-	  			  $rowcolor = "#dcde98";
+	  			  $rowcolor2 = "#dcde98";
 	  		    break;
 	  		  default:
-	  			  $rowcolor = "#f2f5a9";
+	  			  $rowcolor2 = "#f2f5a9";
 	  		}
   	}
     }
@@ -139,7 +148,7 @@ if(is_array($wynik))
 	      <td>".$wiersz['net_info_boa']."</td>
 	      <td rowspan=\"2\"><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."&amp;phone_id=".$wiersz['phone_id']."\">Edytuj</a>";
 	    echo" </td></tr>";
-	    echo "<tr bgcolor=$rowcolor class=\"row\">";
+	    echo "<tr bgcolor=$rowcolor2 class=\"row\">";
 	    echo "<td style=\"text-align:center;\"><font color=green>".$wiersz['phone_start']."</font><br><font color=red>".$wiersz['phone_end_date']."</font></td>";
 	    if($wiersz['phone_wire']=='')
 	      echo"<td><a class=\"edit\" href=\"add_wire_form.php?tryb=edit&amp;main_id=".$wiersz['phone_id']."\">+p.</a></td>";
@@ -159,7 +168,6 @@ if(is_array($wynik))
 	      <td>".$wiersz['phone_info_boa']."</td>";
 	    echo"</tr>";
 	  }
-	
 	}
 ?>
 </tbody>
