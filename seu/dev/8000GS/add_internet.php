@@ -34,7 +34,7 @@ $predkosc_str = array(
 #rate-limit 6900<br>",
 			'30' =>
 "traffic-shape 30720 307200\n<br>
-rate-limit 28500<br>",
+rate-limit 81500<br>",
 #			'100' =>
 #"traffic-shape 102400 1024000\n<br>
 #rate-limit 100000<br>",
@@ -46,7 +46,7 @@ rate-limit 28500<br>",
 #rate-limit 305002<br>")
 			'300' =>
 "traffic-shape 307200 3072000 \n<br>
-rate-limit 305004<br>");
+rate-limit 600000<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])

@@ -604,6 +604,8 @@ if(!defined('HOST_CLASS'))
 
               $data.="  default-lease-time ".$final_opts[49]['value'].";
   max-lease-time ".$final_opts[49]['value'].";
+  min-lease-time 7200;		
+  		
 
 # include \"etc/dhcp/options/".$subnet['opis']."\";
 #######################################
@@ -628,6 +630,147 @@ if(!defined('HOST_CLASS'))
           fclose($file);
           return true;
         }
+        
+        private function generateDhcpFiles3()
+        {
+        	require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
+        	$files_path = '/home/ftp/www/servnet/.dhcp_files';
+        
+        	//deleting old files
+        	$sysout = system("rm $files_path/regions/*");
+        	//                echo "<br><br><strong>$sysout</strong><br><br>";
+        
+        
+        	$update_file_name = $files_path.'/regions/.update_notify';
+        	$subnet_obj = new Podsiec();
+        	$subnets = $subnet_obj->getDhcpSubnets();
+        	$counter = 1;
+        	require(SEU_ABSOLUTE.'/include/classes/dhcp.php');
+        	$dhcp = new Dhcp();
+        	$daddy = new Daddy();
+        	foreach($subnets as $subnet)
+        	{
+        		//var_dump ($subnet);
+        		$sub_ip = new IpAddress($subnet['address'], $subnet['netmask']);
+        		$sub_id = intval($subnet['id']);
+        		$sub_hr_ip = $sub_ip->getHrNetworkAddress();
+        		$sub_hr_mask = $sub_ip->getNetmask();
+        		$sub_gateway = $sub_ip->getHrFirst();//nie wiem w jakiej postaci to zwróci
+        		$sub_broadcast = IpAddress::decToHr($sub_ip->getLast()+1);
+        		$group_id = $subnet_obj->getGroup($sub_id);
+        		$lease_time = 7200;
+        		$dns = "213.5.208.3, 213.5.208.35;";
+        		$group_options = $dhcp->getGroupOptions($group_id, 1);
+        		$subnet_options = $dhcp->getGroupOptions(1, $sub_id);
+        		$final_opts = array(3 => array('option' => 3, 'rfc_name' => 'routers', 'value' => $sub_gateway, 'weight' => 1),
+        				28 => array('option' => 28, 'rfc_name' => 'broadcast-address', 'value' => $sub_broadcast,'weight' => 1),
+        				1 => array('option' => 1, 'rfc_name' => 'subnet-mask', 'value' => $sub_hr_mask, 'weight' => 1),
+        				6 => array('option' => 1, 'rfc_name' => 'domain-name-servers', 'value' => $dns, 'weight' => 1),
+        				49 => array('option' => 49, 'rfc_name' => 'dhcp-lease-time', 'value' => $lease_time, 'weight' => 1));
+        		if(count($group_options) > 0)
+        			foreach ($group_options as $g_opt)
+        			if($g_opt['option']==$final_opts[$g_opt['option']]['option'])
+        			{
+        				if($g_opt['weight'] >= $final_opts[$g_opt['option']]['weight'])
+        					$final_opts[$g_opt['option']] = $g_opt;
+        			}
+        			else
+        				$final_opts[$g_opt['option']] = $g_opt;
+        			if(count($subnet_options) > 0)
+        				foreach ($subnet_options as $s_opt)
+        				if($s_opt['option']==$final_opts[$s_opt['option']]['option'])
+        				{
+        					if($s_opt['weight'] >= $final_opts[$s_opt['option']]['weight'])
+        						$final_opts[$s_opt['option']] = $s_opt;
+        				}
+        				else
+        					$final_opts[$s_opt['option']] = $s_opt;
+        				$query = "SELECT a.ip, d.mac, CONCAT(t.short_name, l.nr_bloku, '_', h.nr_mieszkania) as address_string, d.other_name, d.dev_id, agr.parent_device, agr.parent_port, p.vlan FROM Adres_ip a
+        				INNER JOIN Device d ON ((d.device_type='Host' || d.device_type='Virtual') AND d.dev_id=a.device AND d.mac !='' AND d.exists='1')
+        				LEFT JOIN Host h ON h.device=d.dev_id
+        				LEFT JOIN Agregacja agr ON agr.device = d.dev_id
+        				LEFT JOIN Podsiec p ON p.id = a.podsiec
+        				LEFT JOIN Lokalizacja l ON d.lokalizacja=l.id
+        				LEFT JOIN Teryt t ON l.ulic=t.ulic
+        				WHERE a.podsiec='$sub_id' ORDER BY a.ip";
+        				$ips = $daddy->query_assoc_array($query);
+        				        				
+        				$pool_array = array();
+        				if(!$ips)
+        					continue;
+        					foreach($ips as $ip)
+        					{
+        					$pool_array[$ip['ip']] = "pool {
+\tallow members of \"".$ip['address_string']."__".$ip['dev_id']."\";
+\trange ".$ip['ip'].";
+    }\n";
+        					}
+        
+        					foreach($ips as $ip)
+        				{
+        					$id_parent = $ip['parent_device'];        					
+        					$query1 = "SELECT mac FROM Device WHERE dev_id ='$id_parent'";
+        					
+        					$mac = $daddy->query_assoc_array($query1);        					
+        					$vlan = $ip['vlan'];
+        					if ($vlan <= 9)
+        						$vlan = '0'.$vlan;
+        					        					
+        					$port = substr($ip['parent_port'],1);
+        					if ($port <= 9)
+        						$port = '0'.$port;
+        					 
+        					$class_array[$ip['ip']] = "class \"".$ip['address_string']."__".$ip['dev_id']."\" {
+\tmatch if option agent.circuit-id = 00:".$vlan.":00:02:01:".$port." and option agent.remote-id = 00:06:".$mac[0]['mac'].";
+    }\n";
+          }
+        
+         
+        		$data = "# PODSIEC ".$subnet['opis']."
+#######################################
+# CLASS 
+#######################################\n";
+        
+foreach($sub_ip->generujPodsiec() as $ip_counter)
+  if($pool_array[$ip_counter])
+    $data .= $class_array[$ip_counter];
+        
+$data .="
+#######################################
+#         INTERNET - ADRESACJA
+#######################################
+        
+subnet $sub_hr_ip netmask ".$final_opts[1]['value']." {\n";
+foreach($final_opts as $opt)
+	$data .= "option ".$opt['rfc_name']." ".$opt['value'].";\n";
+	
+	$data.="default-lease-time ".$final_opts[49]['value'].";
+max-lease-time ".$final_opts[49]['value'].";
+        
+# include \"etc/dhcp/options/".$subnet['opis']."\";
+#######################################
+# POOL
+#######################################\n";
+        		foreach($sub_ip->generujPodsiec() as $ip_counter)
+        				if($pool_array[$ip_counter])
+                  $data .= $pool_array[$ip_counter];
+              $data .= "}";
+        $dataTypes = new DataTypes();
+        $opis_ascii = $dataTypes->removePL($subnet['opis']);
+        $filename = $files_path."/regions/".$opis_ascii.".conf";
+        //				echo"<br>$filename<br>";
+        $file = fopen($filename, "w");
+        fwrite($file, $data);
+        fclose($file);
+        $counter++;
+        	}
+        	$file = fopen($update_file_name, "w");
+        	$czas = time();
+        	fwrite($file, $czas);
+        			fclose($file);
+        			return true;
+        	}     
+        
       }
 
     }
