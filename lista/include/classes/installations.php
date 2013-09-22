@@ -182,10 +182,12 @@ if(!defined('INSTALLATIONS_LISTA_CLASS'))
                 a.service_activation as 'Aktywacja usługi', 
                 a.service_configuration as 'Konfiguracja usługi', 
                 a.resignation_date as 'Rezygnacja',
-                c.invoiced as 'Zaksięgowano'
+                c.invoiced as 'Zaksięgowano',
+                IF(a.start_date > c.socket_installation_date OR c.wire_length = '0', 'TAK', null) as 'Już zaksięgowano'
                   FROM Connections a 
                   JOIN Installations c
-                  ON (c.invoiced='$date' AND a.service=c.type AND a.localization=c.localization)
+                  ON (a.service=c.type AND a.localization=c.localization)
+      						WHERE c.invoiced='$date'
                   ORDER BY id ASC;";
       $result = $sql->query($query, null);
       if(count($result)<1)
@@ -197,9 +199,10 @@ if(!defined('INSTALLATIONS_LISTA_CLASS'))
       $sql = new MysqlListaPdo();
       $query = "
         UPDATE  Connections a 
-        JOIN Installations c ON c.invoiced is null AND a.service=c.type AND a.localization=c.localization and c.socket_installation_date is not null
-        SET c.invoiced=NOW() 
-        WHERE ((a.service_activation is not null OR a.payment_activation is not null OR a.resignation_date is not null));";
+        JOIN Installations c ON a.service=c.type AND a.localization=c.localization 
+        SET c.invoiced=NOW()
+      	WHERE c.invoiced is null AND c.socket_installation_date is not null;";	 
+        //WHERE ((a.service_activation is not null OR a.payment_activation is not null OR a.resignation_date is not null));";
       if($sql->query($query, null))
         return true;
       return false;
