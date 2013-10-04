@@ -183,7 +183,7 @@ if(!defined('INSTALLATIONS_LISTA_CLASS'))
                 a.service_configuration as 'Konfiguracja usługi', 
                 a.resignation_date as 'Rezygnacja',
                 c.invoiced as 'Zaksięgowano',
-                IF(a.start_date > c.socket_installation_date OR c.wire_length = '0', 'TAK', null) as 'Już zaksięgowano'
+                IF(a.start_date > c.socket_installation_date, 'TAK', null) as 'Już zaksięgowano'
                   FROM Connections a 
                   JOIN Installations c
                   ON (a.service=c.type AND a.localization=c.localization)

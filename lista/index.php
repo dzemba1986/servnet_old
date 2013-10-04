@@ -35,7 +35,7 @@ if(is_array($wynik))
     {
   	  switch (true){
   			//abonent 7 dniowy
-  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && $wiersz['net_wire'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
+  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
   				$rowcolor = $abon7days;
   		    break;
   		  //abonent telefoniczny - aktywacja po zrobieniu gniazda
@@ -60,7 +60,7 @@ if(is_array($wynik))
   		if($wiersz['phone_id']){
 	  		switch (true){
 	  			//abonent 7 dniowy
-	  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && $wiersz['net_wire'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
+	  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
 	  				$rowcolor2 = $abon7days;
 	  		    break;
 	  		  //abonent telefoniczny - aktywacja po zrobieniu gniazda
