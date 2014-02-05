@@ -246,6 +246,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
         case 'in_progress':
           $inner_query="
             SELECT	a.id as net_id,
+          			a.ara_id net_ara_id,
                           a.start_date as net_start, 
                           DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
                           DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
@@ -281,6 +282,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                           DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
                           (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time,
                           b.id as phone_id,
+          				  b.ara_id as phone_ara_id,
                           DATE_FORMAT(b.start_date, '%d.%m.%y') as phone_start, 
                           DATE_FORMAT(DATE_ADD(b.start_date,INTERVAL 21 DAY), '%d.%m.%y') AS phone_end_date,
                           b.switch as phone_switch, 
@@ -317,6 +319,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                             WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null
                             UNION
                             select	a.id,
+          				  a.ara_id as net_ara_id,
                           a.start_date as net_start, 
                           DATE_FORMAT(a.start_date, '%d.%m.%y') as _net_start, 
                           DATE_ADD(a.start_date,INTERVAL 21 DAY) AS net_end_date,
@@ -352,6 +355,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                           DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf,
                           (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.start_date)) AS net_awaiting_time,
                           null,
+          				  null,
                           null,
                           null,
                           null,
