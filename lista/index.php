@@ -65,7 +65,7 @@ if(is_array($wynik))
   		if($wiersz['phone_id']){
 	  		switch (true){
 	  			case (substr($wiersz['phone_ara_id'],0,1) == 'a'):
-	  				$rowcolor = $abon_nocontract;
+	  				$rowcolor2 = $abon_nocontract;
 	  				break;
 	  			//abonent 7 dniowy
 	  			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):

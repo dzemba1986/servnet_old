@@ -1,5 +1,6 @@
 <?php
 require(LISTA_ABSOLUTE.'/include/classes/installations.php');
+require(LISTA_ABSOLUTE.'/include/classes/connections.php');
 
 //***********************************
 //saving changes section
@@ -50,6 +51,7 @@ elseif($_POST['s_date'])
     $mod->set_desc($_POST['desc']);
     $mod->set_user_add();
     $mod->set_user_last_edit();
+    $mod->set_contract($_POST['contract']);
     $mod->add($_POST['con_id']);
     $_SESSION['mod_sub'] = true;
     echo'<script type="text/javascript">alert("Dodano zdarzenie.");</script>';

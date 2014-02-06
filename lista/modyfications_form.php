@@ -14,6 +14,7 @@ $inst_arr = array('net' => 'Internet',
                   'tv' => 'Telewizja',
                   'phone' => 'Telefon',
                   'net_phone' => 'Internet + telefon',
+				  'bez_umowy' => 'Montaż bez umowy',	
                   'other' => 'Inna');
 $type_arr = array('inst_new' => 'Nowa instalacja',
                   'inst_change' => 'Wymiana instalacji',
@@ -100,6 +101,7 @@ $streets = $sql->getUlic();
           echo "<option value=\"$key\">$val</option>";
       }?>
     </select>
+     Czy brak umowy?<input type="checkbox" name="contract" value="1" />
     </td>
   </tr>
   <tr>
