@@ -101,7 +101,6 @@ $streets = $sql->getUlic();
           echo "<option value=\"$key\">$val</option>";
       }?>
     </select>
-     Czy brak umowy?<input type="checkbox" name="contract" value="1" />
     </td>
   </tr>
   <tr>

@@ -25,7 +25,6 @@ if(!defined('MODYFICATION_CLASS'))
     private $mod_installer;
     private $mod_desc;
     private $mod_close_datetime;
-    private $mod_contract;
     private $mod_fullfill;
     private $mod_col;
     public function get_id()
@@ -310,11 +309,6 @@ if(!defined('MODYFICATION_CLASS'))
       $this->mod_desc = $desc;
       return true;
     }
-    public function set_contract($contract)
-    {
-    	$this->mod_contract = $contract;
-    	return true;
-    }
     public function set_fullfill($val)
     {
       if($val==1)
@@ -430,9 +424,6 @@ if(!defined('MODYFICATION_CLASS'))
           !$this->mod_cause || !$this->mod_loc)
         die("Nie podano wszystkich wymaganych parametrów montażu!");
 
-      if($this->mod_contract == '1') $czybrakumowy = 1;
-      //var_dump($czybrakumowy);
-      //var_dump($this->mod_contract);
       
       $query = "INSERT INTO Modyfications (
         mod_a_datetime,
@@ -447,8 +438,7 @@ if(!defined('MODYFICATION_CLASS'))
         mod_cause,
         mod_loc,
         mod_installer,
-        mod_desc,
-      	mod_contract) VALUES (
+        mod_desc) VALUES (
         NOW(),
        :mod_s_datetime,
        :mod_e_datetime,
@@ -461,8 +451,7 @@ if(!defined('MODYFICATION_CLASS'))
        :mod_cause,
        :mod_loc,
        :mod_installer,
-       :mod_desc,
-       :czybrakumowy)";
+       :mod_desc)";
       
       $sql = new MysqlListaPdo();
       $sql->begin();
@@ -476,8 +465,7 @@ if(!defined('MODYFICATION_CLASS'))
         'mod_cause'=>$this->mod_cause,
         'mod_loc'=>$this->mod_loc,
         'mod_installer'=>$this->mod_installer,
-        'mod_desc'=>$this->mod_desc,
-      	'czybrakumowy'=>$czybrakumowy);
+        'mod_desc'=>$this->mod_desc);
       if($mod_id=$sql->query_insert($query, $params))
       {
         $con = new Connections();
