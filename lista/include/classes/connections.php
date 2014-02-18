@@ -528,7 +528,7 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
     }
     public function validAra($value)
     {
-      $mask = '/^\b[0-9a]{5}\b$/';
+      $mask = '/^\b[0-9]{5}\b$/';
       return preg_match($mask, $value);
     }
     public function validSpeed($value)

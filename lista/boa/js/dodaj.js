@@ -93,7 +93,7 @@ function testStartDate(field)
 function testAra(field)
 {
   var value = field.value;
-  var result = value.match(/^\b[0-9a]{5}\b$/);
+  var result = value.match(/^\b[0-9]{5}\b$/);
   if(result)
   {
     field.style.backgroundColor="white";

@@ -29,16 +29,11 @@ if(is_array($wynik))
     $rowcolor;
     $abon7days = "red";
     $abon_phone = "blue";
-    $abon_nocontract = "green";
     $total_activation_time = 3600*24*21;
            
     if($tryb=='in_progress' || $tryb='for_configuration')
     {
   	  switch (true){
-  	  	//abonent bez umowy
-  	  	case (substr($wiersz['net_ara_id'],0,1) == 'a'):
-  	  		$rowcolor = $abon_nocontract;
-  	  		break;
   			//abonent 7 dniowy
   			case ($wiersz['net_service']=='net' && $wiersz['net_socket_date'] && ($wiersz['net_start']>$wiersz['net_socket_date'])):
   				$rowcolor = $abon7days;
