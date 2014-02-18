@@ -523,7 +523,7 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
     }
     public function validId($value)
     {
-      $mask = '/^\b[0-9]*\b$/';
+      $mask = '/^\b[0-9a]*\b$/';
       return preg_match($mask, $value);
     }
     public function validAra($value)
