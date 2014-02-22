@@ -14,7 +14,9 @@ $inst_arr = array('net' => 'Internet',
                   'tv' => 'Telewizja',
                   'phone' => 'Telefon',
                   'net_phone' => 'Internet + telefon',
-				  'bez_umowy' => 'Montaż bez umowy',	
+				  'bu_net_phone' => 'Bez umowy Internet + telefon',	
+				  'bu_phone' => 'Bez umowy telefon',
+				  'bu_net' => 'Bez umowy internet',
                   'other' => 'Inna');
 $type_arr = array('inst_new' => 'Nowa instalacja',
                   'inst_change' => 'Wymiana instalacji',
@@ -38,7 +40,14 @@ if($con_id)
     $mod->set_desc(Connections::getInfo($con_id)."\n".Connections::getBoaInfo($con_id));
     $service1 = Connections::getService($con_id);
     $service2 = Connections::getService($phone_id);
-    if($service1=='net' && $service2=='phone')
+    
+    if(substr($_GET['ara'],0,1) == 'a' && $service1=='net' && $service2=='phone')
+    	$mod->set_inst('bu_net_phone');
+    elseif (substr($_GET['ara'],0,1) == 'a' && $service1=='net')
+    	$mod->set_inst('bu_net');
+    elseif (substr($_GET['ara'],0,1) == 'a' && $service1=='phone')
+    	$mod->set_inst('bu_phone');
+    elseif($service1=='net' && $service2=='phone')
       $mod->set_inst('net_phone');
     else 
       $mod->set_inst(Connections::getService($con_id));
@@ -91,11 +100,12 @@ $streets = $sql->getUlic();
     <td>
     <select name="inst" id="inst" onchange="testModForm();">
       <option></option>
-      <?php 
+      <?php
       $inst = $mod->get_inst();
+      var_dump($mod->get_inst());
       foreach($inst_arr as $key=>$val)
       {
-        if($key==$inst)
+      	if($key==$inst)
           echo "<option value=\"$key\" selected>$val</option>";
         else
           echo "<option value=\"$key\">$val</option>";

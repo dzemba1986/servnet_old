@@ -250,7 +250,7 @@ if(!defined('MODYFICATION_CLASS'))
     }
     public function set_inst($inst)
     {
-      if($inst=='tv' || $inst=='net' ||$inst=='net_phone' || $inst=='phone' || $inst=='other')
+      if($inst=='tv' || $inst=='net' ||$inst=='net_phone' || $inst=='phone' || $inst=='other' || $inst=='bu_phone' || $inst=='bu_net' || $inst=='bu_net_phone')
       {
         $this->mod_inst = $inst;
         return true;
