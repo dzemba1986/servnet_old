@@ -167,6 +167,7 @@ if(!defined('INSTALLATIONS_LISTA_CLASS'))
       $sql = new MysqlListaPdo();
       $query = "
         SELECT  a.id as Id,
+        		a.ara_id as 'ARA',
                 a.start_date as 'Data umowy', 
                 DATE_ADD(a.start_date,INTERVAL 21 DAY) AS 'Deadline',
                 a.address as Adres,
