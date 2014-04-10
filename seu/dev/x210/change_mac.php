@@ -65,7 +65,6 @@ else
 <table>
 <tr><td>Stary mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
 <tr><td>Nowy mac</td><td><input type="text" name="mac2" value="<? echo ($mac2) ?>"/></td></tr>
-<tr><td>ip</td><td><input type="text" name="ip" value="<? echo ($ip) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>

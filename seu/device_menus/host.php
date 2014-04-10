@@ -21,12 +21,26 @@ function generateMenu($device)
   $port = '';
   $uplinks = $daddy->getUplinkConnections($device['dev_id']);
   $port = substr($uplinks[0]['parent_port'], 1);
-  $menu.="<li><a target=\"_blank\" href=\"dev/8000GS/add_internet.php?mac=$mac&port=$port&address=$loc&ip=$ip&speed=$speed&net_vlan=$vlan\">8000GS user_add</a></li>";
-  $menu.="<li><a target=\"_blank\" href=\"dev/8000GS/drop_internet.php?mac=$mac&net_vlan=$vlan&port=$port\">8000GS user_drop</a></li>";
-  $menu.="<li><a target=\"_blank\" href=\"dev/8000GS/change_mac.php?mac=$mac&net_vlan=$vlan&port=$port\">8000GS change mac</a></li>";
-  $menu.="</ul>";
+  
+  if($daddy->getDeviceModel($device['parent_device'])['id'] == '46'){
+  	
+  	$menu.="<li><a target=\"_blank\" href=\"dev/x210/add_internet.php?mac=$mac&port=$port&address=$loc&speed=$speed&net_vlan=$vlan\">x210 user_add</a></li>";
+  	$menu.="<li><a target=\"_blank\" href=\"dev/x210/drop_internet.php?mac=$mac&net_vlan=$vlan&port=$port\">x210 user_drop</a></li>";
+  	$menu.="<li><a target=\"_blank\" href=\"dev/x210/change_mac.php?mac=$mac&net_vlan=$vlan&port=$port\">x210 change mac</a></li>";
+  	$menu.="</ul>";
+  	
+  }
+  else{	
+  
+  	$menu.="<li><a target=\"_blank\" href=\"dev/8000GS/add_internet.php?mac=$mac&port=$port&address=$loc&ip=$ip&speed=$speed&net_vlan=$vlan\">8000GS user_add</a></li>";
+  	$menu.="<li><a target=\"_blank\" href=\"dev/8000GS/drop_internet.php?mac=$mac&net_vlan=$vlan&port=$port\">8000GS user_drop</a></li>";
+  	$menu.="<li><a target=\"_blank\" href=\"dev/8000GS/change_mac.php?mac=$mac&net_vlan=$vlan&port=$port\">8000GS change mac</a></li>";
+  	$menu.="</ul>";
+  }
   echo $menu;
 }
 ?>
 <?php
 generateMenu($device);
+
+//var_dump($daddy->getDeviceModel($device['parent_device'])['id']);
