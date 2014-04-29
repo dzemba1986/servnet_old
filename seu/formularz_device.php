@@ -26,7 +26,8 @@ function activateParentDevice(value)
 </script>
 <?php 
 $daddy = new Daddy();
-$parent_id = $daddy->getDeviceModel($device['parent_device'])['id'];
+$parent_id1 = $daddy->getDeviceModel($device['parent_device']);
+$parent_id = $parent_id1['id'];
 ?>
 
 <?php if($device['dev_id']): ?>
