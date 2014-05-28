@@ -24,12 +24,12 @@ function generateMenu($device)
   $parent_id1 = $daddy->getDeviceModel($device['parent_device']);
   $parent_id = $parent_id1['id'];
   
-  if($parent_id == '46')
+  if($parent_id == '46' || $parent_id == '47')
   	$port = substr($uplinks[0]['parent_port'], 8);
   else
   	$port = substr($uplinks[0]['parent_port'], 1);
   
-  if($parent_id == '46'){
+  if($parent_id == '46' || $parent_id == '47'){
   	
   	$menu.="<li><a target=\"_blank\" href=\"dev/x210/add_internet.php?mac=$mac&port=$port&address=$loc&speed=$speed&net_vlan=$vlan\">x210 user_add</a></li>";
   	$menu.="<li><a target=\"_blank\" href=\"dev/x210/drop_internet.php?mac=$mac&net_vlan=$vlan&port=$port\">x210 user_drop</a></li>";

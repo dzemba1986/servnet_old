@@ -34,24 +34,12 @@ shutdown<br>
 exit<br>
 no mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
 mac address-table static <b><?php echo($_REQUEST['mac2']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
-clear ip dhcp snooping binding
-
-interface ethernet <b>g<?php echo($port); ?></b><br>
-shutdown<br>
-no port security<br>
-exit<br>
-interface vlan <?php echo($net_vlan); ?><br>
-no bridge address <b><?php echo($_REQUEST['mac']); ?></b><br>
-bridge address <b><?php echo($_REQUEST['mac2']); ?></b> permanent ethernet <b>g<?php echo($port); ?></b><br>
-exit<br>
-interface ethernet <b>g<?php echo($port); ?></b><br>
-port security mode lock<br>
-port security discard<br>
+clear ip dhcp snooping binding <b><?php echo($ip);?></b></br>
+interface ethernet <b>port1.0.<?php echo($port); ?></b><br>
 no shutdown<br>
 exit<br>
 exit<br>
-copy r s<br>
-y<br>
+wr<br>
 <?php
 //*******************************************************************************
 }
@@ -65,6 +53,7 @@ else
 <table>
 <tr><td>Stary mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
 <tr><td>Nowy mac</td><td><input type="text" name="mac2" value="<? echo ($mac2) ?>"/></td></tr>
+<tr><td><input type="hidden" name="ip" value="<? echo ($ip) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>
