@@ -52,6 +52,11 @@ rate-limit 600000<br>");
 if($_REQUEST['wygeneruj'])
 {
 ?>
+interface ethernet <b>g<?php echo($port); ?></b><br>
+no service-acl input<br>
+exit<br>
+no ip access-list <b>user<?php echo($port); ?></b><br>
+no ip access-list <b>user<?php echo($port); ?></b><br>
 interface vlan <?php echo($net_vlan); ?><br>
 bridge address <b><?php echo($_REQUEST['mac']); ?></b> permanent ethernet <b>g<?php echo($port); ?></b><br>
 exit<br>

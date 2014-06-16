@@ -56,6 +56,7 @@ if($_REQUEST['wygeneruj'])
 {
 ?>
 interface <b>port1.0.<?php echo($port); ?></b><br>
+shutdown<br>
 no switchport port-security<br>
 switchport port-security violation protect<br>
 switchport port-security maximum 0<br>
