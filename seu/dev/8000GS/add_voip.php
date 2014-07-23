@@ -28,6 +28,8 @@ exit<br>
 
 interface ethernet <b>g<?php echo($port); ?></b><br>
 shutdown<br>
+switchport trunk allowed vlan remove all<br>
+switchport mode access<br>
 ! Podac lokalizację bramki<br>
 description <b><?php echo($description); ?></b><br>
 ! Podac nazwe ACLki dla klienta<br>

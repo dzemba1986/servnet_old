@@ -68,6 +68,8 @@ permit-udp 0.0.0.0 0.0.0.0 68 any 67<br>
 exit<br>
 interface ethernet <b>g<?php echo($port); ?></b><br>
 shutdown<br>
+switchport trunk allowed vlan remove all<br>
+switchport mode access<br>
 <?php 
 echo "switchport access vlan $net_vlan<br>\n";
 ?>
