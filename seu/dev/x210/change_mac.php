@@ -31,15 +31,18 @@ if($_REQUEST['wygeneruj'])
 ?>
 interface <b>port1.0.<?php echo($port); ?></b><br>
 shutdown<br>
+no switchport port-security</br>
 exit<br>
 no mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
 mac address-table static <b><?php echo($_REQUEST['mac2']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
+exit</br>
 clear ip dhcp snooping binding <b><?php echo($ip);?></b></br>
-interface ethernet <b>port1.0.<?php echo($port); ?></b><br>
-no shutdown<br>
-exit<br>
-exit<br>
-wr<br>
+configure terminal</br>
+interface <b>port1.0.<?php echo($port); ?></b></br>
+switchport port-security</br>
+no shutdown</br>
+exit</br>
+wr</br>
 <?php
 //*******************************************************************************
 }
