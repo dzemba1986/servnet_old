@@ -128,7 +128,7 @@ if(! defined('MYSQL_PDO_CORE'))
         exit();
       }
       $this->result = array();
-      while($this->result[] =  $stmt->fetchObject($class, $args))
+      while($this->result[] =  $stmt->fetchObject($class))
           {};
       if (empty($this->result))
         return true;		//jezeli to bylo insert update delete drop lub wynik był pusty

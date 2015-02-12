@@ -885,6 +885,6 @@ Brak instalacji
 </div>
 </center>
 </div>
-<? endif;?>
+<?php endif;?>
 </body>
 </html>

@@ -407,7 +407,8 @@ if(!defined('HOST_CLASS'))
     private function generateDhcpFiles()
     {
       require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
-      $files_path = '/home/ftp/www/servnet/.dhcp_files';
+      $files_path = '/usr/share/nginx/html/servnet/.dhcp_files';
+      //$files_path = '/home/ftp/www/servnet/.dhcp_files';
 
       //deleting old files
       $sysout = system("rm $files_path/regions/*");
@@ -516,7 +517,8 @@ if(!defined('HOST_CLASS'))
       private function generateDhcpFiles2()
       {
         require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
-        $files_path = '/home/ftp/www/servnet/.dhcp_files';
+        $files_path = '/usr/share/nginx/html/servnet/.dhcp_files';
+        //$files_path = '/home/ftp/www/servnet/.dhcp_files';
 
         //deleting old files
         $sysout = system("rm $files_path/regions/*");
@@ -634,7 +636,8 @@ if(!defined('HOST_CLASS'))
         private function generateDhcpFiles3()
         {
         	require(SEU_ABSOLUTE.'/include/classes/podsiec.php');
-        	$files_path = '/home/ftp/www/servnet/.dhcp_files';
+        	$files_path = '/usr/share/nginx/html/servnet/.dhcp_files';
+      		//$files_path = '/home/ftp/www/servnet/.dhcp_files';
         
         	//deleting old files
         	$sysout = system("rm $files_path/regions/*");

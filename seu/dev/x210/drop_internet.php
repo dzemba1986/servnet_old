@@ -70,7 +70,7 @@ else
 <center>
 <br><h3>Generator konfiguracji przelacznika dla usunięcia abonenta internetowego</h3><br>
 <table>
-<tr><td>mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
+<tr><td>mac</td><td><input type="text" name="mac" value="<?php echo ($mac) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>

@@ -8,7 +8,7 @@ if(! defined('PATH_SEU_CONF'))
 define('PATH_SEU_CONF', true);
 
 if( !defined('ROOT'))
-  define('ROOT', '/home/ftp/www/servnet');
+  define('ROOT', '/usr/share/nginx/html/servnet');
 require(ROOT.'/path.php');
 
 if( !defined('SEU_ABSOLUTE'))

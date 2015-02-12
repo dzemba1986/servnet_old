@@ -2,6 +2,7 @@
 
 <html>
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>Add internet</title>
 </head>
 <body>
@@ -26,24 +27,6 @@ $porty = array('first' => '1', 'last' => '47');
 //*******************************************************************
 
 $predkosc_str = array( 
-#			'4' =>
-#traffic-shape 4096 409600\n<br>
-#rate-limit 6500<br>",
-#			'8' =>
-#traffic-shape 8192 819200\n<br>
-#rate-limit 6900<br>",
-			'30' =>
-"traffic-shape 30720 307200\n<br>
-rate-limit 81500<br>",
-#			'100' =>
-#"traffic-shape 102400 1024000\n<br>
-#rate-limit 100000<br>",
-#			'200' =>
-#"traffic-shape 204800 2048000\n<br>
-#rate-limit 305000<br>", 
-#			'250' =>
-#"traffic-shape 250000 2500000 \n<br>
-#rate-limit 305002<br>")
 			'300' =>
 "traffic-shape 307200 3072000 \n<br>
 rate-limit 600000<br>");
@@ -94,9 +77,9 @@ else
 <center>
 <br><h3>Generator konfiguracji przelacznika dla internetu</h3><br>
 <table>
-<tr><td>mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
-<tr><td>ip</td><td><input type="text" name="ip" value="<? echo ($ip) ?>"/></td></tr>
-<tr><td>description</td><td><input type="text" name="description" value="<? echo ($address) ?>"/></td></tr>
+<tr><td>mac</td><td><input type="text" name="mac" value="<?php echo ($mac) ?>"/></td></tr>
+<tr><td>ip</td><td><input type="text" name="ip" value="<?php echo ($ip) ?>"/></td></tr>
+<tr><td>description</td><td><input type="text" name="description" value="<?php echo ($address) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>
@@ -119,7 +102,7 @@ else
     echo"<option value=\"$i\">$i</option>"; 
 }
 ?></select></td></tr>
-<tr><td>predkosc</td><td><select name="predkosc">
+<tr><td>prędkość</td><td><select name="predkosc">
 <?php foreach($predkosc_str as $key=>$wartosc)
 {
   if($speed==$key)

@@ -47,8 +47,8 @@ else
 <center>
 <br><h3>Generator zmiany adresu mac abonenta</h3><br>
 <table>
-<tr><td>Stary mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
-<tr><td>Nowy mac</td><td><input type="text" name="mac2" value="<? echo ($mac2) ?>"/></td></tr>
+<tr><td>Stary mac</td><td><input type="text" name="mac" value="<?php echo ($mac) ?>"/></td></tr>
+<tr><td>Nowy mac</td><td><input type="text" name="mac2" value="<?php echo ($mac2) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>

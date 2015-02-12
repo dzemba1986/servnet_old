@@ -197,7 +197,7 @@ class Reaport
         if(!$order)
           $order='subnet';
         if($order==="subnet" || $order=="netmask" || $order=="unused" || $order=="used") 
-          $this->keySort(&$result, $order, $direction);
+          $this->keySort($result, $order, $direction);
       }
       return $result;
     }

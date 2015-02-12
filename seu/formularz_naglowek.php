@@ -6,7 +6,7 @@
   <meta name="Keywords" content=" [wstaw tu slowa kluczowe] ">
   <meta name="Author" content="Przemysław Koltermann">
 
-<title><? if(!isset($_GET['device']))
+<title><?php if(!isset($_GET['device']))
  	echo"Dodawanie urządzeń";
 else
 	echo"Edycja urządzenia";
@@ -20,7 +20,7 @@ else
 <script language="JavaScript" SRC="js/modelForm.js"></script>
 <script language="JavaScript" SRC="js/portForm.js"></script>
 <script language="JavaScript" SRC="js/uplink.js"></script>
-<? if(!isset($_GET['device']))
+<?php if(!isset($_GET['device']))
 	echo("<script language=\"JavaScript\" SRC=\"js/dodaj.js\"></script>");
   else
 {
@@ -37,7 +37,7 @@ else
 <div id="gora"></div>
 <div id="tresc">
 <div id="formularz">
-<? if(!isset($_GET['device']))
+<?php if(!isset($_GET['device']))
 {	?>
 <form method="post" action="">
 <select name="device_type"> 
@@ -52,7 +52,7 @@ else
 	</select>
 <input type="submit" name="zmien_typ" value="zmień typ">
 </form>
-<? 
+<?php 
 } else
 	echo("<b>$device_type</b>"); 
 

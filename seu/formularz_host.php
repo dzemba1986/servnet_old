@@ -1,11 +1,11 @@
 <?php require("security.php"); ?>
 <tr>
 	<td>Numer mieszkania *</td>
-	<td><input class="" type="text" name="nr_mieszkania" value="<? echo($device['nr_mieszkania']); ?>"></td>
+	<td><input class="" type="text" name="nr_mieszkania" value="<?php echo($device['nr_mieszkania']); ?>"></td>
 </tr>
 <tr>
 	<td>Id z listy *</td>
-	<td><input class="" type="text" name="con_id" value="<? echo($device['con_id']); ?>"></td>
+	<td><input class="" type="text" name="con_id" value="<?php echo($device['con_id']); ?>"></td>
 </tr>
 <tr>
 	<td>Pakiet *</td>
@@ -24,11 +24,11 @@
 </tr>
 <tr>
 	<td>Data uruchomienia</td>
-	<td><input class="" type="text" name="data_uruchomienia" value="<? echo($device['start']); ?>"> dd.mm.yy</td>
+	<td><input class="" type="text" name="data_uruchomienia" value="<?php echo($device['start']); ?>"> dd.mm.yy</td>
 </tr>
 <?php if($device['dev_id']){ ?>
 <tr>
 	<td>Data zakonczenia</td>
-	<td><input class="" type="text" name="data_zakonczenia" value="<? echo($device['stop']); ?>"> dd.mm.yy</td>
+	<td><input class="" type="text" name="data_zakonczenia" value="<?php echo($device['stop']); ?>"> dd.mm.yy</td>
 </tr>
 <?php }

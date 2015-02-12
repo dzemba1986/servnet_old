@@ -6,7 +6,7 @@ if(! defined('PATH_MAIN_CONF'))
   // Defining Path constants
   define('PATH_MAIN_CONF', true);
   if( !defined('ROOT'))
-    define('ROOT', '/home/ftp/www/servnet');
+    define('ROOT', '/usr/share/nginx/html/servnet');
   if( !defined('CORE_ABSOLUTE'))
     define('CORE_ABSOLUTE', ROOT."/core");
   if( !defined('SEU_ABSOLUTE'))

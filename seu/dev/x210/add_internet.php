@@ -2,6 +2,7 @@
 
 <html>
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>Add internet</title>
 </head>
 <body>
@@ -81,8 +82,8 @@ else
 <center>
 <br><h3>Generator konfiguracji przelacznika dla internetu</h3><br>
 <table>
-<tr><td>mac</td><td><input type="text" name="mac" value="<? echo ($mac) ?>"/></td></tr>
-<tr><td>description</td><td><input type="text" name="description" value="<? echo ($address) ?>"/></td></tr>
+<tr><td>mac</td><td><input type="text" name="mac" value="<?php echo ($mac) ?>"/></td></tr>
+<tr><td>description</td><td><input type="text" name="description" value="<?php echo ($address) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
   <td>
@@ -105,7 +106,7 @@ else
     echo"<option value=\"$i\">$i</option>"; 
 }
 ?></select></td></tr>
-<tr><td>predkosc</td><td><select name="predkosc">
+<tr><td>predkość</td><td><select name="predkosc">
 <?php foreach($predkosc_str as $key=>$wartosc)
 {
   if($speed==$key)

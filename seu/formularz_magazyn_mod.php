@@ -11,17 +11,17 @@ $device_type = $device['device_type']; ?>
 </tr>
 <tr bgcolor="#D8D8D8">
 	<td>Nazwa inna</td>
-	<td><input class="" type="hidden" name="dev_id" value="<? echo($device['dev_id']); ?>">
-		<input class="" type="text" name="other_name" value="<? echo($device['other_name']); ?>"></td>
+	<td><input class="" type="hidden" name="dev_id" value="<?php echo($device['dev_id']); ?>">
+		<input class="" type="text" name="other_name" value="<?php echo($device['other_name']); ?>"></td>
 </tr>
 <tr bgcolor="#D8D8D8">
 	<td>Opis urządzenia</td>
-	<td><textarea class="" type="text" name="opis" style="width:380px"><? echo($device['opis']); ?></textarea>
+	<td><textarea class="" type="text" name="opis" style="width:380px"><?php echo($device['opis']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td>Opis zdarzenia</td>
-	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><? echo($device['opis_historii']); ?></textarea>
+	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><?php echo($device['opis_historii']); ?></textarea>
 	</td>
 </tr>
 <tr>

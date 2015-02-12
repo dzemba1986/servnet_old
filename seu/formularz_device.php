@@ -26,8 +26,8 @@ function activateParentDevice(value)
 </script>
 <?php 
 $daddy = new Daddy();
-$parent_id1 = $daddy->getDeviceModel($device['parent_device']);
-$parent_id = $parent_id1['id'];
+//$parent_id1 = $daddy->getDeviceModel($device['parent_device']);
+//$parent_id = $parent_id1['id'];
 ?>
 
 <?php if($device['dev_id']): ?>
@@ -54,7 +54,7 @@ else :?>
 <?php endif; ?>
 <tr>
 	<td class="tabela_danych_wejsciowych_label" style="background: gray; border: 1px solid black; border-right: none;">Adres MAC *</td>
-	<td style="background: gray; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<?php echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
+	<td style="background: gray; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<? echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
 	</td>
 </tr>
 
@@ -84,22 +84,22 @@ else :?>
 </tr>
 <tr>
 	<td>Nazwa inna</td>
-	<td><input class="" type="text" name="other_name" value="<? echo($device['other_name']); ?>"></td>
+	<td><input class="" type="text" name="other_name" value="<?php echo($device['other_name']); ?>"></td>
 </tr>
 <?php if($device_type!='Virtual'):?>
 <tr>
 	<td>Brama domyślna</td>
-	<td><input class="" type="text" name="gateway" id="gateway" value="<? echo($device['gateway']); ?>"></td>
+	<td><input class="" type="text" name="gateway" id="gateway" value="<?php echo($device['gateway']); ?>"></td>
 </tr>
 <?php endif;?>
 <tr bgcolor="#D8D8D8">
 	<td>Opis urządzenia</td>
-	<td><textarea class="" type="text" name="opis" style="width:380px"><? echo($device['opis']); ?></textarea>
+	<td><textarea class="" type="text" name="opis" style="width:380px"><?php echo($device['opis']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td>Opis zdarzenia</td>
-	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><? echo($device['opis_historii']); ?></textarea>
+	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><?php echo($device['opis_historii']); ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -153,12 +153,12 @@ else :?>
 </tr>
 <tr>
 	<td>Nr bloku *</td>
-	<td><input class="" type="text" name="blok" value="<? echo($device['nr_bloku']); ?>" ></td>
+	<td><input class="" type="text" name="blok" value="<?php echo($device['nr_bloku']); ?>" ></td>
 </tr>
 <?php if($device_type!='Host'){ ?>
 <tr>
 	<td>Klatka schodowa</td>
-	<td><input class="" type="text" name="klatka" value="<? echo($device['klatka']); ?>"></td>
+	<td><input class="" type="text" name="klatka" value="<?php echo($device['klatka']); ?>"></td>
 </tr>
 <?php } ?>
 <tr bgcolor="#D8D8D8">

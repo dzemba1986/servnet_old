@@ -2,7 +2,7 @@
 //if(! defined('NESTED'))
 //  die('Nieprawidłowe wywołanie skryptu!');
   if( !defined('ROOT'))
-    define('ROOT', '/home/ftp/www/servnet');
+    define('ROOT', '/usr/share/nginx/html/servnet');
   require(ROOT.'/path.php');
   // Defining Classes
   if(! defined('MYSQL_BOA'))

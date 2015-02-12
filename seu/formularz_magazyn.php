@@ -73,7 +73,7 @@ echo"
 	<td>".$device['sn']."</td>
 	<td>".$device['mac']."</td>
 	<td>".$device['other_name']."</td>
-	<td><a href=\"modyfikuj_magazyn.php?device=".$device['dev_id']."\">Modyfikuj</a> <a href=\"modyfikuj?device=".$device['dev_id']."&magazyn=true\">Zamontuj</a></td>
+	<td><a href=\"modyfikuj_magazyn.php?device=".$device['dev_id']."\">Modyfikuj</a> <a href=\"modyfikuj.php?device=".$device['dev_id']."&magazyn=true\">Zamontuj</a></td>
 	</tr>
 "
 ?>

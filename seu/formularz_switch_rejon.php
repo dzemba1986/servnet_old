@@ -1,7 +1,7 @@
 <?php require("security.php"); ?>
 <tr>
 	<td>Numer seryjny *</td>
-	<td><input class="" type="text" name="sn" value="<? echo($device['sn']); ?>" <?php if($device['dev_id']) echo 'disabled';?>></td>
+	<td><input class="" type="text" name="sn" value="<?php echo($device['sn']); ?>" <?php if($device['dev_id']) echo 'disabled';?>></td>
 </tr>
 <tr>
 	<td>Producent *</td>

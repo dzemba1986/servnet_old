@@ -132,4 +132,4 @@ switch($tryb)
 define('LIST_MENU', true);
 require('include/html/list_menu.php'); 
 ?>
-<?
+<?php

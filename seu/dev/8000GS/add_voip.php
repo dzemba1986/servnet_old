@@ -52,8 +52,8 @@ else
 <center>
 <br><h3>Generator konfiguracji przelacznika dla voip</h3><br>
 <table>
-<tr><td>ip</td><td><input type="text" name="ip" value="<? echo ($ip) ?>"/></td></tr>
-<tr><td>description</td><td><input type="text" name="description" value="<? echo ($description) ?>"/></td></tr>
+<tr><td>ip</td><td><input type="text" name="ip" value="<?php echo ($ip) ?>"/></td></tr>
+<tr><td>description</td><td><input type="text" name="description" value="<?php echo ($description) ?>"/></td></tr>
 <tr><td>port</td><td><select name="port">
 <?php for($i=$porty['first']; $i<=$porty['last']; $i++)
 {
