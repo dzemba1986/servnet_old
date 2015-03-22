@@ -19,16 +19,15 @@ $porty = array('first' => '1', 'last' => '47');
 if($_REQUEST['wygeneruj'])
 {
 ?>
-interface ethernet <b>g<?php echo($port); ?></b><br>
+interface <b>port1.0.<?php echo($port); ?></b><br>
 shutdown<br>
+no access-group voip<?php echo($port); ?><br>
 switchport access vlan 555<br>
-no service-acl input<br>
 no shutdown<br>
 exit<br>
-no ip access-list <b>voip<?php echo($port); ?></b><br>
+no access-list hardware voip<?php echo($port); ?><br>
 exit<br>
-copy r s<br>
-y<br>
+wr<br>
 <?php
 //*******************************************************************************
 }

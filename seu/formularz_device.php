@@ -26,8 +26,8 @@ function activateParentDevice(value)
 </script>
 <?php 
 $daddy = new Daddy();
-//$parent_id1 = $daddy->getDeviceModel($device['parent_device']);
-//$parent_id = $parent_id1['id'];
+$parent_id1 = $daddy->getDeviceModel($device['parent_device']);
+$parent_id = $parent_id1['id'];
 ?>
 
 <?php if($device['dev_id']): ?>
@@ -73,7 +73,7 @@ else :?>
 </div>
 <input type="button" value="dodaj" onclick="dodajPole()">
 <script type="text/javascript">
-<? if(!$device['dev_id'])
+<?php if(!$device['dev_id'])
 	echo("dodajPole();");
    else
         echo("pobierzAdresy('".$device['dev_id']."');");

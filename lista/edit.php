@@ -315,14 +315,14 @@ $dev_id = $daddy->getDevId($connection1['id']);
 <form action="edit.php?tryb=edit" method="post">
 <table class="tables">
   <tr>
-    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/dodaj_z_listy.php?con_id=<?php echo($connection1['id']);?>">Dodaj do bazy</a></center></td>
+    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://seu-serwis.wtvk.pl/dodaj_z_listy.php?con_id=<?php echo($connection1['id']);?>">Dodaj do bazy</a></center></td>
   </tr>
 </table>
 </form>
 <?php else: ?>
 <table class="tables">
   <tr>
-    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://172.20.7.250/tree.php?con_id=<?php echo($connection1['id']);?>">SEU</a></center></td>
+    <td colspan="3"><center><a target="_blank" style="color: black; text-decoration:none; font-weight:bold; font-size: 10px; font-family: Verdana;" href="https://seu-serwis.wtvk.pl/tree.php?con_id=<?php echo($connection1['id']);?>">SEU</a></center></td>
   </tr>
 </table>
 <?php endif;?>

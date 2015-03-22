@@ -15,41 +15,39 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 </head>
 <body>
 <?php
+
+$predkosc_str = array(
+		'300' =>
+		"no service-policy input 300Mbps<br>");
+
 foreach ( $hosty as $index => $par_hosta )
   {
 	if ($par_hosta['device_type']=='Host'){
 		?>
-		interface vlan <?php echo $par_hosta['vlan']; ?><br>
-		no bridge address <b><?php echo $par_hosta['mac']; ?></b><br>
+		no mac address-table static <b><?php echo $par_hosta['mac']; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
+		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
+		no switchport port-security<br>
+		<b><?php echo($predkosc_str[$predkosc]); ?></b>
+		no egress-rate-limit<br>
+		no access-group anyuser<br>
+		switchport access vlan 555<br>
 		exit<br>
-		interface ethernet <b><?php echo $par_hosta['parent_port']; ?></b><br>
-		shutdown<br>
-		no service-acl input<br>
-		no traffic-shape<br>
-		no rate-limit<br>
-		no port security<br>
-		sw a v 555<br>
-		no shutdown<br>
-		exit<br>
-		no ip access-list <b>user<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
-		no ip access-list <b>user<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
 		<?php
 	} else {?>
-		interface ethernet <b><?php echo $par_hosta['parent_port']; ?></b><br>
+		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		shutdown<br>
-		sw a v 555<br>
-		no service-acl input<br>
+		no access-group voip<?php echo substr($par_hosta['parent_port'],8); ?><br>
+		switchport access vlan 555<br>
 		no shutdown<br>
 		exit<br>
-		no ip access-list <b>voip<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
+		no access-list hardware voip<?php echo substr($par_hosta['parent_port'],8); ?><br>
+		exit<br>
 		<?php	
 		}
-	
   }  
 ?> 
 exit<br>
-copy r s<br>
-y
+wr<br>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 </body>

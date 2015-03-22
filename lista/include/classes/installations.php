@@ -184,11 +184,12 @@ if(!defined('INSTALLATIONS_LISTA_CLASS'))
                 a.service_configuration as 'Konfiguracja usługi', 
                 a.resignation_date as 'Rezygnacja',
                 c.invoiced as 'Zaksięgowano',
-                IF(a.start_date > c.socket_installation_date, 'TAK', null) as 'Już zaksięgowano'
+                IF(a.start_date > c.socket_installation_date, 'TAK', null) as 'Już zaksięgowano',
+                IF(a.start_date >= '$date' and a.start_date > c.socket_installation_date, 'TAK', null) as 'Ponow. podł.'
                   FROM Connections a 
                   JOIN Installations c
                   ON (a.service=c.type AND a.localization=c.localization)
-      						WHERE c.invoiced='$date'
+      						WHERE c.invoiced='$date' OR (a.start_date >= '$date' and a.start_date > c.socket_installation_date)
                   ORDER BY id ASC;";
       $result = $sql->query($query, null);
       if(count($result)<1)

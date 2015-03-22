@@ -61,7 +61,7 @@ else :?>
 </div>
 <input type="button" value="dodaj" onclick="dodajPole()">
 <script type="text/javascript">
-<? if(!$device['dev_id'])
+<?php if(!$device['dev_id'])
 	echo("dodajPole();");
    else
         echo("pobierzAdresy('".$device['dev_id']."');");
@@ -72,22 +72,22 @@ else :?>
 </tr>
 <tr bgcolor="#D8D8D8">
 	<td>Nazwa inna</td>
-	<td><input class="" type="text" name="other_name" value="<? echo($device['other_name']); ?>"></td>
+	<td><input class="" type="text" name="other_name" value="<?php echo($device['other_name']); ?>"></td>
 </tr>
 <?php if($device_type!='Virtual'):?>
 <tr>
 	<td>Brama domyślna</td>
-	<td><input class="" type="text" name="gateway" id="gateway" value="<? echo($device['gateway']); ?>"></td>
+	<td><input class="" type="text" name="gateway" id="gateway" value="<?php echo($device['gateway']); ?>"></td>
 </tr>
 <?php endif;?>
 <tr bgcolor="#D8D8D8">
 	<td>Opis urządzenia</td>
-	<td><textarea class="" type="text" name="opis" style="width:380px"><? echo($device['opis']); ?></textarea>
+	<td><textarea class="" type="text" name="opis" style="width:380px"><?php echo($device['opis']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td>Opis zdarzenia</td>
-	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><? echo($device['opis_historii']); ?></textarea>
+	<td><textarea class="" type="text" name="opis_historii" style="width:380px"><?php echo($device['opis_historii']); ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -111,7 +111,7 @@ else :?>
 	<?php if (!$centralny)
 	if ($device['parent_device']){ ?>
 	<script type="text/javascript">
-	    getHostUplinkWithPort(PARENT_DEVICE, '<? echo("g".$device['parent_port']); ?>');
+	    getHostUplinkWithPort(PARENT_DEVICE, '<?php echo("g".$device['parent_port']); ?>');
 	</script>
 	<?php } ?></td>
 
@@ -131,12 +131,12 @@ else :?>
 </tr>
 <tr>
 	<td>Nr bloku *</td>
-	<td><input class="" type="text" name="blok" value="<? echo($device['nr_bloku']); ?>" ></td>
+	<td><input class="" type="text" name="blok" value="<?php echo($device['nr_bloku']); ?>" ></td>
 </tr>
 <?php if($device_type!='Host'){ ?>
 <tr bgcolor="#D8D8D8">
 	<td>Klatka schodowa</td>
-	<td><input class="" type="text" name="klatka" value="<? echo($device['klatka']); ?>"></td>
+	<td><input class="" type="text" name="klatka" value="<?php echo($device['klatka']); ?>"></td>
 </tr>
 <?php } ?>
 <tr bgcolor="#D8D8D8">
