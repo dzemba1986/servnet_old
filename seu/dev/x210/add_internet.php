@@ -31,8 +31,8 @@ $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array( 
 			'300' =>
-"traffic-shape 307200 3072000 \n<br>
-rate-limit 600000<br>");
+"egress-rate-limit 304000k \n<br>
+service-policy input 300Mbps<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
