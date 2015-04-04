@@ -14,3 +14,8 @@ sess_*
 ##################
 
 *.swp
+
+# DHCP file #
+#############
+.dhcp_files/regions/.update_notify
+#.dhcp_files/regions/.placeholder
