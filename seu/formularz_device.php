@@ -54,7 +54,7 @@ else :?>
 <?php endif; ?>
 <tr>
 	<td class="tabela_danych_wejsciowych_label" style="background: gray; border: 1px solid black; border-right: none;">Adres MAC *</td>
-	<td style="background: gray; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<? echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
+	<td style="background: gray; border: 1px solid black; border-left: none;"><input class="" type="text" name="mac" id="mac" value="<?php echo($device['mac']); ?>" <?php if(isset($_GET['device']) && !$_GET['magazyn'] && $device['device_type']!='Host' && $device['mac']) echo "readonly"; ?>>
 	</td>
 </tr>
 
