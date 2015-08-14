@@ -23,8 +23,13 @@ $predkosc_str = array(
 foreach ( $hosty as $index => $par_hosta )
   {
 	if ($par_hosta['device_type']=='Host'){
+		
+		$mac1 = $par_hosta['mac'];
+		$mac2 = str_replace(':', '', $mac1);
+		$mac = join('.', str_split($mac2, 4)); //zmiana formaru dla x210
+		
 		?>
-		no mac address-table static <b><?php echo $par_hosta['mac']; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
+		no mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		no switchport port-security<br>
 		<b><?php echo($predkosc_str[$predkosc]); ?></b>
@@ -41,7 +46,6 @@ foreach ( $hosty as $index => $par_hosta )
 		no shutdown<br>
 		exit<br>
 		no access-list hardware voip<?php echo substr($par_hosta['parent_port'],8); ?><br>
-		exit<br>
 		<?php	
 		}
   }  

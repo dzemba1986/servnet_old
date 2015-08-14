@@ -583,61 +583,46 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
       {
         case 'pending_installations':
           $inner_query="
-            SELECT	a.id as connection_id,
-                          c.address,
-                          c.wire_length,
-                          c.wire_installation_date,
-                          DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
-                          c.socket_installation_date,
-                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
-                          c.wire_installer,
-                          c.socket_installer,
-                          c.type, 
-                          a.last_modyfication as net_modyf,
-                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
-                            FROM Installations c
-                            LEFT JOIN Connections a 
-                            ON c.localization=a.localization AND a.service=c.type
-                            WHERE (c.wire_installation_date is null AND c.socket_installation_date is not null) 
-                              OR (c.socket_installation_date is null AND c.wire_installation_date is not null)";
+            SELECT c.address,
+                   c.wire_length,
+                   c.wire_installation_date,
+                   DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                   c.socket_installation_date,
+                   DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                   c.wire_installer,
+                   c.socket_installer,
+                   c.type
+                   FROM Installations c
+                   WHERE (c.wire_installation_date is null AND c.socket_installation_date is not null) 
+                   OR (c.socket_installation_date is null AND c.wire_installation_date is not null)";
           break;
         case 'done_installations':
           $inner_query="
-            SELECT	a.id as connection_id,
-                          c.address,
-                          c.wire_length,
-                          c.wire_installation_date,
-                          DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
-                          c.socket_installation_date,
-                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
-                          c.wire_installer,
-                          c.socket_installer,
-                          c.type, 
-                          a.last_modyfication as net_modyf,
-                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
-                            FROM Installations c
-                            LEFT JOIN Connections a 
-                            ON c.localization=a.localization AND a.service=c.type
-                            WHERE c.wire_installation_date is not null AND c.socket_installation_date is not null";
+            SELECT c.address,
+                   c.wire_length,
+                   c.wire_installation_date,
+                   DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                   c.socket_installation_date,
+                   DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                   c.wire_installer,
+                   c.socket_installer,
+                   c.type
+				   FROM Installations c
+				   WHERE c.wire_installation_date is not null AND c.socket_installation_date is not null";
           break;
         case 'all_installations':
           $inner_query="
-            SELECT	a.id as connection_id,
-                          c.address,
-                          c.wire_length,
-                          c.wire_installation_date,
-                          DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
-                          c.socket_installation_date,
-                          DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
-                          c.wire_installer,
-                          c.socket_installer,
-                          c.type, 
-                          a.last_modyfication as net_modyf,
-                          DATE_FORMAT(a.last_modyfication, '%d.%m.%y %H:%i') as _net_modyf
-                            FROM Installations c
-                            LEFT JOIN Connections a 
-                            ON c.localization=a.localization AND a.service=c.type
-                            WHERE (c.wire_installation_date is not null OR c.socket_installation_date is not null) $search";
+            SELECT c.address,
+                   c.wire_length,
+                   c.wire_installation_date,
+                   DATE_FORMAT(c.wire_installation_date, '%d.%m.%y') as _wire_installation_date, 
+                   c.socket_installation_date,
+                   DATE_FORMAT(c.socket_installation_date, '%d.%m.%y') as _socket_installation_date, 
+                   c.wire_installer,
+                   c.socket_installer,
+                   c.type
+                   FROM Installations c
+                   WHERE (c.wire_installation_date is not null OR c.socket_installation_date is not null) $search";
           break;
       }
       //echo $query;

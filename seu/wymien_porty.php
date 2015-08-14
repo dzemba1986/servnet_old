@@ -63,7 +63,7 @@ $porty_po_options = "<option value=\"\"></option>";
 foreach($porty_po as $key=>$port)
 {
 	$nazwa = generateName($port, $po);
-	$porty_po_options = $porty_po_options."<option value=\"".$port."\">".$port." - $nazwa</option>";
+	$porty_po_options = $porty_po_options."<option value=\"".$port."\">".$port."</option>";
 }
 
 

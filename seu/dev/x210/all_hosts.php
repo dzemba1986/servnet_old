@@ -18,6 +18,11 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 foreach ( $hosty as $index => $par_hosta )
   {
 	if ($par_hosta['device_type']=='Host'){
+		
+		$mac1 = $par_hosta['mac'];
+		$mac2 = str_replace(':', '', $mac1);
+		$mac = join('.', str_split($mac2, 4)); //zmiana formaru dla x210
+		
 		?>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		shutdown<br>
@@ -31,8 +36,7 @@ foreach ( $hosty as $index => $par_hosta )
 		switchport access vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		no shutdown<br>
 		exit<br>
-		mac address-table static <b><?php echo $par_hosta['mac']; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
-		exit<br>
+		mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		<?php
 	} else {?>
 		access-list hardware <b>voip<?php echo substr($par_hosta['parent_port'],8); ?></b><br>
@@ -50,12 +54,12 @@ foreach ( $hosty as $index => $par_hosta )
 		access-group <b>voip<?php echo substr($par_hosta['parent_port'],8); ?></b><br>
 		no shutdown<br>
 		exit<br>
-		exit<br>
 		<?php	
 		}
 	
   }  
 ?> 
+exit<br>
 wr<br>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
