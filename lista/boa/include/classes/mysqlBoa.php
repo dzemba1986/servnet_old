@@ -3,7 +3,7 @@ class MysqlBoa extends MysqlMain
 {
   public function connect()
   {
-    return $this->connect_pl('localhost', 'internet', 'szczurek20P4', 'internet');
+    return $this->connect_pl('10.111.233.9', 'internet', 'b@zAd@nych', 'internet');
   }
   //funkcja query zwraca:
   //false jeżeli wynik zapytania był pusty lub zapytanie nie zostało wykonane

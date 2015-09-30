@@ -6,7 +6,7 @@ if(!defined('MYSQL_SEU_CLASS'))
   {
     public function connect()
     {
-      return $this->connect_pl('localhost', 'admin', 'WyGn2jEw0', 'siec');
+      return $this->connect_pl('10.111.233.9', 'admin', 'b@zAd@nych', 'siec');
     }
   }
 }

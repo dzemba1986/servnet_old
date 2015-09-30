@@ -7,7 +7,7 @@ if(!defined('MYSQL_LISTA_PDO_CLASS'))
   {
     public function connect()
     {
-      return $this->connect_pl('localhost', 'internet', 'szczurek20P4', 'internet');
+      return $this->connect_pl('10.111.233.9', 'internet', 'b@zAd@nych', 'internet');
     }
   }
 }

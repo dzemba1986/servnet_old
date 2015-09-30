@@ -9,7 +9,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
     public $result;
     public function connect()
     {
-      $sql = mysql_connect('localhost', 'internet', 'szczurek20P4')or die(mysql_error());			
+      $sql = mysql_connect('10.111.233.9', 'internet', 'b@zAd@nych')or die(mysql_error());			
   //    $sql = mysql_connect('localhost', 'internet_dev', 'szczurek20P4')or die(mysql_error());			
       if($this->sql != $sql)
       {

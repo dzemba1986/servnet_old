@@ -9,7 +9,7 @@ if(!defined('DADDY_CLASS'))
   {
     public function connect()
     {
-      return $this->connect_pl('localhost', 'admin', 'WyGn2jEw0', 'siec');
+      return $this->connect_pl('10.111.233.9', 'admin', 'b@zAd@nych', 'siec');
     }
           //funkcja query zwraca:
           //false jeżeli wynik zapytania był pusty lub zapytanie nie zostało wykonane
