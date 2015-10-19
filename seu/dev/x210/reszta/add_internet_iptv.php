@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Add internet</title>
+<title>Add iptv</title>
 </head>
 <body>
 <?php

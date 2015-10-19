@@ -66,7 +66,7 @@ function generateMenu($device)
     }
     else {
         //var_dump($ip_parent);
-        $menu.="<li><a target=\"_blank\" href=\"dev/x210/reszta/add_internet.php?mac=$mac&port=$port&address=$loc&speed=$speed&net_vlan=$vlan\">x210 user_add</a></li>";
+        $menu.="<li><a target=\"_blank\" href=\"dev/x210/reszta/add_internet.php?mac=$mac&port=$port&address=$loc&speed=$speed&net_vlan=$vlan\">x210 user_add_net</a></li>";
         $menu.="<li><a target=\"_blank\" href=\"dev/x210/reszta/add_internet_iptv.php?mac=$mac&port=$port&address=$loc&speed=$speed&net_vlan=$vlan\">x210 user_add_iptv</a></li>";
         $menu.="<li><a target=\"_blank\" href=\"dev/x210/reszta/drop_internet.php?mac=$mac&net_vlan=$vlan&port=$port\">x210 user_drop</a></li>";
         //$menu.="<li><a target=\"_blank\" href=\"dev/x210/reszta/change_mac.php?mac=$mac&net_vlan=$vlan&port=$port\">x210 change mac</a></li>";
