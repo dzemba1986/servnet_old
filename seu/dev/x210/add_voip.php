@@ -31,6 +31,8 @@ shutdown<br>
 description <b><?php echo($description); ?></b><br>
 switchport access vlan 3<br>
 access-group <b>voip<?php echo($port); ?></b><br>
+spanning-tree portfast<br>
+spanning-tree bpduguard<br>
 no shutdown<br>
 exit<br>
 exit<br>

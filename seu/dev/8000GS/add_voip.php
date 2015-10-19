@@ -34,6 +34,8 @@ switchport mode access<br>
 description <b><?php echo($description); ?></b><br>
 ! Podac nazwe ACLki dla klienta<br>
 switchport access vlan 3<br>
+spanning-tree portfast<br>
+spanning-tree bpduguard<br>
 service-acl input <b>voip<?php echo($port); ?></b><br>
 no shutdown<br>
 exit<br>

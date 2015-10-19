@@ -10,7 +10,10 @@
 //*******************************************************************
 // zmienne
 //*******************************************************************
-$mac = $_REQUEST['mac'];
+$mac1 = $_REQUEST['mac'];
+$mac2 = str_replace(':', '', $mac1);
+$mac = join('.', str_split($mac2, 4)); //zmiana formaru dla x210
+
 $port = $_REQUEST['port']; //3 - 22
 $ip = $_REQUEST['ip'];
 $description = $_REQUEST['description'];
@@ -28,46 +31,30 @@ $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array( 
 			'300' =>
-"traffic-shape 307200 3072000 \n<br>
-rate-limit 600000<br>");
+"egress-rate-limit 304000k \n<br>
+service-policy input internet-user-300M<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
 {
 ?>
-interface ethernet <b>g<?php echo($port); ?></b><br>
-no service-acl input<br>
-exit<br>
-no ip access-list <b>user<?php echo($port); ?></b><br>
-no ip access-list <b>user<?php echo($port); ?></b><br>
-interface vlan <?php echo($net_vlan); ?><br>
-bridge address <b><?php echo($_REQUEST['mac']); ?></b> permanent ethernet <b>g<?php echo($port); ?></b><br>
-exit<br>
-ip access-list <b>user<?php echo($port); ?></b><br>
-deny-udp any any any 68<br>
-deny-tcp any any any 25<br>
-permit any <b><?php echo($ip); ?></b> 0.0.0.0 any<br>
-permit-udp 0.0.0.0 0.0.0.0 68 any 67<br>
-exit<br>
-interface ethernet <b>g<?php echo($port); ?></b><br>
+interface <b>port1.0.<?php echo($port); ?></b><br>
 shutdown<br>
-switchport trunk allowed vlan remove all<br>
-switchport mode access<br>
-<?php 
-echo "switchport access vlan $net_vlan<br>\n";
-?>
+no switchport port-security<br>
+switchport port-security violation protect<br>
+switchport port-security maximum 0<br>
+switchport port-security<br>
 description <b><?php echo($description); ?></b><br>
-service-acl input <b>user<?php echo($port); ?></b><br>
 <b><?php echo($predkosc_str[$predkosc]); ?></b>
-port security mode lock<br>
-port security discard<br>
+access-group internet-user<br>
+switchport access vlan <b><?php echo($net_vlan); ?></b><br>
 spanning-tree portfast<br>
 spanning-tree bpduguard<br>
 no shutdown<br>
 exit<br>
+mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
 exit<br>
-copy r s<br>
-y<br>
+wr<br>
 <?php
 //*******************************************************************************
 }
@@ -80,7 +67,6 @@ else
 <br><h3>Generator konfiguracji przelacznika dla internetu</h3><br>
 <table>
 <tr><td>mac</td><td><input type="text" name="mac" value="<?php echo ($mac) ?>"/></td></tr>
-<tr><td>ip</td><td><input type="text" name="ip" value="<?php echo ($ip) ?>"/></td></tr>
 <tr><td>description</td><td><input type="text" name="description" value="<?php echo ($address) ?>"/></td></tr>
 <tr>
   <td>vlan</td>
@@ -104,7 +90,7 @@ else
     echo"<option value=\"$i\">$i</option>"; 
 }
 ?></select></td></tr>
-<tr><td>prędkość</td><td><select name="predkosc">
+<tr><td>predkość</td><td><select name="predkosc">
 <?php foreach($predkosc_str as $key=>$wartosc)
 {
   if($speed==$key)

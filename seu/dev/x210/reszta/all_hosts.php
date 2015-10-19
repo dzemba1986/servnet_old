@@ -34,6 +34,8 @@ foreach ( $hosty as $index => $par_hosta )
 		<b><?php echo($predkosc_str[$predkosc]); ?></b>
 		access-group anyuser<br>
 		switchport access vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
+        spanning-tree portfast<br>
+        spanning-tree bpduguard<br>
 		no shutdown<br>
 		exit<br>
 		mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
@@ -52,6 +54,8 @@ foreach ( $hosty as $index => $par_hosta )
 		description <b>vo<?php echo $par_hosta['adres_voip']; ?></b><br>
 		switchport access vlan 3<br>
 		access-group <b>voip<?php echo substr($par_hosta['parent_port'],8); ?></b><br>
+        spanning-tree portfast<br>
+        spanning-tree bpduguard<br>
 		no shutdown<br>
 		exit<br>
 		<?php	
