@@ -49,7 +49,7 @@ description <b><?php echo($description); ?></b><br>
 access-group anyuser<br>
 switchport access vlan <b><?php echo($net_vlan); ?></b><br>
 spanning-tree portfast<br>
-spanning-tree bpduguard<br>
+spanning-tree portfast bpdu-guard enable<br>
 no shutdown<br>
 exit<br>
 mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
