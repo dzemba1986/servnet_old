@@ -467,12 +467,12 @@ if(!defined('HOST_CLASS'))
               $host_name = str_replace(" ", "_", $ip['other_name']);
               $host_name = $this->removePL($host_name);
               if($host_name)
-                $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
+                $ips_array[$ip['ip']] = "host abonent_".$ip['dev_id']." {
                   \thardware ethernet ".$ip['mac'].";
               \tfixed-address ".$ip['ip'].";
             }\n";
               else
-                $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
+                $ips_array[$ip['ip']] = "host abonent_".$ip['dev_id']." {
                   \thardware ethernet ".$ip['mac'].";
               \tfixed-address ".$ip['ip'].";
             }\n";
@@ -584,12 +584,12 @@ if(!defined('HOST_CLASS'))
             $host_name = str_replace(" ", "_", $ip['other_name']);
             $host_name = $this->removePL($host_name);
             if($host_name)
-              $ips_array[$ip['ip']] = "host abonent_".$host_name."__".$ip['dev_id']." {
+              $ips_array[$ip['ip']] = "host abonent_".$ip['dev_id']." {
 \thardware ethernet ".$ip['mac'].";
 \tfixed-address ".$ip['ip'].";
     }\n";
             else
-              $ips_array[$ip['ip']] = "host abonent_".$ip['address_string']."__".$ip['dev_id']." {
+              $ips_array[$ip['ip']] = "host abonent_".$ip['dev_id']." {
 \thardware ethernet ".$ip['mac'].";
 \tfixed-address ".$ip['ip'].";
     }\n";

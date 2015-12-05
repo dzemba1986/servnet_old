@@ -35,6 +35,7 @@ foreach ( $hosty as $index => $par_hosta )
 		<b><?php echo($predkosc_str[$predkosc]); ?></b>
 		no egress-rate-limit<br>
 		no access-group anyuser<br>
+        no ip igmp trust all<br>
 		switchport access vlan 555<br>
 		exit<br>
 		<?php
