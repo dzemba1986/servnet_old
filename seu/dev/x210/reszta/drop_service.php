@@ -25,6 +25,10 @@ $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array(
 		'300' =>
+		"no service-policy input internet-user-300M<br>");
+
+$predkosc_str1 = array(
+		'300' =>
 		"no service-policy input iptv-user-300M<br>");
 
 
@@ -36,8 +40,11 @@ no mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward inte
 interface <b>port1.0.<?php echo($port); ?></b><br>
 no switchport port-security<br>
 <b><?php echo($predkosc_str[$predkosc]); ?></b>
+<b><?php echo($predkosc_str1[$predkosc]); ?></b>
 no egress-rate-limit<br>
-no access-group iptv-user<br>
+no ip igmp trust all<br>
+no access-group <b>internet-user</b><br>
+no access-group <b>iptv-user</b><br>
 switchport access vlan 555<br>
 exit<br>
 exit<br>

@@ -1,7 +1,7 @@
 <?php
 
-require('../../security.php');
-require('../../include/definitions.php');
+require('../../../security.php');
+require('../../../include/definitions.php');
 //*******************************************************************
 // zmienne
 //*******************************************************************
@@ -18,7 +18,8 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 
 $predkosc_str = array(
 		'300' =>
-		"no service-policy input 300Mbps<br>");
+		"no service-policy input internet-user-300M<br>
+        no service-policy input iptv-user-300M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {
@@ -32,9 +33,10 @@ foreach ( $hosty as $index => $par_hosta )
 		no mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		no switchport port-security<br>
-		<b><?php echo($predkosc_str[$predkosc]); ?></b>
+		<?php echo($predkosc_str[$par_hosta['pakiet']]); ?>
 		no egress-rate-limit<br>
-		no access-group anyuser<br>
+		no access-group <b>internet-user</b><br>
+        no access-group <b>iptv-user</b><br>
         no ip igmp trust all<br>
 		switchport access vlan 555<br>
 		exit<br>

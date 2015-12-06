@@ -24,10 +24,13 @@ function generateMenu($device)
             break;
           }
         }
+        
+        $ip_parent = $daddy->getIpAddresses($device['parent_device']);
+        //var_dump($ip_parent[0][3]);
 
 	if($device['model'] == '46' || $device['model'] == '47'){ //czy urządzenie jest z serii x
         
-        if(substr($ip_parent, 0, 6) == '172.20'){  //czy rodzic - urządzenie jest z Winograd
+        if(substr($ip_parent[0][3], 0, 6) == '172.20'){  //czy rodzic - urządzenie jest z Winograd
 
             $menu = "<h2>Operacje</h2><ul>";
             $menu.="<li><a target=\"_blank\" href=\"dev/x210/winogrady/all_hosts.php?device=".$device['dev_id']."\">Add all Hosts</a></li>";

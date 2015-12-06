@@ -1,7 +1,7 @@
 <?php
 
-require('../../security.php');
-require('../../include/definitions.php');
+require('../../../security.php');
+require('../../../include/definitions.php');
 //*******************************************************************
 // zmienne
 //*******************************************************************
@@ -32,7 +32,7 @@ foreach ( $hosty as $index => $par_hosta )
 		no mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		no switchport port-security<br>
-		<b><?php echo($predkosc_str[$predkosc]); ?></b>
+		<?php echo($predkosc_str[$par_hosta['pakiet']]); ?>
 		no egress-rate-limit<br>
 		no access-group anyuser<br>
 		switchport access vlan 555<br>

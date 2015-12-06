@@ -1,7 +1,7 @@
 <?php
 
-require('../../security.php');
-require('../../include/definitions.php');
+require('../../../security.php');
+require('../../../include/definitions.php');
 //*******************************************************************
 // zmienne
 //*******************************************************************
@@ -15,6 +15,12 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 </head>
 <body>
 <?php
+
+$predkosc_str = array( 
+			'300' =>
+"egress-rate-limit 304000k \n<br>
+service-policy input internet-user-300M<br>");
+
 foreach ( $hosty as $index => $par_hosta )
   {
 	if ($par_hosta['device_type']=='Host'){
@@ -31,8 +37,9 @@ foreach ( $hosty as $index => $par_hosta )
 		switchport port-security maximum 0<br>
 		switchport port-security<br>
 		description <b><?php echo $par_hosta['adres']; ?></b><br>
-		<b><?php echo($predkosc_str[$predkosc]); ?></b>
-		access-group anyuser<br>
+        <?php if ($par_hosta['pakiet'] == 300) ?>
+            <b><?php echo($predkosc_str[$par_hosta['pakiet']]); ?></b>	
+        access-group <b>internet-user</b><br>
 		switchport access vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
         spanning-tree portfast<br>
         spanning-tree portfast bpdu-guard enable<br>
