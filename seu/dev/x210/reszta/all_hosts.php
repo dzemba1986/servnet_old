@@ -11,6 +11,7 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 ?>
 <html>
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />    
 <title>Add all hosts</title>
 </head>
 <body>
