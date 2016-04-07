@@ -259,40 +259,104 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
               break;
           }
     }
-    private function insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id)
+    public function insertOne($start_date, $address, $mac, $service, $info, $phone, $phone2, $phone3, $speed, $ara_id)
     {
         if(!$this->validDate($start_date))
-          die('Niewlasciwy format daty!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format daty!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format daty!');
         if(!$this->validId($address['ulic']))
-          die('Niewlasciwy format osiedla!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format osiedla!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format osiedla!');
         if(!$this->validBlok($address['blok']))
-          die('Niewlasciwy format bloku!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format bloku!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format bloku!');
         if(!$this->validService($service))
-          die('Niewlasciwy format usługi!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format usługi!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format usługi!');
         if(!$this->validAra($ara_id))
-          die('Niewlasciwy format ARA ID!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format ARA ID!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format ARA ID!');
         if($service=='net' && !$this->validSpeed($speed))
-          die('Niewlasciwy format prędkości!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format prędkości!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format prędkości!');
         if($address['mieszkanie'] && !$this->validMieszkanie($address['mieszkanie']))
-          die('Niewlasciwy format mieszkania!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format mieszkania!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format mieszkania!');
         if($address['klatka'] && !$this->validKlatka($address['klatka']))
-          die('Niewlasciwy format bloku!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format bloku!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format bloku!');
         if($address['mieszkanie'] && $address['klatka'])
-          die('Wpisano i mieszkanie i klatkę!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format daty!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format daty!');
         if(!$address['mieszkanie'] && !$address['klatka'])
-          die('Nie wpisano ani mieszkania ani klatki!');
+        	return [
+        			'error_desc' => 'Nie wpisano ani mieszkania ani klatki!',
+        			'code' => false
+        	];
+        //  die('Nie wpisano ani mieszkania ani klatki!');
         if($address['other_name'] && !$this->validOtherName($address['other_name']))
-          die('Niewlasciwy format nazwy!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format nazwy!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format nazwy!');
         if($phone && !$this->validPhone($phone))
-          die('Niewlasciwy format nr telefonu!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format nr telefonu!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format nr telefonu!');
         if($phone2 && !$this->validPhone($phone2))
-          die('Niewlasciwy format nr telefonu2!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format nr telefonu2!',
+        			'code' => false
+        	];
+         // die('Niewlasciwy format nr telefonu2!');
         if($phone3 && !$this->validPhone($phone3))
-          die('Niewlasciwy format nr telefonu3!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format nr telefonu3!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format nr telefonu3!');
         if($mac && !$this->validMac($mac))
-          die('Niewlasciwy format adresu MAC!');
+        	return [
+        			'error_desc' => 'Niewlasciwy format adresu MAC!',
+        			'code' => false
+        	];
+        //  die('Niewlasciwy format adresu MAC!');
         if(!$this->freeAraId($ara_id, $service, ''))
-          die('Do tego ARA ID jest juz przypisana taka aktywna usługa!');
+        	return [
+        			'error_desc' => 'Do tego ARA ID jest juz przypisana taka aktywna usługa!',
+        			'code' => false
+        	];
+        //  die('Do tego ARA ID jest juz przypisana taka aktywna usługa!');
 
         $sql = new myMysql();
         //najpierw sprawdzamy czy lokalizacja już istnieje
@@ -302,8 +366,13 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
         $address_string = $lok->getAddressStr($id_lok);
         $query = "SELECT COUNT(*) FROM Connections WHERE  localization='".$id_lok."' AND service='".$service."' AND resignation_date is null";
         $in_base = $sql->query($query);
-        if($in_base[0] != 0) 
-          die("Wpis już istnieje!");
+        if($in_base[0] != 0){ 
+          //echo "Wpis już istnieje!";
+          return [
+          		'error_desc' => 'Wpis już istnieje!',
+          		'code' => false
+          ];
+        }  
         $user = intval($_SESSION['user_id']);
         $zapytanie = "INSERT INTO Connections SET start_date='20".$start_date['2']."-".$start_date[1]."-".$start_date[0]."',
           address='".$address_string."',
@@ -319,8 +388,12 @@ if(!defined('CONNECTIONS_LISTA_CLASS'))
           ara_id='$ara_id',
           last_modyfication=NOW()";
         $wykonaj = $sql->query($zapytanie) or die(mysql_error());
-  //      if($wykonaj)
-  //        echo "Dodano";
+       if($wykonaj){
+         return [
+          		'error_desc' => $id_lok,
+          		'code' => true
+          ];
+       }
     }
     public function updateAddress($id, $ulic, $blok, $mieszkanie, $klatka, $other_name)
     {
