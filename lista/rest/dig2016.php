@@ -31,7 +31,7 @@ if ($arPost['haslo'] == '3129'){
 	$ara_id = 'a1234';
 	$address = [
 		'ulic' => $arStreetMap[$arPost['ulica']],
-		'blok' => $arPost['dom_szczegol']	?	$arPost['dom'].'/'.$arPost['dom_szczegol']	:	$arPost['dom'],
+		'blok' => $arPost['dom_szczegol'] == 'A'	?	$arPost['dom'].$arPost['dom_szczegol']	:	$arPost['dom'],
 		'mieszkanie' => $arPost['lokal'],
 		'other_name' => $arPost['lokal_szczegol']
 	];		

@@ -167,7 +167,11 @@ foreach($wynik as $wiersz)
     $wiersz['_net_date']='';
   if($wiersz['_resignation_date']=='00.00.00')
     $wiersz['_resignation_date']='';
-  if($wiersz['_net_date'] || $wiersz['_resignation_date']) 
+  
+  if ($wiersz['ara_id'] == 'a1234'){
+   	$rowcolor ="#ff0033";
+  }  
+  elseif($wiersz['_net_date'] || $wiersz['_resignation_date']) 
   {
     $rowcolor ="#04b404";
     if(strtotime($wiersz['service_activation']) > time())
@@ -183,6 +187,7 @@ foreach($wynik as $wiersz)
       $ara="";
     }
   }
+  
   if($wiersz['installation_date'] && !$wiersz['socket_installation_date'])
     $wiersz['_socket_date'] = 'U'.$wiersz['_installation_date'];;
   echo"<tr bgcolor=\"$rowcolor\" class=\"row\">
