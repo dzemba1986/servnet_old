@@ -57,7 +57,7 @@ if ($arPost['haslo'] == '3129'){
 	}
 	else{
 		$rtn = array("lokalizacja_id" => -1, "opis_bledu" => $res['error_desc']);
-		http_response_code(500);
+		http_response_code(200);
 		print json_encode($rtn);
 	}
 	
