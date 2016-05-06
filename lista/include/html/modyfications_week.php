@@ -49,7 +49,7 @@ for($i=0; $i<$rows; $i++)
         $border_substr = 1;
         if($k+1 == $day_cols)
           $border_substr = 2;
-        if((($hour=='12:00' || $hour_int>15 || $hour_int < 9) && $j!=1 && $j < 6) || ($j==1 && ($hour_int < 11 || $hour_int > 17 || $hour_int == 14)) || $j >=6)
+        if((($hour=='12:00' || $hour_int>15 || $hour_int < 9) && $j < 6) || $j >=6) // || ($j==1 && ($hour_int < 11 || $hour_int > 17 || $hour_int == 14))
           echo '<div class="net_dark" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
         else
           echo '<div class="net" style="top: '.$y_pos.'px; left: '.$x_pos.'px; width: '.($c_width - $border_substr).'px; height:'.$c_height.'px;"></div>'."\n"; 
