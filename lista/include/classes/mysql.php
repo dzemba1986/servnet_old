@@ -316,7 +316,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                             ON  b.service=d.type AND b.localization=d.localization
                             LEFT JOIN Modyfications m
                             ON a.modyfication=m.mod_id
-                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null
+                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null and ( a.ara_id not like 'a%' or a.modyfication <> 0)
                             UNION
                             select	a.id,
 			  a.ara_id as net_ara_id,	
@@ -385,7 +385,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                             ON a.service=c.type AND a.localization=c.localization 
                             LEFT JOIN Modyfications m
                             ON a.modyfication=m.mod_id
-                            WHERE a.service_activation is null and (SELECT count(*) from Connections where localization=a.localization and service_activation is null and service!=a.service and resignation_date is null)='0' and a.resignation_date is null";
+                            WHERE a.service_activation is null and (SELECT count(*) from Connections where localization=a.localization and service_activation is null and service!=a.service and resignation_date is null)='0' and a.resignation_date is null and ( a.ara_id not like 'a%' or a.modyfication <> 0)";
           break;
         case 'for_configuration':
           $inner_query="
