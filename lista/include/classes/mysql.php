@@ -316,7 +316,7 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                             ON  b.service=d.type AND b.localization=d.localization
                             LEFT JOIN Modyfications m
                             ON a.modyfication=m.mod_id
-                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null and ( a.ara_id not like 'a%' or a.modyfication <> 0)
+                            WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null and (a.ara_id not like 'a%' or a.modyfication <> 0 or b.resignation_date is null)
                             UNION
                             select	a.id,
 			  a.ara_id as net_ara_id,	
