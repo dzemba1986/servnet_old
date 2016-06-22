@@ -41,6 +41,7 @@ foreach ( $hosty as $index => $par_hosta )
         no ip igmp trust all<br>
 		switchport access vlan 555<br>
 		exit<br>
+		do clear ip dhcp snooping binding <b><?php echo $par_hosta['parent_port']; ?></b></br>
 		<?php
 	} else {?>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
