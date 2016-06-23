@@ -55,6 +55,7 @@ exit<br>
 mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
 exit<br>
 wr<br>
+&nbsp;<br>
 <?php
 //*******************************************************************************
 }

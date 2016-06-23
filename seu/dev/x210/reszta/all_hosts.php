@@ -73,6 +73,7 @@ foreach ( $hosty as $index => $par_hosta )
 ?> 
 exit<br>
 wr<br>
+&nbsp;<br>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 </body>

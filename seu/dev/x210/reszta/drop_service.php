@@ -47,10 +47,10 @@ no access-group <b>internet-user</b><br>
 no access-group <b>iptv-user</b><br>
 switchport access vlan 555<br>
 exit<br>
-do clear ip dhcp snooping binding <b>port1.0.<?php echo($port); ?></b></br>
+do clear ip dhcp snooping binding int <b>port1.0.<?php echo($port); ?></b></br>
 exit<br>
 wr<br>
-
+&nbsp;<br>
 <?php
 //*******************************************************************************
 }
