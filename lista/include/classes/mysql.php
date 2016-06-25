@@ -301,7 +301,9 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                           b.service_configuration as phone_configuration, 
                           DATE_FORMAT(b.service_configuration, '%d.%m.%y') as _phone_configuration, 
                           b.informed as phone_informed, 
-                          DATE_FORMAT(b.informed, '%d.%m.%y') as _phone_informed, 
+                          DATE_FORMAT(b.informed, '%d.%m.%y') as _phone_informed,
+          				  IF(mp.mod_s_datetime,DATE_FORMAT(mp.mod_s_datetime, '<b>%W</b><br>%d.%m.%y %H:%i'),NULL) as _mod_s_datetime_phone,
+                          IF(mp.mod_s_datetime,mp.mod_s_datetime,NULL) as mod_s_datetime_phone,
                           b.info as phone_info, 
                           b.info_boa as phone_info_boa, 
                           b.last_modyfication as phone_modyf,
@@ -316,6 +318,8 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                             ON  b.service=d.type AND b.localization=d.localization
                             LEFT JOIN Modyfications m
                             ON a.modyfication=m.mod_id
+          					LEFT JOIN Modyfications mp
+                            ON b.modyfication=mp.mod_id
                             WHERE a.service='net' AND a.service_activation is null AND a.resignation_date is null and (a.ara_id not like 'a%' or a.modyfication <> 0 or b.resignation_date is null)
                             UNION
                             select	a.id,
@@ -367,6 +371,8 @@ if(!defined('MY_MYSQL_LISTA_CLASS'))
                           null,
                           null,
                           null,
+          								null,
+          								null,
           								null,
           								null,
                           null,

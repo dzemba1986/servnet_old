@@ -41,16 +41,16 @@
       {
         $con_str = '<a href="edit.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">podłączenia</a>';
      //   $close_str ='<a href="https://lista.virt.com/index.php?tryb=in_progress">-> +g</a>';
-        if($con_id && $phone_id)
-        	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
-        elseif ($con_id)
+//         if($con_id && $phone_id)
+//         	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id='.$phone_id.'">zamknij</a>';
+//         elseif ($con_id)
           $close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$con_id.'&phone_id=">zamknij</a>';
-        elseif ($phone_id) 
-        	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$phone_id.'&phone_id=">zamknij</a>';
+//         elseif ($phone_id) 
+//         	$close_str = '<a href="add_socket_form.php?tryb=edit&main_id='.$phone_id.'&phone_id=">zamknij</a>';
       }
       else
       {
-        $con_str = "podłączenia";
+        $con_str = "";
         $desc = str_replace(array("\r", "\n"), '', $mod->get_desc());
         $close_str = '<div class="close_href" onclick="modyficationCloseFormUnrelated(this, '.$mod->get_id().', \''.$mod->get_installer().'\', \''.$desc.'\', \''.$mod->get_cost().'\',\'\')">zamknij</div>';
       }

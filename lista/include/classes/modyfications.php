@@ -417,8 +417,8 @@ if(!defined('MODYFICATION_CLASS'))
 
     public function add($con_id)
     {
-      if(Modyfications::sameLocTimeNum($this->get_loc(), $this->get_s_datetime()))
-        return;
+//       if(Modyfications::sameLocTimeNum($this->get_loc(), $this->get_s_datetime()))
+//         return;
       if(!$this->mod_s_datetime || !$this->mod_e_datetime || !$this->mod_user_add || 
           !$this->mod_user_last_edit || !$this->mod_inst || !$this->mod_type ||
           !$this->mod_cause || !$this->mod_loc)

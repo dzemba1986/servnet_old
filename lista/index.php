@@ -152,7 +152,7 @@ if(is_array($wynik))
 	    
 	    echo"	<td style=\"text-align:center;\" >".$wiersz['_net_configuration']."</td>";
 	    echo "<td style=\"text-align:center;\" >".$wiersz['_net_payment_activation']."</td>
-	      <td rowspan=\"2\">".$wiersz['_mod_s_datetime']."</td>
+	      <td>".$wiersz['_mod_s_datetime']."</td>
 	      <td>".$wiersz['net_info']."</td>
 	      <td>".$wiersz['net_info_boa']."</td>
 	      <td rowspan=\"2\"><a class=\"edit\" href=\"edit.php?tryb=edit&amp;main_id=".$wiersz['net_id']."&amp;phone_id=".$wiersz['phone_id']."\">Edytuj</a>";
@@ -172,7 +172,7 @@ if(is_array($wynik))
 	      echo"	<td style=\"text-align:center;\" >".$wiersz['_phone_socket_date']."</td>";
 	    echo "<td style=\"text-align:center;\" >".$wiersz['_phone_configuration']."</td>
 	    	<td style=\"text-align:center;\" >".$wiersz['_phone_payment_activation']."</td>
-
+			<td>".$wiersz['_mod_s_datetime_phone']."</td>
 	      <td>".$wiersz['phone_info']."</td>
 	      <td>".$wiersz['phone_info_boa']."</td>";
 	    echo"</tr>";
