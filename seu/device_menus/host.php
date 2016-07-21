@@ -54,7 +54,7 @@ function generateMenu($device)
   else
   	$port = substr($uplinks[0]['parent_port'], 1);
   
-  if($parent_id_model == '46' || $parent_id_model == '47'){ //czy rodzic - urządzenie jest z serii x
+  if($parent_id_model == '46' || $parent_id_model == '47' || $parent_id_model == '60'){ //czy rodzic - urządzenie jest z serii x
   	
     if(substr($ip_parent, 0, 6) == '172.20'){  //czy rodzic - urządzenie jest z Winograd
         //var_dump(substr($ip_parent, 0, 6));
