@@ -28,7 +28,7 @@ function generateMenu($device)
         $ip_parent = $daddy->getIpAddresses($device['parent_device']);
         //var_dump($ip_parent[0][3]);
 
-	if($device['model'] == '46' || $device['model'] == '47'){ //czy urządzenie jest z serii x
+	if($device['model'] == '46' || $device['model'] == '47' || $device['model'] == '60' || $device['model'] == '59'){ //czy urządzenie jest z serii x
         
         if(substr($ip_parent[0][3], 0, 6) == '172.20'){  //czy rodzic - urządzenie jest z Winograd
 

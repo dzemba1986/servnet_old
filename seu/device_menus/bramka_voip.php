@@ -23,12 +23,12 @@ function generateMenu($device, $menu_rows)
   $parent_id1 = $daddy->getDeviceModel($device['parent_device']);
   $parent_id = $parent_id1['id'];
   
-  if($parent_id == '46' || $parent_id == '47')
+  if($parent_id == '46' || $parent_id == '47' || $parent_id == '60' || $parent_id == '59')
   	$port = substr($uplinks[0]['parent_port'], 8);
   else
   	$port = substr($uplinks[0]['parent_port'], 1);
   
-  if($parent_id == '46' || $parent_id == '47'){
+  if($parent_id == '46' || $parent_id == '47' || $parent_id == '60' || $parent_id == '59'){
   	 
   	$menu.="<li><a target=\"_blank\" href=\"dev/x210/add_voip.php?port=$port&description=vo$loc&ip=$ip\">x210 voip_add</a></li>";
   	$menu.="<li><a target=\"_blank\" href=\"dev/x210/drop_voip.php?port=$port\">x210 voip_drop</a></li>";
