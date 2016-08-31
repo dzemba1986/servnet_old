@@ -160,7 +160,8 @@ class Switch_bud extends Daddy
         	LEFT JOIN Host h ON h.device=d.dev_id
         	LEFT JOIN Bramka_voip b ON b.device=d.dev_id
         	JOIN Podsiec p ON a.podsiec=p.id
-        	where d.device_type='Host' OR d.device_type='Bramka_voip'";
+        	where d.device_type='Host' OR d.device_type='Bramka_voip'
+			order by ag.parent_port";
         $sql = new MysqlSeuPdo();
 	$wynik = $sql->query($zapytanie, array('dev_id' => $dev_id));
         if (!$wynik)
@@ -169,6 +170,63 @@ class Switch_bud extends Daddy
    	     {
 		return $wynik;
              }
+	}
+	
+	public static function getAT8000GS()
+	
+	{
+		$zapytanie = "
+			Select d.dev_id, a.ip from Device d 
+			JOIN Switch_bud sw ON d.dev_id=sw.device 
+			JOIN Adres_ip a ON d.dev_id=a.device AND a.main=1 
+			JOIN Model m ON sw.model=m.id 
+			WHERE m.name='AT-8000GS/24' OR m.name='AT-8000GS/48'";
+		$sql = new MysqlSeuPdo();
+		$wynik = $sql->query($zapytanie);
+		if (!$wynik)
+			die("Nie można pobrać parametrów hostów!");     //zakonczone niepowodzeniem
+			else
+			{
+				return $wynik;
+			}
+	}
+	
+	public static function getx210Winogrady()
+	
+	{
+		$zapytanie = "
+			SELECT d.dev_id, a.ip from Device d 
+			JOIN Switch_bud sw ON d.dev_id=sw.device 
+			JOIN Adres_ip a ON d.dev_id=a.device AND a.main=1 
+			JOIN Model m ON sw.model=m.id 
+			WHERE m.name LIKE 'AT-x210%' AND a.ip LIKE '172.%' ORDER BY a.ip";
+		$sql = new MysqlSeuPdo();
+		$wynik = $sql->query($zapytanie);
+		if (!$wynik)
+			die("Nie można pobrać parametrów hostów!");     //zakonczone niepowodzeniem
+			else
+			{
+				return $wynik;
+			}
+	}
+	
+	public static function getx210NonWinogrady()
+	
+	{
+		$zapytanie = "
+			SELECT d.dev_id, a.ip from Device d
+			JOIN Switch_bud sw ON d.dev_id=sw.device
+			JOIN Adres_ip a ON d.dev_id=a.device AND a.main=1
+			JOIN Model m ON sw.model=m.id
+			WHERE m.name LIKE 'AT-x210%' AND a.ip LIKE '10.%' ORDER BY a.ip";
+		$sql = new MysqlSeuPdo();
+		$wynik = $sql->query($zapytanie);
+		if (!$wynik)
+			die("Nie można pobrać parametrów hostów!");     //zakonczone niepowodzeniem
+			else
+			{
+				return $wynik;
+			}
 	}
 }
 

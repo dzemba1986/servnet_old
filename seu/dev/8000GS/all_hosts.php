@@ -35,10 +35,10 @@ foreach ( $hosty as $index => $par_hosta )
 		?>
 		description <b><?php echo $par_hosta['adres']; ?></b><br>
 		service-acl input <b>user<?php echo substr($par_hosta['parent_port'],1); ?></b><br>
-		<?php if ($par_hosta['pakiet'] == 30)
-			echo "traffic-shape 30720 307200 <br> rate-limit 81500<br>";
-		      elseif ($par_hosta['pakiet'] == 300)
-		echo "traffic-shape 307200 3072000 <br> rate-limit 600000<br>";		
+		<?php //if ($par_hosta['pakiet'] == 500)
+			echo "traffic-shape 520000 5200000 <br> rate-limit 800000<br>";
+		     // elseif ($par_hosta['pakiet'] == 300)
+		//echo "traffic-shape 307200 3072000 <br> rate-limit 600000<br>";		
 		 ?>
 		port security mode lock<br>
 		port security discard<br>

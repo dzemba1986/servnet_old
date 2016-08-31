@@ -27,9 +27,9 @@ $porty = array('first' => '1', 'last' => '47');
 //*******************************************************************
 
 $predkosc_str = array( 
-			'300' =>
-"traffic-shape 307200 3072000 \n<br>
-rate-limit 600000<br>");
+			'500' =>
+"traffic-shape 520000 5200000 \n<br>
+rate-limit 800000<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
@@ -58,7 +58,7 @@ echo "switchport access vlan $net_vlan<br>\n";
 ?>
 description <b><?php echo($description); ?></b><br>
 service-acl input <b>user<?php echo($port); ?></b><br>
-<b><?php echo($predkosc_str[$predkosc]); ?></b>
+<b><?php echo($predkosc_str['500']); // była $predkosc ?></b>
 port security mode lock<br>
 port security discard<br>
 spanning-tree portfast<br>

@@ -45,7 +45,7 @@ switchport port-security violation protect<br>
 switchport port-security maximum 0<br>
 switchport port-security<br>
 description <b><?php echo($description); ?></b><br>
-<b><?php echo($predkosc_str[$predkosc]); ?></b>
+<b><?php echo($predkosc_str['300']); // była $predkosc ?></b>
 access-group iptv-user<br>
 ip igmp trusted report<br>
 switchport access vlan <b><?php echo($net_vlan); ?></b><br>
