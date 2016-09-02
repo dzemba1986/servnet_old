@@ -24,12 +24,12 @@ $vlany = array('20', '22', '24', '26', '28');
 $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array(
-		'300' =>
-		"no service-policy input internet-user-300M<br>");
+		'500' =>
+		"no service-policy input internet-user-500M<br>");
 
 $predkosc_str1 = array(
-		'300' =>
-		"no service-policy input iptv-user-300M<br>");
+		'500' =>
+		"no service-policy input iptv-user-500M<br>");
 
 
 //*******************************************************************
@@ -39,8 +39,8 @@ if($_REQUEST['wygeneruj'])
 no mac address-table static <b><?php echo($_REQUEST['mac']); ?></b> forward interface <b>port1.0.<?php echo($port); ?></b> vlan <b><?php echo($net_vlan); ?></b><br>
 interface <b>port1.0.<?php echo($port); ?></b><br>
 no switchport port-security<br>
-<b><?php echo($predkosc_str[$predkosc]); ?></b>
-<b><?php echo($predkosc_str1[$predkosc]); ?></b>
+<b><?php echo($predkosc_str['500']); ?></b>
+<b><?php echo($predkosc_str1['500']); ?></b>
 no egress-rate-limit<br>
 no ip igmp trust all<br>
 no access-group <b>internet-user</b><br>

@@ -18,8 +18,8 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 <?php
 
 $predkosc_str = array(
-		'300' =>
-		"no service-policy input 300Mbps<br>");
+		'500' =>
+		"no service-policy input 500M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {
@@ -33,7 +33,7 @@ foreach ( $hosty as $index => $par_hosta )
 		no mac address-table static <b><?php echo $mac; ?></b> forward interface <b><?php echo $par_hosta['parent_port']; ?></b> vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
 		interface <b><?php echo $par_hosta['parent_port']; ?></b><br>
 		no switchport port-security<br>
-		<?php echo($predkosc_str[$par_hosta['pakiet']]); ?>
+		<?php echo($predkosc_str['500']); ?>
 		no egress-rate-limit<br>
 		no access-group anyuser<br>
 		switchport access vlan 555<br>

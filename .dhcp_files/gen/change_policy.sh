@@ -5,29 +5,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.121 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -36,34 +26,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.155 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -72,54 +50,34 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.185 <
 en
 conf t
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.11
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.12
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.13
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.14
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -128,34 +86,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.21 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -164,24 +110,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.240 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -190,14 +128,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.4.43 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -206,24 +140,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.101 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -232,34 +158,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.107 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -268,14 +182,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.108 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -284,14 +194,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.113 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -306,19 +212,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.116 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -327,44 +227,28 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.12 <<
 en
 conf t
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.13
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -379,24 +263,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.124 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -405,9 +281,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.133 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -416,9 +290,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.137 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -427,19 +299,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.143 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -448,14 +314,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.145 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -464,9 +326,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.146 <
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -475,14 +335,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.148 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -491,9 +347,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.166 <
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -502,39 +356,25 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.168 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -543,39 +383,25 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.184 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -584,9 +410,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.185 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -601,14 +425,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.205 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -617,9 +437,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.21 <<
 en
 conf t
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -628,9 +446,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.233 <
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -639,14 +455,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.234 <
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -655,19 +467,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.236 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -676,24 +482,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.238 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -702,19 +500,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.239 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -723,69 +515,43 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.245 <
 en
 conf t
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.11
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.12
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.13
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.15
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -794,24 +560,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.69 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -820,9 +578,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.74 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -831,9 +587,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.75 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -842,9 +596,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.77 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -853,24 +605,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.84 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -879,34 +623,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.86 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -915,29 +647,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.87 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -958,14 +680,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.93 <<
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -974,9 +692,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.94 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -985,9 +701,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.131 <
 en
 conf t
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -996,14 +710,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.147 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1012,14 +722,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.176 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1028,44 +734,28 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.177 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.12
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1074,14 +764,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.178 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1090,44 +776,28 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.179 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1142,59 +812,37 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.182 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.11
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.12
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.13
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.14
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.16
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1203,19 +851,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.184 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1224,14 +866,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.185 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1240,19 +878,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.186 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1261,24 +893,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.190 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1287,14 +911,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.194 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1303,29 +923,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.197 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1334,29 +944,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.198 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1365,9 +965,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.199 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1376,9 +974,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.201 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1387,24 +983,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.202 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1413,34 +1001,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.204 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1449,29 +1025,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.205 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1480,39 +1046,25 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.206 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1521,24 +1073,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.207 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1547,14 +1091,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.208 <
 en
 conf t
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1563,34 +1103,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.209 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1599,24 +1127,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.211 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1625,14 +1145,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.212 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1641,14 +1157,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.213 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1657,19 +1169,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.214 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1678,9 +1184,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.216 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1689,9 +1193,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.217 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1700,19 +1202,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.219 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1721,14 +1217,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.220 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1737,19 +1229,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.221 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1758,9 +1244,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.222 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1769,29 +1253,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.223 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1800,19 +1274,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.224 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1821,24 +1289,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.226 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.14
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1847,9 +1307,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.227 <
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1858,9 +1316,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.228 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1869,29 +1325,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.229 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1906,9 +1352,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.230 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1917,19 +1361,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.231 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1938,24 +1376,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.233 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1964,24 +1394,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.234 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -1990,24 +1412,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.235 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2016,29 +1430,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.236 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2047,19 +1451,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.237 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2068,34 +1466,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.238 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2104,14 +1490,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.239 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2120,19 +1502,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.240 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2141,34 +1517,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.241 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2177,29 +1541,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.242 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2208,24 +1562,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.243 <
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2234,24 +1580,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.244 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2260,14 +1598,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.245 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2276,19 +1610,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.246 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2297,19 +1625,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.247 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2318,19 +1640,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.248 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2339,19 +1655,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.249 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2360,19 +1670,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.250 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2381,29 +1685,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.251 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2412,29 +1706,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.252 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2443,24 +1727,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.253 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2469,19 +1745,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.254 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2490,29 +1760,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.255 <
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2521,29 +1781,19 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.55 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2552,14 +1802,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.60 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2568,9 +1814,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.82 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2579,19 +1823,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.9 << 
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2600,9 +1838,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.95 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2611,9 +1847,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.97 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2622,14 +1856,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.1 << 
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2638,24 +1868,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.10 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2664,24 +1886,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.12 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.6
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2690,9 +1904,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.13 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2701,9 +1913,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.14 <<
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2712,19 +1922,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.18 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2733,34 +1937,22 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.2 << 
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.10
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.7
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.8
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.9
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2775,9 +1967,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.26 <<
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2792,19 +1982,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.29 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2813,9 +1997,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.3 << 
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2836,14 +2018,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.4 << 
 en
 conf t
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2852,14 +2030,10 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.43 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2868,9 +2042,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.46 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2879,9 +2051,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.49 <<
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2890,24 +2060,16 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.5 << 
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.5
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2916,19 +2078,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.6 << 
 en
 conf t
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.4
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2937,9 +2093,7 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.8 << 
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr
@@ -2948,19 +2102,13 @@ sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.9 << 
 en
 conf t
 interface port1.0.1
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.2
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 interface port1.0.3
-egress-rate-limit 508032
-no service-policy input 300Mbps
-service-policy input 500M
+egress-rate-limit 508032k
 exit
 exit
 wr

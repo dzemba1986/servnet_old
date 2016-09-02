@@ -17,9 +17,9 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 <body>
 <?php
 $predkosc_str = array( 
-			'300' =>
-"egress-rate-limit 304000k \n<br>
-service-policy input 300Mbps<br>");
+			'500' =>
+"egress-rate-limit 508032k \n<br>
+service-policy input 500M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {
@@ -37,8 +37,7 @@ foreach ( $hosty as $index => $par_hosta )
 		switchport port-security maximum 0<br>
 		switchport port-security<br>
 		description <b><?php echo $par_hosta['adres']; ?></b><br>
-		<?php if ($par_hosta['pakiet'] == 300) ?>
-            <b><?php echo($predkosc_str[$par_hosta['pakiet']]); ?></b>
+        <b><?php echo($predkosc_str['500']); ?></b>
 		access-group anyuser<br>
 		switchport access vlan <b><?php echo $par_hosta['vlan']; ?></b><br>
         spanning-tree portfast<br>

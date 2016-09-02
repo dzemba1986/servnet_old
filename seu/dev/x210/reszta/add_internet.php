@@ -30,9 +30,9 @@ $porty = array('first' => '1', 'last' => '47');
 //*******************************************************************
 
 $predkosc_str = array( 
-			'300' =>
-"egress-rate-limit 304000k \n<br>
-service-policy input internet-user-300M<br>");
+			'500' =>
+"egress-rate-limit 508032k \n<br>
+service-policy input internet-user-500M<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])
@@ -45,7 +45,7 @@ switchport port-security violation protect<br>
 switchport port-security maximum 0<br>
 switchport port-security<br>
 description <b><?php echo($description); ?></b><br>
-<b><?php echo($predkosc_str['300']); // była $predkosc ?></b>
+<b><?php echo($predkosc_str['500']); // była $predkosc ?></b>
 access-group internet-user<br>
 switchport access vlan <b><?php echo($net_vlan); ?></b><br>
 spanning-tree portfast<br>

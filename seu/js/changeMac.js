@@ -44,7 +44,7 @@ function generateScript(parentid, ip)
     var old_mac = document.getElementById('mac').value;
     var new_mac = document.getElementById('new_mac').value;
     var vlan = document.getElementById('vlan').value;
-    if (parentid == 46 || parentid == 47)
+    if (parentid == 46 || parentid == 47 || parentid == 59 || parentid == 60) //gdy jest z seri x
     	var alink = 'dev/x210/change_mac.php?mac=' + old_mac + '&port=' + port.substring(8) + '&mac2=' + new_mac + '&net_vlan=' + vlan + '&ip=' + ip;
     else
     	var alink = 'dev/8000GS/change_mac.php?mac=' + old_mac + '&port=' + port.substring(1) + '&mac2=' + new_mac + '&net_vlan=' + vlan;
