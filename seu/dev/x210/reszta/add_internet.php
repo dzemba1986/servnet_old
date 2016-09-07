@@ -32,7 +32,7 @@ $porty = array('first' => '1', 'last' => '47');
 $predkosc_str = array( 
 			'500' =>
 "egress-rate-limit 508032k \n<br>
-service-policy input internet-user-500M<br>");
+service-policy input internet-user-501M<br>");
 
 //*******************************************************************
 if($_REQUEST['wygeneruj'])

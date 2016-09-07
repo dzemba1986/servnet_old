@@ -19,7 +19,7 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 $predkosc_str = array( 
 			'500' =>
 "egress-rate-limit 508032k \n<br>
-service-policy input 500M<br>");
+service-policy input 501M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {

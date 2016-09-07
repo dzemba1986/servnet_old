@@ -6,6 +6,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -14,6 +15,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -22,6 +24,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -30,6 +33,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -38,6 +42,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -46,6 +51,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.100 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -54,6 +69,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -62,6 +78,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -70,6 +87,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -78,6 +96,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -86,6 +105,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -94,6 +114,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.118 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -102,6 +132,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -110,6 +141,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -118,6 +150,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -126,6 +159,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -134,6 +168,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -142,6 +177,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -150,6 +186,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -158,6 +195,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -166,6 +204,25 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.149 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.164 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -174,6 +231,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -182,6 +240,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -190,6 +249,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -198,6 +258,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -206,6 +267,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -214,6 +276,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -222,6 +285,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -230,6 +294,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -238,6 +303,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -246,6 +312,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -254,6 +321,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -262,6 +330,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -270,6 +339,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -278,6 +348,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -286,6 +357,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -294,6 +366,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.5.76 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -302,6 +384,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -310,6 +393,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -318,6 +402,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -326,6 +411,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -334,6 +420,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -342,6 +429,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -350,6 +438,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -358,6 +447,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -366,6 +456,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -374,6 +465,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -382,6 +474,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -390,6 +483,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -398,6 +492,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -406,6 +501,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -414,6 +510,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -422,6 +519,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -430,6 +528,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -438,6 +537,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -446,6 +546,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -454,6 +555,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -462,6 +564,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -470,6 +573,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -478,6 +582,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -486,6 +591,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -494,6 +600,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -502,6 +609,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -510,6 +618,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -518,6 +627,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -526,6 +636,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -534,6 +645,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -542,6 +654,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -550,6 +663,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -558,6 +672,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -566,6 +681,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -574,6 +690,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -582,6 +699,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -590,6 +708,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -598,6 +717,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -606,6 +726,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -614,6 +735,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -622,6 +744,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -630,6 +753,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -638,6 +762,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -646,6 +771,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -654,6 +780,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -662,6 +789,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -670,6 +798,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -678,6 +807,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -686,6 +816,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -694,6 +825,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -702,6 +834,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -710,6 +843,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -718,6 +852,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -726,6 +861,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -734,6 +870,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -742,6 +879,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -750,6 +888,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -758,6 +897,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -766,6 +906,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -774,6 +915,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -782,6 +924,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -790,6 +933,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -798,6 +942,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -806,6 +951,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -814,6 +960,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -822,6 +969,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -830,6 +978,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -838,6 +987,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -846,6 +996,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -854,6 +1005,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -862,6 +1014,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -870,6 +1023,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -878,6 +1032,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -886,6 +1041,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -894,6 +1050,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -902,6 +1059,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -910,6 +1068,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.6.86 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -918,6 +1086,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -926,6 +1095,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -934,6 +1104,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -942,6 +1113,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -950,6 +1122,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -958,6 +1131,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -966,6 +1140,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -974,6 +1149,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.15 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -982,6 +1167,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -990,6 +1176,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.22 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -998,6 +1194,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1006,6 +1203,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1014,6 +1212,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1022,6 +1221,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1030,6 +1230,25 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.32 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.37 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1038,6 +1257,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1046,6 +1266,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1054,6 +1275,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1062,6 +1284,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1070,6 +1293,16 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.48 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1078,6 +1311,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1086,6 +1320,25 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.50 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
+exit
+wr
+DUPA
+sshpass -p $pass ssh -T -p22222 -o StrictHostKeyChecking=no $user@172.20.7.51 << DUPA
+en
+conf t
+no policy-map 300Mbps
+no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1094,6 +1347,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1102,6 +1356,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA
@@ -1110,6 +1365,7 @@ en
 conf t
 no policy-map 300Mbps
 no policy-map 30Mbps
+no policy-map 500M
 exit
 wr
 DUPA

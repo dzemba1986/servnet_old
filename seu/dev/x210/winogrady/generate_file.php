@@ -25,9 +25,9 @@ foreach ($x210s as $x210){
 			$data .= "sshpass -p \$pass ssh -T -p22222 -o StrictHostKeyChecking=no \$user@" . $x210['ip'] . " << DUPA" . "\n" .
 				"en" . "\n" .	
 				"conf t". "\n" .	
-				"policy-map 500M" . "\n" .
+				"policy-map 501M" . "\n" .
 				"class default" . "\n" .
-				"police single-rate 5099072 507904 507904 action drop-red" . "\n" .
+				"police single-rate 509952 512000 512000 action drop-red" . "\n" .
 				"exit" . "\n" .
 				"exit" . "\n" .
 				"exit" . "\n" .
@@ -57,12 +57,11 @@ foreach ($x210s as $x210){
 		if($host['device_type'] == 'Host'){
 		
 		$data .= "interface " . $host['parent_port'] . "\n" .
-			"egress-rate-limit 508032" . "\n" .
-			"no service-policy input 300Mbps" . "\n" .
-			"service-policy input 500M" . "\n" .
+			"no service-policy input 500M" . "\n" .
+			"service-policy input 501M" . "\n" .
 			"exit" . "\n";
-			"wr" . "\n" .
-			"DUPA" . "\n";
+// 			"wr" . "\n" .
+// 			"DUPA" . "\n";
 			}
 	}
 	
@@ -97,6 +96,7 @@ foreach ($x210s as $x210){
 			"conf t". "\n" .
 			"no policy-map 300Mbps" . "\n" .
 			"no policy-map 30Mbps" . "\n" .
+			"no policy-map 500M" . "\n" .
 			"exit" . "\n" .
 			"wr" . "\n" .
 			"DUPA" . "\n";
