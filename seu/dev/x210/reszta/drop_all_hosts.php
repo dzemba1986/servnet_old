@@ -19,8 +19,8 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 
 $predkosc_str = array(
 		'500' =>
-		"no service-policy input internet-user-500M<br>
-        no service-policy input iptv-user-500M<br>");
+		"no service-policy input internet-user-501M<br>
+        no service-policy input iptv-user-501M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {

@@ -25,7 +25,7 @@ $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array(
 		'500' =>
-		"no service-policy input 500M<br>");
+		"no service-policy input 501M<br>");
 
 
 //*******************************************************************

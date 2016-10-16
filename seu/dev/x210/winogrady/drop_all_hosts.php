@@ -19,7 +19,7 @@ $hosty = Switch_bud::get_all_hosts($dev_id);
 
 $predkosc_str = array(
 		'500' =>
-		"no service-policy input 500M<br>");
+		"no service-policy input 501M<br>");
 
 foreach ( $hosty as $index => $par_hosta )
   {

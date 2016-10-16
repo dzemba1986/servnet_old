@@ -25,11 +25,11 @@ $porty = array('first' => '1', 'last' => '47');
 
 $predkosc_str = array(
 		'500' =>
-		"no service-policy input internet-user-500M<br>");
+		"no service-policy input internet-user-501M<br>");
 
 $predkosc_str1 = array(
 		'500' =>
-		"no service-policy input iptv-user-500M<br>");
+		"no service-policy input iptv-user-501M<br>");
 
 
 //*******************************************************************
